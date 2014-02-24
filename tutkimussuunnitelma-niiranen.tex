@@ -1,0 +1,177 @@
+% !TeX encoding = latin1
+%
+% [ Tiedostossa käytetty merkistö on ISO 8859-1 eli Latin 1. Ylläoleva rivi ]
+% [ tarvitaan, jos käyttää MiKTeX-paketin mukana tulevaa TeXworks-editoria. ]
+%
+% TIETOTEKNIIKAN KANDIDAATINTUTKIELMA
+%
+% Yksinkertainen LaTeX2e-mallipohja kandidaatintutkielmalle.
+% Käyttää Antti-Juhani Kaijanahon ja Matthieu Weberin kirjoittamaa
+% gradu2-dokumenttiluokkaa.
+%
+% Laatinut Timo Männikkö
+%
+% Jos kirjoitat pro gradu -tutkielmaa, tee mallipohjaan seuraavat muutokset:
+%  - Poista dokumenttiluokasta optio shortthesis .
+%  - Poista makro \tyyppi .
+%  - Lisää suuntautumisvaihtoehto makrolla \linja .
+%  - Kirjoita ylimmän tason otsikot makrolla \chapter, toisen tason otsikot
+%    makrolla \section ja mahdolliset kolmannen tason otsikot makrolla
+%    \subsection .
+%
+% Halutessasi voit tehdä myös kandidaatintutkielman "pro gradu -tyylillä":
+%  - Poista shortthesis-optio.
+%  - Kirjoita otsikot makroilla \chapter , \section (ja \subsection ).
+
+\documentclass[english]{tjt-latex-gradupohja/gradu3}
+
+\usepackage{graphicx} % tarvitaan vain, jos halutaan mukaan kuvia
+
+\usepackage{booktabs} % hyvä kauniiden taulukoiden tekemiseen
+
+\usepackage{babel}
+
+\usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
+
+%\addbibresource{tutkimussuunnitelma-niiranen.bib}
+\addbibresource{sources-niiranen.bib}
+
+\begin{document}
+
+\title{Self-organization and performance in agile software development teams}
+\translatedtitle{Itseorganisoituminen ja tuloksellisuus ketterässä ohjelmistonkehityksessä}
+
+\author{Sami Niiranen}
+\contactinformation{sami.i.niiranen@student.jyu.fi}
+
+\supervisor{Mauri Leppänen}
+\supervisor{Jukka Lindström}
+
+\setdate{24}{10}{2013}
+
+\abstract{Research plan for the thesis.}
+\tiivistelma{Pro Gradu -tutkielman tutkimussuunnitelma.}
+
+\avainsanat{tietojärjestelmätiede, pro gradu -tutkielma, tutkimussuunnitelma}    % korvaa nämä oikeilla
+\keywords{information technology, Master's thesis, research plan} % avainsanoilla
+
+%\studyline{Järjestelmäkehitys}
+
+\maketitle
+
+\mainmatter
+
+\chapter{Background of the research}
+
+Functional reactive programming is a software language paradigm, where in mobile development systems
+
+Functional reactive programming has grown in popularity for all software application dimensions. 
+
+Research questions:
+    -What is functional reactive programming and its advantages and challenges?
+    -How is FRP implemented in imperative-style programming languages?
+    -Are there practicalities when implementing applications in mobile platforms with FRP?
+        -Is there a threat of ``time-space'' memory-leaks ?
+        -How are FRP-style code bases tested?
+
+Agile development methods such as Scrum~\parencite{schwaber2002agile} and XP~\parencite{beck2004extreme} have been shown to have a positive impact on process and product quality through increased success rate of projects~\parencite{dingsoyr2012decade}. Teams and teamwork are in a central role in agile software development~\parencite{fowler2001agile}. The teams are expected to be highly skilled, communicative and cooperative, but also self-organizing and
+autonomous~\parencite{chow2008survey}. Agile team members are given more
+control over their projects compared to traditional software development. In the same time, rather than reviewing the productivity of a team member, the collective performance of the team is measured. 
+
+Self-organization is a consequence of the complexity of software projects, while it helps to adapt to approaching deadlines by tailoring the tasks as needed~\parencite{schwaber2000selforg}. Leadership is not completely absent in self-organizing agile teams~\parencite{cockburn2001agile}, but manifests itself in a form where emphasis is put on communication and collaboration between team members. 
+
+\section{Main concepts}
+\textit{Self-organization} in agile methods is understood as the self-imposed management of tasks, responsibilities and workloads~\parencite{highsmith2009agile}. Furthermore, decision-making in the team is divided between team members.
+
+\textit{Performance} and \textit{effectiveness} are traditionally measured by the observed quality of the work and amount of tasks completed. This thesis uses the terms `performance` and `effectiveness` interchangeably to mean the work throughput of an agile team.
+
+Some studies argue that self-organization and the resulting increase in performance is one of the key factors to success in agile methods~\parencite{chow2008survey}.
+
+\section{Motivation}
+The Agile Manifesto~\parencite{fowler2001agile} states that ``the best architectures, requirements, and designs 
+emerge from self-organizing teams''. The guidelines for enabling this self-organization in agile teams, however, vary in software project literature~\parencite{hoda2013self}. One reason for this is that several factors exist, such as team size and characteristics of team members that affect the formation of agile teams and their workflow. These observations provide the foundation for the thesis's research.
+
+The motivation of this thesis is to gain understanding of the vague nature of agile teams and teamwork, and more specifically of how self-organization of the team is achieved and how it affects team effectiveness in agile software development.
+
+\section{Previous work}
+
+Teams and teamwork have been widely researched, dating back to to the early 20th century. However, regarding agile methodologies the studies are relatively young~\parencite{moe2009overcoming} and somewhat conflicted about the supremacy of agile methods~\parencite{dingsoyr2012decade}. Self-organization in particular has not been researched thoroughly, despite its evident effect on agile teams~\parencite{hoda2013self}.
+
+\chapter{Research problem and methods}
+The aim of the study is to provide insight into creating effective agile teams. More specifically, the study analyzes different forms of self-organization and how they can be applied to improve performance of agile teams.
+\section{Limitations}
+The subject of teams and teamwork is a vast, multi-disciplinary research topic. This study will be limited to agile methods utilized in software development. Furthermore, the behaviour of individual team members and their collaboration is examined strictly from the viewpoint of agile software projects.
+\section{Research problem}
+The research can be decomposed into four questions:
+
+\begin{itemize}
+    \item What are the characteristics and guidelines of a self-organizing team?
+    \item How is the performance of agile teams perceived and measured?
+    \item What kind of impact self-organization is seen to have on performance?
+    \item What kind of experiences from working in self-organized teams in actual projects have been gained?
+\end{itemize}
+
+The research problem can be expressed as follows: \textit{How does self-organization affect team performance in agile software development?}
+\section{Research methods}
+The thesis utilizes literature review as its main research method. The review consists of an overview into teams in general (team categories, processes of teamwork, team structures, etc.) and factors affecting self-organization and team performance.
+
+In the second part, the research themes are investigated through empirical research. This consists of conducting a survey or a set of interviews in a software company and analyzing the results. For this purpose, a conceptual research model is constructed based on the literature review.
+\section{Expected results and their significance}
+The results aim at explaining the nature of self-organization and effectiveness in agile teams. The expected results are that self-organization improves the performance of an agile team and that self-organization is actively being promoted in prominent software consultant companies. The results will consist of practical knowledge of how to promote team self-organization to achieve greater team effectiveness.
+
+The study will contribute to the ongoing research on agile methods and team performance. For example, team leaders and members of agile projects will benefit from reading the study and applying the principles in their work. The study also aims to be a notable source for academic research in the future regarding agile software projects.
+
+\chapter{Preliminary content}
+This chapter describes the preliminary structure of the study.
+
+\section{Introduction}
+Introduction will guide the reader into the subject by outlining the topic, motivating the study and defining the basic concepts. The chapter also specifies the research problem and questions, as well as describe the research methods and the structure of the contents.
+
+Introduction will be around 3-4 pages.
+
+\section{Functional reactive programming}
+
+\subsection{Functional programming}
+
+\subsection{Summary}
+
+The chapter's length is expected to be around 15 pages.
+
+\section{Empirical study}
+
+The thesis aims to contain an empirical research of the subject. The research will be conducted either as a survey or as a interview -based questionnaire. The actual research model will be built based on the thesis's literature review. The findings will be reported from conclusions from the research and from the answers of the questionnaire. 
+
+The chapter will be 10-15 pages.
+
+\section{Discussion}
+
+This chapter compares the results of the empirical research to scientific studies, and analyzes the accuracy and reliability of the findings. Also the usefulness of the results will be discussed.
+
+The chapter will be 4-6 pages.
+
+\section{Summary and conclusions}
+
+The summary will conclude the study and sum up the research and its conclusions. 
+
+The chapter will be around 3 pages in length.
+
+In total the page count averages between 70 and 93 pages. 
+
+\chapter{Schedule}
+Schedule: \\
+\\
+\begin{tabular}{| l | r |}
+    \hline
+    Reseach plan & November 2013 \\
+    Mini-thesis (chapters 1 to 3) & January 2014 \\
+    Empirical research & March 2014 \\
+    Research results \& analysis & April 2014 \\
+    Polishing \& conclusion & May 2014 \\
+    \hline
+\end{tabular}
+
+The thesis is set to be finished in May 2014. The empirical part should be started as soon as possible in the beginning of next year, to have enough time to collect and analyze the data.
+
+\printbibliography
+
+\end{document}
