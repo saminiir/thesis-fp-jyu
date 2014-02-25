@@ -38,7 +38,7 @@
 
 \begin{document}
 
-\title{Self-organization and performance in agile software development teams}
+\title{Functional reactive programming as an embedded domain-specific language for imperative host language}
 \translatedtitle{Itseorganisoituminen ja tuloksellisuus ketterässä ohjelmistonkehityksessä}
 
 \author{Sami Niiranen}
@@ -63,14 +63,17 @@
 
 \chapter{Background of the research}
 
-Functional reactive programming is a software language paradigm, where in mobile development systems
+Functional programming is a software language paradigm, where functions are first-class citizens and ``pure''. State, as often manifesting as variables in imperative languages, is avoided and captured into concepts such as~\textit{monads}.
+
+Functional reactive programming adds to the original 
 
 Functional reactive programming has grown in popularity for all software application dimensions. 
 
 Research questions:
     -What is functional reactive programming and its advantages and challenges?
+    -How is code quality (volume, redundancy, unit size, complexity, coupling) measured with FRP?
     -How is FRP implemented in imperative-style programming languages?
-    -Are there practicalities when implementing applications in mobile platforms with FRP?
+    -Are there practicalities when implementing applications in with FRP?
         -Is there a threat of ``time-space'' memory-leaks ?
         -How are FRP-style code bases tested?
 
@@ -128,16 +131,31 @@ This chapter describes the preliminary structure of the study.
 Introduction will guide the reader into the subject by outlining the topic, motivating the study and defining the basic concepts. The chapter also specifies the research problem and questions, as well as describe the research methods and the structure of the contents.
 
 Introduction will be around 3-4 pages.
+\section{Functional programming}
+\subsection{Motivation of functional languages}
 
+\subsection{History}
+
+\subsection{Summary}
+Imperative functional programming~\parencite{peyton1993imperative}
+Comparing programming paradigms: an evaluation of functional and object-oriented programs~\parencite{harrison1996comparing}
 \section{Functional reactive programming}
+\subsection{FRP as an Embedded Domain-Specific Language}
+\subsection{Summary}
+Towards safe and efficient functional reactive programming~\parencite{sculthorpe2011towards}
+Functional reactive programming from first principles~\parencite{wan2000functional}
 
-\subsection{Functional programming}
-
+\section{Code quality metrics and evaluation}
 \subsection{Summary}
 
 The chapter's length is expected to be around 15 pages.
 
+Quantitative evaluation of software quality~\parencite{boehm1976quantitative}
+Standardized code quality benchmarking for improving software maintainability~\parencite{baggen2012standardized}
+
 \section{Empirical study}
+\subsection{Objective-C and iOS}
+\subsection{ReactiveCocoa}
 
 The thesis aims to contain an empirical research of the subject. The research will be conducted either as a survey or as a interview -based questionnaire. The actual research model will be built based on the thesis's literature review. The findings will be reported from conclusions from the research and from the answers of the questionnaire. 
 
