@@ -31,14 +31,17 @@
 
 \usepackage{babel}
 
+\usepackage{comment}
+
 \usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
 
-%\addbibresource{tutkimussuunnitelma-niiranen.bib}
+\tolerance=2000 \emergencystretch=10pt % Better hyphenation without overflowing lines
+
 \addbibresource{sources-niiranen.bib}
 
 \begin{document}
 
-\title{Functional reactive programming as an embedded domain-specific language for imperative host language}
+\title{Functional reactive programming and software quality}
 \translatedtitle{Itseorganisoituminen ja tuloksellisuus ketterässä ohjelmistonkehityksessä}
 
 \author{Sami Niiranen}
@@ -63,7 +66,11 @@
 
 \chapter{Background of the research}
 
-Functional programming is a software language paradigm, where functions are first-class citizens and ``pure''. State, as often manifesting as variables in imperative languages, is avoided and captured into concepts such as~\textit{monads}.
+Recently, the Reactive Manifesto~\parencite{reactive2013} was created and signed by over four thousand enthusiasts. The main driving theme of the manifesto are the requirements of complex and large-scale application domains, ranging from ``mobile devices to cloud-based clusters running thousands of multicore processors''~\parencite{reactive2013}. Functional reactive programming aims to deliver event-driven and resilient application stacks for computing environments where concurrency and scalability are central.~\parencite{reactive2013}
+
+Applications implemented with the FRP-paradigm are said to provide elegant solutions 
+
+Not only in heavy server-side computing, but FRP is also increasingly utilized in ``smaller'' application domains such as RESTful services and mobile applications. The driving force behind FRP is to increase the abstraction level of programming, enabling developers to concentrate on the objectives rather than the implementation.
 
 Functional reactive programming adds to the original 
 
@@ -84,24 +91,22 @@ control over their projects compared to traditional software development. In the
 Self-organization is a consequence of the complexity of software projects, while it helps to adapt to approaching deadlines by tailoring the tasks as needed~\parencite{schwaber2000selforg}. Leadership is not completely absent in self-organizing agile teams~\parencite{cockburn2001agile}, but manifests itself in a form where emphasis is put on communication and collaboration between team members. 
 
 \section{Main concepts}
-\textit{Self-organization} in agile methods is understood as the self-imposed management of tasks, responsibilities and workloads~\parencite{highsmith2009agile}. Furthermore, decision-making in the team is divided between team members.
 
-\textit{Performance} and \textit{effectiveness} are traditionally measured by the observed quality of the work and amount of tasks completed. This thesis uses the terms `performance` and `effectiveness` interchangeably to mean the work throughput of an agile team.
+Functional programming is a software language paradigm, where functions are first-class citizens and ``pure''. State, as often manifesting as variables in imperative languages, is avoided and captured into concepts such as~\textit{monads}.
 
-Some studies argue that self-organization and the resulting increase in performance is one of the key factors to success in agile methods~\parencite{chow2008survey}.
+Functional reactive programming adds to the functional paradigm by shifting the focus on time-varying behaviors and stream sequences of events~\parencite{wan2000functional}. Essentially,
+%{{{
+\begin{comment}
+The key ideas in FRP are its notions of behaviors and events. Behaviors are time-varying, reactive values, while events are time-ordered sequences of discrete-time event occurrences.
+\end{comment}
+%}}}
 
 \section{Motivation}
-The Agile Manifesto~\parencite{fowler2001agile} states that ``the best architectures, requirements, and designs 
-emerge from self-organizing teams''. The guidelines for enabling this self-organization in agile teams, however, vary in software project literature~\parencite{hoda2013self}. One reason for this is that several factors exist, such as team size and characteristics of team members that affect the formation of agile teams and their workflow. These observations provide the foundation for the thesis's research.
-
-The motivation of this thesis is to gain understanding of the vague nature of agile teams and teamwork, and more specifically of how self-organization of the team is achieved and how it affects team effectiveness in agile software development.
 
 \section{Previous work}
 
-Teams and teamwork have been widely researched, dating back to to the early 20th century. However, regarding agile methodologies the studies are relatively young~\parencite{moe2009overcoming} and somewhat conflicted about the supremacy of agile methods~\parencite{dingsoyr2012decade}. Self-organization in particular has not been researched thoroughly, despite its evident effect on agile teams~\parencite{hoda2013self}.
-
 \chapter{Research problem and methods}
-The aim of the study is to provide insight into creating effective agile teams. More specifically, the study analyzes different forms of self-organization and how they can be applied to improve performance of agile teams.
+The aim of the study is to present the FRP paradigm, its main concepts and how it is efficiently utilized. Challenges of the paradigm are analyzed.
 \section{Limitations}
 The subject of teams and teamwork is a vast, multi-disciplinary research topic. This study will be limited to agile methods utilized in software development. Furthermore, the behaviour of individual team members and their collaboration is examined strictly from the viewpoint of agile software projects.
 \section{Research problem}
@@ -145,7 +150,7 @@ Comparing programming paradigms: an evaluation of functional and object-oriented
 Towards safe and efficient functional reactive programming~\parencite{sculthorpe2011towards}
 Functional reactive programming from first principles~\parencite{wan2000functional}
 
-\section{Code quality metrics and evaluation}
+\section{Software quality}
 \subsection{Summary}
 
 The chapter's length is expected to be around 15 pages.
