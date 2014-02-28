@@ -65,79 +65,58 @@
 
 \chapter{Background of the research}
 
-As information systems, architectures and graphical user interfaces grow ever more complex, the focus on delivering maintainable and scalable software is of great importance. Recently, the Reactive Manifesto~\parencite{reactive2013} was signed by over four thousand enthusiasts. The main inspiration of the manifesto is functional reactive programming (FRP)~\parencite{reactive2013}, which aims to solve many of the concurrency and coupling problems of traditional approaches by introducing higher-level abstraction to code design than what procedural approaches, such as in C, can offer. More specifically, FRP introduces event-handling mechanisms that hide away the implementation, leaving only concise abstractions in the codebase~\parencite{czaplicki2012elm}. 
+As information systems, architectures and graphical user interfaces grow ever more complex, the focus on delivering maintainable and scalable software is of great importance. Recently,~\citet{reactive2013} was signed by over four thousand enthusiasts. The main inspiration of the manifesto is functional reactive programming (FRP)~\parencite{elliott1997functional}, which aims to solve many of the concurrency and coupling problems of traditional software approaches by introducing higher-level abstraction to code design than what procedural approaches offer. More specifically, FRP introduces event-handling mechanisms that hide away the implementation, leaving only concise abstractions in the codebase~\parencite{czaplicki2012elm}. 
 
-Even though FRP is not a new programming paradigm~\parencite{elliott1997functional}, it has eluded wide adoption. Recently, however, more software practitioners~\parencite{netflix2013,futurice2014,flowdock2013} have started to implement both systems as well as graphical user interfaces in the spirit of FRP.
-
-time as a discrete variable to software design and to which components can be hooked and increasing number of of the manifesto are the requirements of complex and large-scale application domains, ranging from ``mobile devices to cloud-based clusters running thousands of multicore processors''~\parencite{reactive2013}. Functional reactive programming aims to deliver event-driven and resilient application stacks for computing environments where concurrency and scalability are central.~\parencite{reactive2013}
-
-Essentially functional reactive programming (FRP) is a declarative programming model for creating interactive applications. Unlike in imperative languages, The FRP paradigm treats~\textit{time} as a continuous model and, in which the programmer attaches signals models time as continuous
-%{{{
-\begin{comment}
-Functional Reactive Programming (FRP) is a high-level declara- tive programming model for constructing interactive applications.~\parencite{courtney2001frappe}.
-\end{comment}
-%}}}
-Applications implemented with the FRP-paradigm are said to provide elegant solutions 
-
-Not only in heavy server-side computing, but FRP is also increasingly utilized in ``smaller'' application domains such as RESTful services and mobile applications. The driving force behind FRP is to increase the abstraction level of programming, enabling developers to concentrate on the objectives rather than the implementation.
-
-Since functional reactive programming is most often implemented as an embedded domain specific language, the details of the~\textit{host} language play an important part~\parencite{sculthorpe2011towards}.
-%{{{
-\begin{comment}
-The functional level is a pure functional language. FRP implementations are usually embedded in a host language, and in these cases the functional level is provided entirely by the host.~\parencite{sculthorpe2011towards}.
-\end{comment}
-%}}}
-Functional programming is a software language paradigm, where functions are first-class citizens and ``pure''. State, as often manifesting as variables in imperative languages, is avoided and captured into concepts such as~\textit{monads}.
-
-Functional reactive programming adds to the functional paradigm by shifting the focus on time-varying~\textit{behaviors} and streams of~\textit{events}~\parencite{wan2000functional}. Essentially,
+Functional programming is a software language paradigm, where functions are first-class ``citizens'' and ``pure''. State, as often manifesting as variables in imperative languages, is avoided and captured into structures such as~\textit{monads}.  Functional reactive programming adds to the functional paradigm by shifting the focus on time-varying~\textit{behaviors} and streams of~\textit{events}~\parencite{wan2000functional}. These concepts can be used for hiding implementation details and providing a high-level abstraction for development. Essentially, (FRP) is a declarative programming model for creating interactive applications.
 %{{{
 \begin{comment}
 The key ideas in FRP are its notions of behaviors and events. Behaviors are time-varying, reactive values, while events are time-ordered sequences of discrete-time event occurrences.
+
+Functional Reactive Programming (FRP) is a high-level declara- tive programming model for constructing interactive applications.~\parencite{courtney2001frappe}.
 \end{comment}
 %}}}
 
-Research questions:
-    -What is functional reactive programming and its advantages and challenges?
-    -How is code quality (volume, redundancy, unit size, complexity, coupling) measured with FRP?
-    -How is FRP implemented in imperative-style programming languages?
-    -Are there practicalities when implementing applications in with FRP?
-        -Is there a threat of ``time-space'' memory-leaks ?
-        -How are FRP-style code bases tested?
-
 \section{Motivation}
 
-The current notion on software development is the need for developing scalable and fault-tolerant systems~\parencite{reactive2013}.
+Even though FRP is not a new programming paradigm~\parencite{elliott1997functional}, it has eluded wide adoption. Recently, however, more software practitioners~\parencite{netflix2013,futurice2014,flowdock2013} have started to implement both systems as well as graphical user interfaces in the spirit of FRP. Unlike software quality assessment on imperative and object-oriented languages, similar comparison on functional languages is scarce~\parencite{harrison1995estimating,harrison1996comparing} and almost non-existant on the FRP paradigm. However, as the FRP paradigm gains popularity, also the software quality metrics should be updated to support the high-level abstractions of the approach.
 
 \section{Previous work}
 
-Studies on applying FRP in imperative languages is scarce;~\parencite{courtney2001frappe}.
+Functional reactive programming has its root in the academia~\parencite{elliott1997functional}, and as such, has been moderately researched~\parencite{elliott1997functional,elliott2009push,wan2000functional,wan2002event,sculthorpe2011towards,nilsson2002functional}. As the adaptation of FRP in popular use is still in progress, most of the research has concentrated on the semantics of FRP.
 
-Code analysis and comparison on different program versions written with both functional and imperative paradigms is also scarce~\parencite{hudak1994haskell,harrison1996comparing}.
+Code analysis and comparison of quality in functional programming paradigms is relatively scarce~\parencite{hudak1994haskell,harrison1996comparing,harrison1995estimating,harrison1996evaluation}. Studies of applying FRP in imperative languages is scarce~\parencite{courtney2001frappe}. Moreover, not a single study researching the software quality metrics on the FRP was found.
 
 \chapter{Research problem and methods}
-The aim of the study is to present the FRP paradigm, its main concepts and how it is efficiently utilized. Challenges of the paradigm are analyzed.
+The aim of the study is to present the functional reactive programming paradigm, its main concepts and how it is efficiently utilized. Challenges of the paradigm and its use in practical settings are analyzed.
+
 \section{Limitations}
-The subject of teams and teamwork is a vast, multi-disciplinary research topic. This study will be limited to agile methods utilized in software development. Furthermore, the behaviour of individual team members and their collaboration is examined strictly from the viewpoint of agile software projects.
+While implementing a pure approach to functional reactive programming is troublesome (due to several limitations, such as computer's capability of modelling time), several ``compromises'' of FRP exist. As they are numerous and applied to different settings, only thorough examination of one of these implementations is feasible.
+
 \section{Research problem}
 The research can be decomposed into four questions:
 
 \begin{itemize}
-    \item What are the characteristics and guidelines of a self-organizing team?
-    \item How is the performance of agile teams perceived and measured?
-    \item What kind of impact self-organization is seen to have on performance?
-    \item What kind of experiences from working in self-organized teams in actual projects have been gained?
+    \item What is functional reactive programming and its concepts?
+    \item What are the challenges of FRP and how can it be utilized in practical settings?
+    \item How do the software quality metrics apply to FRP code bases?
 \end{itemize}
 
-The research problem can be expressed as follows: \textit{How does self-organization affect team performance in agile software development?}
+\noindent The research problem can be expressed as follows: \textit{What is functional reactive programming and how do software quality metrics apply to its implementations?}
+
 \section{Research methods}
 The thesis utilizes literature review as its main research method. The review consists of an overview into functional and reactive programming and the metrics of software quality. 
 
-In the second part, the research themes are investigated through empirical research. This consists of developing an application adhering to the FRP principles. Some research ideas are as follows: Compare and analyze the code quality of an application implemented with FRP and imperative programming paradigms. Develop an aplication for creating marble diagrams out of FRP abstraction in source code.
+In the second part, the research themes are investigated through empirical research. This consists of developing an application adhering to the FRP principles. Some research ideas are as follows: 
+
+\begin{itemize}
+    \item Compare and analyze the code quality of two versions of an application implemented with FRP and imperative programming paradigms
+    \item Develop an application for creating marble diagrams out of FRP abstractions in the given source code
+\end{itemize}
 
 \section{Expected results and their significance}
-The results aim at explaining the various semantics of FRP and how they relate to software quality. As FRP is especially tailored for data-driven designs, the results are expected to be positive in such settings. However,   the nature of self-organization and effectiveness in agile teams. The expected results are that self-organization improves the performance of an agile team and that self-organization is actively being promoted in prominent software consultant companies. The results will consist of practical knowledge of how to promote team self-organization to achieve greater team effectiveness.
+The results aim at explaining the various semantics of FRP and how they relate to software quality. As FRP is especially tailored for data-driven designs, the results are expected to be positive in such settings. However, analyzing software implemented with FRP might differ from traditional software quality metrics.
 
-The empirical part aims to provide concrete means for approaching FRP: Either as code quality analysis or visualizing FRP graphs. Either way, the results should be of interest to academics and practitioners alike and should fuel future research.
+The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating the concepts of FRP into practical settings and pinpoint the challenges of the approach. Future research will be fueled by providing more support to the functional and reactive paradigms as opposed to imperative approaches.
 
 \chapter{Preliminary content}
 This chapter describes the preliminary structure of the study.
@@ -147,21 +126,41 @@ Introduction will guide the reader into the subject by outlining the topic, moti
 
 Introduction will be around 3-4 pages.
 \section{Functional programming}
+
+This chapter will provide an overview into the functional programming paradigm.
+Length is expected to be around 10 pages.
+
 \subsection{Motivation of functional languages}
 
-\subsection{History}
+\subsection{Concepts}
 
 \subsection{Summary}
-Imperative functional programming~\parencite{peyton1993imperative}
-Comparing programming paradigms: an evaluation of functional and object-oriented programs~\parencite{harrison1996comparing}
-\section{Reactive programming}
-\subsection{Signals}
-\subsection{Structural dynamism}
-\subsection{Behaviours and Events}
 
-Constant behaviours
-Time-varying behaviours
-Events
+\begin{itemize}
+    \item Imperative functional programming~\parencite{peyton1993imperative}
+    \item Comparing programming paradigms: an evaluation of functional and object-oriented programs~\parencite{harrison1996comparing}
+\end{itemize}
+\section{Reactive programming}
+
+This chapter will provide an overview into the reactive programming paradigm in the context of functional programming.
+Length is expected to be around 15 pages.
+
+\begin{itemize}
+    \item Deprecating the observer pattern~\parencite{maier2010deprecating}
+    \item Design patterns: elements of reusable object-oriented software~\parencite{gamma1994design}
+    \item A Possible Future of Software Development~\parencite{parent2006adobe}
+\end{itemize}
+
+\subsection{Concepts}
+
+\begin{itemize}
+    \item Signals
+    \item Structural dynamism
+    \item Constant behaviours
+    \item Time-varying behaviours
+    \item Events
+    \item Combinators
+\end{itemize}
 %{{{
 \begin{comment}
 The simplest examples of behaviors are constant behaviors: those that ignore their time argument and evaluate to some constant value.~\parencite{courtney2001frappe}.
@@ -171,47 +170,62 @@ An example of a time-varying behavior (taken from a binding of FRP for computer 
 Conceptually, an Event is some condition that occurs at a discrete point in time.~\parencite{courtney2001frappe}.
 \end{comment}
 %}}}
-\subsection{Combinators}
+\subsection{Challenges of FRP}
+
+\begin{itemize}
+    \item Time- and space-leaks
+    \item Instantaneous predicate events
+\end{itemize}
+%{{{
+\begin{comment}
+An efficient, robust implementation of the FRP model that is both faithful to the formal se- mantics and does not suffer from space leaks or other performance problems has remained an elusive goal, and we do not expect that this situation will change in the near future.~\parencite{courtney2001frappe}.
+
+Like the stream-based implementation from which it derives, our implementation of FRP is unable to detect instantaneous pred- icate events.~\parencite{courtney2001frappe}.
+\end{comment}
+%}}}
+
 \subsection{Implementations of FRP}
-Stream-based FRP
+\begin{itemize}
+    \item Stream-based FRP
+    \item FrTime, Scheme (Integrating dataflow evaluation into a practical higher-order call-by-value language~\parencite{cooper2008integrating})
+    \item Elm (Elm: Concurrent FRP for Functional GUIs~\parencite{czaplicki2012elm})
+    \item Scala.React (Deprecating the observer pattern~\parencite{maier2010deprecating})
+    \item Fran (Functional reactive animation~\parencite{elliott1997functional}, Push-pull functional reactive programming~\parencite{elliott2009push} )
+    \item Yampa (The yampa arcade~\parencite{courtney2003yampa})
+    \item Flapjax (Flapjax: a programming language for Ajax applications~\parencite{meyerovich2009flapjax})
+    \item Frappe (Frapp{\'e}: Functional reactive programming in Java~\parencite{courtney2001frappe})
+\end{itemize}
+
 %{{{
 \begin{comment}
 One recent implementation of FRP that has received particular scrutiny is the so-called stream-based implementation, described in [9].4 A related paper [18] analyzes this implementation formally, showing that, with one caveat5, as the sample time approaches 0, the implementation is faithful to the formal semantics.~\parencite{courtney2001frappe}.
 \end{comment}
 %}}}
-\subsection{FRP as an Embedded Domain-Specific Language}
-\subsection{Challenges of FRP}
-Time- and space -leaks
-%{{{
-\begin{comment}
-An efficient, robust implementation of the FRP model that is both faithful to the formal se- mantics and does not suffer from space leaks or other performance problems has remained an elusive goal, and we do not expect that this situation will change in the near future.~\parencite{courtney2001frappe}.
-\end{comment}
-
-Instantaneous predicate events
-%{{{
-\begin{comment}
-Like the stream-based implementation from which it derives, our implementation of FRP is unable to detect instantaneous pred- icate events.~\parencite{courtney2001frappe}.
-\end{comment}
-%}}}
 
 %}}}
 \subsection{Summary}
-Towards safe and efficient functional reactive programming~\parencite{sculthorpe2011towards}
-Functional reactive programming from first principles~\parencite{wan2000functional}
+
+\begin{itemize}
+    \item Towards safe and efficient functional reactive programming~\parencite{sculthorpe2011towards}
+    \item Functional reactive programming from first principles~\parencite{wan2000functional}
+\end{itemize}
 
 \section{Software quality}
+
+This chapter will provide an overview into software quality and the metrics of code quality analysis.
+Length is expected to be around 15 pages.
+
+\begin{itemize}
+    \item Quantitative evaluation of software quality~\parencite{boehm1976quantitative}
+    \item Standardized code quality benchmarking for improving software maintainability~\parencite{baggen2012standardized}
+\end{itemize}
+
+\subsection{Metrics}
 \subsection{Summary}
 
-The chapter's length is expected to be around 15 pages.
-
-Quantitative evaluation of software quality~\parencite{boehm1976quantitative}
-Standardized code quality benchmarking for improving software maintainability~\parencite{baggen2012standardized}
-
 \section{Empirical study}
-\subsection{Objective-C and iOS}
-\subsection{ReactiveCocoa}
 
-The thesis aims to contain an empirical research of the subject. The research will be conducted either as a survey or as a interview -based questionnaire. The actual research model will be built based on the thesis's literature review. The findings will be reported from conclusions from the research and from the answers of the questionnaire. 
+The thesis contains an empirical study in the form of application development. The construction of the application is based on the concepts of the literature review part of the thesis.
 
 The chapter will be 10-15 pages.
 
@@ -225,24 +239,22 @@ The chapter will be 4-6 pages.
 
 The summary will conclude the study and sum up the research and its conclusions. 
 
-The chapter will be around 3 pages in length.
-
-In total the page count averages between 70 and 93 pages. 
+The chapter will be around 3 pages in length. In total the page count of the content averages between 60 and 80 pages. 
 
 \chapter{Schedule}
 Schedule: \\
 \\
 \begin{tabular}{| l | r |}
     \hline
-    Reseach plan & November 2013 \\
-    Mini-thesis (chapters 1 to 3) & January 2014 \\
-    Empirical research & March 2014 \\
-    Research results \& analysis & April 2014 \\
-    Polishing \& conclusion & May 2014 \\
+    Reseach plan & February 2014 \\
+    Mini-thesis (chapters 1 to 3) & March 2014 \\
+    Empirical research & April 2014 \\
+    Research results \& analysis & May 2014 \\
+    Polishing \& conclusion & June 2014 \\
     \hline
 \end{tabular}
 
-The thesis is set to be finished in May 2014. The empirical part should be started as soon as possible in the beginning of next year, to have enough time to collect and analyze the data.
+\noindent The thesis is set to be finished in June 2014. 
 
 \printbibliography
 
