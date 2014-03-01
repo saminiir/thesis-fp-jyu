@@ -41,7 +41,7 @@
 
 \begin{document}
 
-\title{Functional reactive programming and software quality}
+\title{Functional reactive programming and software quality metrics}
 \translatedtitle{Reaktiivinen funktionaalinen ohjelmointi}
 
 \author{Sami Niiranen}
@@ -65,7 +65,7 @@
 
 \chapter{Background of the research}
 
-As information systems, architectures and graphical user interfaces grow ever more complex, the focus on delivering maintainable and scalable software is of great importance. Recently,~\citet{reactive2013} was signed by over four thousand enthusiasts. The main inspiration of the manifesto is functional reactive programming (FRP)~\parencite{elliott1997functional}, which aims to solve many of the concurrency and coupling problems of traditional software approaches by introducing higher-level abstraction to code design than what procedural approaches offer. More specifically, FRP introduces event-handling mechanisms that hide away the implementation, leaving only concise abstractions in the codebase~\parencite{czaplicki2012elm}. 
+As information systems, architectures and graphical user interfaces grow ever more complex, the focus on delivering maintainable and scalable software is of great importance. Recently,~\citet{reactive2013} was signed by over four thousand enthusiasts. The main inspiration of the manifesto is functional reactive programming (FRP)~\parencite{elliott1997functional}, which aims to solve many of the concurrency and coupling problems of traditional software approaches by introducing higher-level abstraction to code design than what procedural approaches offer. More specifically, FRP provides event-handling mechanisms that hide away the implementation, leaving only concise abstractions in the codebase~\parencite{czaplicki2012elm}. 
 
 Functional programming is a software language paradigm, where functions are first-class ``citizens'' and ``pure''. State, as often manifesting as variables in imperative languages, is avoided and captured into structures such as~\textit{monads}.  Functional reactive programming adds to the functional paradigm by shifting the focus on time-varying~\textit{behaviors} and streams of~\textit{events}~\parencite{wan2000functional}. These concepts are used for hiding implementation details and providing a high-level abstraction for development. Essentially, FRP is a declarative programming model for creating interactive applications.
 %{{{
@@ -76,9 +76,11 @@ Functional Reactive Programming (FRP) is a high-level declara- tive programming 
 \end{comment}
 %}}}
 
+Software quality and metrics is a branch of software engineering, where the quality of code is analyzed and quantified. The purpose of this observation is to e.g. identify problematic modules in the code and predict future maintenance effort~\parencite{fenton1999software}. Traditionally, however, software metrics have mostly dealt with imperative and object-oriented programming paradigms, and as such, the metrics are tailored for them~\parencite{harrison1996evaluation,basili1996validation,li1993object,chidamber1994metrics}. As the use of functional (reactive) programming increases, also the analysis of such programs is increasingly required. This, in turn, has called out researchers to update and add software metrics that also fit to the functional paradigm concepts~\parencite{ryder2005software,harrison1995estimating}.
+
 \section{Motivation}
 
-Even though FRP is not a new programming paradigm~\parencite{elliott1997functional}, it has eluded wide adoption. Recently, however, more software practitioners~\parencite{netflix2013,futurice2014,flowdock2013} have started to implement both systems as well as graphical user interfaces in the spirit of FRP. Unlike software quality assessment on imperative and object-oriented languages, similar comparison on functional languages is scarce~\parencite{harrison1995estimating,harrison1996comparing} and almost non-existant on the FRP paradigm. However, as the FRP paradigm gains popularity, also the software quality metrics should be updated to support the high-level abstractions of the approach.
+Even though FRP is not a new programming paradigm~\parencite{elliott1997functional}, it has eluded wide adoption. Recently, however, more software practitioners~\parencite{netflix2013,futurice2014,flowdock2013} have started to implement both systems as well as graphical user interfaces in the spirit of FRP. Unlike software quality assessment on imperative and object-oriented languages, similar comparison on functional languages is scarce~\parencite{harrison1995estimating,harrison1996comparing,ryder2005software,ryder2004software,van1995software} and almost non-existant on the FRP paradigm. However, as the FRP paradigm gains popularity, also the software quality metrics should be updated to support the high-level abstractions of the approach.
 
 \section{Previous work}
 
@@ -109,12 +111,13 @@ The thesis utilizes literature review as its main research method. The review co
 In the second part, the research themes are investigated through empirical research. This consists of developing an application adhering to the FRP principles. Some research ideas are as follows: 
 
 \begin{itemize}
+    \item Construct software metrics that can be applied on the internal attributes of code written with FRP, and develop a tool for quantifying the metrics of given FRP source code
     \item Compare and analyze the code quality of two versions of an application implemented with FRP and imperative programming paradigms
     \item Develop an application for creating marble diagrams out of FRP abstractions in the given source code
 \end{itemize}
 
 \section{Expected results and their significance}
-The results aim at explaining the various semantics of FRP and how they relate to software quality. As FRP is especially tailored for data-driven designs, the results are expected to be positive in such settings. However, analyzing software implemented with FRP might differ from traditional software quality metrics.
+The results aim at explaining the various semantics of FRP and how they relate to software quality metrics. As FRP is especially tailored for data-driven designs, the results are expected to be positive in such settings. However, analyzing software implemented with FRP might differ from traditional software quality metrics.
 
 The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating the concepts of FRP into practical settings and pinpoint the challenges of the approach. Future research will be fueled by providing more support to the functional and reactive paradigms as opposed to imperative approaches.
 
@@ -134,11 +137,21 @@ Length is expected to be around 10 pages.
 
 \subsection{Concepts}
 
+\begin{itemize}
+    \item Functions as first-class values
+    \item Pure functions (Side effect -free)
+    \item Lambda expressions
+    \item Lazy evaluation
+    \item Control structures
+\end{itemize}
+
 \subsection{Summary}
 
 \begin{itemize}
     \item Imperative functional programming~\parencite{peyton1993imperative}
     \item Comparing programming paradigms: an evaluation of functional and object-oriented programs~\parencite{harrison1996comparing}
+    \item Haskell 98 language and libraries: the revised report~\parencite{jones2003haskell}
+    \item Software Measurement for Functional Programming~\parencite{ryder2004software}
 \end{itemize}
 \section{Reactive programming}
 
@@ -210,17 +223,36 @@ One recent implementation of FRP that has received particular scrutiny is the so
     \item Functional reactive programming from first principles~\parencite{wan2000functional}
 \end{itemize}
 
-\section{Software quality}
+\section{Software quality metrics}
 
-This chapter will provide an overview into software quality and the metrics of code quality analysis.
+This chapter will provide an overview into software quality and the metrics of code quality analysis. Code metrics for imperative, object-oriented and functional languages are presented.
+
 Length is expected to be around 15 pages.
 
 \begin{itemize}
     \item Quantitative evaluation of software quality~\parencite{boehm1976quantitative}
     \item Standardized code quality benchmarking for improving software maintainability~\parencite{baggen2012standardized}
+    \item Software metrics: successes, failures and new directions~\parencite{fenton1999software}
+    \item Implementing effective software metrics programs~\parencite{hall1997implementing}
+    \item A complexity measure~\parencite{mccabe1976complexity}
+    \item Software Measurement for Functional Programming~\parencite{ryder2004software}
+    \item Software measurement and functional programming~\parencite{van1995software}
+    \item Software structure metrics based on information flow~\parencite{henry1981software}
 \end{itemize}
 
 \subsection{Metrics}
+\begin{itemize}
+    \item Internal attributes~\parencite{hall1997implementing,fenton1999software}
+    \item External attributes~\parencite{hall1997implementing,fenton1999software}
+    \item Control flow
+    \item Cyclomatic complexity~\parencite{mccabe1976complexity}
+    \item Test coverage
+    \item Coupling
+    \item Fan-in \& Fan-out~\parencite{henry1981software}
+\end{itemize}
+
+\subsection{Metrics for functional languages}
+
 \subsection{Summary}
 
 \section{Empirical study}
