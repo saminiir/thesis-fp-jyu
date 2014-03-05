@@ -1,0 +1,210 @@
+%{{{ Settings
+% !TeX encoding = latin1
+%
+% [ Tiedostossa käytetty merkistö on ISO 8859-1 eli Latin 1. Ylläoleva rivi ]
+% [ tarvitaan, jos käyttää MiKTeX-paketin mukana tulevaa TeXworks-editoria. ]
+%
+% TIETOTEKNIIKAN KANDIDAATINTUTKIELMA
+%
+% Yksinkertainen LaTeX2e-mallipohja kandidaatintutkielmalle.
+% Käyttää Antti-Juhani Kaijanahon ja Matthieu Weberin kirjoittamaa
+% gradu2-dokumenttiluokkaa.
+%
+% Laatinut Timo Männikkö
+%
+% Jos kirjoitat pro gradu -tutkielmaa, tee mallipohjaan seuraavat muutokset:
+%  - Poista dokumenttiluokasta optio shortthesis .
+%  - Poista makro \tyyppi .
+%  - Lisää suuntautumisvaihtoehto makrolla \linja .
+%  - Kirjoita ylimmän tason otsikot makrolla \chapter, toisen tason otsikot
+%    makrolla \section ja mahdolliset kolmannen tason otsikot makrolla
+%    \subsection .
+%
+% Halutessasi voit tehdä myös kandidaatintutkielman "pro gradu -tyylillä":
+%  - Poista shortthesis-optio.
+%  - Kirjoita otsikot makroilla \chapter , \section (ja \subsection ).
+
+\documentclass[english]{tjt-latex-gradupohja/gradu3}
+
+\usepackage{graphicx} % tarvitaan vain, jos halutaan mukaan kuvia
+
+\usepackage{booktabs} % hyvä kauniiden taulukoiden tekemiseen
+
+\usepackage{tikz} % Portable graphics, diagrams
+\usetikzlibrary{matrix,positioning,fit,arrows}
+
+\usepackage{listings}
+\lstset{language=Haskell}
+
+\usepackage{babel}
+
+\usepackage{comment}
+
+\usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
+
+\addbibresource{sources-niiranen.bib}
+
+\tolerance=2000 \emergencystretch=10pt % Better hyphenation without overflowing lines
+
+\begin{document}
+%}}}
+%{{{Meta
+\title{Functional reactive programming and software quality metrics}
+\translatedtitle{Reaktiivinen funktionaalinen ohjelmointi}
+
+\author{Sami Niiranen}
+\contactinformation{sami.i.niiranen@student.jyu.fi}
+
+\supervisor{?? (JYU)}
+\supervisor{Jukka Lindström (Reaktor Innovations)}
+
+\setdate{02}{03}{2014}
+
+\abstract{TODO}
+\tiivistelma{TODO}
+
+\avainsanat{tietojärjestelmätiede, pro gradu -tutkielma, TODO} 
+\keywords{information technology, Master's thesis, TODO} % avainsanoilla
+
+%\studyline{Järjestelmäkehitys}
+
+\maketitle
+
+\mainmatter
+%}}}
+%{{{Introduction
+\chapter{Introduction}
+
+%}}}
+%{{{Functional programming
+\chapter{Functional programming}
+%{{{Chapter questions
+\begin{comment}
+\end{comment}
+%}}}
+
+A recurring challenge of software engineering is to develop applications that are not too complex to comprehend and reason about. Actions towards this complexity is actively being taken by e.g. refactoring~\parencite{fowler1999refactoring}, and by analyzing the quality of the software with metrics~\parencite{boehm1976quantitative}. In turn,~\textit{modularization} is in the heart of software engineering, where the aim is to have loosely-coupled relationships between
+components and the possibility of changing and upgrading these components with least effort possible~\parencite{hughes1989functional}. Effectively, software that has a well-thought structure is easier to develop, debug and maintain.
+%{{{
+\begin{comment}
+As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularised.~\parencite{hughes1989functional}.
+
+\end{comment}
+%}}}}
+
+Several programming paradigms exist for developing software. The most popular paradigm is the~\textit{imperative} approach, where programs are written in step-by-step instructions and commands~\parencite{sebesta2002concepts}. This approach is similar to the design of the von Neumann computer architecture and its basic implementation of sending messages back and forth between the CPU and the store (memory)~\parencite{backus1978can}. In turn, many programming languages have
+adapted the same approach as in the von Neumann architecture to their execution flow: variables, control statements and assignment statements~\parencite{backus1978can}.
+%{{{
+\begin{comment}
+In its simplest form a von Neumann computer has three parts, a central processing unit (or CPU) a store, and a connecting tube that can transmit a single word between the CPU and the store (and send an address to the store).~\parencite{backus1978can}.
+
+All have been designed to make efficient use of von Neumann architecture computers. Although the impera- tive style of programming has been found acceptable by most programmers, its heavy reliance on the underlying architecture is thought by some to be an unnecessary restriction on the alternative approaches to software development.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}}
+
+The critics of imperative languages argue that as programs grow large, the imperative approach inherently struggles with expressing non-trivial programs consisting of numerous modules in a succinct manner~\parencite{backus1978can,hughes1989functional}. For example, the inclusion of explicit variables forces the developers to understand all of them concurrently, and in the worst case, keep a mental model of the relationships of these variables~\parencite{sebesta2002concepts}.
+%{{{
+\begin{comment}
+One of the fundamental characteristics of programs written in impera- tive languages is that they have state, which changes throughout the execution process. This state is represented by the program¿s variables. The author and all readers of the program must understand the uses of its variables and how the program¿s state changes through execution. For a large program, this is a daunting task. This is one problem with programs written in an imperative language that is not present in
+a program written in a pure functional language, for such programs have neither variables nor state.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}}
+
+Functional programming is a different approach to software engineering compared to imperative languages. It utilizes mathematical functions for program flow, such as recursion and conditional expressions, in contrast to the characteristic of sequential and iterative repetition found in imperative languages~\parencite{sebesta2002concepts}. Moreover, variables that model values in memory locations do not obviously exist in mathematics, and as such, are also omitted from pure functional
+programming. 
+%{{{
+\begin{comment}
+One of the fundamental characteristics of mathematical functions is that the evaluation order of their mapping expressions is controlled by recursion and conditional expressions, rather than the sequencing and iterative repetition that are common to the imperative programming languages.~\parencite{sebesta2002concepts}
+
+However, a subprogram in an imperative language may depend on the current values of several nonlocal or global variables. This makes it difficult to determine statically what values the subprogram will produce and what side effects it will have on a particular execution.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}}
+TODO: Esimerkki factorialista?
+
+This thesis uses the Haskell programming language~\parencite{jones2003haskell} to express the concepts of functional programming. Haskell, named after the logician Haskell B. Curry, was developed to be a multi-purpose functional programming language. Used both in education, research and by practitioners, Haskell has enjoyed steady popularity as one of the iconic functional programming languages. Albeit several other alternatives (and predecessors) exist, Haskell follows the functional paradigm in a strict manner with education as one of the language's design motives.~\parenciteseveral{jones2003haskell}. However, this thesis does not serve as an introduction to Haskell itself, but rather to the main concepts of functional programming. Syntax of Haskell is not explained, although the expressiveness of the language should aid in understanding the examples in the thesis.
+%{{{
+\begin{comment}
+The committee's primary goal was to deisgn a language that satisfied these constraints:
+1. It should be suitable for teaching, research, and applications, including building large systems.
+2. It should be completely described via the publication of a formal syntax and semantics.
+3. It should be freely available. Anyone should be permitted to implement the language and distribute it to whomever they please.
+4. It should be based on ideas that enjoy a wide consensus.
+5. It should reduce unnecessary diversity in functional programming languages.
+~\parencite{jones2003haskell}
+\end{comment}
+%}}}}
+
+\section{Concepts}
+
+The different concepts of functional programming are numerous, but shared between languages. This section aims to provide an overview into the features of functional languages, as well as their strengths and weaknesses.
+
+\subsection{Functions}
+
+The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages are meant to resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{sebesta2002concepts}. For example, a function that returns an integer doubled by itself (square) in Haskell would be defined as:
+
+\begin{lstlisting}
+square :: Num a => a -> a
+square x = x * x 
+\end{lstlisting}
+
+\noindent The assignment operator, {\tt =} is meant to define functions (in this case, the computation of a number's square) and not to actually assign any values to a variable. Additionally, the parameters of the function definition are fixed, meaning they can not change in the domain of the function. This is opposite in imperative languages, where variables received as parameters are often manipulated and their state is changed.~\parenciteseveral{sebesta2002concepts}.
+%{{{
+\begin{comment}
+In this definition, the domain and range sets are the real numbers. The symbol K is used to mean ¿is defined as.¿ The parameter x can represent any member of the domain set, but it is fixed to represent one specific element during evalu- ation of the function expression. This is one way the parameters of mathemati- cal functions differ from the variables in imperative languages.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}
+
+%{{{
+\begin{comment}
+The functional programming paradigm, which is based on mathematical functions, is the design basis of the most important nonimperative styles of languages. This style of programming is supported by functional programming languages.~\parencite{sebesta2002concepts}.
+
+\end{comment}
+%}}}}
+
+\subsection{Higher-order functions}
+\begin{itemize}
+    \item Partial application, currying
+\end{itemize}
+
+\subsection{Lazy Evaluation}
+
+\subsection{Polymorphic types}
+
+\subsection{Monads}
+
+\section{Summary}
+
+%}}}
+%{{{Reactive programming
+\chapter{Reactive programming}
+%{{{Questions
+\begin{comment}
+\end{comment}
+%}}}
+
+
+%}}}
+%{{{Software metrics
+\chapter{Software metrics}
+
+%}}}
+%{{{Empirical study
+\chapter{Empirical study}
+%{{{Questions
+\begin{comment}
+\end{comment}
+%}}}
+
+%}}}
+%{{{Discussion
+\chapter{Discussion}
+
+%}}}
+%{{{Summary and conclusion
+\chapter{Summary and conclusion}
+
+%}}}
+
+\printbibliography
+
+\end{document}
