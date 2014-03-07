@@ -121,7 +121,7 @@ However, a subprogram in an imperative language may depend on the current values
 %}}}}
 TODO: Esimerkki factorialista?
 
-This thesis uses the Haskell programming language~\parencite{jones2003haskell} to express the concepts of functional programming. Haskell, named after the logician Haskell B. Curry, was developed to be a multi-purpose functional programming language. Used both in education, research and by practitioners, Haskell has enjoyed steady popularity as one of the iconic functional programming languages. Albeit several other alternatives (and predecessors) exist, Haskell follows the functional paradigm in a strict manner with education as one of the language's design motives.~\parenciteseveral{jones2003haskell}. However, this thesis does not serve as an introduction to Haskell itself, but rather to the main concepts of functional programming. Syntax of Haskell is not explained, although the expressiveness of the language should aid in understanding the examples in the thesis.
+This thesis uses the Haskell programming language~\parencite{jones2003haskell} to demonstrate the concepts of functional programming. Haskell, named after the logician Haskell B. Curry, was developed to be a multi-purpose functional programming language. Used both in education, research and by practitioners, Haskell has enjoyed steady popularity as one of the modern functional languages. Albeit several other alternatives (and predecessors) exist, Haskell follows the functional paradigm in a ``pure'' manner with education as one of the language's design motives.~\parenciteseveral{jones2003haskell}. However, this thesis does not serve as an introduction to Haskell itself, but rather to the main concepts of functional programming. The syntax of Haskell is not explained, although the expressiveness, one of the goals of the functional paradigm, should aid in understanding the examples provided in the thesis.
 %{{{
 \begin{comment}
 The committee's primary goal was to deisgn a language that satisfied these constraints:
@@ -134,39 +134,134 @@ The committee's primary goal was to deisgn a language that satisfied these const
 \end{comment}
 %}}}}
 
-\section{Concepts}
-
-The different concepts of functional programming are numerous, but shared between languages. This section aims to provide an overview into the features of functional languages, as well as their strengths and weaknesses.
-
-\subsection{Functions}
-
-The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages are meant to resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{sebesta2002concepts}. For example, a function that returns an integer doubled by itself (square) in Haskell would be defined as:
-
-\begin{lstlisting}
-square :: Num a => a -> a
-square x = x * x 
-\end{lstlisting}
-
-\noindent The assignment operator, {\tt =} is meant to define functions (in this case, the computation of a number's square) and not to actually assign any values to a variable. Additionally, the parameters of the function definition are fixed, meaning they can not change in the domain of the function. This is opposite in imperative languages, where variables received as parameters are often manipulated and their state is changed.~\parenciteseveral{sebesta2002concepts}.
-%{{{
+%{{{Additional sources
 \begin{comment}
-In this definition, the domain and range sets are the real numbers. The symbol K is used to mean ¿is defined as.¿ The parameter x can represent any member of the domain set, but it is fixed to represent one specific element during evalu- ation of the function expression. This is one way the parameters of mathemati- cal functions differ from the variables in imperative languages.~\parencite{sebesta2002concepts}.
+The earliest programming languages were developed with one simple goal in mind: to provide a vehicle through which one could control the behavior of computers. Not sur- prisingly, the early languages reflected the structure of the underlying machines fairly well. First, it became obvious that what was easy for a machine to reason about was not necessarily easy for a human being to rea- son about.~\parencite{hudak1989conception} In Conception_evolution_and_application.....pdf
+
+The class of functional, or applicative, programming languages, in which computation is carried out entirely through the evaluation of expressions, is one such family of languages, and debates over its merits have been quite lively in recent years.~\parencite{hudak1989conception}
+
+Among the claims made by functional language advocates are that programs can be written quicker, are more concise, are higher level (resembling more closely traditional mathematical notation), are more amenable to formal reasoning and analysis, and can be executed more easily on parallel architectures. Of course, many of these features touch on rather subjective issues, which is one reason why the debates can be so lively.~\parencite{hudak1989conception}.
+
+TODO: Maininta myös Lispistä!! Esim. hudak1989conception :ssa hyvää juttua
+Despite its impurities, Lisp had a great influence on functional language development, and it is encouraging to note that modern Lisps (especially Scheme) have returned more to the purity of the lambda calculus rather than the ad hocery that plagued the Maclisp era. This return to the purity includes the first-class treatment of functions and the lexical scoping of identifiers.~\parencite{hudak1989conception}.
+
+A purely functional programming language does not use variables or assignment statements, thus freeing the programmer from concerns related to the memory cells, or state, of the program. Without variables, iterative con- structs are not possible, for they are controlled by variables.~\parencite{sebesta2002concepts}.
+
 \end{comment}
 %}}}
 
+\section{Concepts}
+
+The different concepts of functional programming are numerous, but shared between languages. This section aims to provide an overview into the features of functional languages, as well as their strengths and weaknesses. 
+
+\subsection{Functions}
+
+The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{sebesta2002concepts}. A function that returns an integer doubled by itself (effectively calculating the square of a number) would be defined in Haskell as:
+
+\begin{lstlisting}
+square x = x * x 
+\end{lstlisting}
+
+\noindent The assignment operator, {\tt =} is meant to define a function (in this case, the computation of a number's square) and not to actually assign any values to a variable. Additionally, the parameters of the function definition are fixed (constant), meaning they can not change in the domain of the function. This is opposite in imperative languages, where variables received as parameters are often manipulated and their state is changed. In pure functional languages, such as Haskell, variables are omitted and state does not exist in an operational or denotational sense. This can be observed through~\textit{referential transparency}, which holds that a function should return the same result every time with the same given parameters, since no ``external'' variables, or~\textit{side-effects}, can affect the computation.~\parenciteseveral{sebesta2002concepts}.
 %{{{
+\begin{comment}
+In this definition, the domain and range sets are the real numbers. The symbol K is used to mean ¿is defined as.¿ The parameter x can represent any member of the domain set, but it is fixed to represent one specific element during evalu- ation of the function expression. This is one way the parameters of mathemati- cal functions differ from the variables in imperative languages.~\parencite{sebesta2002concepts}.
+
+Without variables, the execution of a purely functional program has no state in the sense of operational and denotational semantics. The execution of a function always produces the same result when given the same parameters. This feature is called referential transparency.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}
+
+A particular inspiration for functional languages is the~\textit{lamdba calculus}~\parencite{church1932set}. Its main purpose is to define the behavior of functions in an intuitive manner, where computations are the central aspect. In particular, the functions in lamdba calculus have one key abstraction: They can be applied to themselves. In addition to functions being anonymous in lamdba calculus, recursion does not have to be explicitly stated because of the general applicability of the functions.~\parenciteseveral{hudak1989conception}. For an example of lamdba calculus, the following expression results in 8 as the value of the computation:
+
+\begin{lstlisting}[mathescape]
+$(\lambda (x)x * x * x)(2)$
+\end{lstlisting}
+
+\noindent Although the semantics of lamdba calculus are essentially small and simple~\parencite{hudak1989conception}, its application is more involved and thus is not described in this thesis. The important point to be made is that lamdba calculus predates the Turing Machine~\parencite{turing1936computable} and effectively serves as the basis for functions in functional programming languages.
+%{{{
+\begin{comment}
+Church's work was motivated by the desire to create a calculus (informally, a syntax for terms and set of rewrite rules for transforming terms) that captured one's intuition about the behavior of cuntions. This approach is counter to the consideration of functions, as for example, sets (more precisely, sets of argument/value pairs), since the intent was to capture the computational aspects of functions.~\parencite{hudak1989conception}.
+
+Its [lambda calculus] type-free nature yielded a particularly small and simple calculus, and it had one very interesting property, capturing functions in their fullest generality: Functions could be applied to themselves.~\parencite{hudak1989conception}
+
+This ability of self-application is what gives the lambda calculus its power. It allows us to gain the effect of recursion without explicitly writing a recursive definition.~\parencite{hudak1989conception}.
+\end{comment}
+%}}}
+
+%{{{ Additional sources
 \begin{comment}
 The functional programming paradigm, which is based on mathematical functions, is the design basis of the most important nonimperative styles of languages. This style of programming is supported by functional programming languages.~\parencite{sebesta2002concepts}.
 
 \end{comment}
-%}}}}
+%}}}
 
 \subsection{Higher-order functions}
+
+Higher-order functions are the landmark feature of functional languages. Derived from the previous observation of generally applicable functions in lamdba calculus, higher-order functions can take functions as parameters and also return a function~\parencite{sebesta2002concepts}. Thus functions are treated like any other value. This has convenient practical implications, where functions can be composed of other functions. For example, composing a function that executes a given function twice is possible:
+\begin{lstlisting}
+twice f = f . f
+\end{lstlisting}
+
+\noindent Now {\tt twice sum 4}, where {\tt sum} is {\tt sum x = x * x}, would return 256. The function twice is now~\textit{curried} (i.e.\ composes multiple functions) and returns a new function. As twice is a function it can be used again for function composition, et cetera.
+%{{{
+\begin{comment}
+A higher-order function, or functional form, is one that either takes one or more functions as parameters or yields a function as its result, or both.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}
+
+``Glueing'' together functions increases modularity of software written in a functional manner. Treating functions as first-class values also provides a way to abstract over functional behavior.~\parenciteseveral{hudak1989conception}.
+%{{{
+\begin{comment}
+If functions are treated as first-class values in a language--allowing them to be stored in data structures, passed as arguments, and returned as results--they are referred to as higher-order functions.~\parencite{hudak1989conception}.
+
+That glueing property comes not just from the ability to compose functions but also from the ability to abstract over functional behavior as described above.
+\end{comment}
+%}}}
+
 \begin{itemize}
     \item Partial application, currying
 \end{itemize}
 
 \subsection{Lazy Evaluation}
+
+Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand, this~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
+%{{{
+\begin{comment}
+A programming language is strict if it requires all actual parameters to be fully evaluated, which ensures that the value of a function does not depend on the order in which the parameters are evaluated. A language is nonstrict if it does not have the strict requirement.~\parencite{hudak1989conception}.
+
+First, nonstrict languages are gener- ally more efficient, because some evaluation is avoided.13 Second, some inter- esting capabilities are possible with nonstrict languages that are not possible with strict languages. Among these are infinite lists. Nonstrict languages can use an evaluation form called lazy evaluation, which means that expressions are evaluated only if and when their values are needed.~\parencite{hudak1989conception}.
+
+The idea is that a programmer should be able to describe a specific data structure without worrying about how it gets evaluated.~\parencite{hudak1989conception}.
+\end{comment}
+%}}}
+
+\begin{lstlisting}
+-- Examples of infinite lists
+positives = [1,2..]
+evens = [2,4..]
+squares = [x * x | x <- [0..]] 
+
+\end{lstlisting}
+
+\noindent The values of the lists are not computed until they are needed. For example, {\tt take 5 squares} returns {\tt [0, 1, 2, 4, 9, 16, 25, 36, 49, 64, 81]}. Effectively, lazy evaluation provides three important mechanisms for evaluating function parameters~\parencite{sebesta2002concepts}:
+
+\begin{itemize}
+    \item Only the needed parameters are evaluated
+    \item Only the needed part of a single parameter is evaluated
+    \item An evaluated parameter is reused if it appears again in function calls
+\end{itemize}
+%{{{
+\begin{comment}
+zy evaluation means that an actual parameter is evaluated only when its value is necessary to evaluate the function. So, if a function has two parameters, but on a particular execution of the function the first parameter is not used, the actual parameter passed for that execution will not be evaluated. Furthermore, if only a part of an actual parameter must be evaluated for an execution of the function, the rest is left unevaluated. Finally, actual parameters are evaluated only once, if at all, even if the same actual parameter appears more than once in a function call.~\parencite{sebesta2002concepts}.
+\end{comment}
+%}}}
+
+\noindent As previously presented, functions have the convenient property of being freely composable from other functions. In conjuction with lazy evaluation, this function composition becomes especially useful when ``glueing'' several functions together. A popular usage in functional programs is to include ``generators'' (functions) that produce arbitrarily large data sets. However, combining these generators with functions that include predicates for selecting the correct values provides a modular and concise way to structure applications.~\parencite{hughes1989functional}. This separation of data structures and control is also one of the central notions of functional programming~\parencite{hudak1989conception}.
+%{{{
+\begin{comment}
+Since this method of evaluation runs f as little as possible, it is called 'lazy evaluation'. It makes it practical to modularise a program as a generator which constructs a large number of possible answers, and a sleector which chooses the appropriate one.~\parencite{hughes1989functional}.
+\end{comment}
+%}}}
 
 \subsection{Polymorphic types}
 
