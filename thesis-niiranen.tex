@@ -222,6 +222,8 @@ That glueing property comes not just from the ability to compose functions but a
     \item Partial application, currying
 \end{itemize}
 
+TODO: Examples of popular higher-order functions? map, filter..
+
 \subsection{Lazy Evaluation}
 
 Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand, this~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
@@ -265,19 +267,140 @@ Since this method of evaluation runs f as little as possible, it is called 'lazy
 
 \subsection{Polymorphic types}
 
+Although a somewhat technical concept,~\textit{data types} are an essential part of modern functional languages~\parencite{hudak2007history}. In this section, algebraic and abstract data types are discussed and one of the main mechanism for their use, pattern matching, is presented.
+%{{{
+\begin{comment}
+Data types and pattern matching are fundamental to most modern functional languages (with the notable exception of Scheme).~\parencite{hudak2007history}.
+\end{comment}
+%}}}}
+
+~\textit{Algebraic data types} increase the flexibility in which a computation can depend on type alternatives. In other words, the data types of functional languages are often~\textit{polymorphic}, i.e.\ they can represent multiple types.~\parenciteseveral{hudak2007history}. A popular example regarding algebraic data types is to represent the types of a binary search tree:
+%{{{
+\begin{comment}
+In general, an algebraic type specifies a sum of one or more alter- natives, where each alternative is a product of zero or more fields. It might have been useful to permit a sum of zero alternatives, which would be a completely empty type, but at the time the value of such a type was not appreciated.~\parencite{hudak2007history}
+\end{comment}
+%}}}}
+
+\begin{lstlisting}
+data Tree a = Leaf a | Branch (Tree a) (Tree a)
+\end{lstlisting}
+
+Here {\tt Tree} is a~\textit{data type}. {\tt Leaf} and {\tt Branch} are~\textit{data constructors}. What follows is that we can use~\textit{pattern matching} to conveniently address either of these data constructors in a function~\parencite{hudak2007history}. For example, a function that returns the size (the number of elements) of the tree recursively can be expressed as follows:
+
+\begin{lstlisting}
+size (Leaf x)     = 1
+size (Branch l r) = size l + size r + 1
+\end{lstlisting}
+
+Effectively, {\tt size} receives a data type of {\tt Tree} as the only parameter. In fact, the function signature is {\tt size :: Tree a -> Int}. The pattern matching mechanism is then utilized for evaluating either expression, depending on the actual data constructor. 
+
+Due to the nature of lazy evaluation, the actual implementation of pattern matching has proved to be challenging in functional languages. In particular, the order of parameters rise subtle problems depending on their evaluation mechanism~\parencite{hudak1989conception}. In the end, matching patterns from top to bottom and evaluating parameters from left to right serves as a sufficient compromise and is used in most modern functional languages~\parencite{hudak2007history}.
+%{{{
+\begin{comment}
+In SASL, KRC, Hope, SML, and Miranda, matching against equa- tions is in order from top to bottom, with the first matching equation being used. Moreover in SASL, KRC, and Miranda, matching is from left to right within each left-hand-side¿which is important in a lazy language, since as soon as a non-matching pattern is found, matching proceeds to the next equation, potentially avoiding non- termination or an error in a match further to the right. Eventually, these choices were made for
+Haskell as well ~\parencite{hudak2007history}.
+\end{comment}
+%}}}}
+
+~\textit{Abstract data types} address the need for increased modularity and security. Specifically, the actual data type is not exposed outside its module, but rather, can be accessed through utility functions. Similar to~\textit{interfaces} in Java, abstract data types allow changing the representation type without affecting external modules that depend on this ``interface''.~\parenciteseveral{hudak1989conception}.
+%{{{
+\begin{comment}
+Another idea in data abstraction originating in imperative languages is the notion of an abstract datatype (ADT) in which the details of the implementation of a datatype are hidden from the users of that type, thus enhancing modularity and security.~\parencite{hudak1989conception}.
+
+The advantage of this, of course, is that one is free to change the representation type without fear of breaking some other code that uses the ADT.~\parencite{hudak1989conception}.
+\end{comment}
+%}}}}
+
+In conclusion, data types in functional languages bear similarities with polymorphism in object-oriented design.
+
 \subsection{Monads}
+
+~\textit{Monads} address the issue of ``purity'' in functional languages. For example, a user interacting with the application results in input and output, or in other words, communication between the application and external domains. However, as functions are pure, they can not As the meaning of purity was presented earlier in the chapter,  A
+
+%{{{Additional sources
+\begin{comment}
+There are three laws that these definitions should satisfy in order to be a true monad in the sense defined by category theory. These laws guarantee that composition of functions with side effects is associative and has an identity (Wadler, 1992b).~\parencite{hudak2007history}
+
+Although Wadler¿s development of Moggi¿s ideas was not directed towards the question of input/output, he and others at Glasgow soon realised that monads provided an ideal framework for I/O. The key idea is to treat a value of type as a ¿computation¿ that, when performed, might perform input and output before delivering a value of type.~\parencite{hudak2007history}
+
+\end{comment}
+%}}}}
 
 \section{Summary}
 
+%{{{ Additional sources
+\begin{comment}
+Some in the functional programming community have claimed that the use of functional programming results in an order-of-magnitude increase in productivity, largely due to functional programs being claimed to be only 10 percent as large as their imperative counterparts. While such numbers have been actually shown for certain problem areas, for other problem areas, func- tional programs are more like 25 percent as large as imperative solutions to the same problems (Wadler,
+1998).~\parencite{sebesta2002concepts}
+
+In fact, because of the necessity of dealing with variables, imperative programs have many trivially simple lines for initializing and making small changes to variables.~\parencite{sebesta2002concepts}
+
+However, there are now compilers for most functional languages, so that execution speed disparities between functional languages and compiled imperative languages are no longer so great. One might be tempted to say that because functional programs are significantly smaller than equivalent imperative programs, they should execute much faster than the imperative programs. However, this often is not the case, because of a collection of language characteristics of the functional
+lan- guages, such as lazy evaluation, that have a negative impact on execution efficiency.~\parencite{sebesta2002concepts}.
+
+Another source of the difference in execution efficiency between functional and imperative programs is the fact that imperative languages were designed to run efficiently on von Neumann architecture computers, while the design of functional languages is based on mathematical functions. This gives the imperative languages a large advantage.~\parencite{sebesta2002concepts}.
+
+Functional languages have a potential advantage in readability. In many imperative programs, the details of dealing with variables obscure the logic of the program.~\parencite{sebesta2002concepts}.
+
+In an imperative language, the pro- grammer must make a static division of the program into its concurrent parts, which are then written as tasks, whose execution often must be synchronized. This can be a complicated process. Programs in functional languages are natu- rally divided into functions. In a pure functional language, these functions are independent in the sense that they do not create side effects and their operations do not depend on any nonlocal or global variables.
+Therefore, it is much easier to determine which of them can be concurrently executed.~\parencite{sebesta2002concepts}.
+
+\end{comment}
+%}}}}
+
 %}}}
 %{{{Reactive programming
-\chapter{Reactive programming}
+\chapter{Functional reactive programming}
 %{{{Questions
 \begin{comment}
 \end{comment}
 %}}}
 
+The reactive programming paradigm centers itself around the observation that systems, often composed of numerous heterogenous components, require declarative abstractions in order to be efficiently developed and maintained~\parencite{wan2000functional}. As a main characteristic of functional languages, the implementation details of rudimentary operations are hidden under the language semantics, thus freeing developers to express solutions concisely. However, side effects, as discussed
+in the previous chapter, are bound to manifest if the application aims to have any real-world value. This in turn, can lead to ``imperative''-like code, where 
+%{{{
+\begin{comment}
+Functional Reactive Programming, or FRP, is a general framework for programming hybrid systems in a high-level, declarative manner.~\parencite{wan2000functional}.
+\end{comment}
+%}}}}
 
+Functional reactive programming, or FRP (as referred to onwards), was first introduced as a term in the influential work of~\citet{elliott1997functional}. They set to provide a high-level programming abstraction to computer animation, which traditionally involves complex mathematical equations and is seen as difficult to be modelled in traditional imperative programming style. In specific, animation in low-level languages involves concentration on the presentation logic, such as
+the explicit management of time (as frames), user input and updating the animation models. In response to this, the initial conception of FRP and its latter derivatives aim towards the same goal of relieving the developer from repetitive ``chores'' and instead, providing convenient models for handling interaction, whether it originates from the user of an application or from other systems.~\parenciteseveral{elliott1997functional}.
+%{{{
+\begin{comment}
+The construction of richly interactive multimedia animations (involving audio, pictures, video, 2D and 3D graphics) has long been a complex and tedious job. Much of the difficulty, we believe, stems from the lack of sufficiently high-level abstractions, and in particular from the failure to clearly distinguish between modeling and presentation, or in other words, between what an animation is and how it should be presented.~\parencite{elliott1997functional}.
+
+Consequently, the resulting programs must explicitly manage common implementation chores that have nothing to do with the content of an animation, but rather its presentation through low-level display libraries running on a sequential digital computer.~\parencite{elliott1997functional}.
+\end{comment}
+%}}}}
+
+\subsection{Concepts}
+
+\begin{itemize}
+    \item Signal processing
+    \item Behaviors
+    \item Events
+\end{itemize}
+
+\subsection{Challenges}
+\subsection{Implementations}
+
+\begin{itemize}
+    \item DSEL
+\end{itemize}
+
+\subsection{Summary}
+
+%{{{Additional sources
+\begin{comment}
+Internally, the implementation uses discrete sam- pling and synchronous streams to approximate the continuous time model. It has been shown that, as the time between samples approaches zero, the dis- crete implementation converges to the continuous semantics in the limit [27].~\parencite{courtney2001genuinely}
+
+Second, experience implementing Fran [6] and FRP [14] taught us that allowing signals as first class values inevitably leads to ¿space-time leaks¿ [6] in the implementation. A ¿space-time leak¿ occurs when the implementation needs the complete time-history of a signal to compute one sample value.~\parencite{courtney2001genuinely}.
+
+In modeling reactive systems in general (and user interfaces in particu- lar), we often need to model event sources that produce event occurrences at discrete points in time.~\parencite{courtney2001genuinely}.
+
+\end{comment}
+%}}}}
 %}}}
 %{{{Software metrics
 \chapter{Software metrics}
