@@ -76,7 +76,14 @@ Functional Reactive Programming (FRP) is a high-level declara- tive programming 
 \end{comment}
 %}}}
 
-Software quality and metrics is a branch of software engineering, where the quality of code is analyzed and quantified. The purpose of this observation is to e.g. identify problematic modules in the code and predict future maintenance effort~\parencite{fenton1999software}. Traditionally, however, software metrics have mostly dealt with imperative and object-oriented programming paradigms, and as such, the metrics are tailored for them~\parencite{harrison1996evaluation,basili1996validation,li1993object,chidamber1994metrics}. As the use of functional (reactive) programming increases, also the analysis of such programs is increasingly required. This, in turn, has called out researchers to update and add software metrics that also fit to the functional paradigm concepts~\parencite{ryder2005software,harrison1995estimating}.
+Software quality metrics is a branch of software engineering, where the quality of code is analyzed and quantified. The purpose of this observation is to e.g. identify problematic modules in the code and predict future maintenance effort~\parencite{fenton1999software}. The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
+~\begin{quoting}
+A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
+~\end{quoting}
+
+\noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
+
+Traditionally, however, software metrics have mostly dealt with imperative and object-oriented programming paradigms, and as such, the metrics are tailored for them~\parencite{harrison1996evaluation,basili1996validation,li1993object,chidamber1994metrics}. As the use of functional (reactive) programming increases, also the analysis of such programs is increasingly required. This, in turn, has called out researchers to update and add software metrics that also fit to the functional paradigm concepts~\parencite{ryder2005software,harrison1995estimating}.
 
 \section{Motivation}
 
@@ -99,25 +106,27 @@ The research can be decomposed into four questions:
 
 \begin{itemize}
     \item What is functional reactive programming and its concepts?
-    \item What are the challenges of FRP and how can it be utilized in practical settings?
-    \item How do the software quality metrics apply to FRP code bases?
+    \item What are software quality metrics?
+    \item How do software quality metrics relate to functional and reactive programming? 
+    \item How do existing software metrics apply to FRP and what kind of FRP-specific metrics can be formulated?
 \end{itemize}
 
 \noindent The research problem can be expressed as follows: \textit{What is functional reactive programming and how do software quality metrics apply to its implementations?}
 
 \section{Research methods}
-The thesis utilizes literature review as its main research method. The review consists of an overview into functional and reactive programming and the metrics of software quality. 
+The thesis utilizes literature review as its main research method. The review consists of an overview into functional and reactive programming and the metrics of software quality. In preparation of the empirical part, FP metrics~\parencite{ryder2004software} are scrutinized and FRP-tailored metrics are formulated.
 
-In the second part, the research themes are investigated through empirical research. This consists of developing an application adhering to the FRP principles. Some research ideas are as follows: 
+In the second part, the research themes are investigated through empirical research. 
 
-\begin{itemize}
-    \item Construct software metrics that can be applied on the internal attributes of code written with FRP, and develop a tool for quantifying the metrics of given FRP source code
-    \item Compare and analyze the code quality of two versions of an application implemented with FRP and imperative programming paradigms
-    \item Develop an application for creating marble diagrams out of FRP abstractions in the given source code
-\end{itemize}
+The source code of existing applications implemented with FP and FRP is analyzed and software quality metrics are quantified. The applicability of metrics and their quality are further analyzed based on the results.
+
+As an alternative a tool for visualizing software metrics on FRP code bases could be developed.
 
 \section{Expected results and their significance}
-The results aim at explaining the various semantics of FRP and how they relate to software quality metrics. As FRP is especially tailored for data-driven designs, the results are expected to be positive in such settings. However, analyzing software implemented with FRP might differ from traditional software quality metrics.
+The results aim at explaining the various semantics of FRP and how they relate to software quality metrics. As FRP is especially tailored for data-driven designs, the results are expected to be positive in such settings. However, analyzing software implemented with FRP might differ from traditional software quality metrics. As some of the traditional software metrics are applicable to the FP paradigm~\parencite{ryder2004software}, also some of the existings metrics are assumed to apply to FRP
+code bases too.
+
+However, specific software metrics for FRP applications are likely to be needed. For example, the amount of Behaviors and Events~\parencite{elliott1997functional} and their coupling could serve as a simple metric for the FRP paradigm.
 
 The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating the concepts of FRP into practical settings and pinpoint the challenges of the approach. Future research will be fueled by providing more support to the functional and reactive paradigms as opposed to imperative approaches.
 
@@ -253,11 +262,15 @@ Length is expected to be around 15 pages.
 
 \subsection{Metrics for functional languages}
 
+\subsection{Metrics for functional reactive programming}
+
+As no software metrics for FRP exists, this section analyzes the applicability of existing metrics to the FRP paradigm. Furthermore, software metrics specifically tailored for FRP are presented.
+
 \subsection{Summary}
 
 \section{Empirical study}
 
-The thesis contains an empirical study in the form of application development. The construction of the application is based on the concepts of the literature review part of the thesis.
+The thesis contains an empirical study in the form of application code review and metric analysis. Existing FP and FRP implementations will be analyzed and quantified with software metrics presented in the literature review.
 
 The chapter will be 10-15 pages.
 
