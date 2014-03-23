@@ -311,9 +311,105 @@ The advantage of this, of course, is that one is free to change the representati
 \end{comment}
 %}}}}
 
-In conclusion, data types in functional languages bear similarities with polymorphism in object-oriented design.
+In conclusion, data types in functional languages bear similarities with polymorphism in object-oriented design (TODO: NOT!)
+
+\subsection{Functors}
+
+Functors add flexibility when encountering different data types, such as the previously presented {\tt Tree} construct or an ordinary list data structure. As looping over the values of a construct would be convenient, functors aim at providing an abstraction for this kind of behavior. Namely, functors enable ``mapping'' functions over data types and is one of the central routines of functional programming.~\parenciteseveral{lipovavca2011learn}. For example, {\tt Tree} can be made an instance of {\tt Functor}:
+%{{{
+\begin{comment}
+And now, we're going to take a look at the Functor typeclass, which is basically for things that can be mapped over.~\parencite{lipovavca2011learn}
+
+\end{comment}
+%}}}}
+\begin{lstlisting}
+instance Functor Tree where
+    fmap f (Leaf x) = Leaf (f x)
+    fmap f (Branch a b) = Branch (fmap f a) (fmap f b)
+\end{lstlisting}
+
+\noindent Now we can ``map'' a given function over values in a {\tt Tree}:
+
+\begin{lstlisting}
+fmap (*2) (Branch (Leaf 2) (Leaf 3)) 
+-- Outputs: Branch (Leaf 4) (Leaf 6)
+\end{lstlisting}
+
+Derived from category theory, functors provide certain ``homomorphism'' or abstractions over functional data structures. As is the case with mathematics, certain laws must be satisfied for functors, expressed in Haskell code as: 
+
+\begin{lstlisting}
+fmap id = id
+fmap (g . h) = (fmap g) . (fmap h))
+\end{lstlisting}
+
+\noindent The first law dictates simply that mapping an ``identity'' function (i.e. {\tt x = x}) over a value should always return the value itself, unchanged. The second law asserts that mapping over functions that are then composited should be the same as mapping over a result of function composition.~\parenciteseveral{lipovavca2011learn}. As trivial as these laws seem, they are a powerful aid in reasoning about code written in a functional language.
+%{{{
+\begin{comment}
+As far as the Haskell language itself is concerned, the only requirement to be a Functor is an implementation of fmap with the proper type. Any sensible Functor instance, however, will also satisfy the functor laws, which are part of the definition of a mathematical functor. There are two:
+
+fmap id = id
+fmap (g . h) = (fmap g) . (fmap h))
+
+Together, these laws ensure that fmap g does not change the structure of a container, only the elements. Equivalently, and more simply, they ensure that fmap g changes a value without altering its context ¿.
+
+The first law says that mapping the identity function over every item in a container has no effect. The second says that mapping a composition of two functions over every item in a container is the same as first mapping one function, and then mapping the other.
+
+The second law says that composing two functions and then mapping the resulting function over a functor should be the same as first mapping one function over the functor and then mapping the other one.~\parencite{lipovavca2011learn}.
+\end{comment}
+%}}}}
+
+\subsection{Applicative functors}
+
+Applicative functors as an explicit abstraction are relatively new in functional programming~\parencite{mcbride2008functional}. Applicative functors, as their name implies, are an extension for functors. As functions essentially take only one parameter (and are thus~\textit{curried} functions for subsequent parameters), a data type can naturally contain functions. For example, the leaves of a {\tt Tree} data type could contain functions as values: 
+\begin{lstlisting}
+fmap (*) (Branch (Leaf 2) (Leaf 3)))
+\end{lstlisting}
+
+Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value. Recurring patterns of ``picking'' the function value out of the functor were then abstracted as applicative functors~\parencite{mcbride2008functional}.
+
+%{{{
+\begin{comment}
+So now we know: there are strictly more Applicative functors than Monads. Should we just throw the Monad class away and use Applicative instead? Of course not! The reason there are fewer monads is just that the Monad structure is more powerful.~\parencite{mcbride2008functional}
+
+\end{comment}
+%}}}}
+
+\subsection{Monoids}
 
 \subsection{Monads}
+
+Functional programming languages can roughly be divided into two categories; pure and impure approaches.~\textit{Pure} functional languages, such as Haskell, utilize lambda calculus in its simplest form, while~\textit{impure} languages, such as Scheme, introduce additional features, such as assignments, into computations. The main motivation behind ``pure'' languages is that they make data flow explicit and expressions only depend on their free variables. This enables a powerful
+aid in reasoning about the code's logic, since substitution is always valid(TODO: ??). On the other hand,
+impure features in a language can offer more conveniency for the developer as the concept of purity is not strictly enforced.~\parenciteseveral{wadler1995monads}.
+%{{{
+\begin{comment}
+The functional programming community divides into two camps. Pure languages,
+such as Miranda2 and Haskell, are lambda calculus pure and simple. Impure lan- guages, such as Scheme and Standard ML, augment lambda calculus with a number of possible effects, such as assignment, exceptions, or continuations. Pure languages are easier to reason about and may benefit from lazy evaluation, while impure lan- guages offer efficiency benefits and sometimes make possible a more compact mode of expression.~\parencite{wadler1995monads}.
+
+A program in a pure functional language is written as a set of equations. Ex- plicit data flow ensures that the value of an expression depends only on its free variables. Hence substitution of equals for equals is always valid, making such pro- grams especially easy to reason about. Explicit data flow also ensures that the order of computation is irrelevant, making such programs susceptible to lazy evaluation.~\parencite{wadler1995monads}
+\end{comment}
+%}}}}
+
+As an example, adding error handling to program logic can turn out to be tedious, since every recursive function call would need to be checked for errors and handled. In contrast, exceptions in an impure language would not introduce such structuring of code. As a simpler example, counting the number of operations performed on a function would need similar structuring of the code where the count is explicitly passed on for further operations. Again,
+in an impure language a global variable for the count would suffice.~\parenciteseveral{wadler1995monads}. Largely for this division of pure and impure functional languages, monads were introduced as an utility to combine the benefits from both approaches. Mainly, monads are used ``to integrate impure effects into pure functional languages''~\parencite[25.]{wadler1995monads}. As is customary for the functional programming paradigm, also the concept of monads is derived from mathematics, and in this case, category theory.~\parenciteseveral{wadler1995monads}.
+%{{{
+\begin{comment}
+
+Recent advances in theoretical computing science, notably in the areas of type theory and category theory, have suggested new approaches that may integrate the benefits of the pure and impure schools. These notes describe one, the use of monads to integrate impure effects into pure functional languages.~\parencite{wadler1995monads}
+
+The concept of a monad, which arises from category theory, has been applied by Moggi to structure the denotational semantics of programming languages [13, 14]~\parencite{wadler1995monads}.
+\end{comment}
+%}}}}
+
+Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In specific, the standard Haskell data type {\tt Maybe} is an instance of the monad type class
+
+
+
+Monads have three laws that they must obey.~\textit{Left identity}
+
+~\textit{Right identity}
+
+~\textit{Associativity}
 
 ~\textit{Monads} address the issue of ``purity'' in functional languages. For example, a user interacting with the application results in input and output, or in other words, communication between the application and external domains. However, as functions are pure, they can not As the meaning of purity was presented earlier in the chapter,  A
 
@@ -364,7 +460,7 @@ Functional Reactive Programming, or FRP, is a general framework for programming 
 \end{comment}
 %}}}}
 
-Functional reactive programming, or FRP (as referred to onwards), was first introduced as a term in the influential work of~\citet{elliott1997functional}. They set to provide a high-level programming abstraction to computer animation, which traditionally involves complex mathematical equations and is seen as difficult to be modelled in traditional imperative programming style. In specific, animation in low-level languages involves concentration on the presentation logic, such as
+Functional reactive programming, or FRP (as referred to onwards), was first introduced as a term in the influential work of~\citet{elliott1997functional}. They set to provide a high-level programming abstraction to computer animation, which traditionally involves complex mathematical equations and is seen as difficult to be modelled in traditional imperative programming style. In specific, animation in low-level languages involves concentrating on the presentation logic such as
 the explicit management of time (as frames), user input and updating the animation models. In response to this, the initial conception of FRP and its latter derivatives aim towards the same goal of relieving the developer from repetitive ``chores'' and instead, providing convenient models for handling interaction, whether it originates from the user of an application or from other systems.~\parenciteseveral{elliott1997functional}.
 %{{{
 \begin{comment}
@@ -374,22 +470,81 @@ Consequently, the resulting programs must explicitly manage common implementatio
 \end{comment}
 %}}}}
 
-\subsection{Concepts}
+The work of~\citet{elliott1997functional} inspired researchers interested in creating reactive systems to extend the semantics of FRP but also to implement and utilize these concepts. Since then, FRP has been applied in TAHAN ESIMERKKEJA (GUI, Robotics..)
+
+%{{{Additional sources
+\begin{comment}
+Many interesting application domains are reactive rather than trans- formational. The input to a reactive system is not know in advance, but arrives continuously as the program executes. A reactive sys- tem is expected to interleave input and output, producing outputs in response to input stimuli as they arrive. A common approach to implementing reactive systems is to use a synchronous dataflow programming language, such as Signal [11], Lustre [4], or Lucid Synchrone [22]. In such
+languages, programs are built from a small set of primitive processing elements and a set of composition op- erators. Complete programs are formed by using the wiring prim- itives to compose processing elements into a hierarchical network or directed graph structure. The dataflow programming model thus provides a natural form of modularity for many applications, since larger programs are composed hierarchically from smaller compo- nents, each of which is itself a reactive
+program.~\parencite{nilsson2002functional}.
+
+Functional Reactive Programming (FRP) serves to integrate reactivity directly in to the functional program- ming style while hiding the mechanism that controls time flow un- der an abstraction layer.~\parencite{nilsson2002functional}.
+
+\end{comment}
+%}}}}
+
+\section{Concepts}
+
+Functional reactive programming first appeared as a term in~\citet{elliott1997functional} to address the lack of declarativeness in animation programming. In specific, time is customary modelled as discrete in computer programming, but in animations, time is conceptually continuous. For this reason~\citet{elliott1997functional} presents the concept of FRP, where time and the behavior of animations is abstracted into two concepts:~\textit{behaviors} and~\textit{events}. 
+%{{{
+\begin{comment}
+Values, called behaviors, that vary over continuous time are the chief values of interest. Behaviors are first-class values, and are built up compositionally.~\parencite{elliott1997functional}.
+\end{comment}
+%}}}}
+
+\subsection{Behaviors}
+
+Conceptually, behaviors are time-varying values, where as events are sequences of discrete event occurrences~\parencite{elliott1997functional}. For example, a value varying between -1 and +1 based on the current time can be expressed as a behavior:~\parencite[2.]{elliott1997functional}: 
+\begin{lstlisting}
+wiggle = sin (pi * time)
+\end{lstlisting}
+
+\subsection{Events}
+
+On the other hand, events contain information about discrete occurrences of interaction~\parencite{elliott1997functional}. For example, user interaction such as mouse button presses or animation events such as collision can be modelled as events. Events are technically time-ordered sequences of event occurrences. An event describing a left mouse-button press is simply {\tt lpb}. Since an event is a sequence, it contains all of the generated events of the given
+type~\parencite{wan2000functional}. Similar to behaviors, events are also treated as first-class values. This provides the powerful ability of~\textit{composing} behaviors and events. For example, a behavior changing
+its color based on user mouse press can be expressed as~\parencite{wan2000functional}:
+%{{{
+\begin{comment}
+Like behaviors, events are first-class values. Events may refer to happenings in the real world (e.g. mouse button presses), but also to predicates based on animation parameters (e.g. proximity or collision).~\parencite{elliott1997functional}
+
+The declarative reading of lpb (and key) is that it is an event sequence containing all of the left button presses (and key presses), not just one.~\parencite{wan2000functional}.
+    
+Like behaviors, events are first-class values. Events may refer to happenings in the real world (e.g. mouse button presses), but also to predicates based on animation parameters (e.g. proximity or collision). Moreover, such events may be combined with others, to an arbitrary degree of copmlexity, thus factoring complex animation logic into semantically rich, modular building blocks.~\parencite{elliott1997functional}.
+\end{comment}
+%}}}}
+\begin{lstlisting}
+color :: Behavior Color
+color = red 'until' (lpb -=> blue)
+\end{lstlisting}
+
+\noindent This can be read concisely as something along the lines of ``color is red until left-button is pressed, when it is blue''. Many other~\textit{combinators} like {\tt until} are provided for combining behaviors and events. 
+
+\subsection{Combinators}
+
+The semantics and implementation details of FRP are quite involved and thus not described in this thesis. However, many concerns about the implementation can be raised.~\parencite{} Namely, as time is considered continuous in FRP, and computers inherently deal with discrete computations, a compromise has to be taken in the implementation. For example, a behavior representing time is computed discretely by sampling and thus does not represent
+time in its continuous sense. Furthermore, since events are technically ordered sequences of event occurrences, severe performance considerations need to be accounted for~\parencite{elliott1997functional}.
+
+\section{Challenges}
 
 \begin{itemize}
-    \item Signal processing
-    \item Behaviors
-    \item Events
+    \item Instantenous predicate events
+    \item Efficiency of pull-based (sampling) approaches
+    \item Time- and space-leaks
 \end{itemize}
 
-\subsection{Challenges}
-\subsection{Implementations}
+\section{Implementations}
+
+\subsection{Stream-based}
+\subsection{N-ary}
+\subsection{Event-driven}
+\subsection{Push-Pull}
 
 \begin{itemize}
     \item DSEL
 \end{itemize}
 
-\subsection{Summary}
+\section{Summary}
 
 %{{{Additional sources
 \begin{comment}
@@ -404,6 +559,70 @@ In modeling reactive systems in general (and user interfaces in particu- lar), w
 %}}}
 %{{{Software metrics
 \chapter{Software metrics}
+
+Software is known to be brittle in the sense that its runtime behavior might not correspond to what the programmer had intended. More specifically, human error often introduces faulty logic into the software's code. Once these unintended ``features'', or bugs, slip into production versions and the software is released, fixing a critical error afterwards might require approximately hundred times more effort~\parencite{shull2002we}. To help assessing and predicting the quality of the
+software at the time of development, software metrics are engineered.
+%{{{
+\begin{comment}
+General data were presented that supported an effort increase of approximately 100:1. Don O¿Neill described data from IBM Rochester [10] in the pre-meeting feedback that found an increase in effort of about 13:1 for defect slippage from code to test and a further 9:1 increase for slippage from test to field (so, a ratio of about 117:1
+from code to field).~\parencite{shull2002we}
+\end{comment}
+%}}}}
+
+~\textit{Software metrics} is a rather generic term traditionally meant to include the assessment of software by its internal and external attributes~\parencite{fenton1999software}. The characteristics of software are quantified through metrics in order to predict (1) effort/cost of development processes and (2) the quality of software~\parencite{fenton2000software}. The central idea of measuring software is that with access to the characteristics
+(quality, complexity) of the software, developers and management can make educated guesses about development and resource planning~\parencite{fenton1999software}.
+%{{{
+\begin{comment}
+¿Software metrics¿ is the rather misleading collective term used to describe the wide range of activities concerned with measurement in software engineering. These activities range from producing numbers that characterise properties of software code (these are the classic software ¿metrics¿) through to models that help predict software resource requirements and software quality. The subject also includes the quantitative aspects of quality control and assurance - and this covers
+activities like recording and monitoring defects during development and testing.~\parencite{fenton1999software}.
+
+Although there are literally thousands of metrics that have been proposed since the mid 1960's (all of which fit into the framework of Table 1) the rationale for almost all individual metrics has been motivated by one of two activities:
+1. The desire to assess or predict effort/cost of development processes;
+2. The desire to assess or predict quality of software
+key in both cases has been the assumption that product 'size' measures should drive any predictive models.~\parencite{fenton2000software}
+\end{comment}
+%}}}
+
+First attempts at recording software metrics were witnessed in the 1960s when .
+
+The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
+~\begin{quoting}
+A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
+~\end{quoting}
+
+\noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
+
+Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
+
+\section{Metrics for imperative languages}
+
+Some misconceptions about lines of code~\parencite{rosenberg1997some}
+
+\section{Metrics for object-oriented languages}
+\section{Metrics for functional languages}
+\section{Metrics for functional reactive programming}
+\section{Miscellaneous defect predictors}
+
+Predicting fault incidence using software change history~\parencite{graves2000predicting}
+
+\section{Summary}
+
+
+%{{{Additional sources
+\begin{comment}
+In the world of imperative and object-oriented languages, software measure- ment, also known as software metrics, has been used for many years to provide developers with additional information about their programs. Such information can give programmers important indications about where bugs are likely to be in- troduced, or about how easy parts of a program are to test, for instance. This can be extremely valuable in easing the testing process by focusing programmers¿ at- tention on parts
+of the program where their effort may provide the greatest overall benefit, which in turn can help ease the whole process of validating software.~\parencite{ryder2004software}.
+
+The example of the imperative and object-oriented communities suggests that software metrics could provide a useful complement to the existing debugging tools available to functional programmers today. Some of the measurement techniques from imperative and object-oriented languages may transfer quite cleanly to func- tional languages, for instance the pathcount metric which counts the number of execution paths through a piece of program code, but some of the more advanced features of
+functional programming languages may contribute to the complexity of a program in ways that are not considered by traditional imperative or object- oriented metrics. It may therefore be necessary to develop new metrics for certain aspects of functional programs.~\parencite{ryder2004software}
+
+Software measurement is a technique in which quantitative measures, often called metrics, are taken from the source code of a program. Typically metrics attempt to quantify how complex a piece of source code is to understand, modify or test. This notion of complexity should not be confused with the computational complexity of an algorithm, which is typically denoted using O( notation. Com- putational complexity is concerned with runtime behaviour, rather than how easy or hard it is for a
+programmer to maintain.~\parencite{ryder2004software}
+
+One of the claims of software measurement is that it can help identify the parts of a system which are most likely to benefit from inspection. This allows resources to be focused where they will help most and allows them to be used in their most effective way, e.g. peer reviews of small sections of code, rather than large sections, or indicating parts of a program that may benefit from refactoring code changes.~\parencite{ryder2004software}
+
+\end{comment}
+%}}}}
 
 %}}}
 %{{{Empirical study
