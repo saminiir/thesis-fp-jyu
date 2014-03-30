@@ -147,6 +147,9 @@ Despite its impurities, Lisp had a great influence on functional language develo
 
 A purely functional programming language does not use variables or assignment statements, thus freeing the programmer from concerns related to the memory cells, or state, of the program. Without variables, iterative con- structs are not possible, for they are controlled by variables.~\parencite{sebesta2002concepts}.
 
+Haskell functions are in general pure functions: when given the same arguments, they return the same results. The reason for this paradigm is that pure functions are much easier to debug and to prove correct. Test cases can also be set up much more easily, since we can be sure that nothing other than the arguments will influence a function's result. We also require pure functions not to have side effects other than returning a value: a pure function must be self-contained, and cannot open a network connection, write a file or do anything other than producing its result. This allows the Haskell compiler to optimise the code very aggressively.
+However, there are very useful functions that cannot be pure: an input function, say getLine, will return different results every time it is called; indeed, that's the point of an input function, since an input function returning always the same result would be pointless. Output operations have side effects, such as creating files or printing strings on the terminal: this is also a violation of purity, because the function is no longer self-contained.~\parencite{wikibooks2014haskell}
+
 \end{comment}
 %}}}
 
@@ -315,11 +318,13 @@ In conclusion, data types in functional languages bear similarities with polymor
 
 \subsection{Functors}
 
-Functors add flexibility when encountering different data types, such as the previously presented {\tt Tree} construct or an ordinary list data structure. As looping over the values of a construct would be convenient, functors aim at providing an abstraction for this kind of behavior. Namely, functors enable ``mapping'' functions over data types and is one of the central routines of functional programming.~\parenciteseveral{lipovavca2011learn}. For example, {\tt Tree} can be made an instance of {\tt Functor}:
+Functors add flexibility when encountering different data types, such as the previously presented {\tt Tree} construct or an ordinary list data structure. As looping over the values of a construct would be convenient, functors aim at providing an abstraction for this kind of behavior. Namely, functors enable ``mapping'' functions over data types and is one of the central routines of functional programming.~\parenciteseveral{lipovavca2011learn}. Functors can be thought as
+containers for values, or more precisely, as computational contexts~\parencite{typeclassopedia2014haskellwiki}. For example, {\tt Tree} can be made an instance of {\tt Functor}:
 %{{{
 \begin{comment}
 And now, we're going to take a look at the Functor typeclass, which is basically for things that can be mapped over.~\parencite{lipovavca2011learn}
 
+Another intuition is that a Functor represents some sort of ¿computational context¿. This intuition is generally more useful, but is more difficult to explain, precisely because it is so general~\parencite{typeclassopedia2014haskellwiki}
 \end{comment}
 %}}}}
 \begin{lstlisting}
@@ -328,21 +333,28 @@ instance Functor Tree where
     fmap f (Branch a b) = Branch (fmap f a) (fmap f b)
 \end{lstlisting}
 
-\noindent Now we can ``map'' a given function over values in a {\tt Tree}:
+\noindent Now we can apply (~\textit{map}) a given function over values in a {\tt Tree}:
 
 \begin{lstlisting}
 fmap (*2) (Branch (Leaf 2) (Leaf 3)) 
 -- Outputs: Branch (Leaf 4) (Leaf 6)
 \end{lstlisting}
 
-Derived from category theory, functors provide certain ``homomorphism'' or abstractions over functional data structures. As is the case with mathematics, certain laws must be satisfied for functors, expressed in Haskell code as: 
+Thus the values inside the {\tt Tree} ``context'' are changed, without affecting the computational context itself. Perhaps a more general example of a functor instance is the list data type, since it provides a map function like our tree structure~\parencite{typeclassopedia2014haskellwiki}. Derived from category theory, functors provide certain ``homomorphism'' or abstractions over functional data structures. As is the case with mathematics, certain laws must be satisfied for functors, expressed in Haskell code as: 
+%{{{
+\begin{comment}
+From the context point of view, the intention is that fmap applies a function to a value without altering its context~\parencite{typeclassopedia2014haskellwiki}
+
+As noted before, the list constructor [ is a functor ¿; we can use the standard list function map to apply a function to each element of a list ¿.~\parencite{typeclassopedia2014haskellwiki}.
+\end{comment}
+%}}}}
 
 \begin{lstlisting}
 fmap id = id
 fmap (g . h) = (fmap g) . (fmap h))
 \end{lstlisting}
 
-\noindent The first law dictates simply that mapping an ``identity'' function (i.e. {\tt x = x}) over a value should always return the value itself, unchanged. The second law asserts that mapping over functions that are then composited should be the same as mapping over a result of function composition.~\parenciteseveral{lipovavca2011learn}. As trivial as these laws seem, they are a powerful aid in reasoning about code written in a functional language.
+\noindent The first law dictates simply that mapping an ``identity'' function (i.e. {\tt x = x}) over a value should always return the value itself, unchanged. The second law asserts that mapping over functions that are then composited should be the same act as mapping over a result of function composition. If a functor instance satisfies the first law, also the second law is automatically passed.~\parenciteseveral{typeclassopedia2014haskellwiki}. As trivial as these laws seem, they are a powerful aid in reasoning about code written in a functional language.
 %{{{
 \begin{comment}
 As far as the Haskell language itself is concerned, the only requirement to be a Functor is an implementation of fmap with the proper type. Any sensible Functor instance, however, will also satisfy the functor laws, which are part of the definition of a mathematical functor. There are two:
@@ -354,18 +366,50 @@ Together, these laws ensure that fmap g does not change the structure of a conta
 
 The first law says that mapping the identity function over every item in a container has no effect. The second says that mapping a composition of two functions over every item in a container is the same as first mapping one function, and then mapping the other.
 
-The second law says that composing two functions and then mapping the resulting function over a functor should be the same as first mapping one function over the functor and then mapping the other one.~\parencite{lipovavca2011learn}.
+The second law says that composing two functions and then mapping the resulting function over a functor should be the same as first mapping one function over the functor and then mapping the other one.~\parencite{typeclassopedia2014haskellwiki}.
 \end{comment}
 %}}}}
 
 \subsection{Applicative functors}
 
-Applicative functors as an explicit abstraction are relatively new in functional programming~\parencite{mcbride2008functional}. Applicative functors, as their name implies, are an extension for functors. As functions essentially take only one parameter (and are thus~\textit{curried} functions for subsequent parameters), a data type can naturally contain functions. For example, the leaves of a {\tt Tree} data type could contain functions as values: 
+Applicative functors as an explicit abstraction are relatively new in functional programming~\parencite{mcbride2008functional}. As their name implies, applicative functors are an extension for functors. As functions essentially take only one parameter (and are thus~\textit{curried} functions for subsequent parameters), a data type can naturally contain functions. For example, the leaves of a {\tt Tree} data type could contain functions as values: 
 \begin{lstlisting}
 fmap (*) (Branch (Leaf 2) (Leaf 3)))
 \end{lstlisting}
 
-Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value. Recurring patterns of ``picking'' the function value out of the functor were then abstracted as applicative functors~\parencite{mcbride2008functional}.
+Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value ({\tt Leaf} in this case). As a result this recurring pattern of ``picking'' the function value out of the functor was abstracted as applicative functors~\parencite{mcbride2008functional}. The {\tt Tree} data type can be made as an instance of {\tt Applicative}:
+\begin{lstlisting}
+instance Applicative Tree where
+    pure = Leaf
+    (Leaf f) <*> (Leaf x) = Leaf (f x)
+    (Branch a b) <*> (Branch c d) = Branch (a <*> c) (a <*> d)
+\end{lstlisting}
+
+\noindent Now {\tt <*>} can be used for applying functor values:
+
+\begin{lstlisting}
+(Branch (Leaf (*2)) (Leaf (*3))) <*> (Branch (Leaf 2) (Leaf 3))
+-- Outputs Branch (Leaf 4) (Leaf 6) 
+\end{lstlisting}
+
+In essence, {\tt <*>} is just function application with a context~\parencite{typeclassopedia2014haskellwiki}. The {\tt pure} function ``embeds pure computations into the pure fragment of an effectful world''~\parencite{mcbride2008functional}. In other words, a pure value is lifted into the computational context of {\tt Applicative}. Applicative functors must also satisfy some laws: 
+%{{{
+\begin{comment}
+The idea is that pure embeds pure computations into the pure fragment of an effectful world¿the resulting computations may thus be shunted around freely, as long as the order of the genuinely effectful computations is preserved.~\parencite{mcbride2008functional}.
+\end{comment}
+%}}}
+
+\begin{itemize}
+    \item The identity law:
+          {\tt pure id <*> v = v}
+    \item Homomorphism
+          {\tt pure f <*> pure x = pure (f x)}
+    \item Interchange
+    \item Composition
+\end{itemize}
+
+
+The applicative type class contains the operator {\tt<*>} used for applying functors over functors:
 
 %{{{
 \begin{comment}
@@ -378,8 +422,7 @@ So now we know: there are strictly more Applicative functors than Monads. Should
 
 \subsection{Monads}
 
-Functional programming languages can roughly be divided into two categories; pure and impure approaches.~\textit{Pure} functional languages, such as Haskell, utilize lambda calculus in its simplest form, while~\textit{impure} languages, such as Scheme, introduce additional features, such as assignments, into computations. The main motivation behind ``pure'' languages is that they make data flow explicit and expressions only depend on their free variables. This enables a powerful
-aid in reasoning about the code's logic, since substitution is always valid(TODO: ??). On the other hand,
+Functional programming languages can roughly be divided into two categories; pure and impure approaches.~\textit{Pure} functional languages, such as Haskell, utilize lambda calculus in its simplest form, while~\textit{impure} languages, such as Scheme, introduce additional features, such as assignments, into computations. The main motivation behind ``pure'' languages is that they make data flow explicit and expressions only depend on their free variables. This enables a powerful aid in reasoning about the code's logic, since substitution is always valid(TODO: ??). On the other hand,
 impure features in a language can offer more conveniency for the developer as the concept of purity is not strictly enforced.~\parenciteseveral{wadler1995monads}.
 %{{{
 \begin{comment}
@@ -390,8 +433,7 @@ A program in a pure functional language is written as a set of equations. Ex- pl
 \end{comment}
 %}}}}
 
-As an example, adding error handling to program logic can turn out to be tedious, since every recursive function call would need to be checked for errors and handled. In contrast, exceptions in an impure language would not introduce such structuring of code. As a simpler example, counting the number of operations performed on a function would need similar structuring of the code where the count is explicitly passed on for further operations. Again,
-in an impure language a global variable for the count would suffice.~\parenciteseveral{wadler1995monads}. Largely for this division of pure and impure functional languages, monads were introduced as an utility to combine the benefits from both approaches. Mainly, monads are used ``to integrate impure effects into pure functional languages''~\parencite[25.]{wadler1995monads}. As is customary for the functional programming paradigm, also the concept of monads is derived from mathematics, and in this case, category theory.~\parenciteseveral{wadler1995monads}.
+As an example, adding error handling to program logic can turn out to be tedious, since every recursive function call would need to be checked for errors and subsequently handled. In contrast, exceptions in an impure language would not introduce such structuring of code. More to the point, counting the number of operations performed on a function would need similar structuring of the code where the count is explicitly passed on for further operations. Again, in an impure language a global variable for the count would suffice.~\parenciteseveral{wadler1995monads}. Largely for this division of pure and impure functional languages,~\textit{monads} were introduced as an utility to combine the benefits of both approaches. Namely, monads are used ``to integrate impure effects into pure functional languages''~\parencite[25.]{wadler1995monads}. As is customary for the functional programming paradigm, also the concept of monads is derived from mathematics, and in this case, category theory.~\parenciteseveral{wadler1995monads}.
 %{{{
 \begin{comment}
 
@@ -401,7 +443,7 @@ The concept of a monad, which arises from category theory, has been applied by M
 \end{comment}
 %}}}}
 
-Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In specific, the standard Haskell data type {\tt Maybe} is an instance of the monad type class
+Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. For example, the standard Haskell data type {\tt Maybe} is an instance of the monad type class. 
 
 
 
