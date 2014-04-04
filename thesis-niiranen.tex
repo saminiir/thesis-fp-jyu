@@ -288,7 +288,7 @@ In general, an algebraic type specifies a sum of one or more alter- natives, whe
 data Tree a = Leaf a | Branch (Tree a) (Tree a)
 \end{lstlisting}
 
-Here {\tt Tree} is a~\textit{data type}. {\tt Leaf} and {\tt Branch} are~\textit{data constructors}. What follows is that we can use~\textit{pattern matching} to conveniently address either of these data constructors in a function~\parencite{hudak2007history}. For example, a function that returns the size (the number of elements) of the tree recursively can be expressed as follows:
+Here {\tt Tree} is a~\textit{data type}. {\tt Leaf} and {\tt Branch} are~\textit{data constructors}. What follows is that~\textit{pattern matching} can be used to conveniently address either of these data constructors in a function~\parencite{hudak2007history}. For example, a function that returns the size (the number of elements) of the tree recursively can be expressed as follows:
 
 \begin{lstlisting}
 size (Leaf x)     = 1
@@ -333,7 +333,7 @@ instance Functor Tree where
     fmap f (Branch a b) = Branch (fmap f a) (fmap f b)
 \end{lstlisting}
 
-\noindent Now we can apply (~\textit{map}) a given function over values in a {\tt Tree}:
+\noindent Now a given function can be applied (~\textit{mapped}) over the values in a {\tt Tree}:
 
 \begin{lstlisting}
 fmap (*2) (Branch (Leaf 2) (Leaf 3)) 
@@ -347,7 +347,7 @@ From the context point of view, the intention is that fmap applies a function to
 
 As noted before, the list constructor [ is a functor ¿; we can use the standard list function map to apply a function to each element of a list ¿.~\parencite{typeclassopedia2014haskellwiki}.
 \end{comment}
-%}}}}
+%}}}
 
 \begin{lstlisting}
 fmap id = id
