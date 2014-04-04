@@ -90,7 +90,7 @@ components and the possibility of changing and upgrading these components with l
 As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularised.~\parencite{hughes1989functional}.
 
 \end{comment}
-%}}}}
+%}}}
 
 Several programming paradigms exist for developing software. The most popular paradigm is the~\textit{imperative} approach, where programs are written in step-by-step instructions and commands~\parencite{sebesta2002concepts}. This approach is similar to the design of the von Neumann computer architecture and its basic implementation of sending messages back and forth between the CPU and the store (memory)~\parencite{backus1978can}. In turn, many programming languages have
 adapted the same approach as in the von Neumann architecture to their execution flow: variables, control statements and assignment statements~\parencite{backus1978can}.
@@ -100,7 +100,7 @@ In its simplest form a von Neumann computer has three parts, a central processin
 
 All have been designed to make efficient use of von Neumann architecture computers. Although the impera- tive style of programming has been found acceptable by most programmers, its heavy reliance on the underlying architecture is thought by some to be an unnecessary restriction on the alternative approaches to software development.~\parencite{sebesta2002concepts}.
 \end{comment}
-%}}}}
+%}}}
 
 The critics of imperative languages argue that as programs grow large, the imperative approach inherently struggles with expressing non-trivial programs consisting of numerous modules in a succinct manner~\parencite{backus1978can,hughes1989functional}. For example, the inclusion of explicit variables forces the developers to understand all of them concurrently, and in the worst case, keep a mental model of the relationships of these variables~\parencite{sebesta2002concepts}.
 %{{{
@@ -108,7 +108,7 @@ The critics of imperative languages argue that as programs grow large, the imper
 One of the fundamental characteristics of programs written in impera- tive languages is that they have state, which changes throughout the execution process. This state is represented by the program¿s variables. The author and all readers of the program must understand the uses of its variables and how the program¿s state changes through execution. For a large program, this is a daunting task. This is one problem with programs written in an imperative language that is not present in
 a program written in a pure functional language, for such programs have neither variables nor state.~\parencite{sebesta2002concepts}.
 \end{comment}
-%}}}}
+%}}}
 
 Functional programming is a different approach to software engineering compared to imperative languages. It utilizes mathematical functions for program flow, such as recursion and conditional expressions, in contrast to the characteristic of sequential and iterative repetition found in imperative languages~\parencite{sebesta2002concepts}. Moreover, variables that model values in memory locations do not obviously exist in mathematics, and as such, are also omitted from pure functional
 programming. 
@@ -118,7 +118,7 @@ One of the fundamental characteristics of mathematical functions is that the eva
 
 However, a subprogram in an imperative language may depend on the current values of several nonlocal or global variables. This makes it difficult to determine statically what values the subprogram will produce and what side effects it will have on a particular execution.~\parencite{sebesta2002concepts}.
 \end{comment}
-%}}}}
+%}}}
 TODO: Esimerkki factorialista?
 
 This thesis uses the Haskell programming language~\parencite{jones2003haskell} to demonstrate the concepts of functional programming. Haskell, named after the logician Haskell B. Curry, was developed to be a multi-purpose functional programming language. Used both in education, research and by practitioners, Haskell has enjoyed steady popularity as one of the modern functional languages. Albeit several other alternatives (and predecessors) exist, Haskell follows the functional paradigm in a ``pure'' manner with education as one of the language's design motives.~\parenciteseveral{jones2003haskell}. However, this thesis does not serve as an introduction to Haskell itself, but rather to the main concepts of functional programming. The syntax of Haskell is not explained, although the expressiveness, one of the goals of the functional paradigm, should aid in understanding the examples provided in the thesis.
@@ -132,7 +132,7 @@ The committee's primary goal was to deisgn a language that satisfied these const
 5. It should reduce unnecessary diversity in functional programming languages.
 ~\parencite{jones2003haskell}
 \end{comment}
-%}}}}
+%}}}
 
 %{{{Additional sources
 \begin{comment}
@@ -227,7 +227,7 @@ That glueing property comes not just from the ability to compose functions but a
 
 TODO: Examples of popular higher-order functions? map, filter..
 
-\subsection{Lazy Evaluation}
+\subsection{Lazy evaluation}
 
 Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand, this~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
 %{{{
@@ -275,14 +275,14 @@ Although a somewhat technical concept,~\textit{data types} are an essential part
 \begin{comment}
 Data types and pattern matching are fundamental to most modern functional languages (with the notable exception of Scheme).~\parencite{hudak2007history}.
 \end{comment}
-%}}}}
+%}}}
 
 ~\textit{Algebraic data types} increase the flexibility in which a computation can depend on type alternatives. In other words, the data types of functional languages are often~\textit{polymorphic}, i.e.\ they can represent multiple types.~\parenciteseveral{hudak2007history}. A popular example regarding algebraic data types is to represent the types of a binary search tree:
 %{{{
 \begin{comment}
 In general, an algebraic type specifies a sum of one or more alter- natives, where each alternative is a product of zero or more fields. It might have been useful to permit a sum of zero alternatives, which would be a completely empty type, but at the time the value of such a type was not appreciated.~\parencite{hudak2007history}
 \end{comment}
-%}}}}
+%}}}
 
 \begin{lstlisting}
 data Tree a = Leaf a | Branch (Tree a) (Tree a)
@@ -303,7 +303,7 @@ Due to the nature of lazy evaluation, the actual implementation of pattern match
 In SASL, KRC, Hope, SML, and Miranda, matching against equa- tions is in order from top to bottom, with the first matching equation being used. Moreover in SASL, KRC, and Miranda, matching is from left to right within each left-hand-side¿which is important in a lazy language, since as soon as a non-matching pattern is found, matching proceeds to the next equation, potentially avoiding non- termination or an error in a match further to the right. Eventually, these choices were made for
 Haskell as well ~\parencite{hudak2007history}.
 \end{comment}
-%}}}}
+%}}}
 
 ~\textit{Abstract data types} address the need for increased modularity and security. Specifically, the actual data type is not exposed outside its module, but rather, can be accessed through utility functions. Similar to~\textit{interfaces} in Java, abstract data types allow changing the representation type without affecting external modules that depend on this ``interface''.~\parenciteseveral{hudak1989conception}.
 %{{{
@@ -312,7 +312,7 @@ Another idea in data abstraction originating in imperative languages is the noti
 
 The advantage of this, of course, is that one is free to change the representation type without fear of breaking some other code that uses the ADT.~\parencite{hudak1989conception}.
 \end{comment}
-%}}}}
+%}}}
 
 In conclusion, data types in functional languages bear similarities with polymorphism in object-oriented design (TODO: NOT!)
 
@@ -326,7 +326,7 @@ And now, we're going to take a look at the Functor typeclass, which is basically
 
 Another intuition is that a Functor represents some sort of ¿computational context¿. This intuition is generally more useful, but is more difficult to explain, precisely because it is so general~\parencite{typeclassopedia2014haskellwiki}
 \end{comment}
-%}}}}
+%}}}
 \begin{lstlisting}
 instance Functor Tree where
     fmap f (Leaf x) = Leaf (f x)
@@ -368,7 +368,7 @@ The first law says that mapping the identity function over every item in a conta
 
 The second law says that composing two functions and then mapping the resulting function over a functor should be the same as first mapping one function over the functor and then mapping the other one.~\parencite{typeclassopedia2014haskellwiki}.
 \end{comment}
-%}}}}
+%}}}
 
 \subsection{Applicative functors}
 
@@ -416,7 +416,7 @@ The applicative type class contains the operator {\tt<*>} used for applying func
 So now we know: there are strictly more Applicative functors than Monads. Should we just throw the Monad class away and use Applicative instead? Of course not! The reason there are fewer monads is just that the Monad structure is more powerful.~\parencite{mcbride2008functional}
 
 \end{comment}
-%}}}}
+%}}}
 
 \subsection{Monoids}
 
@@ -431,7 +431,7 @@ such as Miranda2 and Haskell, are lambda calculus pure and simple. Impure lan- g
 
 A program in a pure functional language is written as a set of equations. Ex- plicit data flow ensures that the value of an expression depends only on its free variables. Hence substitution of equals for equals is always valid, making such pro- grams especially easy to reason about. Explicit data flow also ensures that the order of computation is irrelevant, making such programs susceptible to lazy evaluation.~\parencite{wadler1995monads}
 \end{comment}
-%}}}}
+%}}}
 
 As an example, adding error handling to program logic can turn out to be tedious, since every recursive function call would need to be checked for errors and subsequently handled. In contrast, exceptions in an impure language would not introduce such structuring of code. More to the point, counting the number of operations performed on a function would need similar structuring of the code where the count is explicitly passed on for further operations. Again, in an impure language a global variable for the count would suffice.~\parenciteseveral{wadler1995monads}. Largely for this division of pure and impure functional languages,~\textit{monads} were introduced as an utility to combine the benefits of both approaches. Namely, monads are used ``to integrate impure effects into pure functional languages''~\parencite[25.]{wadler1995monads}. As is customary for the functional programming paradigm, also the concept of monads is derived from mathematics, and in this case, category theory.~\parenciteseveral{wadler1995monads}.
 %{{{
@@ -441,7 +441,7 @@ Recent advances in theoretical computing science, notably in the areas of type t
 
 The concept of a monad, which arises from category theory, has been applied by Moggi to structure the denotational semantics of programming languages [13, 14]~\parencite{wadler1995monads}.
 \end{comment}
-%}}}}
+%}}}
 
 Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. For example, the standard Haskell data type {\tt Maybe} is an instance of the monad type class. 
 
@@ -462,7 +462,7 @@ There are three laws that these definitions should satisfy in order to be a true
 Although Wadler¿s development of Moggi¿s ideas was not directed towards the question of input/output, he and others at Glasgow soon realised that monads provided an ideal framework for I/O. The key idea is to treat a value of type as a ¿computation¿ that, when performed, might perform input and output before delivering a value of type.~\parencite{hudak2007history}
 
 \end{comment}
-%}}}}
+%}}}
 
 \section{Summary}
 
@@ -497,7 +497,7 @@ software at the time of development, software metrics are engineered.
 General data were presented that supported an effort increase of approximately 100:1. Don O¿Neill described data from IBM Rochester [10] in the pre-meeting feedback that found an increase in effort of about 13:1 for defect slippage from code to test and a further 9:1 increase for slippage from test to field (so, a ratio of about 117:1
 from code to field).~\parencite{shull2002we}
 \end{comment}
-%}}}}
+%}}}
 
 ~\textit{Software metrics} is a rather generic term traditionally meant to include the assessment of software by its internal and external attributes~\parencite{fenton1999software}. The characteristics of software are quantified through metrics in order to predict (1) effort/cost of development processes and (2) the quality of software~\parencite{fenton2000software}. The central idea of measuring software is that with access to the characteristics
 (quality, complexity) of the software, developers and management can make educated guesses about development and resource planning~\parencite{fenton1999software}.
@@ -552,7 +552,7 @@ programmer to maintain.~\parencite{ryder2004software}
 One of the claims of software measurement is that it can help identify the parts of a system which are most likely to benefit from inspection. This allows resources to be focused where they will help most and allows them to be used in their most effective way, e.g. peer reviews of small sections of code, rather than large sections, or indicating parts of a program that may benefit from refactoring code changes.~\parencite{ryder2004software}
 
 \end{comment}
-%}}}}
+%}}}
 
 %}}}
 %{{{Empirical study
