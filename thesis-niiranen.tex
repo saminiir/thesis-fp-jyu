@@ -74,8 +74,92 @@
 %}}}
 %{{{Introduction
 \chapter{Introduction}
+Software quality metrics is a branch of software engineering, where the quality of code is analyzed and quantified. The purpose of this observation is to e.g. identify problematic modules in the code and predict future maintenance effort~\parencite{fenton1999software}. The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
+~\begin{quoting}
+A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
+~\end{quoting}
+
+\noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
+
+The aim of this thesis is to provide an up-to-date overview of software metrics and discuss future research. Moreover, metrics are specifically pruned in the context of functional programming languages, where Haskell is used as reference.
 
 %}}}
+%{{{Software metrics
+\chapter{Software metrics}
+
+Software is known to be brittle in the sense that its runtime behavior might not correspond to what the programmer had intended. More specifically, human error often introduces faulty logic into the software's code. Once these unintended ``features'', or bugs, slip into production versions and the software is released, fixing a critical error afterwards might require approximately hundred times more effort~\parencite{shull2002we}. To help assessing and predicting the quality of the
+software at the time of development, software metrics are engineered.
+%{{{
+\begin{comment}
+General data were presented that supported an effort increase of approximately 100:1. Don O¿Neill described data from IBM Rochester [10] in the pre-meeting feedback that found an increase in effort of about 13:1 for defect slippage from code to test and a further 9:1 increase for slippage from test to field (so, a ratio of about 117:1
+from code to field).~\parencite{shull2002we}
+\end{comment}
+%}}}
+
+~\textit{Software metrics} is a rather generic term traditionally meant to include the assessment of software by its internal and external attributes~\parencite{fenton1999software}. The characteristics of software are quantified through metrics in order to predict (1) effort/cost of development processes and (2) the quality of software~\parencite{fenton2000software}. The central idea of measuring software is that with access to the characteristics
+(quality, complexity) of the software, developers and management can make educated guesses about development and resource planning~\parencite{fenton1999software}.
+%{{{
+\begin{comment}
+¿Software metrics¿ is the rather misleading collective term used to describe the wide range of activities concerned with measurement in software engineering. These activities range from producing numbers that characterise properties of software code (these are the classic software ¿metrics¿) through to models that help predict software resource requirements and software quality. The subject also includes the quantitative aspects of quality control and assurance - and this covers
+activities like recording and monitoring defects during development and testing.~\parencite{fenton1999software}.
+
+Although there are literally thousands of metrics that have been proposed since the mid 1960's (all of which fit into the framework of Table 1) the rationale for almost all individual metrics has been motivated by one of two activities:
+1. The desire to assess or predict effort/cost of development processes;
+2. The desire to assess or predict quality of software
+key in both cases has been the assumption that product 'size' measures should drive any predictive models.~\parencite{fenton2000software}
+\end{comment}
+%}}}
+
+First attempts at recording software metrics were witnessed in the 1960s when .
+
+The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
+~\begin{quoting}
+A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
+~\end{quoting}
+
+\noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
+
+Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
+
+\section{Flowgraphs}
+\section{Callgraphs}
+\section{Abstract syntax trees}
+
+\section{Metrics for imperative languages}
+
+Some misconceptions about lines of code~\parencite{rosenberg1997some}
+
+\section{Metrics for object-oriented languages}
+\section{Metrics for functional languages}
+\section{Miscellaneous defect predictors}
+
+Predicting fault incidence using software change history~\parencite{graves2000predicting}
+
+\section{Summary}
+
+
+%{{{Additional sources
+\begin{comment}
+This type of overriding can be particularly troublesome if the conflicting defi- nitions have the same type, which prevents the compiler from indicating possibly erroneous behaviour when modifying the program. For instance, consider the (contrived) area function in Example 10. If the a in the where clause is renamed, the function will compile with no errors, but will give incorrect results unless the a after the = is also changed.
+It therefore appears that measuring the number of pattern variables involved in overriding might predict potential points of error. However, the implementation of the metric used in this work does not yet contain a type system, and so for this work it is not possible to check if the variables involved in the overriding have the same type, which would be interesting to factor into the measurement, and so this implementation of the metric treats all overriding in the same manner, regardless of the types involved. However it would be possible to re-implement the metric using a framework such as Programatica [41] to make use of type information in~\parencite{ryder2004software}
+
+
+In the world of imperative and object-oriented languages, software measure- ment, also known as software metrics, has been used for many years to provide developers with additional information about their programs. Such information can give programmers important indications about where bugs are likely to be in- troduced, or about how easy parts of a program are to test, for instance. This can be extremely valuable in easing the testing process by focusing programmers¿ at- tention on parts
+of the program where their effort may provide the greatest overall benefit, which in turn can help ease the whole process of validating software.~\parencite{ryder2004software}.
+
+The example of the imperative and object-oriented communities suggests that software metrics could provide a useful complement to the existing debugging tools available to functional programmers today. Some of the measurement techniques from imperative and object-oriented languages may transfer quite cleanly to func- tional languages, for instance the pathcount metric which counts the number of execution paths through a piece of program code, but some of the more advanced features of
+functional programming languages may contribute to the complexity of a program in ways that are not considered by traditional imperative or object- oriented metrics. It may therefore be necessary to develop new metrics for certain aspects of functional programs.~\parencite{ryder2004software}
+
+Software measurement is a technique in which quantitative measures, often called metrics, are taken from the source code of a program. Typically metrics attempt to quantify how complex a piece of source code is to understand, modify or test. This notion of complexity should not be confused with the computational complexity of an algorithm, which is typically denoted using O( notation. Com- putational complexity is concerned with runtime behaviour, rather than how easy or hard it is for a
+programmer to maintain.~\parencite{ryder2004software}
+
+One of the claims of software measurement is that it can help identify the parts of a system which are most likely to benefit from inspection. This allows resources to be focused where they will help most and allows them to be used in their most effective way, e.g. peer reviews of small sections of code, rather than large sections, or indicating parts of a program that may benefit from refactoring code changes.~\parencite{ryder2004software}
+
+\end{comment}
+%}}}
+
+%}}}
+
 %{{{Functional programming
 \chapter{Functional programming}
 %{{{Chapter questions
@@ -136,6 +220,8 @@ The committee's primary goal was to deisgn a language that satisfied these const
 
 %{{{Additional sources
 \begin{comment}
+Haskell is a high level language. A really high level language. We can spend our days programming entirely in abstractions, in monoids, functors and hylomorphisms, far removed from any particular hardware model of computation. The language specification goes to great lengths to avoid prescribing any particular evaluation model. These layers of abstraction let us treat Haskell as a notation for computation itself, letting the programmer concentrate on the essence of their problem without getting bogged down in low level implementation decisions. We get to program in pure thought.~\parencite{o2008real}
+
 The earliest programming languages were developed with one simple goal in mind: to provide a vehicle through which one could control the behavior of computers. Not sur- prisingly, the early languages reflected the structure of the underlying machines fairly well. First, it became obvious that what was easy for a machine to reason about was not necessarily easy for a human being to rea- son about.~\parencite{hudak1989conception} In Conception_evolution_and_application.....pdf
 
 The class of functional, or applicative, programming languages, in which computation is carried out entirely through the evaluation of expressions, is one such family of languages, and debates over its merits have been quite lively in recent years.~\parencite{hudak1989conception}
@@ -482,74 +568,6 @@ Functional languages have a potential advantage in readability. In many imperati
 
 In an imperative language, the pro- grammer must make a static division of the program into its concurrent parts, which are then written as tasks, whose execution often must be synchronized. This can be a complicated process. Programs in functional languages are natu- rally divided into functions. In a pure functional language, these functions are independent in the sense that they do not create side effects and their operations do not depend on any nonlocal or global variables.
 Therefore, it is much easier to determine which of them can be concurrently executed.~\parencite{sebesta2002concepts}.
-
-\end{comment}
-%}}}
-
-%}}}
-%{{{Software metrics
-\chapter{Software metrics}
-
-Software is known to be brittle in the sense that its runtime behavior might not correspond to what the programmer had intended. More specifically, human error often introduces faulty logic into the software's code. Once these unintended ``features'', or bugs, slip into production versions and the software is released, fixing a critical error afterwards might require approximately hundred times more effort~\parencite{shull2002we}. To help assessing and predicting the quality of the
-software at the time of development, software metrics are engineered.
-%{{{
-\begin{comment}
-General data were presented that supported an effort increase of approximately 100:1. Don O¿Neill described data from IBM Rochester [10] in the pre-meeting feedback that found an increase in effort of about 13:1 for defect slippage from code to test and a further 9:1 increase for slippage from test to field (so, a ratio of about 117:1
-from code to field).~\parencite{shull2002we}
-\end{comment}
-%}}}
-
-~\textit{Software metrics} is a rather generic term traditionally meant to include the assessment of software by its internal and external attributes~\parencite{fenton1999software}. The characteristics of software are quantified through metrics in order to predict (1) effort/cost of development processes and (2) the quality of software~\parencite{fenton2000software}. The central idea of measuring software is that with access to the characteristics
-(quality, complexity) of the software, developers and management can make educated guesses about development and resource planning~\parencite{fenton1999software}.
-%{{{
-\begin{comment}
-¿Software metrics¿ is the rather misleading collective term used to describe the wide range of activities concerned with measurement in software engineering. These activities range from producing numbers that characterise properties of software code (these are the classic software ¿metrics¿) through to models that help predict software resource requirements and software quality. The subject also includes the quantitative aspects of quality control and assurance - and this covers
-activities like recording and monitoring defects during development and testing.~\parencite{fenton1999software}.
-
-Although there are literally thousands of metrics that have been proposed since the mid 1960's (all of which fit into the framework of Table 1) the rationale for almost all individual metrics has been motivated by one of two activities:
-1. The desire to assess or predict effort/cost of development processes;
-2. The desire to assess or predict quality of software
-key in both cases has been the assumption that product 'size' measures should drive any predictive models.~\parencite{fenton2000software}
-\end{comment}
-%}}}
-
-First attempts at recording software metrics were witnessed in the 1960s when .
-
-The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
-~\begin{quoting}
-A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
-~\end{quoting}
-
-\noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
-
-Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
-
-\section{Metrics for imperative languages}
-
-Some misconceptions about lines of code~\parencite{rosenberg1997some}
-
-\section{Metrics for object-oriented languages}
-\section{Metrics for functional languages}
-\section{Metrics for functional reactive programming}
-\section{Miscellaneous defect predictors}
-
-Predicting fault incidence using software change history~\parencite{graves2000predicting}
-
-\section{Summary}
-
-
-%{{{Additional sources
-\begin{comment}
-In the world of imperative and object-oriented languages, software measure- ment, also known as software metrics, has been used for many years to provide developers with additional information about their programs. Such information can give programmers important indications about where bugs are likely to be in- troduced, or about how easy parts of a program are to test, for instance. This can be extremely valuable in easing the testing process by focusing programmers¿ at- tention on parts
-of the program where their effort may provide the greatest overall benefit, which in turn can help ease the whole process of validating software.~\parencite{ryder2004software}.
-
-The example of the imperative and object-oriented communities suggests that software metrics could provide a useful complement to the existing debugging tools available to functional programmers today. Some of the measurement techniques from imperative and object-oriented languages may transfer quite cleanly to func- tional languages, for instance the pathcount metric which counts the number of execution paths through a piece of program code, but some of the more advanced features of
-functional programming languages may contribute to the complexity of a program in ways that are not considered by traditional imperative or object- oriented metrics. It may therefore be necessary to develop new metrics for certain aspects of functional programs.~\parencite{ryder2004software}
-
-Software measurement is a technique in which quantitative measures, often called metrics, are taken from the source code of a program. Typically metrics attempt to quantify how complex a piece of source code is to understand, modify or test. This notion of complexity should not be confused with the computational complexity of an algorithm, which is typically denoted using O( notation. Com- putational complexity is concerned with runtime behaviour, rather than how easy or hard it is for a
-programmer to maintain.~\parencite{ryder2004software}
-
-One of the claims of software measurement is that it can help identify the parts of a system which are most likely to benefit from inspection. This allows resources to be focused where they will help most and allows them to be used in their most effective way, e.g. peer reviews of small sections of code, rather than large sections, or indicating parts of a program that may benefit from refactoring code changes.~\parencite{ryder2004software}
 
 \end{comment}
 %}}}
