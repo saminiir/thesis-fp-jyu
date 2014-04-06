@@ -49,13 +49,15 @@
 \begin{document}
 %}}}
 %{{{Meta
-\title{Functional reactive programming and software quality metrics}
-\translatedtitle{Reaktiivinen funktionaalinen ohjelmointi}
+\title{Software quality metrics and functional programming}
+\translatedtitle{Ohjelmistomittarit ja funktionaalinen ohjelmointi}
 
 \author{Sami Niiranen}
 \contactinformation{sami.i.niiranen@student.jyu.fi}
 
-\supervisor{?? (JYU)}
+\supervisor{Ville Tirronen,}
+\supervisor{Antti-Juhani Kaijanaho,}
+\supervisor{Jari Veijalainen}
 \supervisor{Jukka Lindström (Reaktor Innovations)}
 
 \setdate{02}{03}{2014}
@@ -81,7 +83,51 @@ A function whose inputs are software data and whose output is a single numerical
 
 \noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
 
-The aim of this thesis is to provide an up-to-date overview of software metrics and discuss future research. Moreover, metrics are specifically pruned in the context of functional programming languages, where Haskell is used as reference.
+
+\section{Previous work}
+
+Code analysis and comparison of quality in functional programming (FP) paradigms is relatively scarce~\parencite{hudak1994haskell,harrison1996comparing,harrison1995estimating,harrison1996evaluation}.
+
+Explicit formulation of metrics for functional programming has been presented in the works of~\citet{ryder2004software,van1995software}. Furthermore,~\citet{ryder2004software} leaves the measurement of type systems, polymorphism and higher-order functions for future research, which this thesis aims to address.
+
+\section{Limitations}
+
+Commercial use of programming paradigms are still in favour of the object-oriented (Java) and imperative (C) approaches. Despite FP being largely utilized in academia, the research on it is somewhat diverse and not uniform. In addition, real-world applications of FP are not abundant and finding a suitable program for research might be challenging. 
+
+Software metrics, regardless of their quantitative nature, are up for interpretation and thus the results of the metrics are subjectively assessed.
+
+\section{Research problem}
+
+The aim of this thesis is to provide an up-to-date overview of software metrics and discuss future research. Moreover, metrics are specifically pruned in the context of functional programming languages, where Haskell is used as reference.  As an example,~\citet{ryder2004software} encourages future research for measuring polymorphism and higher-order functions in functional programming.
+%{{{
+\begin{comment}
+Functional languages often provide powerful abstraction mechanisms such as polymorphic and higher-order functions, or abstract data types. These languages features suggest that useful metrics could be defined to measure attributes of abstraction in programs.
+For example, one might measure how polymorphic a function is by counting the number of different type variables present in the function¿s type signature, or by counting how many different types the function is used as. Likewise one might measure how abstract a given algebraic data type is by counting the number of constructors which are exported for that data type. Similar metrics could also be created to measure attributes of higher-order functions and other abstraction mechanisms.~\parencite{ryder2004software}
+\end{comment}
+%}}}
+
+The research can be decomposed into four questions:
+
+\begin{itemize}
+    \item What are software quality metrics?
+    \item What is functional programming?
+    \item How do existing software quality metrics apply to the functional programming paradigm? 
+    \item What kind of new metrics can be formulated and how do they apply to FP programs?
+\end{itemize}
+
+\noindent The research problem can be expressed as follows: \textit{What kind of software metrics exists for the functional programming paradigm, and how do the metrics apply to applications with functional implementation?}
+
+\section{Research methods}
+The thesis utilizes literature review as its main research method. The review consists of an overview into the metrics of software quality and functional programming. In preparation of the empirical part, FP metrics~\parencite{ryder2004software} are scrutinized and the possibility for new metrics is investigated.
+
+New metrics formulated will be presented. For example, polymorphism and other type system -specific metrics are currently nonexistant~\parencite{ryder2004software} and could serve as a basis for new metrics research.
+
+In the second part, the research themes are investigated through empirical research. One or more case study applications are chosen and their source code is used for applying the metrics. As an example, the abstract syntax trees (AST) with type information could be built from the case study source codes and the metrics quantified with the help of the AST.
+
+\section{Expected results and their significance}
+The results aim at explaining the various semantics of FP and how they relate to software quality metrics. The discovery of new metrics for FP-specific metrics is likely, since research on the subject has not been extensive~\parencite{ryder2004software}.
+
+The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating software metrics and FP into practical settings. Future research will be fueled by providing more support to the functional paradigm as opposed to imperative approaches, and encourage real-world usage of the functional paradigm.
 
 %}}}
 %{{{Software metrics
@@ -130,7 +176,6 @@ Although the theoretical effectiveness of software metrics and defect prediction
 Some misconceptions about lines of code~\parencite{rosenberg1997some}
 
 \section{Metrics for object-oriented languages}
-\section{Metrics for functional languages}
 \section{Miscellaneous defect predictors}
 
 Predicting fault incidence using software change history~\parencite{graves2000predicting}
@@ -573,6 +618,58 @@ Therefore, it is much easier to determine which of them can be concurrently exec
 %}}}
 
 %}}}
+\chapter{Metrics for functional programming}
+
+Software Measurement for Functional Programming~\parencite{ryder2004software}
+
+\section{Complexity of patterns}
+~\begin{itemize}
+    \item Number of pattern variables
+    \item Number of overridden or overriding pattern variables 
+    \item Number of constructors
+    \item Number of wildcards
+    \item Depth of nesting
+    \item Pattern size 
+~\end{itemize}
+
+\section{Distance between declarations and usage}
+~\begin{itemize}
+    \item Distance by the number of scopes
+    \item Distance by the number of declarations in scope
+    \item Distance by the number of source lines
+    \item Distance by the number of parse tree nodes
+~\end{itemize}
+
+\section{Attributes of recursive Functions}
+~\begin{itemize}
+    \item Binary indication of recursion 
+    \item Number of recursive paths
+    \item Number of trivial and non-trivial recursive paths
+    \item Sum and product of recursive path lengths
+~\end{itemize}
+
+\section{Attributes of callgraphs}
+~\begin{itemize}
+    \item Strongly connected components
+    \item Indegree of a function
+    \item Outdegree of a function 
+    \item Size of a functions callgraph
+~\end{itemize}
+
+\section{Miscellaneous attributes of functions}
+~\begin{itemize}
+    \item Pathcount of a function~\parencite{barnes2000evolution}
+    \item Size of a function
+    \item Operators and operands
+    \item Outdegree of a function 
+    \item Size of a functions callgraph
+~\end{itemize}
+
+\section{Degree of polymorphism}
+
+
+\section{Summary}
+
 %{{{Empirical study
 \chapter{Empirical study}
 %{{{Questions
