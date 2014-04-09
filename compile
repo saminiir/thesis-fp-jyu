@@ -1,0 +1,6 @@
+#!/bin/bash
+FILE="thesis-niiranen"
+pdflatex -halt-on-error "$FILE"
+biber "$FILE"
+pdflatex -halt-on-error "$FILE"
+open "$FILE.pdf"

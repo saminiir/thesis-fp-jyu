@@ -1,0 +1,5 @@
+#!/bin/bash
+
+biber --cache | xargs rm -rf
+find -E . -regex ".*.(aux|lof|lot|bbl|bcf|blg|toc|out|log)" -exec rm {} \;
+./compile
