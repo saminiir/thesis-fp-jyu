@@ -81,6 +81,12 @@ Software quality metrics is a branch of software engineering, where the quality 
 A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
 ~\end{quoting}
 
+\noindent~\citet{fenton1998software} regards these as ``structural and complexity metrics'' when dealing with the internal attributes of software.
+%{{{
+\begin{comment}
+Structural and complexity metrics~\parencite{fenton1998software} p 18.
+\end{comment}
+%}}}
 \noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
 
 
@@ -95,6 +101,8 @@ Explicit formulation of metrics for functional programming has been presented in
 Commercial use of programming paradigms are still in favour of the object-oriented (Java) and imperative (C) approaches. Despite FP being largely utilized in academia, the research on it is somewhat diverse and not uniform. In addition, real-world applications of FP are not abundant and finding a suitable program for research might be challenging. 
 
 Software metrics, regardless of their quantitative nature, are up for interpretation and thus the results of the metrics are subjectively assessed.
+
+Algorithmic efficiency is left out.
 
 \section{Research problem}
 
@@ -167,16 +175,55 @@ A function whose inputs are software data and whose output is a single numerical
 
 Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
 
-\section{Flowgraphs}
-\section{Callgraphs}
-\section{Abstract syntax trees}
-
-\section{Metrics for imperative languages}
+\section{Size metrics}
+\subsection{Lines of code}
 
 Some misconceptions about lines of code~\parencite{rosenberg1997some}
 
+\begin{itemize}
+    \item LOC
+    \item NLOC
+    \item NCLOC
+\end{itemize}
+
+\subsection{Halstead's program volume}
+
+
+\section{Structural metrics}
+\subsection{Flowgraphs}
+
+\subsection{Cyclomatic complexity}
+
+~\citet{mccabe1976complexity}
+
+\subsection{Test coverage measures}
+
+\begin{itemize}
+    \item Minimum number of test cases
+    \item Test effectiveness ratio
+\end{itemize}
+
+\section{Data-flow attributes}
+
+\subsection{Callgraphs}
+\subsection{Global modularity}
+\subsection{Morphology}
+\subsection{Tree impurity}
+\subsection{Internal reuse}
+\subsection{Coupling}
+\subsection{Cohesion}
+\subsection{Information flow}
+Henry-Kafura measure
+
 \section{Metrics for object-oriented languages}
-\section{Miscellaneous defect predictors}
+\subsection{Weighted methods per class}
+\subsection{Depth of inheritance}
+\subsection{Number of children}
+\subsection{Coupling between object classes}
+\subsection{Response for class}
+\subsection{Lack of cohesion metric}
+
+\section{Challenges of metrics}
 
 Predicting fault incidence using software change history~\parencite{graves2000predicting}
 
@@ -595,6 +642,59 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 \end{comment}
 %}}}
 
+\section{Metrics for functional programming}
+
+Software Measurement for Functional Programming~\parencite{ryder2004software}
+
+\subsection{Complexity of patterns}
+~\begin{itemize}
+    \item Number of pattern variables
+    \item Number of overridden or overriding pattern variables 
+    \item Number of constructors
+    \item Number of wildcards
+    \item Depth of nesting
+    \item Pattern size 
+~\end{itemize}
+
+\subsection{Distance between declarations and usage}
+~\begin{itemize}
+    \item Distance by the number of scopes
+    \item Distance by the number of declarations in scope
+    \item Distance by the number of source lines
+    \item Distance by the number of parse tree nodes
+~\end{itemize}
+
+\subsection{Attributes of recursive Functions}
+~\begin{itemize}
+    \item Binary indication of recursion 
+    \item Number of recursive paths
+    \item Number of trivial and non-trivial recursive paths
+    \item Sum and product of recursive path lengths
+~\end{itemize}
+
+\subsection{Attributes of callgraphs}
+~\begin{itemize}
+    \item Strongly connected components
+    \item Indegree of a function
+    \item Outdegree of a function 
+    \item Size of a functions callgraph
+~\end{itemize}
+
+\subsection{Miscellaneous attributes of functions}
+~\begin{itemize}
+    \item Pathcount of a function~\parencite{barnes2000evolution}
+    \item Size of a function
+    \item Operators and operands
+    \item Outdegree of a function 
+    \item Size of a functions callgraph
+~\end{itemize}
+
+\subsection{Degree of polymorphism}
+
+
+\subsection{Summary}
+
+
 \section{Summary}
 
 %{{{ Additional sources
@@ -618,58 +718,6 @@ Therefore, it is much easier to determine which of them can be concurrently exec
 %}}}
 
 %}}}
-\chapter{Metrics for functional programming}
-
-Software Measurement for Functional Programming~\parencite{ryder2004software}
-
-\section{Complexity of patterns}
-~\begin{itemize}
-    \item Number of pattern variables
-    \item Number of overridden or overriding pattern variables 
-    \item Number of constructors
-    \item Number of wildcards
-    \item Depth of nesting
-    \item Pattern size 
-~\end{itemize}
-
-\section{Distance between declarations and usage}
-~\begin{itemize}
-    \item Distance by the number of scopes
-    \item Distance by the number of declarations in scope
-    \item Distance by the number of source lines
-    \item Distance by the number of parse tree nodes
-~\end{itemize}
-
-\section{Attributes of recursive Functions}
-~\begin{itemize}
-    \item Binary indication of recursion 
-    \item Number of recursive paths
-    \item Number of trivial and non-trivial recursive paths
-    \item Sum and product of recursive path lengths
-~\end{itemize}
-
-\section{Attributes of callgraphs}
-~\begin{itemize}
-    \item Strongly connected components
-    \item Indegree of a function
-    \item Outdegree of a function 
-    \item Size of a functions callgraph
-~\end{itemize}
-
-\section{Miscellaneous attributes of functions}
-~\begin{itemize}
-    \item Pathcount of a function~\parencite{barnes2000evolution}
-    \item Size of a function
-    \item Operators and operands
-    \item Outdegree of a function 
-    \item Size of a functions callgraph
-~\end{itemize}
-
-\section{Degree of polymorphism}
-
-
-\section{Summary}
-
 %{{{Empirical study
 \chapter{Empirical study}
 %{{{Questions
