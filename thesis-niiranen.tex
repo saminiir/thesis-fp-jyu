@@ -407,7 +407,7 @@ TODO: Examples of popular higher-order functions? map, filter..
 
 \subsection{Lazy evaluation}
 
-Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand, this~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
+Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand,~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
 %{{{
 \begin{comment}
 A programming language is strict if it requires all actual parameters to be fully evaluated, which ensures that the value of a function does not depend on the order in which the parameters are evaluated. A language is nonstrict if it does not have the strict requirement.~\parencite{hudak1989conception}.
