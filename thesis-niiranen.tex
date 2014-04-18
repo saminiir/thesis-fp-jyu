@@ -268,7 +268,7 @@ As software becomes more and more complex, it is more and more important to stru
 \end{comment}
 %}}}
 
-Several programming paradigms exist for developing software. The most popular paradigm is the~\textit{imperative} approach, where programs are written in step-by-step instructions and commands~\parencite{sebesta2002concepts}. This approach is similar to the design of the von Neumann computer architecture and its basic implementation of sending messages back and forth between the CPU and the store (memory)~\parencite{backus1978can}. In turn, many programming languages have
+Several programming paradigms exist for developing software. The most popular paradigm is the~\textit{imperative} approach, where programs are written in step-by-step instructions and commands~\parencite{TODO: Better source than sebesta}. This approach is similar to the design of the von Neumann computer architecture and its basic implementation of sending messages back and forth between the CPU and the store (memory)~\parencite{backus1978can}. In turn, many programming languages have
 adapted the same approach as in the von Neumann architecture to their execution flow: variables, control statements and assignment statements~\parencite{backus1978can}.
 %{{{
 \begin{comment}
@@ -278,7 +278,7 @@ All have been designed to make efficient use of von Neumann architecture compute
 \end{comment}
 %}}}
 
-The critics of imperative languages argue that as programs grow large, the imperative approach inherently struggles with expressing non-trivial programs consisting of numerous modules in a succinct manner~\parencite{backus1978can,hughes1989functional}. For example, the inclusion of explicit variables forces the developers to understand all of them concurrently, and in the worst case, keep a mental model of the relationships of these variables~\parencite{sebesta2002concepts}.
+The critics of imperative languages argue that as programs grow large, the imperative approach inherently struggles with expressing non-trivial programs consisting of numerous modules in a succinct manner~\parencite{backus1978can,hughes1989functional}. For example, the inclusion of explicit variables forces the developers to understand all of them concurrently, and in the worst case, keep a mental model of the relationships of these variables~\parencite{TODO: Better source than sebesta}.
 %{{{
 \begin{comment}
 One of the fundamental characteristics of programs written in impera- tive languages is that they have state, which changes throughout the execution process. This state is represented by the program¿s variables. The author and all readers of the program must understand the uses of its variables and how the program¿s state changes through execution. For a large program, this is a daunting task. This is one problem with programs written in an imperative language that is not present in
@@ -286,7 +286,7 @@ a program written in a pure functional language, for such programs have neither 
 \end{comment}
 %}}}
 
-Functional programming is a different approach to software engineering compared to imperative languages. It utilizes mathematical functions for program flow, such as recursion and conditional expressions, in contrast to the characteristic of sequential and iterative repetition found in imperative languages~\parencite{sebesta2002concepts}. Moreover, variables that model values in memory locations do not obviously exist in mathematics, and as such, are also omitted from pure functional
+Functional programming is a different approach to software engineering compared to imperative languages. It utilizes mathematical functions for program flow, such as recursion and conditional expressions, in contrast to the characteristic of sequential and iterative repetition found in imperative languages~\parencite{TODO: Better source than sebesta}. Moreover, variables that model values in memory locations do not obviously exist in mathematics, and as such, are also omitted from pure functional
 programming. 
 %{{{
 \begin{comment}
@@ -323,7 +323,7 @@ Among the claims made by functional language advocates are that programs can be 
 TODO: Maininta myös Lispistä!! Esim. hudak1989conception :ssa hyvää juttua
 Despite its impurities, Lisp had a great influence on functional language development, and it is encouraging to note that modern Lisps (especially Scheme) have returned more to the purity of the lambda calculus rather than the ad hocery that plagued the Maclisp era. This return to the purity includes the first-class treatment of functions and the lexical scoping of identifiers.~\parencite{hudak1989conception}.
 
-A purely functional programming language does not use variables or assignment statements, thus freeing the programmer from concerns related to the memory cells, or state, of the program. Without variables, iterative con- structs are not possible, for they are controlled by variables.~\parencite{sebesta2002concepts}.
+A purely functional programming language does not use variables or assignment statements, thus freeing the programmer from concerns related to the memory cells, or state, of the program. Without variables, iterative con- structs are not possible, for they are controlled by variables.~\parencite{TODO: Better source than sebesta}.
 
 Haskell functions are in general pure functions: when given the same arguments, they return the same results. The reason for this paradigm is that pure functions are much easier to debug and to prove correct. Test cases can also be set up much more easily, since we can be sure that nothing other than the arguments will influence a function's result. We also require pure functions not to have side effects other than returning a value: a pure function must be self-contained, and cannot open a network connection, write a file or do anything other than producing its result. This allows the Haskell compiler to optimise the code very aggressively.
 However, there are very useful functions that cannot be pure: an input function, say getLine, will return different results every time it is called; indeed, that's the point of an input function, since an input function returning always the same result would be pointless. Output operations have side effects, such as creating files or printing strings on the terminal: this is also a violation of purity, because the function is no longer self-contained.~\parencite{wikibooks2014haskell}
@@ -337,13 +337,13 @@ The different concepts of functional programming are numerous, but shared betwee
 
 \subsection{Functions}
 
-The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{sebesta2002concepts}. A function that returns an integer doubled by itself (effectively calculating the square of a number) would be defined in Haskell as:
+The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{TODO: Better source than sebesta}. A function that returns an integer doubled by itself (effectively calculating the square of a number) would be defined in Haskell as:
 
 \begin{lstlisting}
 square x = x * x 
 \end{lstlisting}
 
-\noindent The assignment operator, {\tt =} is meant to define a function (in this case, the computation of a number's square) and not to actually assign any values to a variable. Additionally, the parameters of the function definition are fixed (constant), meaning they can not change in the domain of the function. This is opposite in imperative languages, where variables received as parameters are often manipulated and their state is changed. In pure functional languages, such as Haskell, variables are omitted and state does not exist in an operational or denotational sense. This can be observed through~\textit{referential transparency}, which holds that a function should return the same result every time with the same given parameters, since no ``external'' variables, or~\textit{side-effects}, can affect the computation.~\parenciteseveral{sebesta2002concepts}.
+\noindent The assignment operator, {\tt =} is meant to define a function (in this case, the computation of a number's square) and not to actually assign any values to a variable. Additionally, the parameters of the function definition are fixed (constant), meaning they can not change in the domain of the function. This is opposite in imperative languages, where variables received as parameters are often manipulated and their state is changed. In pure functional languages, such as Haskell, variables are omitted and state does not exist in an operational or denotational sense. This can be observed through~\textit{referential transparency}, which holds that a function should return the same result every time with the same given parameters, since no ``external'' variables, or~\textit{side-effects}, can affect the computation.~\parenciteseveral{TODO: Better source than sebesta}.
 %{{{
 \begin{comment}
 In this definition, the domain and range sets are the real numbers. The symbol K is used to mean ¿is defined as.¿ The parameter x can represent any member of the domain set, but it is fixed to represent one specific element during evalu- ation of the function expression. This is one way the parameters of mathemati- cal functions differ from the variables in imperative languages.~\parencite{sebesta2002concepts}.
@@ -378,7 +378,7 @@ The functional programming paradigm, which is based on mathematical functions, i
 
 \subsection{Higher-order functions}
 
-Higher-order functions are the landmark feature of functional languages. Derived from the previous observation of generally applicable functions in lamdba calculus, higher-order functions can take functions as parameters and also return a function~\parencite{sebesta2002concepts}. Thus functions are treated like any other value. This has convenient practical implications, where functions can be composed of other functions. For example, composing a function that executes a given function twice is possible:
+Higher-order functions are the landmark feature of functional languages. Derived from the previous observation of generally applicable functions in lamdba calculus, higher-order functions can take functions as parameters and also return a function~\parencite{TODO: Better source than sebesta}. Thus functions are treated like any other value. This has convenient practical implications, where functions can be composed of other functions. For example, composing a function that executes a given function twice is possible:
 \begin{lstlisting}
 twice f = f . f
 \end{lstlisting}
@@ -426,7 +426,7 @@ squares = [x * x | x <- [0..]]
 
 \end{lstlisting}
 
-\noindent The values of the lists are not computed until they are needed. For example, {\tt take 5 squares} returns {\tt [0, 1, 2, 4, 9, 16, 25, 36, 49, 64, 81]}. Effectively, lazy evaluation provides three important mechanisms for evaluating function parameters~\parencite{sebesta2002concepts}:
+\noindent The values of the lists are not computed until they are needed. For example, {\tt take 5 squares} returns {\tt [0, 1, 2, 4, 9, 16, 25, 36, 49, 64, 81]}. Effectively, lazy evaluation provides three important mechanisms for evaluating function parameters~\parencite{TODO: Better source than sebesta}:
 
 \begin{itemize}
     \item Only the needed parameters are evaluated
