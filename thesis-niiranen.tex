@@ -213,7 +213,7 @@ Furthermore, not all source code lines are equal. Often comments and blank lines
 \end{align}
 
 \noindent This way, similar implementations can be more easily compared, since the ratio of different types of LOC are evident.
-
+lstead classifies symbols in a program into two classes, those that are used to specify actions are classed as operators while symbols that represent data are classed as operands.
 Executable statements (ES) is one form of quantifying lines of source codes. In ES, comment lines, data declarations and headers are ignored and instead, the operation statements are counted. Multiple executable statements in one line are thus considered separate.
 %{{{
 \begin{comment}
@@ -232,9 +232,43 @@ Some misconceptions about lines of code~\parencite{rosenberg1997some}
 
 \subsection{Halstead's program volume}
 
+One of the earliest static analysis methods for source code is the Halstead-metric~\parencite{halstead1977elements}. With an effort to unify empirical research on software,~\citet{halstead1977elements} divides program code into tokens of~\textit{operators} and~\textit{operands} that could be used to assess several characteristics of the software regardless of, for example, the implementation language. Operators can be considered as ``actions'' in the source code (e.g. in imperative languages, the assignment operator =), and operands represent data (variables)~\parencite{ryder2004software}. Moreover, the variables of the Halstead-metric are:
+%{{{
+\begin{comment}
+Halstead classifies symbols in a program into two classes, those that are used to specify actions are classed as operators while symbols that represent data are classed as operands.~\parencite{ryder2004software}.
+\end{comment}
+%}}}
+
+\begin{flalign*}
+\mu_1 = \text{number of unique operators}\\
+\mu_2 = \text{number of unique operands}\\
+\\
+N_1 = \text{total occurrences of operators}\\
+N_2 = \text{total occurrences of operands}\\
+\end{flalign*}
+
+\noindent These variables are then used to quantify several properties such as the~\textit{length},~\textit{vocabulary},~\textit{volume},~\textit{program level} and~\textit{difficulty} of the source code. (TODO: Calculations of the formulas)
+
 
 \section{Structural metrics}
+
+Another interesting property of software is their structure, which indicates additional information of the development and maintenance effort of the source code. One approach to inspecting structural metrics is the perspective of~\textit{control-flow}, or the logical paths in the execution of the program. On the other hand,~\textit{Data-flow} deals with information flow between modules in the software.~\parenciteseveral{fenton1998software}. In this section, the more evident metrics of structural metrics are presented and their challenges are analyzed.
+%{{{
+\begin{comment}
+The structure of the product plays a part, not only in requiring development effort but also in how the product is maintained.~\parencite{fenton1998software}.
+
+It is the inter-module dependencies that interest us, and measures of these attributes are called inter-modular measures.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
 \subsection{Flowgraphs}
+
+As the research on software metrics traditionally centers on imperative languages,~\textit{Flowgraphs} are an intuitive way of mapping the ``flow'' of program statements. Moreover, flowgraphs are directed graphs that indicate program statements as nodes, and flow of control as arcs in the graph.
+%{{{
+\begin{comment}
+A great deal of software metrics work has been devoted to measuring the control-flow structure of imperative language programs or algorithms. The control flow measures are usually modeled with directed graphs, where each node (or point) corresponds to a program statement, and each arc (or directed edge) indicates the flow of control from one statement to another.
+\end{comment}
+%}}}
 
 \subsection{Cyclomatic complexity}
 
