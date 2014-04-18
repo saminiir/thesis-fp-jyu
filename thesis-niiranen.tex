@@ -33,6 +33,8 @@
 \usepackage{tikz} % Portable graphics, diagrams
 \usetikzlibrary{matrix,positioning,fit,arrows}
 
+\usepackage{amsmath}
+
 \usepackage{listings}
 \lstset{language=Haskell}
 
@@ -176,15 +178,57 @@ A function whose inputs are software data and whose output is a single numerical
 Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
 
 \section{Size metrics}
-\subsection{Lines of code}
 
-Some misconceptions about lines of code~\parencite{rosenberg1997some}
+Perhaps the first approach to measuring the internal attributes of software is the ~\textit{size} metric. It is relatively easy to be quantified, since only source code is required for the analysis and the measurement is made statically, meaning that the program code does not even have to be executed.~\citet{fenton1998software} divide the size metric into the following subcategories: 
 
 \begin{itemize}
-    \item LOC
-    \item NLOC
-    \item NCLOC
+    \item~\textit{Length} (actual size of the source code)
+    \item~\textit{Functionality} (the features the user receives)
+    \item~\textit{Complexity} (how difficult is the program code to reason with) 
+    \item~\textit{Reuse} (how much of the code is original and what is reused)
 \end{itemize}
+
+Essentially the simplest size metrics are the easiest to be formed, but also provide only a one-dimensional view into the quality of the software. Thus some of the metrics are most often utilized as an aid for interpreting internal attributes, but not too much information should be expected of their results.~\parenciteseveral{fenton1998software}.
+%{{{
+\begin{comment}
+Rejecting simple size measures on these grounds reflects a misunderstanding of the basic measurement principles.~\parencite{fenton1998software}
+\end{comment}
+%}}}
+
+\subsection{Lines of code}
+
+Counting the lines of code (LOC) is perhaps the most commonly used metric, but on the same time it poses challenges regarding the interpretation of the results~\parencite{fenton1998software}. Programmers (and projects) have distinct styles which can affect the results. For example, a function can be separated into multiple lines in order to make it more readable, where in other cases the same results are achieved by a shorter declaration. In turn, the LOC varies even though the intent
+of the function is the same.
+%{{{
+\begin{comment}
+Some lines of code are different from others~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+Furthermore, not all source code lines are equal. Often comments and blank lines are used to increase the readability of the program. These types of lines might not require the same effort of development as the code itself and as a result they can distort the size metric. For these reasons, LOC is traditionally meant to contain only the ``effective'' source code lines without comments and blank lines~\parencite{grady1987software}. To iterate the LOC metric further,~\citet{fenton1998software} suggest calculating the ratio of the different types of source code lines: 
+\begin{align}
+\intertext{total length (LOC) = Non-Comment LOC + Comment LOC}
+\intertext{Then the following serves as the ratio of commented lines in the source code:}
+\dfrac{CLOC}{LOC}
+\end{align}
+
+\noindent This way, similar implementations can be more easily compared, since the ratio of different types of LOC are evident.
+
+Executable statements (ES) is one form of quantifying lines of source codes. In ES, comment lines, data declarations and headers are ignored and instead, the operation statements are counted. Multiple executable statements in one line are thus considered separate.
+%{{{
+\begin{comment}
+(ES) This measure counts separate statements on the same physical line as distinct. it ignores comment lines, data delcarations and headings.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+The implications are that the LOC-metric is highly situational. Different software projects can be compared based on their line count, but also modules in the same source code are often inspected. Puzzlingly, this seemingly simple metric can be non-trivial to interpret, since its use-cases are manifold. One source code line might be short, while another one is long and complex. As is, the Lines Of Code -metric should be tailored for specific use.~\parenciteseveral{fenton1998software}.
+%{{{
+\begin{comment}
+Clearly, the definition of code length is influenced by the way in which it is to be used. Some organizations use length to compare one proeject with another, to answer questions such as: What is our largest/smallest/average project? What is our productivity? What are the trends in project length over time?~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+Some misconceptions about lines of code~\parencite{rosenberg1997some}
 
 \subsection{Halstead's program volume}
 
@@ -407,7 +451,7 @@ TODO: Examples of popular higher-order functions? map, filter..
 
 \subsection{Lazy evaluation}
 
-Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand,~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
+Derived from lambda calculus, a~\textit{nonstrict} programming language such as Haskell avoids evaluating values until they are actually needed(TODO: Selvennä tätä, nonstrict <-> WHNF <-> lazy evaluation). In contrast,~\textit{strict} languages, such as Java and C++, eagerly compute parameter values to ensure proper evaluation order (TODO: ??). Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand,~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
 %{{{
 \begin{comment}
 A programming language is strict if it requires all actual parameters to be fully evaluated, which ensures that the value of a function does not depend on the order in which the parameters are evaluated. A language is nonstrict if it does not have the strict requirement.~\parencite{hudak1989conception}.
@@ -720,6 +764,7 @@ Therefore, it is much easier to determine which of them can be concurrently exec
 %}}}
 %{{{Empirical study
 \chapter{Empirical study}
+Preliminary guidelines for empirical research in software engineering~\parencite{kitchenham2002preliminary}
 %{{{Questions
 \begin{comment}
 \end{comment}
