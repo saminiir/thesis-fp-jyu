@@ -398,6 +398,21 @@ However, the actual TER is typically no better than 40%. The typical TER for bra
 
 \section{Data-flow attributes}
 
+The metrics so far have dealt with~\textit{intra-modular measures}, but another interesting application of software measurement is how different program modules relate to each other in terms of structure and modularity~\parencite{fenton1998software}.~\citet{fenton1998software} propose that a module is any program construct that can be ``at least theoretically separately compilable''. 
+
+Data-flow is often depicted with~\textit{callgraphs}, which are directed graphs, but do not contain the start and end nodes found in flowgraphs~\parencite{fenton1998software}. Furthermore, a callgraph does not contain individual attributes of modules, but rather just describes which modules a specific module ``calls''.
+%{{{
+\begin{comment}
+We use a more abstract model of the design, a directed graph known as the module call-graph. A call-graph is not a flowgraph, as it has no circled start or stop node.~\parencite{fenton1998software}
+
+For example, instead of examining variables, we may need to know only whether or not one module calls (or depends on) another module.~\parencite{fenton1998software}
+\end{comment}
+%}}}
+
+\begin{align}
+\text{TODO: Example of callgraph}
+\end{align}
+
 \subsection{Callgraphs}
 \subsection{Global modularity}
 \subsection{Morphology}
