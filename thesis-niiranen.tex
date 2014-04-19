@@ -335,10 +335,34 @@ Programmers have been required to calculate complexity as they create software m
 
 \subsection{Test coverage measures}
 
-\begin{itemize}
-    \item Minimum number of test cases
-    \item Test effectiveness ratio
-\end{itemize}
+One approach to software measurement is how difficult the modules of the program are to test. In specific, if the structure of a program is misconstructed, also the testability should be low and testing difficult to be carried out. Moreover, motivation for software measurement and testing is that complex structures should often be concentrated on over ``simpler'' functionality. 
+%{{{
+\begin{comment}
+In particular, the structure of a module is related to the difficulty we find in testing it.
+\end{comment}
+%}}}
+
+~\textit{Minimun number of test cases}
+
+~\textit{Test effectiveness ratio}, or test coverage, is a common metric to indicate to which extent the actual execution logic is covered by the testing strategy~\parencite{fenton1998software}. Test effectiveness ratio can be calculated as
+%{{{
+\begin{comment}
+For a given program and a set of cases to test it, we would like to know the extent to which the test cases satisfy a particular testing strategy.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+\begin{align}
+TER_T = \dfrac{\text{number of T objects exercised at least once}}{\text{total number of T objects}}
+\end{align}
+
+\noindent Where $T$ objects are paths in the execution logic, such as loops and branches. Few important observations of $TER$ are that it often requires run-time execution, as which paths a test case covers is difficult to deduce statically~\parencite{ryder2004software}. Second, the resulting ratio can be deceiving if the $T$ objects are constrained loosely. Namely, a $TER$ of 100\% is easy to achieve by only ``simple paths'' as $T$ object values, but this hardly indicates whether some particular functionality is actually tested~\parencite{fenton1998software}.
+%{{{
+\begin{comment}
+This may be difficult to achieve statically, so it is often necessary to perform some form of runtime execu- tion tracing to be able to perform this measurement.~\parencite{ryder2004software}.
+
+However, the actual TER is typically no better than 40%. The typical TER for branch coverage is lower still, providing objective evidence that most software is not tested as rigorously as we like to think.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
 
 \section{Data-flow attributes}
 
