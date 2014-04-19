@@ -299,6 +299,38 @@ For example, the following pseudo-code {\tt if A then X} can be expressed as a f
   ]{Example of flowgraph~\parencite{allen1970control}}
     \label{fig:flowgraph-example}
 \end{figure}
+\begin{figure}[h]\centering
+  \begin{tikzpicture}[%
+    ->,
+    shorten >=2pt,
+    >=stealth,
+    node distance=1cm,
+    node/.style={%
+      ellipse,
+      minimum width=5em,
+      minimum height=3em,
+      draw
+    }
+  ]
+    \node[node] (1)                                             {1};
+    \node[node] (2) [below=of 1]                                {2};
+    \node[node] (4) [node distance=1cm and 3mm,below left=of 2] {4};
+    \node[node] (3) [left=of 4]                                 {3};
+    \node[node] (5) [below=of 4]                                {5};
+    \node[node] (6) [node distance=2cm,right=of 5]              {6};
+
+    \path (1) edge                   node {} (2)
+          (2) edge                   node {} (3)
+          (2) edge                   node {} (4)
+          (2) edge                   node {} (6)
+          (3) edge                   node {} (5)
+          (4) edge                   node {} (5)
+          (5) edge [bend right=20pt] node {} (2);
+  \end{tikzpicture}
+  \caption[Example of flowgraph~\parencite{allen1970control}
+  ]{Example of flowgraph~\parencite{allen1970control}}
+    \label{fig:flowgraph-example}
+\end{figure}
 
 As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node is called the~\textit{in-degree} of the node, while a node's~\textit{outdegree} is the number of arcs ``leaving'' the node~\parencite{fenton1998software}.
 %{{{
