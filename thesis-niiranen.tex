@@ -31,7 +31,7 @@
 \usepackage{booktabs} % hyvä kauniiden taulukoiden tekemiseen
 
 \usepackage{tikz} % Portable graphics, diagrams
-\usetikzlibrary{matrix,positioning,fit,arrows}
+\usetikzlibrary{matrix,positioning,fit,arrows,shapes.geometric}
 
 \usepackage{amsmath}
 
@@ -263,10 +263,49 @@ It is the inter-module dependencies that interest us, and measures of these attr
 
 \subsection{Flowgraphs}
 
-As the research on software metrics traditionally centers on imperative languages,~\textit{Flowgraphs} are an intuitive way of mapping the ``flow'' of program statements. Moreover, flowgraphs are directed graphs that indicate program statements as nodes, and flow of control as arcs in the graph.
+As the research on software metrics traditionally centers on imperative languages,~\textit{Flowgraphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flowgraphs are directed graphs that indicate program statements as nodes, and flow of control as arcs in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 A great deal of software metrics work has been devoted to measuring the control-flow structure of imperative language programs or algorithms. The control flow measures are usually modeled with directed graphs, where each node (or point) corresponds to a program statement, and each arc (or directed edge) indicates the flow of control from one statement to another.
+\end{comment}
+%}}}
+
+For example, the following pseudo-code {\tt if A then X} can be expressed as a flowgraph (TODO: finish diagram):
+
+\begin{figure}[h]\centering
+    \begin{tikzpicture}[>=latex']
+        \tikzset{block/.style= {draw, rectangle, align=center,minimum width=2cm,minimum height=1cm},
+        rblock/.style={draw, shape=rectangle,rounded corners=1.5em,align=center,minimum width=2cm,minimum height=1cm},
+        input/.style={ % requires library shapes.geometric
+        draw,
+        trapezium,
+        trapezium left angle=60,
+        trapezium right angle=120,
+        minimum width=2cm,
+        align=center,
+        minimum height=1cm
+    },
+        }
+        \node [rblock]  (start) {A};
+        \node [rblock, below right =2cm of start] (acquire) {X};
+        \node [rblock, below right =2cm and -5.5cm of start] (gchannel) {Y};
+
+    %% paths
+        \path[draw,->] (start) edge (acquire)
+                    (start) edge (gchannel)
+                    ;
+    \end{tikzpicture}
+  \caption[Example of flowgraph~\parencite{allen1970control}
+  ]{Example of flowgraph~\parencite{allen1970control}}
+    \label{fig:flowgraph-example}
+\end{figure}
+
+As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node is called the~\textit{in-degree} of the node, while a node's~\textit{outdegree} is the number of arcs ``leaving'' the node~\parencite{fenton1998software}.
+%{{{
+\begin{comment}
+Thus, directed graphs are depicted with a set of nodes, and each arc connects a pair of nodes. We write an arc as an ordered pair, <x,y>, where x and y are the nodes forming the endpoints of the arc, and the arrow indicates that the arc direction is from x to y. The arrowhead indicates that something flows from one node to another node.~\parencite{fenton1998software}.
+
+The in-degree of a node is the number of arcs arriving at the node, and the outdegree is the number of arcs that leave the node. We can move from one node to another along the arcs, as long as we move in the direction of the arrows. A path is a sequence of consecutive (directed) edges, some of which may be traversed more than once during the sequence. A simple path is one in which there are no repeated edges.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
