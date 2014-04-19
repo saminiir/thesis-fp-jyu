@@ -311,7 +311,27 @@ The in-degree of a node is the number of arcs arriving at the node, and the outd
 
 \subsection{Cyclomatic complexity}
 
-~\citet{mccabe1976complexity}
+~\textit{Cyclomatic complexity}~\parencite{mccabe1976complexity} utilizes flowgraphs to evaluate the complexity of a program's decision structure. A program is represented as a flowgraph $F$ with single entry and exit points of execution. The~\textit{cyclomatic number} is then calculated as:
+\begin{align}
+v(F) = e - n + 2
+\end{align}
+
+\noindent where the flowgraph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}.~\citet{fenton1998software} agree that the measurement is objective, but argue concurrently that the cyclomatic number is a poor indicator of ``general complexity'' of a program's structure. Mainly because this ``complexity'' of a flowgraph $F$ does not necessary hold in conjuction with general measurement theory and its ``intuitive relations about complexity''.~\citet{fenton1998software} do suggest, however, that cyclomatic number is a well-suited indicator for how difficult the program is to test and maintain.
+%{{{
+\begin{comment}
+The number of independent paths is a good indicator of the complexity of a program because generally a program becomes harder to understand as the number of paths increases.~\parencite{ryder2004software}.
+
+From a measurement theory perspective, it is extremely doubtful that any of these assumptions corresponds to intuitive relations about complexity. Thus, v cannot be used as a generla complexity measure.~\parencite{fenton1998software}
+\end{comment}
+%}}}
+
+~\citet{mccabe1976complexity} suggests that a module with a complexity number of over 10 should be identified as problematic and refactoring should be considered.
+%{{{
+\begin{comment}
+Programmers have been required to calculate complexity as they create software modules. When the complexity exceeded 10 they had to either recognize and modularize subfunctions or redo the software. The intention was to keep the "size" of the modules manageable and allow for testing all the independent paths~\parencite{mccabe1976complexity}.
+
+\end{comment}
+%}}}
 
 \subsection{Test coverage measures}
 
