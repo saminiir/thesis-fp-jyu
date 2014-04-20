@@ -509,6 +509,43 @@ This measure is crude as a reuse measure; not only does it take no account of po
 %}}}
 
 \subsection{Coupling}
+
+~\textit{Coupling} addresses the degree of interdependence between modules~\parencite{allen2001measuring}. Namely, coupling is most often inspected between two modules ($x$, $y$).~\textit{Global coupling} can be derived from the combination of coupling between modules~\parencite{fenton1998software}.
+%{{{
+\begin{comment}
+Coupling of a subsystem characterizes its interde- pendence with other subsystems.~\parencite{allen2001measuring}
+
+Usually, coupling is an attribute of pairs of modules, rather than of the design as a whole. The entire set of modules in the design exhibits global coupling, which can be derived from the coupling among the possible pairs.
+\end{comment}
+%}}}
+
+~\citet{fenton1998software} define several relations for inspecting the coupling between two modules:
+\begin{itemize}
+    \item ~\textit{No coupling relation} $R_0$ when $x$ and $y$ have no interdependency.
+    \item ~\textit{Data coupling relation} $R_1$ when $x$ and $y$ communicate by data parameters but no control element is incorporated. An example would be a mathematical function which performs the same computation regardless of the parameter values~\parencite{ryder2004software}.
+    \item ~\textit{Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
+    \item ~\textit{Control coupling relation} $R_3$ when $x$ passes a parameter to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
+    \item ~\textit{Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
+    \item ~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values) of $y$.
+\end{itemize}
+%{{{
+\begin{comment}
+n example might be passing parameters to a mathematical function, the func- tion performs the same actions regardless of the parameters passed. This is in contrast to control coupling in which different sets of actions may be performed depending on the parameters that are passed.~\parencite{ryder2004software}.
+\end{comment}
+%}}}
+
+\noindent In essence, higher the $R_i$ value for two given modules, the more~\textit(tightly coupled) they are. In contrast, a $R_i$ value of 1-2 would be identified as~\textit{loosely coupled}. However, the coupling classification can be challenging to determine, at least programmatically. A manual inspection of the program's structure is thus often warranted~\parencite{ryder2004software}.
+%{{{
+\begin{comment}
+We say that x and y are loosely coupled if i is 1 or 2, and they are tightly coupled if i is 4 or 5.~\parencite{fenton1998software}.
+
+It is also worth noting that in practice it may be difficult to exactly classify coupling by Fenton¿s classifications. For instance, determining between R3 and R1 coupling may be difficult or impossible to do mechanically and may therefore require manual inspection in order to decide the exact classification.~\parencite{ryder2004software}.
+\end{comment}
+%}}}
+
+For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.
+
+
 \subsection{Cohesion}
 \subsection{Information flow}
 Henry-Kafura measure
