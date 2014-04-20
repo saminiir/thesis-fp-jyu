@@ -489,6 +489,25 @@ Results suggest a relationship between tree impurity and poor design. Thus m may
 %}}}
 
 \subsection{Internal reuse}
+
+Internal reuse is the measure to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse (system design measure~\parencite{yin1978establishment}) which can be calculated from the callgraph of a program:
+%{{{
+\begin{comment}
+We call internal reuse the extent to which modules are reused within the same product.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+\begin{align}
+r(G) = e - n + 1
+\end{align}
+
+\noindent where graph $G$ has $e$ edges and $n$ nodes.~\citet{fenton1998software} criticize the measure by stating that (1) it does not consider different calls from the same module and (2) it does not consider the size of the reused components. As such, the measure is perhaps best used as a general measure of a program's internal reuse and used in conjuction with other measures such as tree impurity.
+%{{{
+\begin{comment}
+This measure is crude as a reuse measure; not only does it take no account of possible different calls from the same module, it also takes no account of the size of the reused components.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
 \subsection{Coupling}
 \subsection{Cohesion}
 \subsection{Information flow}
