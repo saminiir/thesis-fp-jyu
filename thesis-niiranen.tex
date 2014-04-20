@@ -413,10 +413,81 @@ For example, instead of examining variables, we may need to know only whether or
 \text{TODO: Example of callgraph}
 \end{align}
 
-\subsection{Callgraphs}
-\subsection{Global modularity}
-\subsection{Morphology}
-\subsection{Tree impurity}
+\noindent Several properties for assessing software design quality from callgraphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the callgraph. A large callgraph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node.~\textit{Width} measures the maximum number of nodes at any one level.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the ratio also increases~\parencite{ryder2004software}. More specific measures for callgraphs can be derived, and they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
+%{{{
+\begin{comment}
+Yourdon and Constantine have analyzed what contributes to good design, and they suggest several ways to view design components and structure. They use the notion of morphology to refer to the ``shape'' of the overall system structure when expressed pictorially.~\parencite{fenton1998software}.
+
+The greater the size of the callgraph, the more dependencies between different parts of the program there is likely to be, and so the greater the complexity.~\parencite{ryder2004software}.
+
+This is a connectivity density measure that increases as more connections, or function calls, are made and is similar to cyclomatic complexity. A high arc-to-node ratio indicates complex interactions between functions, and thus may highlight areas of program code that may benefit from re-engineering. Section 2.7 examines the use of metrics in the re- engineering process.~\parencite{ryder2004software}.
+
+These measures are not restricted to dependency graphs. They are generally applicable to most graph-type models, and we shall apply them in Chapter 12 to evaluate project management structures.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+\subsection{Graph impurity}
+
+One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the callgraph of a program. The measure contains a simple hypothesis which holds that the more the program's callgraph deviates from being a tree-structure, the more complex the structure is~\parencite{ince1988approach}. 
+%{{{
+\begin{comment}
+One measure of system complexity that has been sug- gested is graph impurity: the more a system deviates from being a pure tree structure towards being a graph structure, the worse the design is~\parencite{ince1988approach}.
+
+\end{comment}
+%}}}
+
+\begin{figure}[h]\centering
+  \begin{tikzpicture}[%
+    ->,
+    shorten >=2pt,
+    >=stealth,
+    node distance=0.5cm,
+    node/.style={%
+      rectangle,
+      minimum width=3em,
+      minimum height=1.5em,
+      draw
+    }
+  ]
+    \node[node] (1)                                             {A};
+    \node[node] (2) [below left=of 1]                           {B};
+    \node[node] (3) [below right=of 1]                          {C};
+    \node[node] (4) [below left=of 2]                           {D};
+    \node[node] (5) [below right=of 2]                          {E};
+    \node[node] (6) [below left=of 3]              {F};
+    \node[node] (7) [below right=of 3]              {G};
+
+    \path (1) edge                   node {} (2)
+          (1) edge                   node {} (3)
+          (2) edge                   node {} (4)
+          (2) edge                   node {} (5)
+          (3) edge                   node {} (6)
+          (3) edge                   node {} (7);
+  \end{tikzpicture}
+  \caption[Example of graph impurity~\parencite{ince1988approach}
+  ]{TODO: Example of graph impurity~\parencite{ince1988approach}}
+    \label{fig:graph-impurity-example}
+\end{figure}
+
+\noindent~\citet{ince1988approach} argue, that graph impurity should not be achieved at the cost of generally accepted design patterns. For example, a module that is referenced often would be considered as contributing to graph impurity, but the structure of the program can actually be well-designed because of module reuse. As is, graph impurity should probably not be interpreted fully objectively, but rather ``where choice exists a design should be produced which minimises graph impurity''~\parencite{ince1988approach}.
+%{{{
+\begin{comment}
+This does not mean that a designer should aim at producing a pure tree-structured design. The very nature of the subroutine, an object called from many places in a program which saves space, means that the designer will make use of common calls. What it does mean is that where choice exists a design should be produced which minimises graph impurity.~\parencite{ince1988approach}.
+\end{comment}
+%}}}
+
+Furthermore,~\citet{fenton1998software} provide a formula for calculating the impurity:
+\begin{align}
+m(G) = \dfrac{2(e - n + 1)}{(n - 1)(n - 2)}
+\end{align}
+
+\noindent where $e$ is the edge (or arc) count and $n$ is the node count.~\citet{fenton1998software} conclude that ``system designs should strive for a value of $m$ near zero, but not at the expense of unnecessary duplication of modules''. This is in conjuction with the earlier presented observation that while graph impurity can indicate problematic software design, it might contradict with beneficial design choices.
+%{{{
+\begin{comment}
+Results suggest a relationship between tree impurity and poor design. Thus m may be useful for quality assurance of designs. System designs should strive for a value of m near zero, but not at the expense of unnecessary duplication of modules.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
 \subsection{Internal reuse}
 \subsection{Coupling}
 \subsection{Cohesion}
