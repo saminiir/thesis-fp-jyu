@@ -188,6 +188,12 @@ Concepts such as complexity, coupling, cohesion or even size are very often subj
 
 %{{{ TODO: sources
 \begin{comment}
+In the software engineering literature, the notion of measure validity is used in many ways with different mean- ings [16]. Fenton and Pfleeger [17] call a measure internally valid if it is a proper numerical characterisation of the attribute. The internal validity of a measure must be distinguished from its external validity. The latter perspective on measure validity refers to the usefulness of a measure. According to Briand et al. [18] a software measure is useful if it is related to a measure of some external attribute, e.g.~\parencite{poels2000distance}
+
+A measure is (internally) valid if it is a homomorphism from the empirical relational system into a formal relational system, i.e. if it maps entities into values such that all empirical relations among the entities are preserved as formal relations among the measurement values. The funda- mental problem of software measurement is that for many software attributes, including software complexity, it is not known what the empirical relational system looks like [20].~\parencite{poels2000distance}.
+
+As a consequence, these measure property sets are useful to in- validate software measures by showing that they do not measure the attribute such as it is empirically understood. However, the set of measures that would be considered valid for the attribute of interest is only a subset of the set of measures that satisfy all the necessary axioms.~\parencite{poels2000distance}
+
 \end{comment}
 %}}}
 
@@ -541,12 +547,12 @@ Usually, coupling is an attribute of pairs of modules, rather than of the design
 
 ~\citet{fenton1998software} define several relations for inspecting the coupling between two modules:
 \begin{itemize}
-    \item ~\textit{No coupling relation} $R_0$ when $x$ and $y$ have no interdependency.
-    \item ~\textit{Data coupling relation} $R_1$ when $x$ and $y$ communicate by data parameters but no control element is incorporated. An example would be a mathematical function which performs the same computation regardless of the parameter values~\parencite{ryder2004software}.
-    \item ~\textit{Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
-    \item ~\textit{Control coupling relation} $R_3$ when $x$ passes parameters to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
-    \item ~\textit{Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
-    \item ~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values) of $y$.
+    \item~\textit{No coupling relation} $R_0$ when $x$ and $y$ have no interdependency.
+    \item~\textit{Data coupling relation} $R_1$ when $x$ and $y$ communicate by data parameters but no control element is incorporated. An example would be a mathematical function which performs the same computation regardless of the parameter values~\parencite{ryder2004software}.
+    \item~\textit{Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
+    \item~\textit{Control coupling relation} $R_3$ when $x$ passes parameters to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
+    \item~\textit{Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
+    \item~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values) of $y$.
 \end{itemize}
 %{{{
 \begin{comment}
