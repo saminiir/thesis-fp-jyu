@@ -607,6 +607,25 @@ To model module coupling, we use a directed graph with more detail than a callgr
 
 
 \subsection{Cohesion}
+
+The metric~\textit{cohesion} determines the relative proximity of similar program features~\parencite{briand1996property}. Another interpretation is that cohesion determines the level of dependencies inside a module, in contrast to inter-module inspection of coupling~\parencite{allen2001measuring}. The higher the cohesion of a module is, the better its features are encapsulated and the responsibilities defined. As a result, the reliability and maintainability of the system increases~\parencite{fenton1998software}. 
+%{{{
+\begin{comment}
+The concept of cohesion has been used with reference to modules or modular systems. It assesses the tightness with which "related" program features are "grouped together" in systems or modules.~\parencite{briand1996property}.
+
+ subsystem¿s cohe- sion, on the other hand, characterizes its internal in- terdependencies.~\parencite{allen2001measuring}.
+\end{comment}
+%}}}
+
+TODO: More detailed presentation of cohesion
+
+Curiously, the cohesion metric has no formal measure by which it can be quantified. Instead,~\citet{fenton1998software} states that the level of a module's cohesion can be deduced by simply asking questions about the module's purpose. For example, if the purpose of a module cannot be described in a single sentence, it might have too many responsibilities, and consequently its cohesion is low. Paradoxically, a good designer probably has asked the question in his or hers mind already and developed a module with high cohesion.~\parenciteseveral{fenton1998software}.
+%{{{
+\begin{comment}
+There is no obvious measurement procedure for determining the level of cohesion in a given module. However, we can get a rough idea by writing down a sentence to describe the module's purpose. A good designer should have already done so, but a module with low cohesion is unlikely to have been produced by a good designer! If it is impossible to describe its purpose in a single sentence, then the module is likely to have coincidental cohesion.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
 \subsection{Information flow}
 Henry-Kafura measure
 
