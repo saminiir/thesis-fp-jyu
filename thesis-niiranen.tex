@@ -524,7 +524,7 @@ Usually, coupling is an attribute of pairs of modules, rather than of the design
     \item ~\textit{No coupling relation} $R_0$ when $x$ and $y$ have no interdependency.
     \item ~\textit{Data coupling relation} $R_1$ when $x$ and $y$ communicate by data parameters but no control element is incorporated. An example would be a mathematical function which performs the same computation regardless of the parameter values~\parencite{ryder2004software}.
     \item ~\textit{Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
-    \item ~\textit{Control coupling relation} $R_3$ when $x$ passes a parameter to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
+    \item ~\textit{Control coupling relation} $R_3$ when $x$ passes parameters to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
     \item ~\textit{Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
     \item ~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values) of $y$.
 \end{itemize}
@@ -534,7 +534,7 @@ n example might be passing parameters to a mathematical function, the func- tion
 \end{comment}
 %}}}
 
-\noindent In essence, higher the $R_i$ value for two given modules, the more~\textit(tightly coupled) they are. In contrast, a $R_i$ value of 1-2 would be identified as~\textit{loosely coupled}. However, the coupling classification can be challenging to determine, at least programmatically. A manual inspection of the program's structure is thus often warranted~\parencite{ryder2004software}.
+\noindent In essence, the higher the $R_i$ value for two given modules, the more~\textit{tightly coupled} they are. In contrast, a $R_i$ value of 1-2 between two module would be characterized as~\textit{loosely-coupled}. However, the coupling classification can be challenging to determine, at least programmatically. A manual inspection of the program's structure is thus often warranted~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
 We say that x and y are loosely coupled if i is 1 or 2, and they are tightly coupled if i is 4 or 5.~\parencite{fenton1998software}.
@@ -544,6 +544,46 @@ It is also worth noting that in practice it may be difficult to exactly classify
 %}}}
 
 For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.
+
+\begin{figure}[h]\centering
+  \begin{tikzpicture}[%
+    ->,
+    shorten >=2pt,
+    >=stealth,
+    node distance=0.5cm,
+    node/.style={%
+      rectangle,
+      minimum width=3em,
+      minimum height=1.5em,
+      draw
+    }
+  ]
+    \node[node] (1)                                             {A};
+    \node[node] (2) [below left=of 1]                           {B};
+    \node[node] (3) [below right=of 1]                          {C};
+    \node[node] (4) [below left=of 2]                           {D};
+    \node[node] (5) [below right=of 2]                          {E};
+    \node[node] (6) [below left=of 3]              {F};
+    \node[node] (7) [below right=of 3]              {G};
+
+    \path (1) edge                   node {} (2)
+          (1) edge                   node {} (3)
+          (2) edge                   node {} (4)
+          (2) edge                   node {} (5)
+          (3) edge                   node {} (6)
+          (3) edge                   node {} (7);
+  \end{tikzpicture}
+  \caption[Example of coupling model graph~\parencite{fenton1998software}
+  ]{TODO: Example of coupling model graph~\parencite{fenton1998software}}
+    \label{fig:coupling-model-graph-example}
+\end{figure}
+
+\noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
+%{{{
+\begin{comment}
+To model module coupling, we use a directed graph with more detail than a callgraph but less than the full module structure chart. The nodes correspond to the modules, and there may be more than one arc between two nodes. Each arc from a node x to node y represents coupling between modules x and y.~\parencite{fenton1998software}
+\end{comment}
+%}}}
 
 
 \subsection{Cohesion}
