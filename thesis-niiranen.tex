@@ -177,6 +177,20 @@ A function whose inputs are software data and whose output is a single numerical
 
 Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
 
+This thesis adopts the general categorization of software measures as proposed by~\citet{fenton1998software}. In specific, measures are divided into size, structure and information flow measures.~\citet{briand1996property} argue that many of the metrics presented in research are misplaced in the sense that they do not obey mathematical axioms of a given category. As such, this thesis recognizes the interpretative nature of the metrics and does not attempt to prove the validity of each presented measure in mathematical terms.
+%{{{
+\begin{comment}
+Unfortunately, new software measures are very often defined to capture elusive concepts such as complexity, cohesion, coupling, connectivity, etc. (Only size can be thought to be reasonably well understood.) Thus, it is impossible to assess the theoretical soundness of newly proposed measures, and the acceptance of a new measure is mostly a matter of belief.~\parencite{briand1996property}
+
+Concepts such as complexity, coupling, cohesion or even size are very often subject to interpretation and appear to have inconsistent definitions in the literature. As a consequence, there is little guidance provided to the analyst attempting to define proper measures for specific problems.~\parencite{briand1996property}
+\end{comment}
+%}}}
+
+%{{{ TODO: sources
+\begin{comment}
+\end{comment}
+%}}}
+
 \section{Size metrics}
 
 Perhaps the first approach to measuring the internal attributes of software is the ~\textit{size} metric. It is relatively easy to be quantified, since only source code is required for the analysis and the measurement is made statically, meaning that the program code does not even have to be executed.~\citet{fenton1998software} divide the size metric into the following subcategories: 
@@ -192,6 +206,12 @@ Essentially the simplest size metrics are the easiest to be formed, but also pro
 %{{{
 \begin{comment}
 Rejecting simple size measures on these grounds reflects a misunderstanding of the basic measurement principles.~\parencite{fenton1998software}
+\end{comment}
+%}}}
+
+%{{{TODO: Sources
+\begin{comment}
+Several measures introduced in the literature can be classified as size measures, according to our properties Size.1 - Size.3. With reference to code measures, we have: LOC, #Statements, #Modules, #Procedures, Halstead's Length [H77], #Occurrences of Operators, #Occurrences of Operands, #Unique Operators, #Unique Operands. In each of the above cases, the representation of a program as a system is quite straightforward. Each counted entity is an element, and the relationship between elements is just the sequential relationship.~\parencite{briand1996property}
 \end{comment}
 %}}}
 
