@@ -199,16 +199,16 @@ As a consequence, these measure property sets are useful to in- validate softwar
 
 \section{Size metrics}
 
-Perhaps the first approach to measuring the internal attributes of software is the ~\textit{size} metric. It is relatively easy to be quantified, since only source code is required for the analysis and the measurement is made statically, meaning that the program code does not even have to be executed.~\citet{fenton1998software} divide the size metric into the following subcategories: 
+Perhaps the first approach to measuring the internal attributes of software is the ~\textit{size} metric. It is relatively easy to be quantified, since only source code is required for the analysis and the measurement is often made statically, meaning that the program code is not executed.~\citet{fenton1998software} divide the size metric into the following subcategories: 
 
 \begin{itemize}
     \item~\textit{Length} (actual size of the source code)
     \item~\textit{Functionality} (the features the user receives)
-    \item~\textit{Complexity} (how difficult is the program code to reason with) 
+    \item~\textit{Complexity} (how difficult the program code is to reason with) 
     \item~\textit{Reuse} (how much of the code is original and what is reused)
 \end{itemize}
 
-Essentially the simplest size metrics are the easiest to be formed, but also provide only a one-dimensional view into the quality of the software. Thus some of the metrics are most often utilized as an aid for interpreting internal attributes, but not too much information should be expected of their results.~\parenciteseveral{fenton1998software}.
+\noindent Essentially the simplest size metrics are relatively easy to be formed, but also provide only a one-dimensional view into the quality of the software. Thus some of the metrics are most often utilized as an aid for interpreting internal attributes, but not too much information should be expected of their results.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
 Rejecting simple size measures on these grounds reflects a misunderstanding of the basic measurement principles.~\parencite{fenton1998software}
@@ -223,7 +223,7 @@ Several measures introduced in the literature can be classified as size measures
 
 \subsection{Lines of code}
 
-Counting the lines of code (LOC) is perhaps the most commonly used metric, but on the same time it poses challenges regarding the interpretation of the results~\parencite{fenton1998software}. Programmers (and projects) have distinct styles which can affect the results. For example, a function can be separated into multiple lines in order to make it more readable, where in other cases the same results are achieved by a shorter declaration. In turn, the LOC varies even though the intent
+Counting the lines of code (LOC) is perhaps the most commonly used metric, but on the same time it poses challenges regarding the interpretation of the results~\parencite{fenton1998software}. Programmers (and projects) have distinct styles which can affect the results. For example, a function can be separated into multiple lines in order to make it more readable, where in other cases the same results are achieved by a shorter declaration. In turn, LOC varies even though the intent
 of the function is the same.
 %{{{
 \begin{comment}
@@ -233,32 +233,32 @@ Some lines of code are different from others~\parencite{fenton1998software}.
 
 Furthermore, not all source code lines are equal. Often comments and blank lines are used to increase the readability of the program. These types of lines might not require the same effort of development as the code itself and as a result they can distort the size metric. For these reasons, LOC is traditionally meant to contain only the ``effective'' source code lines without comments and blank lines~\parencite{grady1987software}. To iterate the LOC metric further,~\citet{fenton1998software} suggest calculating the ratio of the different types of source code lines: 
 \begin{align}
-\intertext{total length (LOC) = Non-Comment LOC + Comment LOC}
-\intertext{Then the following serves as the ratio of commented lines in the source code:}
+\text{Total length (LOC) = Non-Comment LOC + Comment LOC}
+\end{align}
+\noindent Then the following serves as the ratio of commented lines in the source code:
+\begin{align}
 \dfrac{CLOC}{LOC}
 \end{align}
 
-\noindent This way, similar implementations can be more easily compared, since the ratio of different types of LOC are evident.
-lstead classifies symbols in a program into two classes, those that are used to specify actions are classed as operators while symbols that represent data are classed as operands.
-Executable statements (ES) is one form of quantifying lines of source codes. In ES, comment lines, data declarations and headers are ignored and instead, the operation statements are counted. Multiple executable statements in one line are thus considered separate.
+\noindent Using a ratio different programs can be more easily compared, since the ratio of different types of LOC are evident. Executable statements (ES) is one form of quantifying lines of source codes. In ES, comment lines, data declarations and headers are ignored and instead the operation statements are counted. Multiple executable statements in one line are thus considered separate.
 %{{{
 \begin{comment}
 (ES) This measure counts separate statements on the same physical line as distinct. it ignores comment lines, data delcarations and headings.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
-The implications are that the LOC-metric is highly situational. Different software projects can be compared based on their line count, but also modules in the same source code are often inspected. Puzzlingly, this seemingly simple metric can be non-trivial to interpret, since its use-cases are manifold. One source code line might be short, while another one is long and complex. As is, the Lines Of Code -metric should be tailored for specific use.~\parenciteseveral{fenton1998software}.
+The implications are that the LOC-metric is highly situation-dependant. Different software projects can be compared based on their line count, but also modules in the same source code are often inspected. Puzzlingly, this seemingly simple metric can be non-trivial to interpret, since its use-cases are manifold. One source code line might be short, while another one is long and complex. As is, measuring the lines of code should be tailored for specific use.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
 Clearly, the definition of code length is influenced by the way in which it is to be used. Some organizations use length to compare one proeject with another, to answer questions such as: What is our largest/smallest/average project? What is our productivity? What are the trends in project length over time?~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
-Some misconceptions about lines of code~\parencite{rosenberg1997some}
+TODO: Critique on LOC: Some misconceptions about lines of code~\parencite{rosenberg1997some}
 
 \subsection{Halstead's program volume}
 
-One of the earliest static analysis methods for source code is the Halstead-metric~\parencite{halstead1977elements}. With an effort to unify empirical research on software,~\citet{halstead1977elements} divides program code into tokens of~\textit{operators} and~\textit{operands} that could be used to assess several characteristics of the software regardless of, for example, the implementation language. Operators can be considered as ``actions'' in the source code (e.g. in imperative languages, the assignment operator =), and operands represent data (variables)~\parencite{ryder2004software}. Moreover, the variables of the Halstead-metric are:
+One of the earliest static analysis methods for source code is the Halstead-metric~\parencite{halstead1977elements}. With an effort to unify empirical research on software,~\citet{halstead1977elements} divides program code into tokens of~\textit{operators} and~\textit{operands} that can be used to assess several characteristics of the software regardless of, for example, the implementation language. Operators can be considered as ``actions'' in the source code (e.g. in imperative languages, the assignment operator =). Operands represent data (e.g. variables)~\parencite{ryder2004software}. Moreover, the variables of the Halstead-metric are:
 %{{{
 \begin{comment}
 Halstead classifies symbols in a program into two classes, those that are used to specify actions are classed as operators while symbols that represent data are classed as operands.~\parencite{ryder2004software}.
@@ -273,8 +273,7 @@ N_1 = \text{total occurrences of operators}\\
 N_2 = \text{total occurrences of operands}\\
 \end{flalign*}
 
-\noindent These variables are then used to quantify several properties such as the~\textit{length},~\textit{vocabulary},~\textit{volume},~\textit{program level} and~\textit{difficulty} of the source code. (TODO: Calculations of the formulas)
-
+\noindent These variables are then used to quantify several properties such as the~\textit{length},~\textit{vocabulary},~\textit{volume},~\textit{program level} and~\textit{difficulty} of the source code. (TODO: Calculations and examples of the formulas)
 
 \section{Structural metrics}
 
@@ -289,7 +288,7 @@ It is the inter-module dependencies that interest us, and measures of these attr
 
 \subsection{Flowgraphs}
 
-As the research on software metrics traditionally centers on imperative languages,~\textit{Flowgraphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flowgraphs are directed graphs that indicate program statements as nodes, and flow of control as arcs in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
+As the research on software metrics traditionally centers on imperative languages,~\textit{flowgraphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flowgraphs are directed graphs that indicate program statements as nodes, and flow of control as arcs (or edges) in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 A great deal of software metrics work has been devoted to measuring the control-flow structure of imperative language programs or algorithms. The control flow measures are usually modeled with directed graphs, where each node (or point) corresponds to a program statement, and each arc (or directed edge) indicates the flow of control from one statement to another.
@@ -325,6 +324,8 @@ For example, the following pseudo-code {\tt if A then X} can be expressed as a f
   ]{Example of flowgraph~\parencite{allen1970control}}
     \label{fig:flowgraph-example}
 \end{figure}
+%{{{
+\begin{comment}
 \begin{figure}[h]\centering
   \begin{tikzpicture}[%
     ->,
@@ -357,8 +358,10 @@ For example, the following pseudo-code {\tt if A then X} can be expressed as a f
   ]{Example of flowgraph~\parencite{allen1970control}}
     \label{fig:flowgraph-example}
 \end{figure}
+\end{comment}
+%}}}
 
-As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node is called the~\textit{in-degree} of the node, while a node's~\textit{outdegree} is the number of arcs ``leaving'' the node~\parencite{fenton1998software}.
+\noindent As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node is called the~\textit{in-degree} of the node, while a node's~\textit{outdegree} is the number of arcs ``leaving'' the node~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Thus, directed graphs are depicted with a set of nodes, and each arc connects a pair of nodes. We write an arc as an ordered pair, <x,y>, where x and y are the nodes forming the endpoints of the arc, and the arrow indicates that the arc direction is from x to y. The arrowhead indicates that something flows from one node to another node.~\parencite{fenton1998software}.
@@ -383,7 +386,7 @@ From a measurement theory perspective, it is extremely doubtful that any of thes
 \end{comment}
 %}}}
 
-~\citet{mccabe1976complexity} suggests that a module with a complexity number of over 10 should be identified as problematic and refactoring should be considered.
+~\citet{mccabe1976complexity} suggests that a module with a complexity number of over 10 should be identified as problematic and refactoring should be considered. TODO: More text about CC
 %{{{
 \begin{comment}
 Programmers have been required to calculate complexity as they create software modules. When the complexity exceeded 10 they had to either recognize and modularize subfunctions or redo the software. The intention was to keep the "size" of the modules manageable and allow for testing all the independent paths~\parencite{mccabe1976complexity}.
@@ -393,14 +396,14 @@ Programmers have been required to calculate complexity as they create software m
 
 \subsection{Test coverage measures}
 
-One approach to software measurement is how difficult the modules of the program are to test. In specific, if the structure of a program is misconstructed, also the testability should be low and testing difficult to be carried out. Moreover, motivation for software measurement and testing is that complex structures should often be concentrated on over ``simpler'' functionality. 
+One approach to software measurement is how difficult the modules of the program are to test. In specific, if the structure of a program is misconstructed, also the testability should be low and difficult to be carried out. Moreover, motivation for software measurement and testing is that complex structures should often be concentrated on over ``simpler'' functionality. 
 %{{{
 \begin{comment}
 In particular, the structure of a module is related to the difficulty we find in testing it.
 \end{comment}
 %}}}
 
-~\textit{Minimun number of test cases}
+TODO:~\textit{Mininum number of test cases}
 
 ~\textit{Test effectiveness ratio}, or test coverage, is a common metric to indicate to which extent the actual execution logic is covered by the testing strategy~\parencite{fenton1998software}. Test effectiveness ratio can be calculated as
 %{{{
@@ -439,7 +442,7 @@ For example, instead of examining variables, we may need to know only whether or
 \text{TODO: Example of callgraph}
 \end{align}
 
-\noindent Several properties for assessing software design quality from callgraphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the callgraph. A large callgraph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node.~\textit{Width} measures the maximum number of nodes at any one level.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the ratio also increases~\parencite{ryder2004software}. More specific measures for callgraphs can be derived, and they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
+\noindent Several properties for assessing software design quality from callgraphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the callgraph. A large callgraph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node.~\textit{Width} measures the maximum number of nodes at any one level.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the ratio increases simultaneously~\parencite{ryder2004software}. More specific attributes of callgraphs can be derived, and they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Yourdon and Constantine have analyzed what contributes to good design, and they suggest several ways to view design components and structure. They use the notion of morphology to refer to the ``shape'' of the overall system structure when expressed pictorially.~\parencite{fenton1998software}.
@@ -516,7 +519,7 @@ Results suggest a relationship between tree impurity and poor design. Thus m may
 
 \subsection{Internal reuse}
 
-Internal reuse is the measure to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse (system design measure~\parencite{yin1978establishment}) which can be calculated from the callgraph of a program:
+Internal reuse is the measure to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse (~\textit{system design measure}~\parencite{yin1978establishment}) which can be calculated from the callgraph of a program:
 %{{{
 \begin{comment}
 We call internal reuse the extent to which modules are reused within the same product.~\parencite{fenton1998software}.
@@ -533,6 +536,8 @@ r(G) = e - n + 1
 This measure is crude as a reuse measure; not only does it take no account of possible different calls from the same module, it also takes no account of the size of the reused components.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
+
+TODO: How is the measure interpreted?
 
 \subsection{Coupling}
 
@@ -569,8 +574,6 @@ It is also worth noting that in practice it may be difficult to exactly classify
 \end{comment}
 %}}}
 
-For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.
-
 \begin{figure}[h]\centering
   \begin{tikzpicture}[%
     ->,
@@ -604,7 +607,7 @@ For visualizing the coupling of a system, a~\textit{coupling model graph} can be
     \label{fig:coupling-model-graph-example}
 \end{figure}
 
-\noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
+\noindent For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.  \noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
 %{{{
 \begin{comment}
 To model module coupling, we use a directed graph with more detail than a callgraph but less than the full module structure chart. The nodes correspond to the modules, and there may be more than one arc between two nodes. Each arc from a node x to node y represents coupling between modules x and y.~\parencite{fenton1998software}
@@ -625,7 +628,7 @@ The concept of cohesion has been used with reference to modules or modular syste
 
 TODO: More detailed presentation of cohesion
 
-Curiously, the cohesion metric has no formal measure by which it can be quantified. Instead,~\citet{fenton1998software} states that the level of a module's cohesion can be deduced by simply asking questions about the module's purpose. For example, if the purpose of a module cannot be described in a single sentence, it might have too many responsibilities, and consequently its cohesion is low. Paradoxically, a good designer probably has asked the question in his or hers mind already and developed a module with high cohesion.~\parenciteseveral{fenton1998software}.
+Curiously, the cohesion metric has no formal measure by which it can be quantified. Instead,~\citet{fenton1998software} state that the level of a module's cohesion can be deduced by simply asking questions about the module's purpose. For example, if the purpose of a module cannot be described in a single sentence, it might have too many responsibilities, and consequently its cohesion is low. Paradoxically, a good designer probably has asked the question already and developed a module with high cohesion.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
 There is no obvious measurement procedure for determining the level of cohesion in a given module. However, we can get a rough idea by writing down a sentence to describe the module's purpose. A good designer should have already done so, but a module with low cohesion is unlikely to have been produced by a good designer! If it is impossible to describe its purpose in a single sentence, then the module is likely to have coincidental cohesion.~\parencite{fenton1998software}.
