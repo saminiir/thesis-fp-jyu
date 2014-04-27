@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SESSION='Gradu'
+
+tmux new-session -s ${SESSION} -n Latex -d
+tmux send-keys -t ${SESSION} 'vim -O thesis-niiranen.tex sources-niiranen.bib' C-m
+tmux new-window -n Sources -t ${SESSION}
+
+tmux select-window -t ${SESSION}:1
+tmux attach -t ${SESSION}
