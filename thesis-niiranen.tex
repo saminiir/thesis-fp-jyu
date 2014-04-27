@@ -636,8 +636,42 @@ There is no obvious measurement procedure for determining the level of cohesion 
 %}}}
 
 \subsection{Information flow}
-Henry-Kafura measure
 
+As the flow of data between modules is an important part of measuring the attributes of software, also the overall level of information flow in a system is of interest.~\citet{henry1981software} describe three different types of~\textit{information flow}. (1)~\textit{Local indirect flow} occurs when a module passes information to another module or conversely, returns a result to a module invoking it. (2)~\textit{Local indirect flow} exists if ``the invoked module returns information
+that is subsequently passed to a second invoked module''. Third,~\textit{global flow} exists if data is passed between modules through a global data structure.~\parenciteseveral{fenton1998software}.
+\begin{comment}
+Generally a modular program will consist of modules with data flowing through them in a manner that is termed information flow. Measuring properties of in- formation flow may be of interest to programmers because it can help to indicate where particularly complex interaction is occurring between functions, and thus where there may be complex algorithmic behaviour that is likely to make modifi- cations to the program difficult to perform.~\parencite{ryder2004software}.
+
+We say a local direct flow exists if either 1. a module invokes a second module and passes information to it; or 2. the invoked module returns a result to the caller. Similarly, we say that a local indirect flow exists if the invoked module returns information that is subsequently passed to a second invoked module. A global flow exists if information flows from one module to another via a global data structure.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+The information flow is relatively easy to be determined, as it can be done by simply analyzing the procedures and calls of the system's module~\parencite{henry1981software}. The~\textit{Henry-Kafura}~\parencite{henry1981software} measure formulates additional variables that help measuring the complexity of a module: The~\textit{fan-in} is the number of~\textit{local flows} into the module plus the number of data structures the module utilizes for information retrieval. On the other
+hand,~\textit{fan-out} is the amount of local flows out from a module plus the number of data structures the module updates. ~\parenciteseveral{henry1981software}.
+%{{{
+\begin{comment}
+An important property of the information flows defined above is that the knowledge necessary toconstructthecom- pleteflowsstructurecanbeobtainedfromasimpleprocedure- by-procedureanalysis.~\parencite{henry1981software}.
+
+Thetermsfan-in,fan-out,complexity,andmodulearespecif- icallydefinedforinformationflowinordertopresentthe measurementsinthissection.Fan-inandfan-outaredescribed withrespecttoindividualprocedures.  Definition5:Thefan-inofprocedureAisthenumberof localflowsintoprocedureAplusthenumberofdatastruc- turesfromwhichprocedureAretrievesinformation.  Definition6:Thefan-outofprocedureAisthenumberof localflowsfromprocedureAplusthenumberofdatastruc-
+tureswhichprocedureAupdates.~\parencite{henry1981software}.
+\end{comment}
+%}}}}
+
+The~\textit{Henry-Kafura} measure is formulated as follows:
+\begin{align}
+    \text{Complexity of module $=$ length $*$ (fan-in $*$ fan-out)$^2$}
+\end{align}
+
+\noindent where~\textit{fan-in $*$ fan-out} indicates the number of possible combinations of an input source to an output destination. Furthermore, the number is squared because the complexity is believed to be more than linear. Length is used for a simple measure of the complexity of the module's code. The result defines the complexity of a module based on its external dependencies and internal code quality~\parenciteseveral{henry1981software}
+%{{{
+\begin{comment}
+Thetermfan-in*fan-outrepresentsthetotalpossiblenumber ofcombinationsofaninputsourcetoanoutputdestination.~\parencite{henry1981software}
+
+ofcombinationsofaninputsourcetoanoutputdestination.  Theweightingofthefan-inandfan-outcomponentisbasedon thebeliefthatthecomplexityismorethanlinearintermsof theconnectionswhichaprocedurehastoitsenvironment.  ThepoweroftwousedinthisweightingisthesameasBrook's ~\parencite{henry1981software}.
+\end{comment}
+%}}}}
+
+%{{{
 \section{Metrics for object-oriented languages}
 \subsection{Weighted methods per class}
 \subsection{Depth of inheritance}
