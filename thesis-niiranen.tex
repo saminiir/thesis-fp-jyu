@@ -138,6 +138,12 @@ In the second part, the research themes are investigated through empirical resea
 The results aim at explaining the various semantics of FP and how they relate to software quality metrics. The discovery of new metrics for FP-specific metrics is likely, since research on the subject has not been extensive~\parencite{ryder2004software}.
 
 The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating software metrics and FP into practical settings. Future research will be fueled by providing more support to the functional paradigm as opposed to imperative approaches, and encourage real-world usage of the functional paradigm.
+%{{{Additional questions
+\begin{comment}
+There are two general types of criticisms that can be applied to current software metrics. The first category are those theoretical criticisms that are leveled at conventional software metrics as they are applied to traditional, non-00 software design and development. Kearney, et al. criticized software complexity metrics as being without solid theoretical bases and lacking appropriate properties [21]. Vessey and Weber also commented on the general lack of theoretical rigor in the
+structured programming literature [41]. Both Prather and Weyuker proposed that traditional software complexity metrics do not possess appropriate mathematical properties, and consequently fail to display what might be termed normal predictable behavior [34], [47].~/parencite{chidamber1994metrics}.
+\end{comment}
+%}}}
 
 %}}}
 %{{{Software metrics
@@ -194,6 +200,9 @@ A measure is (internally) valid if it is a homomorphism from the empirical relat
 
 As a consequence, these measure property sets are useful to in- validate software measures by showing that they do not measure the attribute such as it is empirically understood. However, the set of measures that would be considered valid for the attribute of interest is only a subset of the set of measures that satisfy all the necessary axioms.~\parencite{poels2000distance}
 
+A useful way to understand empirical relations on a set of object-elements is to consider the measurement of complexity.  A designer generally has some intuitive ideas about the com- plexity of different object-elements, as to which element is more complex than another or which ones are equally complex.  For example, a designer intuitively understands that a class that has many methods is generally more complex, ceteris paribus, than one that has few methods. This intuitive idea is
+defined as a viewpoint. The notion of a viewpoint was originally introduced to describe evaluation measures for information retrieval systems and is applied here to capture designer views [9 1. More recently, Fenton states that viewpoints characterize intuitive understanding and that viewpoints must be the logical starting point for the definition of metrics [14]. An empirical relation is identical to a viewpoint, and the two terms are distinguished here only for the sake of consistency with
+the measurement theory literature.~\parencite{chidamber1994metrics}.
 \end{comment}
 %}}}
 
@@ -673,6 +682,22 @@ ofcombinationsofaninputsourcetoanoutputdestination.  Theweightingofthefan-inandf
 
 %{{{
 \section{Metrics for object-oriented languages}
+
+The popularity of object-oriented programming (OOP) has produced numerous new or adjusted software measures specific to the paradigm. In specific, the main components of OOP are real-world simulated classes, from which~\textit{objects} are instantiated. This is distinct to the imperative and functional approaches, where functions and data are the main drivers of design~\parencite{chidamber1994metrics}. 
+%{{{
+\begin{comment}
+The 00 approach centers around modeling the real world in terms of its objects, which is in contrast to older, more traditional approaches that emphasize a function-oriented view that separates data and procedures.~\parencite{chidamber1994metrics}
+\end{comment}
+%}}}
+
+An object possesses~\textit{methods} and~\textit{attributes} that characterize its functionality. For example, a {\tt Dog} class might have a method {\tt wagTail()}. Now, a {\tt Dog} object can be instantiated and its methods used:
+\begin{lstlisting}
+    var dog = new Dog();
+    dog.wagTail();
+\end{lstlisting}
+
+The purpose of the OOP paradigm is to model real-world entities as closely as possible.~\citet{chidamber1994metrics} define several measures for OOP based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics.
+
 \subsection{Weighted methods per class}
 \subsection{Depth of inheritance}
 \subsection{Number of children}
