@@ -696,10 +696,20 @@ An object possesses~\textit{methods} and~\textit{attributes} that characterize i
     dog.wagTail();
 \end{lstlisting}
 
-The purpose of the OOP paradigm is to model real-world entities as closely as possible.~\citet{chidamber1994metrics} define several measures for OOP based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics.
+The purpose of the OOP paradigm is to model real-world entities as closely as possible~\parencite{booch1986object}.~\citet{chidamber1994metrics} define several measures for OOP based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics.
 
 \subsection{Weighted methods per class}
+
+~\citet{chidamber1994metrics} argue that the the number of methods and their complexity in a class is a predictor of the effort required to develop and maintain it. Furthermore, the more methods in a class, the greater the effect on subclasses. Thus the first metric proposed metric by~\citet{chidamber1994metrics} is the~\textit{weighted methods per class} (WMC) metric. WMC is defined as
+
+\begin{align}
+WMC = \sum_{i=1}^{n} c_i
+\end{align}
+
+\noindent where $n$ is the amount of methods in a given class and $c_i$ is the ``complexity'' of the method. The complexity metric is deliberately left undefined, as it can be interpreted in multiple ways and thus interchangeable in the metric(TODO: ???).
+
 \subsection{Depth of inheritance}
+
 \subsection{Number of children}
 \subsection{Coupling between object classes}
 \subsection{Response for class}
