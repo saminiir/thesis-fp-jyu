@@ -710,6 +710,30 @@ WMC = \sum_{i=1}^{n} c_i
 
 \subsection{Depth of inheritance}
 
+As inheritance is often utilized in object-oriented design~\parencite{booch1986object}, also its quantity and quality should offer some information for software measurement.~\textit{Depth of inheritance} (DIT) simply inspects the ``position'' of a class in its inheritance hierarchy. For example, the deeper the class is in regards to inheritance, the more likely it is to obtain unneeded methods from parent classes and thus increase compleexity. On the other hand, inheritance's main
+advantage is the reusability of methods, since general functionality can simply be acquired higher from the inheritance hierarchy. As is, the DIT metric is easy to be calculated, but does not directly point problems in the design. The inheritance tree can be ``top-heavy'', where the tree can be depicted as flat and wide, or ``bottom-heavy'', where the tree is thin but long. These properties do not, however, necessarily point out design flaws directly, as every program's design choices are unique.~\parenciteseveral{chidamber1994metrics}.
+%{{{
+\begin{comment}
+    Metric 2: Depth of Inheritance Tree (DIT) 
+    Definition: Depth of inheritance of the class is the DIT metric 
+    for the class. In cases involving multiple inheritance, the DIT will 
+    be the maximum length from the node to the root of the tree. 
+    Theoretical Basis: DIT relates to Bunge¿s notion of the 
+    scope of properties. DIT is a measure of how many ancestor 
+    classes can potentially affect this class. 
+    Viewpoints: 
+    1) The deeper a class is in the hierarchy, the greater the 
+    number of methods it is likely to inherit, making it more 
+    complex to predict its behavior.16 
+    ¿61nterestingly, this has been independently observed by other researchers 
+    2) Deeper trees constitute greater design complexity, since 
+    3) The deeper a particular class is in the hierarchy, the 
+    more methods and classes are involved. 
+    greater the potential reuse of inherited methods. 
+    )~\parencite{chidamber1994metrics}
+\end{comment}
+%}}}}
+
 \subsection{Number of children}
 \subsection{Coupling between object classes}
 \subsection{Response for class}
