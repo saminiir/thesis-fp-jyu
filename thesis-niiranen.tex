@@ -735,6 +735,30 @@ advantage is the reusability of methods, since general functionality can simply 
 %}}}}
 
 \subsection{Number of children}
+
+The~textit{number of children} metric is likewise easy to be measured. It is simply the amount of immediate subclasses (children) of a class. The number of children metric is based on the notions that the greater the amount of subclasses, also greater is the reusage of the parent class's methods. With increased subclass count, however, also the likelyhood of misuse of inheritance by improper abstractions is increased. Lastly, the number of subclasses predict the impact of the parent
+class on the design. For example, a high subclass count may mandate more testing of that class.~\parencitesseveral{chidamber1994metrics}.
+%{{{
+\begin{comment}
+nated to a class in the class hierarchy. 
+Theoretical Basis: NOC relates to the notion of scope of 
+properties. It is a measure of how many subclasses are going 
+to inherit the methods of the parent class. 
+Viewpoints: 
+1) Greater the number of children, greater the reuse, since 
+inheritance is a form of reuse. 
+2) Greater the number of children, the greater the likelihood 
+of improper abstraction of the parent class. If a class has 
+a large number of children, it may be a case of misuse 
+of subclassing. 
+3) The number of children gives an idea of the potential 
+influence a class has on the design. If a class has a large 
+number of children, it may require more testing of the 
+methods in that class. ~\parencite{chidamber1994metrics}
+
+\end{comment}
+%}}}}
+
 \subsection{Coupling between object classes}
 \subsection{Response for class}
 \subsection{Lack of cohesion metric}
