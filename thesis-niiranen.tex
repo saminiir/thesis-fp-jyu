@@ -760,6 +760,42 @@ methods in that class. ~\parencite{chidamber1994metrics}
 %}}}}
 
 \subsection{Coupling between object classes}
+
+The metric~\textit{coupling between object classes} (CBO) is measured by the amount of objects an object is coupled to.~\citet{chidamber1994metrics} define coupling as ``an object is coupled to another object if one of them acts on the other, i.e., methods of one use methods or instance variables of another''.  
+%{{{
+\begin{comment}
+    Definition: CBO for a class is a count of the number of other 
+    classes to which it is coupled. 
+    Theoretical Basis: CBO relates to the notion that an object is 
+    coupled to another object if one of them acts on the other, i.e., 
+    methods of one use methods or instance variables of another. 
+    As stated earlier, since objects of the same class have the same 
+    properties, two classes are coupled when methods declared in 
+    one class use methods or instance variables defined by the 
+    other class.~\parencite{chidamber1994metrics}
+\end{comment}
+%}}}
+
+CBO is argued to predict the quality of the program's design. Tight coupling between objects hinders modularity and reuse of the components and subsequently increases the CBO count. In other words, coupling and the CBO count is favourable to be kept at minimum. Additionally, the CBO measure can be a indicator of the effort needed to test the program's code. A high CBO count is probable to warrant more testing.~\parenciteseveral{chidamber1994metrics}.
+%{{{
+\begin{comment}
+    Viewpoints: 
+    1) Excessive coupling between object classes is detrimental 
+    to modular design and prevents reuse. The more inde- 
+    pendent a class is, the easier it is to reuse it in another 
+    application. 
+    2) In order to improve modularity and promote encapsu- 
+    lation, inter-object class couples should be kept to a 
+    minimum. The larger the number of couples, the higher 
+    the sensitivity to changes in other parts of the design, 
+    and therefore maintenance is more difficult. 
+    3) A measure of coupling is useful to determine how 
+    complex the testing of various parts of a design are 
+    likely to be. The higher the inter-object class coupling, 
+    the more rigorous the testing needs to be.~\parencite{chidamber1994metrics}
+\end{comment}
+%}}}
+
 \subsection{Response for class}
 \subsection{Lack of cohesion metric}
 
