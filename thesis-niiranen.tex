@@ -824,6 +824,44 @@ class.~\parenciteseveral{chidamber1994metrics}.
 
 \subsection{Lack of cohesion in methods}
 
+The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of cohesion in an object class. Namely, it calculates the amount of method pairs in a class that have no relation to each other. For example, if two methods do not share the use of an instance attribute of the object, their LCOM measure is zero. In essence, the LCOM metric ``provides a measure of the relative disparate nature of methods in the class''~\parencite{chidamber1994metrics}.
+%{{{
+\begin{comment}
+    The LCOM is a count of the number of method pairs whose 
+    similarity is 0 (i.e., U ( )  is a null set) minus the count of method 
+    pairs whose similarity is not zero. The larger the number 
+    of similar methods, the more cohesive the class, which is 
+    consistent with traditional notions of cohesion that measure 
+    the inter-relatedness between portions of a program. If none 
+    of the methods of a class display any instance behavior, i.e., 
+    do not use any instance variables, they have no similarity and 
+    the LCOM value for the class will be zero. The LCOM value 
+    provides a measure of the relative disparate nature of methods 
+    in the class. A smaller number of disjoint pairs (elements of set 
+    P) implies greater similarity of methods. LCOM is intimately 
+    tied to the instance variables and methods of a class, and 
+    therefore is a measure of the attributes of an object class.~\parencite{chidamber1994metrics}
+\end{comment}
+%}}}
+
+Cohesiveness is roughly translated to the level of uniformity of a class. The greater the cohesiveness of a class's methods is, the greater the encapsulation is and subsequently the quality of design is heightened. A lack of cohesion increases complexity, which in turn increases the effort required to maintain and test the class. Low cohesion implies that the class has too many responsibilities and would benefit from division to smaller
+classes.~\parenciteseveral{chidamber1994metrics}.
+%{{{
+\begin{comment}
+    therefore is a measure of the attributes of an object class. 
+    Viewpoints: 
+    1) Cohesiveness of methods within a class is desirable, 
+    since it promotes encapsulation. 
+    2) Lack of cohesion implies classes should probably be 
+    split into two or more subclasses. 
+    3) Any measure of disparateness of methods helps identify 
+    flaws in the design of classes. 
+    4) Low cohesion increases complexity, thereby increasing 
+    the likelihood of errors during the development process. 
+    ~\parencite{chidamber1994metrics}.
+\end{comment}
+%}}}
+
 \section{Challenges of metrics}
 
 Predicting fault incidence using software change history~\parencite{graves2000predicting}
