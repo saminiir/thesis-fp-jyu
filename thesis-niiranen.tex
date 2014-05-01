@@ -797,7 +797,32 @@ CBO is argued to predict the quality of the program's design. Tight coupling bet
 %}}}
 
 \subsection{Response for class}
-\subsection{Lack of cohesion metric}
+
+The~\textit{Response for class} (RFC) metric deals with the amount of methods that are called when the object receives a message. If a high amount of method calls can potentially be executed when the object receives a message, also the testing and debugging of the object's class becomes more difficult. Additionally, the larger the RFC number is, the complexity of that class increases. With the help of the RFC metric, developers can draw opinions on the effort needed to e.g. test the
+class.~\parenciteseveral{chidamber1994metrics}.
+%{{{
+\begin{comment}
+    The response set of a class is a set of methods that can 
+    potentially be executed in response to a message received 
+    by an object of that class.26 The cardinality of this set is 
+    a measure of the attributes of objects in the class. Since it 
+    specifically includes methods called from outside the class, it 
+    is also a measure of the potential communication between the 
+    class and other classes. 
+    Viewpoints: 
+    1) If a large number of methods can be invoked in response 
+    to a message, the testing and debugging of the class 
+    becomes more complicated since it requires a greater 
+    level of understanding required on the part of the tester. 
+    2) The larger the number of methods that can be invoked 
+    from a class, the greater the complexity of the class. 
+    3) A worst case value for possible responses will assist in 
+    appropriate allocation of testing time. 
+    ~\parencite{chidamber1994metrics}.
+\end{comment}
+%}}}
+
+\subsection{Lack of cohesion in methods}
 
 \section{Challenges of metrics}
 
