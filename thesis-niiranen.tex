@@ -683,7 +683,7 @@ ofcombinationsofaninputsourcetoanoutputdestination.  Theweightingofthefan-inandf
 %{{{
 \section{Metrics for object-oriented languages}
 
-The popularity of object-oriented programming (OOP) has produced numerous new or adjusted software measures specific to the paradigm. In specific, the main components of OOP are real-world simulated classes, from which~\textit{objects} are instantiated. This is distinct to the imperative and functional approaches, where functions and data are the main drivers of design~\parencite{chidamber1994metrics}. 
+The popularity of object-oriented programming (OOP) has produced numerous new or adjusted software measures specific to the paradigm~\parencite{chidamber1994metrics,lorenz1994object,bansiya2002hierarchical}. In specific, the main components of OOP are real-world simulated classes, from which~\textit{objects} are instantiated. This is distinct to the imperative and functional approaches, where functions and data are the main drivers of design~\parencite{chidamber1994metrics}. 
 %{{{
 \begin{comment}
 The 00 approach centers around modeling the real world in terms of its objects, which is in contrast to older, more traditional approaches that emphasize a function-oriented view that separates data and procedures.~\parencite{chidamber1994metrics}
@@ -696,7 +696,19 @@ An object possesses~\textit{methods} and~\textit{attributes} that characterize i
     dog.wagTail();
 \end{lstlisting}
 
-The purpose of the OOP paradigm is to model real-world entities as closely as possible~\parencite{booch1986object}.~\citet{chidamber1994metrics} define several measures for OOP based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics.
+The purpose of the OOP paradigm is to model real-world entities as closely as possible~\parencite{booch1986object}. This thesis chooses to present OOP metrics specific to the work of~\citet{chidamber1994metrics}, where several measures for OOP are defined based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics. Their measures have been validated as good predictors defects in real-world software by numerous empirical studies~\parencite{basili1996validation,subramanyam2003empirical,gyimothy2005empirical,zhou2006empirical,olague2007empirical} and is the most widely used OOP metric suite~\parencite{catal2009systematic}.
+%{{{
+\begin{comment}
+We conclude that the CK and QMOOD suites contain similar components and produce statistical models that are effective in detecting error-prone classes.~\parencite{olague2007empirical}
+
+discussed. Several of Chidamber&Kemerer¿s OO metrics appear to be useful to predict class
+fault-proneness during the early phases of the life-cycle. We also showed that they are, on our
+data set, better predictors than ¿traditional¿ code metrics, which can only be collected at a later
+phase of the software development processes.~\parencite{basili1996validation}
+
+However, CK metrics suite is much more popular than other suites and they are mostly used if class-level metrics are applied.~\parencite{catal2009systematic}.
+\end{comment}
+%}}}
 
 \subsection{Weighted methods per class}
 
