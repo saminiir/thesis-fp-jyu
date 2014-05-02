@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e # Exit immediately if util exists with non-zero exit value
+
+biber --cache | xargs rm -rf
+find . -regextype posix-extended -regex ".*.(aux|lof|lot|bbl|bcf|blg|toc|out|log)" -exec rm {} \;
+./compile
