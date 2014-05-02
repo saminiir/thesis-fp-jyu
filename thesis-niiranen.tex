@@ -878,6 +878,51 @@ classes.~\parenciteseveral{chidamber1994metrics}.
 
 Predicting fault incidence using software change history~\parencite{graves2000predicting}
 
+None of the metric suites presented in research literature are without their criticism. For example,~\citet{hitz1996chidamber} show that some of the metrics of~\citet{chidamber1994metrics} can be easily misused by not establishing a solid measurement environment. In essence, measuring software's internal attributes is highly context-specific. Concentrating on irrelevant attributes is bound to cause skewed measurement results and thus active engagement in resolving the truly important aspects of the software is required~\parencite{hitz1996chidamber}. This seems to be the core problem of software metrics: Determining what to measure, what data is relevant and how to interpret the results. The problem is further escalated by the fact that many metrics serve only as ``proxies'' to relevant measures, making the recognition of what to measure even harder. 
+%{{{
+\begin{comment}
+    Before any measurement activity, we must identify the attribute to 
+    be measured. Such an attribute must bear a certain significance for 
+    a person involved in the development process, such as a designer, 
+    programmer, manager, user, etc. The attribute might not necessar- 
+    ily be interesting per se, but might serve as an independent vari- 
+    able for indirect measurement of another (interesting!) attribute or 
+    in a given prediction model (a case we do not consider further 
+    here), however, one should avoid collecting data about meaning- 
+    less aspects of the software document under investigation (just 
+    because they happen to be easily collectible). 
+    In the next step, a "sufficient" empirical relation system must ~\parencite{hitz1996chidamber}
+\end{comment}
+%}}}
+
+Even after decades, no uniform guidelines for measuring software exist~\parencite{kitchenham2010s}. Since metrics are scrutinized closely by the research community, also their theoretical foundation can be often invalidated. For example,~\citet{kitchenham2010s} notes that the metric suite of~\citet{chidamber1994metrics} is long been theoretically invalidated, and as a consequence empirical results of those metrics are also invalid. This results in a large body of studies and results that are potentially invalid in scientific sense. On the other hand, many researchers acknowledge the situational nature of metrics and seem to concentrate more on real-world scenarios~\parencite{kitchenham2010s}. As is, the best of both worlds (solid ontologies for creating metrics and guidelines for empirical studies) is still yet to emerge.
+%{{{
+\begin{comment}
+    It seems that empirical validation papers are of major impor-
+    tance to the software metrics research community. However, this
+    study suggests that the limitations of empirical studies are not al-
+    ways understood, in particular, the impact of the context in which
+    data arises, the impact of constructed metrics (such as defect den-
+    sity, change density), the implication of linear relationships, and
+    the notion of measures needing to be identically, independently,
+    distributed. Furthermore, we appear to have no idea when to stop
+    empirical validation, even in the case of well-investigated metrics
+    such as the Chidamber¿Kemerer metrics.
+    I believe the software engineering research community must
+    take up the challenge to aggregate its results into an empirically-
+    based body of knowledge. The evidence from this mapping study~\parencite{kitchenham2010s}
+
+    Currently many studies use multiple data sets. However, most
+    researchers still construct post-hoc explanations for different out-
+    comes rather than refining their hypotheses to predict differences.
+    Overall, we need to reflect more on what we mean by ¿¿empirical
+    validation¿ and identify appropriate methods for performing such
+    studies. The complexity of the interaction between context and
+    outcomes suggest support for Fenton and Neil¿s proposals to model~\parencite{kitchenham2010s}
+
+\end{comment}
+%}}}
+
 \section{Summary}
 
 
