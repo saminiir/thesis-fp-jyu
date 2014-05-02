@@ -1011,22 +1011,40 @@ The committee's primary goal was to deisgn a language that satisfied these const
 
 %{{{Additional sources
 \begin{comment}
-Haskell is a high level language. A really high level language. We can spend our days programming entirely in abstractions, in monoids, functors and hylomorphisms, far removed from any particular hardware model of computation. The language specification goes to great lengths to avoid prescribing any particular evaluation model. These layers of abstraction let us treat Haskell as a notation for computation itself, letting the programmer concentrate on the essence of their problem without getting bogged down in low level implementation decisions. We get to program in pure thought.~\parencite{o2008real}
+    Haskell is a high level language. A really high level language. We can spend our days programming entirely in abstractions, in monoids, functors and hylomorphisms, far removed from any particular hardware model of computation. The language specification goes to great lengths to avoid prescribing any particular evaluation model. These layers of abstraction let us treat Haskell as a notation for computation itself, letting the programmer concentrate on the essence of their problem without getting bogged down in low level implementation decisions. We get to program in pure thought.~\parencite{o2008real}
 
-The earliest programming languages were developed with one simple goal in mind: to provide a vehicle through which one could control the behavior of computers. Not sur- prisingly, the early languages reflected the structure of the underlying machines fairly well. First, it became obvious that what was easy for a machine to reason about was not necessarily easy for a human being to rea- son about.~\parencite{hudak1989conception} In Conception_evolution_and_application.....pdf
+    The earliest programming languages were developed with one simple goal in mind: to provide a vehicle through which one could control the behavior of computers. Not sur- prisingly, the early languages reflected the structure of the underlying machines fairly well. First, it became obvious that what was easy for a machine to reason about was not necessarily easy for a human being to rea- son about.~\parencite{hudak1989conception} In Conception_evolution_and_application.....pdf
 
-The class of functional, or applicative, programming languages, in which computation is carried out entirely through the evaluation of expressions, is one such family of languages, and debates over its merits have been quite lively in recent years.~\parencite{hudak1989conception}
+    The class of functional, or applicative, programming languages, in which computation is carried out entirely through the evaluation of expressions, is one such family of languages, and debates over its merits have been quite lively in recent years.~\parencite{hudak1989conception}
 
-Among the claims made by functional language advocates are that programs can be written quicker, are more concise, are higher level (resembling more closely traditional mathematical notation), are more amenable to formal reasoning and analysis, and can be executed more easily on parallel architectures. Of course, many of these features touch on rather subjective issues, which is one reason why the debates can be so lively.~\parencite{hudak1989conception}.
+    Among the claims made by functional language advocates are that programs can be written quicker, are more concise, are higher level (resembling more closely traditional mathematical notation), are more amenable to formal reasoning and analysis, and can be executed more easily on parallel architectures. Of course, many of these features touch on rather subjective issues, which is one reason why the debates can be so lively.~\parencite{hudak1989conception}.
 
-TODO: Maininta myös Lispistä!! Esim. hudak1989conception :ssa hyvää juttua
-Despite its impurities, Lisp had a great influence on functional language development, and it is encouraging to note that modern Lisps (especially Scheme) have returned more to the purity of the lambda calculus rather than the ad hocery that plagued the Maclisp era. This return to the purity includes the first-class treatment of functions and the lexical scoping of identifiers.~\parencite{hudak1989conception}.
+    TODO: Maininta myös Lispistä!! Esim. hudak1989conception :ssa hyvää juttua
+    Despite its impurities, Lisp had a great influence on functional language development, and it is encouraging to note that modern Lisps (especially Scheme) have returned more to the purity of the lambda calculus rather than the ad hocery that plagued the Maclisp era. This return to the purity includes the first-class treatment of functions and the lexical scoping of identifiers.~\parencite{hudak1989conception}.
 
-A purely functional programming language does not use variables or assignment statements, thus freeing the programmer from concerns related to the memory cells, or state, of the program. Without variables, iterative con- structs are not possible, for they are controlled by variables.~\parencite{TODO: Better source than sebesta}.
+    A purely functional programming language does not use variables or assignment statements, thus freeing the programmer from concerns related to the memory cells, or state, of the program. Without variables, iterative con- structs are not possible, for they are controlled by variables.~\parencite{TODO: Better source than sebesta}.
 
-Haskell functions are in general pure functions: when given the same arguments, they return the same results. The reason for this paradigm is that pure functions are much easier to debug and to prove correct. Test cases can also be set up much more easily, since we can be sure that nothing other than the arguments will influence a function's result. We also require pure functions not to have side effects other than returning a value: a pure function must be self-contained, and cannot open a network connection, write a file or do anything other than producing its result. This allows the Haskell compiler to optimise the code very aggressively.
-However, there are very useful functions that cannot be pure: an input function, say getLine, will return different results every time it is called; indeed, that's the point of an input function, since an input function returning always the same result would be pointless. Output operations have side effects, such as creating files or printing strings on the terminal: this is also a violation of purity, because the function is no longer self-contained.~\parencite{wikibooks2014haskell}
+    Haskell functions are in general pure functions: when given the same arguments, they return the same results. The reason for this paradigm is that pure functions are much easier to debug and to prove correct. Test cases can also be set up much more easily, since we can be sure that nothing other than the arguments will influence a function's result. We also require pure functions not to have side effects other than returning a value: a pure function must be self-contained, and cannot open a network connection, write a file or do anything other than producing its result. This allows the Haskell compiler to optimise the code very aggressively.
+    However, there are very useful functions that cannot be pure: an input function, say getLine, will return different results every time it is called; indeed, that's the point of an input function, since an input function returning always the same result would be pointless. Output operations have side effects, such as creating files or printing strings on the terminal: this is also a violation of purity, because the function is no longer self-contained.~\parencite{wikibooks2014haskell}
 
+    The basic difference between functional and imperative programming lan-
+    guages lies in the hiding of the computational model (Petre & Winder, 1990). 
+    The imperative model incorporates the Von Neuman machine characteristics 
+    in the notions of assignment, state and effect. A characteristic of this language 
+    class is the explicit flow of control, e.g. sequencing, selection and repetition. In 
+    assignments, the value of memory places denoted with variables is changed 
+    during program execution. This model of operation by change of state and by 
+    alteration of variable values is also named 'computation by effect'. The func-
+    tional model is characterised by 'computation by value'. Functions return val-
+    ues and have no side-effects, and expressions represent values. There is no no-
+    tion of updatable memory accessible by instruction. The program consists of a 
+    script with a number of mathematical-like definitions and an expression that 
+    must be evaluated. Functions can be passed as arguments to other functions 
+    and can be the result of a function application (higher-order functions). These 
+    programs possess the property of referential transparency, which means that 
+    in a fixed context the replacement of a subexpression by its value is completely 
+    independent of the surrounding expression. Therefore functional programming 
+    is more closely related to mathematical activities (Bird & Wadler, 1988). ~\parencite{van1995software} <- Hyvaa johdantoa FP:hen!
 \end{comment}
 %}}}
 
@@ -1431,8 +1449,20 @@ Therefore, it is much easier to determine which of them can be concurrently exec
 %{{{Empirical study
 \chapter{Empirical study}
 Preliminary guidelines for empirical research in software engineering~\parencite{kitchenham2002preliminary}
-%{{{Questions
+%{{{Additional Sources
 \begin{comment}
+    Before developing and using metrics, one must have a clear idea about the 
+    purpose of the metric. A Goal-Question-Metric method (Basili & Rombach, 
+    1988) gives a framework for this issue. The goal and some questions have been 
+    expressed above. In the research in this thesis, one major issue has been the 
+    objective assessment of the comprehensibility of programs. Understanding ex-
+    isting code is one of the more time-consuming tasks in the maintenance of 
+    software products. A recent survey of models for code understanding is given 
+    by von Mayrhauser (1994). The models are classified as either top-down mod-
+    els or bottom-up models. Top-down models emphasise the nature and structure 
+    of domain knowledge and how it is represented in and mapped onto code and 
+    documentation information. Bottom-up models build understanding from de-
+    tail code using control flow and data flow.~\parencite{van1995software}
 \end{comment}
 %}}}
 
