@@ -148,6 +148,7 @@ structured programming literature [41]. Both Prather and Weyuker proposed that t
 %}}}
 %{{{Software metrics
 \chapter{Software metrics}
+\label{chap:software_metrics}
 
 Software is known to be brittle in the sense that its runtime behavior might not correspond to what the programmer had intended. More specifically, human error often introduces faulty logic into the software's code. Once these unintended ``features'', or bugs, slip into production versions and the software is released, fixing a critical error afterwards might require approximately hundred times more effort~\parencite{shull2002we}. To help assessing and predicting the quality of the
 software at the time of development, software metrics are engineered.
@@ -1341,6 +1342,17 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 %}}}
 
 \section{Metrics for functional programming}
+
+As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
+
+Prior research on metrics exclusively applicable to functional programming is scarce. Foundings are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose research this section heavily leans on.~\citet{van1995software} initial work was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as lines of code and cyclomatic complexity, are also applicable to functional programs with slight modifications~\parencite{van1995software}.
+%{{{
+\begin{comment}
+    A problem encountered was that these metrics have been defined mainly for imperative languages: there-
+    fore, a first task was the definition of the metrics for functional programs.~\parencite{van1995software}
+
+\end{comment}
+%}}}
 
 Software Measurement for Functional Programming~\parencite{ryder2004software}
 
