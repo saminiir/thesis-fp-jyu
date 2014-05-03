@@ -950,25 +950,65 @@ Even after decades, no uniform guidelines for measuring software exist~\parencit
 
 \section{Summary}
 
+A somewhat promising trend in the field of software measurement is the use of defect predicting analysis tools~\parencite{nagappan2005use,zimmermann2005mining,menzies2007data}. These techniques utilize machine learning and data mining~\parencite{witten2005data} to effectively train the tools used to recognize patterns in the source code that cause defects. In more depth, this approach concerns itself more on the algorithms which by the machine learning is conducted, rather than on the specific software metrics used. Even simple static code attributes, such as lines of code and cyclomatic complexity, have been found to be indicative of software quality~\parencite{menzies2007data}. 
+%{{{
+\begin{comment}
+Our conclusion is that, contrary to prior pessimism [21],
+[22], data mining static code attributes to learn defect
+predictors is useful. Given our new results on naive Bayes
+and log-filtering, these predictors are much better than
+previously demonstrated. Also, prior contradictory results
+on the merits of defect predictors can be explained in terms
+of the brittleness of the space of ¿best¿ predictors. Further,
+our baseline experiment clearly shows that it is a misdir-
+ected discussion to debate, e.g., ¿lines of code versus
+McCabe¿ for predicting defects. As we shall see, the choice of
+learning method is far more important than which subset of the
+available data is used for learning.~\parencite{menzies2007data}.
+
+\end{comment}
+%}}}
+
 
 %{{{Additional sources
 \begin{comment}
-This type of overriding can be particularly troublesome if the conflicting defi- nitions have the same type, which prevents the compiler from indicating possibly erroneous behaviour when modifying the program. For instance, consider the (contrived) area function in Example 10. If the a in the where clause is renamed, the function will compile with no errors, but will give incorrect results unless the a after the = is also changed.
-It therefore appears that measuring the number of pattern variables involved in overriding might predict potential points of error. However, the implementation of the metric used in this work does not yet contain a type system, and so for this work it is not possible to check if the variables involved in the overriding have the same type, which would be interesting to factor into the measurement, and so this implementation of the metric treats all overriding in the same manner, regardless of the types involved. However it would be possible to re-implement the metric using a framework such as Programatica [41] to make use of type information in~\parencite{ryder2004software}
+    This type of overriding can be particularly troublesome if the conflicting defi- nitions have the same type, which prevents the compiler from indicating possibly erroneous behaviour when modifying the program. For instance, consider the (contrived) area function in Example 10. If the a in the where clause is renamed, the function will compile with no errors, but will give incorrect results unless the a after the = is also changed.
+    It therefore appears that measuring the number of pattern variables involved in overriding might predict potential points of error. However, the implementation of the metric used in this work does not yet contain a type system, and so for this work it is not possible to check if the variables involved in the overriding have the same type, which would be interesting to factor into the measurement, and so this implementation of the metric treats all overriding in the same manner, regardless of the types involved. However it would be possible to re-implement the metric using a framework such as Programatica [41] to make use of type information in~\parencite{ryder2004software}
 
 
-In the world of imperative and object-oriented languages, software measure- ment, also known as software metrics, has been used for many years to provide developers with additional information about their programs. Such information can give programmers important indications about where bugs are likely to be in- troduced, or about how easy parts of a program are to test, for instance. This can be extremely valuable in easing the testing process by focusing programmers¿ at- tention on parts
-of the program where their effort may provide the greatest overall benefit, which in turn can help ease the whole process of validating software.~\parencite{ryder2004software}.
+    In the world of imperative and object-oriented languages, software measure- ment, also known as software metrics, has been used for many years to provide developers with additional information about their programs. Such information can give programmers important indications about where bugs are likely to be in- troduced, or about how easy parts of a program are to test, for instance. This can be extremely valuable in easing the testing process by focusing programmers¿ at- tention on parts
+    of the program where their effort may provide the greatest overall benefit, which in turn can help ease the whole process of validating software.~\parencite{ryder2004software}.
 
-The example of the imperative and object-oriented communities suggests that software metrics could provide a useful complement to the existing debugging tools available to functional programmers today. Some of the measurement techniques from imperative and object-oriented languages may transfer quite cleanly to func- tional languages, for instance the pathcount metric which counts the number of execution paths through a piece of program code, but some of the more advanced features of
-functional programming languages may contribute to the complexity of a program in ways that are not considered by traditional imperative or object- oriented metrics. It may therefore be necessary to develop new metrics for certain aspects of functional programs.~\parencite{ryder2004software}
+    The example of the imperative and object-oriented communities suggests that software metrics could provide a useful complement to the existing debugging tools available to functional programmers today. Some of the measurement techniques from imperative and object-oriented languages may transfer quite cleanly to func- tional languages, for instance the pathcount metric which counts the number of execution paths through a piece of program code, but some of the more advanced features of
+    functional programming languages may contribute to the complexity of a program in ways that are not considered by traditional imperative or object- oriented metrics. It may therefore be necessary to develop new metrics for certain aspects of functional programs.~\parencite{ryder2004software}
 
-Software measurement is a technique in which quantitative measures, often called metrics, are taken from the source code of a program. Typically metrics attempt to quantify how complex a piece of source code is to understand, modify or test. This notion of complexity should not be confused with the computational complexity of an algorithm, which is typically denoted using O( notation. Com- putational complexity is concerned with runtime behaviour, rather than how easy or hard it is for a
-programmer to maintain.~\parencite{ryder2004software}
+    Software measurement is a technique in which quantitative measures, often called metrics, are taken from the source code of a program. Typically metrics attempt to quantify how complex a piece of source code is to understand, modify or test. This notion of complexity should not be confused with the computational complexity of an algorithm, which is typically denoted using O( notation. Com- putational complexity is concerned with runtime behaviour, rather than how easy or hard it is for a
+    programmer to maintain.~\parencite{ryder2004software}
 
-One of the claims of software measurement is that it can help identify the parts of a system which are most likely to benefit from inspection. This allows resources to be focused where they will help most and allows them to be used in their most effective way, e.g. peer reviews of small sections of code, rather than large sections, or indicating parts of a program that may benefit from refactoring code changes.~\parencite{ryder2004software}
+    One of the claims of software measurement is that it can help identify the parts of a system which are most likely to benefit from inspection. This allows resources to be focused where they will help most and allows them to be used in their most effective way, e.g. peer reviews of small sections of code, rather than large sections, or indicating parts of a program that may benefit from refactoring code changes.~\parencite{ryder2004software}
 
-Abstract¿The value of using static code attributes to learn defect predictors has been widely debated. Prior work has explored issues like the merits of ¿McCabes versus Halstead versus lines of code counts¿ for generating defect predictors. We show here that such debates are irrelevant since how the attributes are used to build predictors is much more important than which particular attributes are used. Also, contrary to prior pessimism, we show that such defect predictors are demonstrably useful and, on the data studied here, yield predictors with a mean probability of detection of 71 percent and mean false alarms rates of 25 percent. These predictors would be useful for prioritizing a resource-bound exploration of code that has yet to be inspected.~\parencite{menzies2007data}. <-- Hyvaa pointtia siita kuinka metriikka itsessaan ei tarkoita mitaan, vaan kuinka sita kaytetaan!  
+    Abstract¿The value of using static code attributes to learn defect predictors has been widely debated. Prior work has explored issues like the merits of ¿McCabes versus Halstead versus lines of code counts¿ for generating defect predictors. We show here that such debates are irrelevant since how the attributes are used to build predictors is much more important than which particular attributes are used. Also, contrary to prior pessimism, we show that such defect predictors are demonstrably useful and, on the data studied here, yield predictors with a mean probability of detection of 71 percent and mean false alarms rates of 25 percent. These predictors would be useful for prioritizing a resource-bound exploration of code that has yet to be inspected.~\parencite{menzies2007data}. <-- Hyvaa pointtia siita kuinka metriikka itsessaan ei tarkoita mitaan, vaan kuinka sita kaytetaan!  
+
+    Given recent research in artificial intelligence, it is now
+    practical to use data miners to automatically learn
+    predictors for software quality. When budget does not
+    allow for complete testing of an entire system, software
+    managers can use such predictors to focus the testing on
+    parts of the system that seem defect-prone. These potential
+    defect-prone trouble spots can then be examined in more
+    detail by, say, model checking, intensive testing, etc.~\parencite{menzies2007data} <-- Hyvaa pointtia machine learningin kaytosta
+
+    This brittleness result offers a new insight on prior work.
+    Prior results about defect predictors were so contradictory
+    since they were drawn from a large space of competing
+    conclusions with similar but distinct properties. Different
+    studies could conclude that, say, lines of code are a better/
+    worse predictor for defects than the McCabes complexity
+    attribute, just because of small variations to the data.
+    Bayesian methods smooth over the brittleness problem by
+    polling numerous Gaussian approximations to the nu-
+    merics distributions. Hence, Bayesian methods do not get
+    confused by minor details about candidate predictors.~\parencite{menzies2007data}
 
 \end{comment}
 %}}}
