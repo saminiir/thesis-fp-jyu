@@ -875,6 +875,30 @@ classes.~\parenciteseveral{chidamber1994metrics}.
 \end{comment}
 %}}}
 
+\section{Change metrics}
+
+One of the currently more active approaches to measuring and predicting the quality of software is the inclusion of version change history as a measurement dimension~\parencite{zimmermann2005mining,hassan2009predicting}. These so-called ``change metrics'' presume that problematic components can be identified by the focus they receive during development.~\citet{zimmermann2005mining} apply~\textit{evolutionary coupling} as an indicator for components that would benefit from maintenance. Evolutionary coupling is simply deduced by the amount of changes to any two modules in the same revision of the version history. For example, when two source code files change, their evolutionary coupling number is increased. After inspecting the whole revision history, the evolutionary coupling count between modules is argued to be a good indicator for maintenance effort~\parencite{zimmermann2005mining}. The metric can also be tuned more precise, by e.g. inspecting the evolutionary coupling of methods and functions.
+%{{{
+\begin{comment}
+    Both files have been changed together 20 times, indicat-
+    ing some evolutionary coupling. This is not a very strong
+    coupling, though, since ComparePreferencePage.java
+    has been changed 40 times overall¿that is, it has been
+    changed 20 times without plugin.properties being
+    changed at the same time.
+    To obtain more details, we can increase the granularity
+    from files to entities and determine the evolutionary
+    coupling between the individual attributes and functions
+    defined in ComparePreferencePage.java. This reveals
+    new couplings¿for instance, a coupling between the
+    fKeys[] attribute and the initDefaults() method as
+    well as a coupling between the fKeys[] attribute and the
+    plugin.properties file. Both couplings are strong: In
+    10 out of 11 times that fKeys[] has been changed,
+    plugin.properties has been changed, too.~\parencite{zimmermann2005mining}.
+\end{comment}
+%}}}
+
 \section{Challenges of metrics}
 
 Predicting fault incidence using software change history~\parencite{graves2000predicting}
