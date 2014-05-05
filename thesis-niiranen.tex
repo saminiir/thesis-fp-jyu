@@ -1427,14 +1427,42 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 
 As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
-Prior research on metrics exclusively applicable to functional programming is scarce. Foundings are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose research this section heavily leans on.~\citet{van1995software} initial work was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as lines of code and cyclomatic complexity, are also applicable to functional programs with slight modifications~\parencite{van1995software}.
+Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose research this section heavily leans on.~\citet{van1995software} initial work was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
+lines of code and Halstead's program volume, are also applicable to functional programs with slight modifications~\parencite{van1995software}. Other such metrics are the measures of testing effort (pathcount, cyclomatic complexity), callgraph measures (size, depth, arc-to-node ratio) and coupling measures~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
     A problem encountered was that these metrics have been defined mainly for imperative languages: there-
     fore, a first task was the definition of the metrics for functional programs.~\parencite{van1995software}
 
+    ¿ Program size.The various measures of program size, such as LOC and
+    Halstead¿s program volume can be transfered to functional programs with
+    little or no modification. These measures are used in Section 4.5.2 of this
+    chapter.
+    ¿ Testing effort. Metrics that measure the effort involved in testing a program,
+    such as pathcount and cyclomatic complexity, can be applied to functional
+    programming languages, although as is described later in Section 4.5.1 im-
+    plementing such metrics requires care to correctly consider all execution
+    paths. The pathcount measure is analysed for Haskell in Section 4.5.1 of
+    this chapter.
+    ¿ Callgraph measures.Measurements taken from callgraphs, such as size,
+    depth, width and arc-to-node ratio, can all be applied to functional pro-
+    grams without modification.These measures are examined for use with
+    Haskell in Section 4.4 of this chapter.
+    ¿ Coupling measures. Although it is possible to apply OO coupling measures,
+    such as object level and class level coupling and coupling strength, from
+    functional languages such as Haskell, some modifications are needed to map
+    different language elements into the metric. For instance, OO coupling met-
+    rics normally measure coupling between classes, but Haskell classes are not
+    classes in the OO sense, and instead one is most likely to measure coupling
+    between modules or functions.Coupling between functions is examined
+    Briefly in Sections 4.4.2 and 4.4.3 of this chapter.~\parencite{ryder2004software}.
 \end{comment}
 %}}}
+
+~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of callgraphs. 
+
+The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.
+
 
 Software Measurement for Functional Programming~\parencite{ryder2004software}
 
