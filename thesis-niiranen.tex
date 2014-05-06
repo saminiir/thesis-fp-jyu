@@ -1467,9 +1467,57 @@ The validation methodology used by~\citet{ryder2004software} is based on~\textit
 Software Measurement for Functional Programming~\parencite{ryder2004software}
 
 \subsection{Complexity of patterns}
+
+One of the most used features in functional programming is pattern matching. In Haskell, pattern matching is used in various ways. In addition to normal function arguments, data types are often used as arguments to pattern matching. The {\tt \_} wildcard can be used to match (or ignore) any argument, and patterns can also be used in function bodies. Constructing metrics to deduce the complexity of patterns is then an obvious first interesting step towards measuring FP programs.(TODO:
+Lahde? Esimerkki PatMatchista?)
+
+~\citet{ryder2004software} found a relatively weak correlation between the~\textit{number of pattern variables} and subjective complexity in two case-study programs. He argues that an increased number of variables in pattern matching also increases the effort required to comprehend that specific code. The case-study programs utilize pattern matching heavily, with 70-85\% of the functions containing patterns.
+
+The measure~\textit{number of overridden or overriding pattern variables} deals with the fact that pattern and expression variables can be easily overridden in functional programming. For example, a {\tt where} or {\tt let} are often used for denoting intermediary variables(TODO: Esimerkki?). The hypothesis is that an increased amount of overridden variables in patterns increase program complexity.~\citet{ryder2004software} finds a statistical correlation between the hypothesis
+and the metric, but it can be argued that such a programming style is detrimental in its own. Thus the measure should be used as a sign of the need to refactor any patterns containing redundant naming~\parencite{ryder2004software}.
+%{{{
+\begin{comment}
+    Patterns that introduce variables may override existing identifiers, and identifiers
+    in patterns may be overridden by those in a where or let clause. Overriding
+    identifiers in this manner can be confusing, for instance in Example 10 it is not
+    immediately clear which a is being used at any point in the function.~\parencite{ryder2004software}.
+
+    The correlation results for the Peg Solitaire program, shown in Table 9 in
+    Appendix B, do not exhibit any statistically significant correlation with the num-
+    ber of bug fixing changes, probably because of the low number of instances of
+    overriding occurring in the program. However, the results from the Refactoring
+    program show a statistically significant correlation of 0.3731. Thus the following
+    observation can be made.
+    Observation 4.1.2 Increasing the number of overridden pattern variables in-
+    creases the subjective complexity of the function.
+    One might claim that overriding pattern variables is an inherently undesirable
+    programming paradigm and as such this metric may be a useful tool to highlight
+    such occurrences, so that they may be corrected by the programmer.Such a
+    tool might combine this metric with a visualisation technique such as the pixel
+    representation to quickly highlight such code (See for instance Sections 6.1 and
+    6.5 of Chapter 6), or form part of an automated refactoring tool such as HaRe
+    [60].~\parencite{ryder2004software}.
+\end{comment}
+%}}}
+
+The~\textit{number of constructors} in a pattern can be an indicator of program complexity. Two hypotheses are provided by~\citet{ryder2004software}, where the first deals with the notion that an increased count of constructors increases complexity. The second hypothesis argues, counteractively, that if the constructors are named properly, it can reduce subjective complexity of a function.
+%{{{
+\begin{comment}
+    Patterns are commonly used in Haskell programs for manipulating algebraic data
+    types by matching against constructor names. A possible metric is to count how
+    many constructors are used in a pattern. There are two interesting and opposing
+    hypotheses about the effect of this attribute on the subjective complexity of a
+    function.
+    One hypothesis is that using more constructors in a pattern requires more
+    objects to be understood in order to comprehend the pattern, therefore increasing
+    the complexity. The alternative hypothesis is that if constructor names are chosen
+    well they are descriptive, and therefore add an element of documentation to the
+    pattern, possibly reducing the subjective complexity of the pattern.~\parencite{ryder2004software}.
+\end{comment}
+%}}}
+
+
 ~\begin{itemize}
-    \item Number of pattern variables
-    \item Number of overridden or overriding pattern variables 
     \item Number of constructors
     \item Number of wildcards
     \item Depth of nesting
@@ -1514,6 +1562,10 @@ Software Measurement for Functional Programming~\parencite{ryder2004software}
 
 \subsection{Summary}
 
+Critique:
+~\begin{itemize}
+    \item Ryder's work uses only two small case-study programs
+~\end{itemize}
 
 \section{Summary}
 
