@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 FILE="thesis-niiranen"
 pdflatex -halt-on-error "$FILE"
 biber "$FILE"
