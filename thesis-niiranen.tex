@@ -1544,14 +1544,47 @@ Using the two case-study programs,~\citet{ryder2004software} found correlation b
 \end{comment}
 %}}}
 
+The~\textit{depth of nesting} in patterns can be measured. For example, {\tt [(a,b),(c,d)]} shows a list containing tuples. The maximum depth of the pattern is 2, since the nested elements amount to two (list and tuple). The sum of the depths, however, may be more accurate in depicting the level of nesting taking place.
+\begin{lstlisting}
+type Tuple = (Int, Int)
+type TupleList = [Tuple]
 
+pattern1 :: TupleList -> Int
+pattern1 [(a,b)] = a + b
 
-~\begin{itemize}
-    \item Number of constructors
-    \item Number of wildcards
-    \item Depth of nesting
-    \item Pattern size 
-~\end{itemize}
+pattern2 :: TupleList -> Int
+pattern2 [(a,b), (c,d),(e,f)] = a + b + c + d + e + f
+\end{lstlisting}
+
+For both patterns, {\tt pattern1} and {\tt pattern2}, the maximum depth is 2. However, sums of the depths are not the same between the patterns. Finally,~\citet{ryder2004software} found a somewhat strong correlation for increased depth of nesting and complexity.
+%{{{
+\begin{comment}
+    When measuring the depth of nesting one must consider how to measure the
+    depth of nesting of patterns that contain more than one nested pattern.For
+    instance, [(a,b),(c,d)] contains two nested patterns. One method is to take
+    the maximum depth of all the nested patterns. Another method is to take the
+    sum of the depths of all the nested patterns.
+    Taking the maximum of the depths measures only how deeply nested the pat-
+    tern is, while taking the sum of the depths effectively measures how much nesting
+    is taking place, which may be more accurate. However it may be that taking the
+    sum of the depths will actually be measuring the size of the pattern, in which case
+    one would see a strong correlation between those two measures.~\parencite{ryder2004software}
+\end{comment}
+%}}}
+
+The last pattern metric presented by~\citet{ryder2004software} is~\textit{pattern size}, which can be measured in two ways. The number of components in a pattern can be calculated or the depth of the resulting~\textit{abstract syntax tree}(TODO: reference?) can be measured.~\citet{ryder2004software} utilizes the amount of nodes in the syntax tree as a measure, and found a correlation for increased size in patterns and subjective complexity.
+%{{{
+\begin{comment}
+The size of a pattern could be measured in a number of ways. For instance, one
+could count the number of components in the abstract syntax tree, or one might
+take the depth of abstract syntax tree as a measure of its size. For the purpose
+of exploring the effect of pattern size on the number of changes, the number of
+nodes in the abstract syntax tree of the pattern was chosen as the size measure.
+The metric results in Table 9 in Appendix B show that the Peg Solitaire
+program had no significant correlation, while the Refactoring program had a cor-
+relation of 0.5423, which seems to suggest the following observation.~\parencite{ryder2004software}
+\end{comment}
+%}}}
 
 \subsection{Distance between declarations and usage}
 ~\begin{itemize}
