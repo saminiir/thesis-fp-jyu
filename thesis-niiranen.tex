@@ -35,8 +35,17 @@
 
 \usepackage{amsmath}
 
+\usepackage{caption}
 \usepackage{listings}
-\lstset{language=Haskell}
+\lstset{language=Haskell,
+        captionpos=b,
+        numbersep=25pt,
+        numberstyle=\color{mygray}
+       }
+
+\captionsetup[lstlisting]{aboveskip=1em,belowskip=1em}
+
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
 
 \usepackage{babel}
 
