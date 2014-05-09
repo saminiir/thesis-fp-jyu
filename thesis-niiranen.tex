@@ -1595,7 +1595,28 @@ relation of 0.5423, which seems to suggest the following observation.~\parencite
 \end{comment}
 %}}}
 
+The pattern metrics are essentially simple and mostly deal with the ``size'' of a pattern. These kind of metrics are usually bundled together to provide stronger observations of the measurements. For this reason,~\citet{ryder2004software} also analyzes the interaction of the pattern metrics by presenting a correlation matrix.~\citet{ryder2004software} concludes that the size-specific metrics, such as size, number of variables and depth of patterns are strongly correlating on the
+subjective complexity of the code. However, the rest of the metrics are found to have almost no interaction between them.
+
+As it seems, the size of a pattern is perhaps the only indicator of its complexity. However, further validation of the metrics is warranted and their application to larger projects should be conducted. 
+
 \subsection{Distance between declarations and usage}
+
+The conceptual distance between two interacting functions is an interesting property to measure. It is likely that if the distance is large, also the source code is harder to be comprehended and the probability of errors in code increase. However, distance can be interpreted in multiple ways. First, the~\textit{number of scopes} that are introduced for a executed function call can be quantified.
+
+\begin{lstlisting}[numbers=left,caption={Example of number of scopes~\parencite{ryder2004software}},label={lst:number-of-scopes}]
+foo :: Int -> Int
+foo a = a * a
+
+bar :: [Int] -> [Int] -> [Int]
+bar a b = map fn c
+    where 
+        c = zip a b
+        fn = \(x,y) -> foo (x+y)
+\end{lstlisting}
+
+\noindent Example~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt a b}, {\tt fn c}, and {\tt x,y} are considered as scopes for the function {\tt foo} when it is called.
+
 ~\begin{itemize}
     \item Distance by the number of scopes
     \item Distance by the number of declarations in scope
