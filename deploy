@@ -1,0 +1,8 @@
+#!/bin/bash
+
+latexdiff <(git show HEAD~1:thesis-niiranen.tex) thesis-niiranen.tex > diff.tex
+
+pdflatex -interaction=nonstopmode diff.tex
+
+scp thesis-niiranen.pdf jyu:/autowebhome/home/sailniir/html/gradu/
+scp diff.pdf jyu:/autowebhome/home/sailniir/html/gradu/
