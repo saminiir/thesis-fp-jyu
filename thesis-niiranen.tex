@@ -1602,7 +1602,7 @@ As it seems, the size of a pattern is perhaps the only indicator of its complexi
 
 \subsection{Distance between declarations and usage}
 
-The conceptual distance between two interacting functions is an interesting property to measure. It is likely that if the distance is large, also the source code is harder to be comprehended and the probability of errors in code increase. However, distance can be interpreted in multiple ways. First, the~\textit{number of scopes} that are introduced for a executed function call can be quantified.
+The distance between two interacting functions is an interesting property to measure. It is likely that if the distance is large, also the source code is harder to be comprehended and the probability of errors in code increase. However, distance can be interpreted in multiple ways. The actual distance of source code lines can be referred as ``spatial'' distance measures, as where more semantic distance measures can be termed as ``conceptual'' distance measures.~\parenciteseveral{ryder2004software}. First, the~\textit{number of scopes} that are introduced for an executed function call can be quantified.
 
 \begin{lstlisting}[numbers=left,caption={Example of number of scopes~\parencite{ryder2004software}},label={lst:number-of-scopes}]
 foo :: Int -> Int
@@ -1615,16 +1615,17 @@ bar a b = map fn c
         fn = \(x,y) -> foo (x+y)
 \end{lstlisting}
 
-\noindent Example~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt a b}, {\tt fn c}, and {\tt x,y} are considered as scopes for the function {\tt foo} when it is called.
+\noindent Figure~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt (a,b)}, {\tt (fn c)}, and {\tt (x,y)} are considered as scopes for the function {\tt foo} when it is called. Thus measuring the number of scopes signals ``how complex the name-space of the program is at a particular point in the code'', but also indicates how nested the usage of functions is~\parencite{ryder2004software}.
 
-~\begin{itemize}
-    \item Distance by the number of scopes
-    \item Distance by the number of declarations in scope
-    \item Distance by the number of source lines
-    \item Distance by the number of parse tree nodes
-~\end{itemize}
+A second approach provided by~\citet{ryder2004software} is to count the~\textit{number of declarations} in the scope of a function call. This is performed by counting the declarations introduced between the function call and its declaration. The scope that contains the declaration is ignored. For example in figure~\ref{lst:number-of-scopes}, {\tt foo} is called at line 8. The scopes needed for this operation are then {\tt (x,y)}, {\tt (c,fn)}, {\tt (a, b)}. The {\tt foo} scope itself is ignored. The purpose of this measurement is to indicate the ``traffic'' of the nested scopes. Finally,~\citet{ryder2004software} concludes that~\textit{nesting} of the local definitions is more important than the number of those definitions for indicating complexity.
+
+An example of spatial distance is to measure the actual source code lines from a function call to its declaration. In essence, the call to function {\tt foo} at line 8 (figure~\ref{lst:number-of-scopes}) is 7 source code lines away from its declaration (if empty lines are counted). The empirical results of~\citet{ryder2004software} leaves room for further research, since mixed results from the measure were found. 
+
+Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can e.g. contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees, it makes sense to count the amount of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
+representation details of the source code are dismissed. However,~\citet{ryder2004software} found no distinguishable difference between this approach and counting the source code lines. Further research is thus warranted.
 
 \subsection{Attributes of recursive Functions}
+
 ~\begin{itemize}
     \item Binary indication of recursion 
     \item Number of recursive paths
