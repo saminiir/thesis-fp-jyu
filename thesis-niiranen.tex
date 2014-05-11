@@ -1626,9 +1626,34 @@ representation details of the source code are dismissed. However,~\citet{ryder20
 
 \subsection{Attributes of recursive Functions}
 
+Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
+
+First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a return value of zero or one. This seemingly simple metric can correlate with the amount of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
+recursion produces a cyclic callgraph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) or non-trivial recursion at the same time. For this case, the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
+
+Often recursion is invoked based on multiple paths in a function. The metric~\textit{number of recursive paths} determines the amount of paths leading to recursion in a function, which is argued to correlate with subjective complexity. 
+
+\begin{lstlisting}[caption={Example of multiple recursive paths~\parencite{ryder2004software}},label={lst:number-of-recursive-paths}]
+toggleCase :: String -> String
+toggleCase [] = []
+toggleCase (x:xs)
+        |  isUpper x = toLower x : toggleCase xs
+        |  otherwise = toUpper x : toggleCase xs
+\end{lstlisting}
+
+In figure~\ref{lst:number-of-recursive-paths} the number of recursive paths is two. The resulting hypothesis is that the greater the number of recursive paths, the more complex the function is to be comprehended. However,~\citet{ryder2004software} found weak correlation with the number of recursive paths and complexity in the case study applications. This is most likely due to a minimal amount of recursive paths in actual functions, since introducing such complexity would be against good coding practices.
+
+Counting the~\textit{number of non-trivial and trivial recursion} can indicate complexity in the code base. As presented previously, trivial recursion occurs when a function invokes itself, as where non-trivial recursion deals with two functions that invoke each other. If the amount of non-trivial recursion exceeds trivial recursion, it can be hypothesised that the complexity of the code also increases. Again,~\citet{ryder2004software} found no support for the hypothesis,
+most likely since the studied applications did not utilize non-trivial recursion to an extent.
+
+One property of recursion is the actual~\textit{length of the recursive path}. Since the path leading to recursion can be somewhat long, also the comprehensibility of the function is likely to lower. The path can be measured in multiple ways. For instance, the number of calls or the number of functions in the path can be quantified. Additionally, if the function contains multiple recursive paths, the paths are summed and their product can be calculated. The results from the research
+of~\citet{ryder2004software} do not show any statistically significant correlation for either the sum or product of recursive paths as a metric.
+
+Lastly, all of the recursion-specific metrics are likely to interact with each other, and as such, observation of their interaction from a measurement perspective is worthwhile to conduct.
+
+-Critique: Don't use explicit recursion, use fold!
+
 ~\begin{itemize}
-    \item Binary indication of recursion 
-    \item Number of recursive paths
     \item Number of trivial and non-trivial recursive paths
     \item Sum and product of recursive path lengths
 ~\end{itemize}
