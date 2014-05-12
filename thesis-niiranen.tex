@@ -1436,7 +1436,7 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 
 As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
-Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose research this section heavily leans on.~\citet{van1995software} initial work was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
+Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose metrics are primarily discussed in this section.The initial work of~\citet{van1995software} was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
 lines of code and Halstead's program volume, are also applicable to functional programs with slight modifications~\parencite{van1995software}. Other such metrics are the measures of testing effort (pathcount, cyclomatic complexity), callgraph measures (size, depth, arc-to-node ratio) and coupling measures~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
@@ -1470,19 +1470,16 @@ lines of code and Halstead's program volume, are also applicable to functional p
 
 ~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of callgraphs. 
 
-The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.
-
-
-Software Measurement for Functional Programming~\parencite{ryder2004software}
+The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.(TODO: Enemman tasta?)
 
 \subsection{Complexity of patterns}
 
-One of the most used features in functional programming is pattern matching. In Haskell, pattern matching is used in various ways. In addition to normal function arguments, data types are often used as arguments to pattern matching. The {\tt \_} wildcard can be used to match (or ignore) any argument, and patterns can also be used in function bodies. Constructing metrics to deduce the complexity of patterns is then an obvious first interesting step towards measuring FP programs.(TODO:
+One of the most used features in functional programming is pattern matching. In Haskell, pattern matching is used in various ways. In addition to normal function arguments, data types are often used as arguments to pattern matching. The {\tt \_} wildcard can be used to match (or ignore) arguments, and patterns can also be used in function bodies. Constructing metrics to deduce the complexity of patterns is then an obvious first interesting step towards measuring FP programs.(TODO:
 Lahde? Esimerkki PatMatchista?)
 
 ~\citet{ryder2004software} found a relatively weak correlation between the~\textit{number of pattern variables} and subjective complexity in two case-study programs. He argues that an increased number of variables in pattern matching also increases the effort required to comprehend that specific code. The case-study programs utilize pattern matching heavily, with 70-85\% of the functions containing patterns.
 
-The measure~\textit{number of overridden or overriding pattern variables} deals with the fact that pattern and expression variables can be easily overridden in functional programming. For example, a {\tt where} or {\tt let} are often used for denoting intermediary variables(TODO: Esimerkki?). The hypothesis is that an increased amount of overridden variables in patterns increase program complexity.~\citet{ryder2004software} finds a statistical correlation between the hypothesis
+The measure~\textit{number of overridden or overriding pattern variables} deals with the fact that pattern and expression variables can be easily overridden in functional programming. For example, {\tt where} or {\tt let} bindings are often used for denoting intermediary variables(TODO: Esimerkki?). The hypothesis is that an increased amount of overridden variables in patterns increase program complexity.~\citet{ryder2004software} finds a statistical correlation between the hypothesis
 and the metric, but it can be argued that such a programming style is detrimental in its own. Thus the measure should be used as a sign of the need to refactor any patterns containing redundant naming~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
@@ -1509,7 +1506,7 @@ and the metric, but it can be argued that such a programming style is detrimenta
 \end{comment}
 %}}}
 
-The~\textit{number of constructors} in a pattern can be an indicator of program complexity. Two hypotheses are provided by~\citet{ryder2004software}, where the first deals with the notion that an increased count of constructors also increases complexity. The second hypothesis argues, counteractively, that if the constructors are named properly, it can reduce subjective complexity of a function. Once again,~\citet{ryder2004software} found a slight statistical correlation
+The~\textit{number of constructors} in a pattern can be an indicator of program complexity. Two hypotheses are provided by~\citet{ryder2004software}, where the first deals with the notion that an increased number of constructors also increases complexity. The second hypothesis argues, counteractively, that if the constructors are named properly, it can reduce subjective complexity of a function. Once again,~\citet{ryder2004software} found a slight statistical correlation
 between an elevated usage of constructors in patterns and subjective complexity.
 %{{{
 \begin{comment}
@@ -1554,7 +1551,8 @@ Using the two case-study programs,~\citet{ryder2004software} found correlation b
 %}}}
 
 The~\textit{depth of nesting} in patterns can be measured. For example, {\tt [(a,b),(c,d)]} shows a list containing tuples. The maximum depth of the pattern is 2, since the nested elements amount to two (list and tuple). The sum of the depths, however, may be more accurate in depicting the level of nesting taking place.
-\begin{lstlisting}
+\begin{lstlisting}[caption={Example of depth of nesting~\parencite{ryder2004software}},label={lst:depth-of-nesting}]
+
 type Tuple = (Int, Int)
 type TupleList = [Tuple]
 
@@ -1565,7 +1563,7 @@ pattern2 :: TupleList -> Int
 pattern2 [(a,b), (c,d),(e,f)] = a + b + c + d + e + f
 \end{lstlisting}
 
-For both patterns, {\tt pattern1} and {\tt pattern2}, the maximum depth is 2. However, sums of the depths are not the same between the patterns. Finally,~\citet{ryder2004software} found a somewhat strong correlation for increased depth of nesting and complexity.
+For both patterns in listing~\ref{lst:depth-of-nesting}, {\tt pattern1} and {\tt pattern2}, the maximum depth is 2. However, sums of the depths are not the same between the patterns. Finally,~\citet{ryder2004software} found a somewhat strong correlation for increased depth of nesting and complexity.
 %{{{
 \begin{comment}
     When measuring the depth of nesting one must consider how to measure the
@@ -1602,7 +1600,7 @@ As it seems, the size of a pattern is perhaps the only indicator of its complexi
 
 \subsection{Distance between declarations and usage}
 
-The distance between two interacting functions is an interesting property to measure. It is likely that if the distance is large, also the source code is harder to be comprehended and the probability of errors in code increase. However, distance can be interpreted in multiple ways. The actual distance of source code lines can be referred as ``spatial'' distance measures, as where more semantic distance measures can be termed as ``conceptual'' distance measures.~\parenciteseveral{ryder2004software}. First, the~\textit{number of scopes} that are introduced for an executed function call can be quantified.
+The distance between two interacting functions is an interesting property to measure. It is likely that if the distance is large, also the source code is harder for the developer to comprehend and the probability of errors in code increase. However, distance can be interpreted in multiple ways. The actual distance of source code lines can be referred as ``spatial'' distance measures, as where more semantic distance measures can be termed as ``conceptual'' distance measures.~\parenciteseveral{ryder2004software}. First, the~\textit{number of scopes} that are introduced for an executed function call can be quantified.
 
 \begin{lstlisting}[numbers=left,caption={Example of number of scopes~\parencite{ryder2004software}},label={lst:number-of-scopes}]
 foo :: Int -> Int
@@ -1615,13 +1613,13 @@ bar a b = map fn c
         fn = \(x,y) -> foo (x+y)
 \end{lstlisting}
 
-\noindent Figure~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt (a,b)}, {\tt (fn c)}, and {\tt (x,y)} are considered as scopes for the function {\tt foo} when it is called. Thus measuring the number of scopes signals ``how complex the name-space of the program is at a particular point in the code'', but also indicates how nested the usage of functions is~\parencite{ryder2004software}.
+\noindent Listing~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt (a,b)}, {\tt (fn c)}, and {\tt (x,y)} are considered as scopes for the function {\tt foo} when it is called. Thus measuring the number of scopes signals ``how complex the name-space of the program is at a particular point in the code'', but also indicates how nested the usage of functions is~\parencite{ryder2004software}.(TODO: Tahan lisaselvitysta)
 
 A second approach provided by~\citet{ryder2004software} is to count the~\textit{number of declarations} in the scope of a function call. This is performed by counting the declarations introduced between the function call and its declaration. The scope that contains the declaration is ignored. For example in figure~\ref{lst:number-of-scopes}, {\tt foo} is called at line 8. The scopes needed for this operation are then {\tt (x,y)}, {\tt (c,fn)}, {\tt (a, b)}. The {\tt foo} scope itself is ignored. The purpose of this measurement is to indicate the ``traffic'' of the nested scopes. Finally,~\citet{ryder2004software} concludes that~\textit{nesting} of the local definitions is more important than the number of those definitions for indicating complexity.
 
-An example of spatial distance is to measure the actual source code lines from a function call to its declaration. In essence, the call to function {\tt foo} at line 8 (figure~\ref{lst:number-of-scopes}) is 7 source code lines away from its declaration (if empty lines are counted). The empirical results of~\citet{ryder2004software} leaves room for further research, since mixed results from the measure were found. 
+An example of spatial distance is to measure the actual source code lines from a function call to its declaration. In essence, the call to function {\tt foo} at line 8 in figure~\ref{lst:number-of-scopes} is seven source code lines away from its declaration, if empty lines are counted. The empirical results of~\citet{ryder2004software} leaves room for further research, since mixed results from the measure were found. 
 
-Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can e.g. contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees, it makes sense to count the amount of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
+Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees when compiling, it makes sense to count the amount of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
 representation details of the source code are dismissed. However,~\citet{ryder2004software} found no distinguishable difference between this approach and counting the source code lines. Further research is thus warranted.
 
 \subsection{Attributes of recursive Functions}
@@ -1629,7 +1627,7 @@ representation details of the source code are dismissed. However,~\citet{ryder20
 Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
 
 First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a return value of zero or one. This seemingly simple metric can correlate with the amount of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
-recursion produces a cyclic callgraph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) or non-trivial recursion at the same time. For this case, the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
+recursion produces a cyclic callgraph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) and non-trivial recursion at the same time. Thus the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
 
 Often recursion is invoked based on multiple paths in a function. The metric~\textit{number of recursive paths} determines the amount of paths leading to recursion in a function, which is argued to correlate with subjective complexity. 
 
@@ -1641,7 +1639,7 @@ toggleCase (x:xs)
         |  otherwise = toUpper x : toggleCase xs
 \end{lstlisting}
 
-In figure~\ref{lst:number-of-recursive-paths} the number of recursive paths is two. The resulting hypothesis is that the greater the number of recursive paths, the more complex the function is to be comprehended. However,~\citet{ryder2004software} found weak correlation with the number of recursive paths and complexity in the case study applications. This is most likely due to a minimal amount of recursive paths in actual functions, since introducing such complexity would be against good coding practices.
+In listing~\ref{lst:number-of-recursive-paths} the number of recursive paths is two. The resulting hypothesis is that the greater the number of recursive paths, the more complex the function is to comprehend. However,~\citet{ryder2004software} found weak correlation with the number of recursive paths and complexity in the case study applications. This is most likely due to a minimal amount of recursive paths in actual functions, since introducing such complexity would be against good coding practices.
 
 Counting the~\textit{number of non-trivial and trivial recursion} can indicate complexity in the code base. As presented previously, trivial recursion occurs when a function invokes itself, as where non-trivial recursion deals with two functions that invoke each other. If the amount of non-trivial recursion exceeds trivial recursion, it can be hypothesised that the complexity of the code also increases. Again,~\citet{ryder2004software} found no support for the hypothesis,
 most likely since the studied applications did not utilize non-trivial recursion to an extent.
