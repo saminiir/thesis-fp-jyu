@@ -1658,6 +1658,9 @@ As presented earlier in chapter~\ref{chap:software_metrics}, callgraphs are a co
 Callgraphs can indicate~\textit{strongly connected components} in the program. When nodes of the callgraph are coupled so that they call each other, they are strongly connected. This connection can also be indirect by having a more complex graph that produces cyclic paths. The hypothesis is that the size of the strongly connected components also correlate with increased maintenance effort. This is because every change in these kind of coupled functions have the potential to also force
 changes in the strongly connected components.~\parenciteseveral{ryder2004software}. The empirical results of~\citet{ryder2004software} do not point out a strong correlation with the hypothesis, however. Further validation for the metric is warranted.
 
+The~\textit{indegree of a function} indicates how many times a function is called. This can point out ``important'' functions and in the same time, problematic areas of the program code. However,~\citet{ryder2004software} found no correlation of the property with subjective complexity. In similar spirit, the~\textit{outdegree} of a function counts the number of outbound function calls from a given function. Since this indicates how coupled the function is to other functions, it can also
+indicate how likely the function is to change because of other changes. As is,~\citet{ryder2004software} found correlation with the hypothesis in both case-study applications. The results are encouraging, but they warrant further empirical application of the metric.
+
 ~\begin{itemize}
     \item Indegree of a function
     \item Outdegree of a function 
