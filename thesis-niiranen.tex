@@ -1651,14 +1651,14 @@ Lastly, all of the recursion-specific metrics are likely to interact with each o
 
 -Critique: Don't use explicit recursion, use fold!
 
-~\begin{itemize}
-    \item Number of trivial and non-trivial recursive paths
-    \item Sum and product of recursive path lengths
-~\end{itemize}
-
 \subsection{Attributes of callgraphs}
+
+As presented earlier in chapter~\ref{chap:software_metrics}, callgraphs are a convenient way of rendering and analyzing the data flow of a program. As functions are the main tool of functional languages, it should be possible to utilize much of the same metrics of callgraphs to the functional paradigm.
+
+Callgraphs can indicate~\textit{strongly connected components} in the program. When nodes of the callgraph are coupled so that they call each other, they are strongly connected. This connection can also be indirect by having a more complex graph that produces cyclic paths. The hypothesis is that the size of the strongly connected components also correlate with increased maintenance effort. This is because every change in these kind of coupled functions have the potential to also force
+changes in the strongly connected components.~\parenciteseveral{ryder2004software}. The empirical results of~\citet{ryder2004software} do not point out a strong correlation with the hypothesis, however. Further validation for the metric is warranted.
+
 ~\begin{itemize}
-    \item Strongly connected components
     \item Indegree of a function
     \item Outdegree of a function 
     \item Size of a functions callgraph
