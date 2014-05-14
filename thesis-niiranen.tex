@@ -445,6 +445,7 @@ However, the actual TER is typically no better than 40%. The typical TER for bra
 %}}}
 
 \section{Data-flow attributes}
+\label{section:data-flow-attributes}
 
 The metrics so far have dealt with~\textit{intra-modular measures}, but another interesting application of software measurement is how different program modules relate to each other in terms of structure and modularity~\parencite{fenton1998software}.~\citet{fenton1998software} propose that a module is any program construct that can be ``at least theoretically separately compilable''. 
 
@@ -1661,11 +1662,46 @@ changes in the strongly connected components.~\parenciteseveral{ryder2004softwar
 The~\textit{indegree of a function} indicates how many times a function is called. This can point out ``important'' functions and in the same time, problematic areas of the program code. However,~\citet{ryder2004software} found no correlation of the property with subjective complexity. In similar spirit, the~\textit{outdegree} of a function counts the number of outbound function calls from a given function. Since this indicates how coupled the function is to other functions, it can also
 indicate how likely the function is to change because of other changes. As is,~\citet{ryder2004software} found correlation with the hypothesis in both case-study applications. The results are encouraging, but they warrant further empirical application of the metric.
 
-~\begin{itemize}
-    \item Indegree of a function
-    \item Outdegree of a function 
-    \item Size of a functions callgraph
-~\end{itemize}
+A useful property of callgraphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of callgraphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the amount of function calls (arcs) with functions (nodes) (TODO: ?). Depth and width is calculated simply by how wide or deep the callgraph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
+
+\begin{figure}[h]\centering
+    \begin{tikzpicture}[>=latex']
+        \tikzset{block/.style= {draw, rectangle, align=center,minimum width=2cm,minimum height=1cm},
+        rblock/.style={
+                        draw, 
+                        shape=rectangle,
+                        rounded corners=1.5em,
+                        align=center,
+                        minimum width=2cm,
+                        minimum height=1cm
+                      },
+        input/.style={ % requires library shapes.geometric
+                        draw,
+                        trapezium,
+                        trapezium left angle=60,
+                        trapezium right angle=120,
+                        minimum width=2cm,
+                        align=center,
+                        minimum height=1cm
+                     },
+        }
+        \node [rblock]  (start) {readFile};
+        \node [rblock, below right =1.5cm of start] (acquire) {openFile};
+        \node [rblock, below right =1.5cm and -5cm of start] (readContents) {readContents};
+        \node [rblock, below =1.5cm of readContents] (readChar) {readChar};
+
+    %% paths
+        \path[draw,->] (start) edge (acquire)
+                       (start) edge (readContents)
+                       (readContents) edge (readChar)
+                       ;
+    \end{tikzpicture}
+  \caption[Example of subgraph~\parencite{ryder2004software}
+  ]{Example of subgraph~\parencite{ryder2004software}}
+    \label{fig:subgraph-example}
+\end{figure}
+
+The subgraph accurately depicts the dependencies of a given function (see figure~\ref{fig:subgraph-example}).~\citet{ryder2004software} argues that if the subgraph ``grows'' too deep or too wide, the more problematic the function is to maintain and comprehend.~\citet{ryder2004software} found correlation for the hypothesis in his larger case-study application, where the function call-graphs are more complex.
 
 \subsection{Miscellaneous attributes of functions}
 ~\begin{itemize}
