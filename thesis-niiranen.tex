@@ -1703,6 +1703,8 @@ A useful property of callgraphs is that~\textit{subgraphs} of specific function 
 
 The subgraph accurately depicts the dependencies of a given function (see figure~\ref{fig:subgraph-example}).~\citet{ryder2004software} argues that if the subgraph ``grows'' too deep or too wide, the more problematic the function is to maintain and comprehend.~\citet{ryder2004software} found correlation for the hypothesis in his larger case-study application, where the function call-graphs are more complex.
 
+The interaction of the callgraph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
+
 \subsection{Miscellaneous attributes of functions}
 ~\begin{itemize}
     \item Pathcount of a function~\parencite{barnes2000evolution}
