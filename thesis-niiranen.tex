@@ -276,6 +276,7 @@ Clearly, the definition of code length is influenced by the way in which it is t
 TODO: Critique on LOC: Some misconceptions about lines of code~\parencite{rosenberg1997some}
 
 \subsection{Halstead's program volume}
+\label{subsection:halstead-metric}
 
 One of the earliest static analysis methods for source code is the Halstead-metric~\parencite{halstead1977elements}. With an effort to unify empirical research on software,~\citet{halstead1977elements} divides program code into tokens of~\textit{operators} and~\textit{operands} that can be used to assess several characteristics of the software regardless of, for example, the implementation language. Operators can be considered as ``actions'' in the source code (e.g. in imperative languages, the assignment operator =). Operands represent data (e.g. variables)~\parencite{ryder2004software}. Moreover, the variables of the Halstead-metric are:
 %{{{
@@ -1721,9 +1722,9 @@ func (x:y:xs) = func xs
 
 An additional branch is introduced by the clause {\tt x > 0}. If the conditional fails, the execution continues on to the last pattern match. Thus the pathcount of this function is four.~\citet{ryder2004software} argues that this kind of subtle increase in pathcount is easy to miss when studying the source code, and that they manifest often by e.g. leaving the {\tt otherwise} block from a guard expression in Haskell. On the other hand,~\citet{ryder2004software} found no statistically significant correlation between the metric and subjective complexity. 
 
+The~\textit{size} of a function is a simple, yet heavily utilized measurement of complexity.~\citet{ryder2004software} modified the initial size metric specific to functional programming provided by~\citet{van1995software}. The size is calculated much in the same fashion as in the metrics of~\citet{halstead1977elements} (see subsection~\ref{subsection:halstead-metric}), where the program code is divided into~\textit{operands} and~\textit{operators}. Namely, operators include the standard operators and language keywords, such as {\tt :}, {\tt ++} and {\tt where} in Haskell. After applying the metric to his two case-study applications,~\citet{ryder2004software} found some correlation for increased size of functions and subjective complexity. This might especially apply to functional languages, where functions are intended to be kept as small as possible and numerous.
+
 ~\begin{itemize}
-    \item Size of a function
-    \item Operators and operands
     \item Outdegree of a function 
     \item Size of a functions callgraph
 ~\end{itemize}
