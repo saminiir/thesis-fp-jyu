@@ -1706,8 +1706,22 @@ The subgraph accurately depicts the dependencies of a given function (see figure
 The interaction of the callgraph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
 
 \subsection{Miscellaneous attributes of functions}
+
+As many of the imperative metrics presented in chapter~\ref{chap:software_metrics} are also applicable to programs written in functional languages, it is interesting to explore the correlation of these metrics on complexity. For example, the~\textit{pathcount} and~\textit{operators and operands} are straightforward metrics often used in imperative languages, but may also provide additional insight into software measurement in functional programming.
+
+The pathcount metric is calculated by summing all of the logical paths a program can take. In specific, every branching logic in the function add up to the metric. For example in Haskell, the {\tt if ... then ... else ...} and {\tt case} expressions are branching by definition. However, this branching can also be somewhat subtle. In listing~\ref{lst:pathcount-of-function} the function has three obvious branches in the form of pattern matches.~\parenciteseveral{ryder2004software}.
+
+\begin{lstlisting}[caption={Example of function's pathcount~\parencite{ryder2004software}},label={lst:pathcount-of-function}]
+func :: [Int] -> Int
+func [] = 0
+func (x:xs)
+        | x > 0 = func xs
+func (x:y:xs) = func xs
+\end{lstlisting}
+
+An additional branch is introduced by the clause {\tt x > 0}. If the conditional fails, the execution continues on to the last pattern match. Thus the pathcount of this function is four.~\citet{ryder2004software} argues that this kind of subtle increase in pathcount is easy to miss when studying the source code, and that they manifest often by e.g. leaving the {\tt otherwise} block from a guard expression in Haskell. On the other hand,~\citet{ryder2004software} found no statistically significant correlation between the metric and subjective complexity. 
+
 ~\begin{itemize}
-    \item Pathcount of a function~\parencite{barnes2000evolution}
     \item Size of a function
     \item Operators and operands
     \item Outdegree of a function 
