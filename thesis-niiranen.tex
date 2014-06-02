@@ -151,6 +151,33 @@ The research is expected to be of significance to researchers and practitioners 
 \begin{comment}
 There are two general types of criticisms that can be applied to current software metrics. The first category are those theoretical criticisms that are leveled at conventional software metrics as they are applied to traditional, non-00 software design and development. Kearney, et al. criticized software complexity metrics as being without solid theoretical bases and lacking appropriate properties [21]. Vessey and Weber also commented on the general lack of theoretical rigor in the
 structured programming literature [41]. Both Prather and Weyuker proposed that traditional software complexity metrics do not possess appropriate mathematical properties, and consequently fail to display what might be termed normal predictable behavior [34], [47].~/parencite{chidamber1994metrics}.
+
+One of the peculiarities of software engineering rela-
+tive to other engineering and scientific disciplines is its
+lack of maturity (Abran et al., 2003; Abran, 1998).
+Symptoms of this are the small number of empirical
+studies and the lack of an empirical basis in the aca-
+demic world (exceptions are works like Boehm et al.,
+2005; Endres and Rombach, 2003), and the very limited
+number of internationally accepted software measure-
+ment methods available for practitioners. In mature dis-
+ciplines, there is international consensus on measurement,
+in addition to established measurement methods and an
+etalon for each. There is also a significant number of
+measuring instruments to be used in different contexts
+and under various constraints, many of them often cali-
+brated against internationally recognized, and traceable,
+etalons. In the software domain, we have none of the
+above, with the exception of functional size measurement
+with an ISO meta-standard prescribing key concepts of
+the entity and attribute to be measured ISO/IEC 14143
+(2003) and four ISO recognized measurement methods
+ISO/IEC 19761, COSMIC-FFP (2003), ISO/IEC 20968
+(2001),ISO/IEC20968(2001)andISO/IEC24570
+(2001), since it has not yet reached the stage of having
+a single universal way of measuring software functional
+size.~\parencite{habra2008framework}.
+
 \end{comment}
 %}}}
 
@@ -1724,10 +1751,22 @@ An additional branch is introduced by the clause {\tt x > 0}. If the conditional
 
 The~\textit{size} of a function is a simple, yet heavily utilized measurement of complexity.~\citet{ryder2004software} modified the initial size metric specific to functional programming provided by~\citet{van1995software}. The size is calculated much in the same fashion as in the metrics of~\citet{halstead1977elements} (see subsection~\ref{subsection:halstead-metric}), where the program code is divided into~\textit{operands} and~\textit{operators}. Namely, operators include the standard operators and language keywords, such as {\tt :}, {\tt ++} and {\tt where} in Haskell. After applying the metric to his two case-study applications,~\citet{ryder2004software} found some correlation for increased size of functions and subjective complexity. This might especially apply to functional languages, where functions are intended to be kept as small as possible and numerous.
 
-~\begin{itemize}
-    \item Outdegree of a function 
-    \item Size of a functions callgraph
-~\end{itemize}
+\subsection{Referential transparency as a measure}
+
+~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables it depends on that could affect the computation. Referential transparency also makes the program easier to reason about, both for the programmer and the compiler.~\parenciteseveral{muddu2013metrics}.TODO: Parempi lahde?
+
+~\textit{Referential Transparency Index} (RTI)~\parencite{muddu2013metrics} quantifies ``the proportion of all the defined methods which can be considered pure functions''. The metric is calculated by the ratio of pure (referentially transparent) functions that are used to the amount of overall used functions in the system. The~\textit{Intermodule Referential Transparency Index} (IRTI) calculates the proportion of referentially transparent function calls from a certain module to the rest of the system by the ratio of a module's pure function calls and the overall amount of functions in the system.~\parenciteseveral{muddu2013metrics}.
+%{{{
+\begin{comment}
+In the Intermodule Referential Transparency Index (IRTI) we measure the proportion of the calls in a certain module to methods in other modules which are pure over all the intermodule calls: ~\parencite{muddu2013metrics}
+\end{comment}
+%}}}
+
+~\parencite{muddu2013metrics}
+
+\subsection{Higher-order functions as a measure}
+
+~\parencite{muddu2013metrics}
 
 \subsection{Degree of polymorphism}
 
