@@ -1753,16 +1753,18 @@ The~\textit{size} of a function is a simple, yet heavily utilized measurement of
 
 \subsection{Referential transparency as a measure}
 
-~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables it depends on that could affect the computation. Referential transparency also makes the program easier to reason about, both for the programmer and the compiler.~\parenciteseveral{muddu2013metrics}.TODO: Parempi lahde?
+~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables as dependencies that could affect the computation. Referential transparency also makes the program easier to reason about and allows the compiler to provide heavy optimizations of such ``pure'' functions.~\parenciteseveral{hughes1989functional}.
 
-~\textit{Referential Transparency Index} (RTI)~\parencite{muddu2013metrics} quantifies ``the proportion of all the defined methods which can be considered pure functions''. The metric is calculated by the ratio of pure (referentially transparent) functions that are used to the amount of overall used functions in the system. The~\textit{Intermodule Referential Transparency Index} (IRTI) calculates the proportion of referentially transparent function calls from a certain module to the rest of the system by the ratio of a module's pure function calls and the overall amount of functions in the system. Furthermore, by taking the average of IRTI, the metric can be calculated for the entire system.~\parenciteseveral{muddu2013metrics}.
+~\textit{Referential Transparency Index} (RTI)~\parencite{muddu2013metrics} quantifies ``the proportion of all the defined methods which can be considered pure functions''. The metric is calculated by the ratio of pure (referentially transparent) functions that are in-use and the amount of overall used functions in the system. The~\textit{Intermodule Referential Transparency Index} (IRTI) calculates the proportion of referentially transparent function calls from a certain module to the rest of the system by the ratio of a module's pure function calls and the overall amount of functions in the system. Furthermore, by taking the average of IRTI, the metric can be calculated for the entire system.~\parenciteseveral{muddu2013metrics}.
 %{{{
 \begin{comment}
 In the Intermodule Referential Transparency Index (IRTI) we measure the proportion of the calls in a certain module to methods in other modules which are pure over all the intermodule calls: ~\parencite{muddu2013metrics}
 \end{comment}
 %}}}
 
-~\parencite{muddu2013metrics}
+~\citet{muddu2013metrics} validate the provided metrics by assessing their impact on the modularity of a program. A well-modularized system contains separate modules that are loosely-coupled and thoroughly tested. The program is then easier to maintain, contains fewer bugs and is generally more extendable. The metrics were tested against three popular Scala open-source projects to indicate their level of modularity. The RTI metric was not concentrated on, partly because it
+yielded lowest scores of the metrics. The inter-module metric, IRTI, however showed increases between versions, suggesting that updates to software brought about refactorings that included switching the use of impure functions in favour of pure functions, and specifically those that are used between modules~\parencite{muddu2013metrics}. As it stands, function pureness is something of a desirable quality in functional programming and the RTI and IRTI metrics are useful if one wants to
+quantify that property.
 
 \subsection{Metrics for Higher-order functions}
 
