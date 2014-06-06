@@ -1768,7 +1768,7 @@ quantify that property.
 
 \subsection{Metrics for Higher-order functions}
 
-The use of higher-order functions is prevalent in functional programming. Higher-order functions are functions that receive functions as parameters and can output a function as their return value. The primary benefit of higher-order functions is perhaps in modularization, since e.g. data structures can be traversed by higher-order functions without explicitly declaring how the data is utilized~\parencite{muddu2013metrics}.
+The use of higher-order functions is prevalent in functional programming. Higher-order functions are functions that receive functions as parameters and can output a function as their return value. The primary benefit of higher-order functions is in modularization, since e.g. data structures can be traversed by higher-order functions without explicitly declaring how the data is utilized~\parencite{hughes1989functional}.
 %{{{
 \begin{comment}
 In functional programming the use of first-order functions
@@ -1780,9 +1780,15 @@ is clearly an advantage w.r.t modularization..~\parencite{muddu2013metrics}.
 \end{comment}
 %}}}
 
-Slightly confusingly,~\citet{muddu2013metrics} define several metrics for ``first order'' functions, even though the more prevalent term seems to be higher-orderism.~\citet{muddu2013metrics} argue that if first-order functions are separated in different modules, additional dependencies are created and thus program modularization might suffer.
+Slightly confusingly,~\citet{muddu2013metrics} define several metrics for ``first order'' functions, even though the more prevalent term seems to be higher-orderism~\parencite{hughes1989functional}. This thesis treats the terms higher-order and first-order as interchangeable.~\citet{muddu2013metrics} argue that if first-order functions are separated in different modules, additional dependencies are created and thus the level of program modularization might suffer. This~\textit{Intermodule First Order Functions Index} (IFOI) can be resolved by taking the minimum of three calculations: 
 
-~\parencite{muddu2013metrics}
+\begin{itemize}
+        \item Ratio of the amount of functions in a module that have at least one external function as their parameter and the amount of functions in the module with a function as a parameter.  
+        \item Ratio of the amount of external functions that are called in a first-order way from the current module and the amount of functions outside the module
+        \item ``The proportion of other modules whose methods are called upon in a first order way by current module's methods''~\parencite{muddu2013metrics}
+\end{itemize}
+
+The~\textit{Pure First Order Function Index} (PFOI) metric addresses the fact that a function being passed in a higher-order manner benefits of the property of pureness, since it increases program modularity. PFOI is defined at a system level by measuring ``the proportion of all the first order calls which are pure methods''~\parencite{muddu2013metrics}. Furthermore, the~\textit{Intermodule Pure First Order Function Index} (IPFOI) metric is similar, but calculates the ratio of first order calls to pure functions in external modules and the amount of first order function calls executed~\parencite{muddu2013metrics}.
 
 \subsection{Degree of polymorphism}
 
