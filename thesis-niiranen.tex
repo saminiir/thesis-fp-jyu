@@ -1763,12 +1763,12 @@ In the Intermodule Referential Transparency Index (IRTI) we measure the proporti
 %}}}
 
 ~\citet{muddu2013metrics} validate the provided metrics by assessing their impact on the modularity of a program. A well-modularized system contains separate modules that are loosely-coupled and thoroughly tested. The program is then easier to maintain, contains fewer bugs and is generally more extendable. The metrics were tested against three popular Scala open-source projects to indicate their level of modularity. The RTI metric was not concentrated on, partly because it
-yielded lowest scores of the metrics. The inter-module metric, IRTI, however showed increases between versions, suggesting that updates to software brought about refactorings that included switching the use of impure functions in favour of pure functions, and specifically those that are used between modules~\parencite{muddu2013metrics}. As it stands, function pureness is something of a desirable quality in functional programming and the RTI and IRTI metrics are useful if one wants to
+yielded lowest scores of the metrics. The inter-module metric, IRTI, however showed increases between versions, suggesting that updates to software brought about refactorings that included switching the use of impure functions to pure functions, and specifically those that are used between modules~\parencite{muddu2013metrics}. As it stands, function pureness is something of a desirable quality in functional programming and the RTI and IRTI metrics are useful if one wants to
 quantify that property.
 
-\subsection{Metrics for Higher-order functions}
+\subsection{Metrics for higher-order functions}
 
-The use of higher-order functions is prevalent in functional programming. Higher-order functions are functions that receive functions as parameters and can output a function as their return value. The primary benefit of higher-order functions is in modularization, since e.g. data structures can be traversed by higher-order functions without explicitly declaring how the data is utilized~\parencite{hughes1989functional}.
+The use of higher-order functions is prevalent in functional programming. Higher-order functions are functions that receive functions as parameters and can output a function as their return value. The primary benefit of higher-order functions is in modularization, since e.g. data structures can be traversed by these functions without explicitly declaring how the data is utilized~\parencite{hughes1989functional}.
 %{{{
 \begin{comment}
 In functional programming the use of first-order functions
@@ -1780,7 +1780,7 @@ is clearly an advantage w.r.t modularization..~\parencite{muddu2013metrics}.
 \end{comment}
 %}}}
 
-Slightly confusingly,~\citet{muddu2013metrics} define several metrics for ``first order'' functions, even though the more prevalent term seems to be higher-orderism~\parencite{hughes1989functional}. This thesis treats the terms higher-order and first-order as interchangeable.~\citet{muddu2013metrics} argue that if first-order functions are separated in different modules, additional dependencies are created and thus the level of program modularization might suffer. This~\textit{Intermodule First Order Functions Index} (IFOI) can be resolved by taking the minimum of three calculations: 
+Slightly confusingly,~\citet{muddu2013metrics} define several metrics for ``first order'' functions, even though the more prevalent term seems to be higher-orderism~\parencite{hughes1989functional}. This thesis treats the terms higher-order and first-order as interchangeable.~\citet{muddu2013metrics} argue that if related first-order functions are separated in different modules, additional dependencies are created and thus the level of program modularization might suffer. This~\textit{Intermodule First Order Functions Index} (IFOI) can be resolved by taking the minimum of three calculations: 
 
 \begin{itemize}
         \item Ratio of the amount of functions in a module that have at least one external function as their parameter and the amount of functions in the module with a function as a parameter.  
