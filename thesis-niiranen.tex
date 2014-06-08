@@ -1790,6 +1790,20 @@ Slightly confusingly,~\citet{muddu2013metrics} define several metrics for ``firs
 
 The~\textit{Pure First Order Function Index} (PFOI) metric addresses the fact that a function being passed in a higher-order manner benefits of the property of pureness, since it increases program modularity. PFOI is defined at a system level by measuring ``the proportion of all the first order calls which are pure methods''~\parencite{muddu2013metrics}. Furthermore, the~\textit{Intermodule Pure First Order Function Index} (IPFOI) metric is similar, but calculates the ratio of first order calls to pure functions in external modules and the amount of first order function calls executed~\parencite{muddu2013metrics}.
 
+The metrics proposed by~\citet{muddu2013metrics} have only been tested with few open-source projects, and thus should be further validated to assess their feasibility. Furthermore, the results of the metrics are somewhat ambiguous and most benefit would be drawn if the developers and architects of the modules themselves would address this issue~\parencite{muddu2013metrics}. 
+%{{{
+\begin{comment}
+The proposed metrics are validated on open source software
+systems and are yet to be tested on large scale enterprise
+software, but the evidence so far obtained clearly validates the
+assumptions on which the metrics were based. The modules
+created during the experiments are not based on developer or
+architect inputs, who would have a better understanding of
+the system and the testing against such a system will further
+strengthen the validity of the metrics.~\parencite{muddu2013metrics}.
+\end{comment}
+%}}}
+
 \subsection{Degree of polymorphism}
 
 
