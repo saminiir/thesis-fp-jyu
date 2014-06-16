@@ -305,7 +305,8 @@ TODO: Critique on LOC: Some misconceptions about lines of code~\parencite{rosenb
 \subsection{Halstead's program volume}
 \label{subsection:halstead-metric}
 
-One of the earliest static analysis methods for source code is the Halstead-metric~\parencite{halstead1977elements}. With an effort to unify empirical research on software,~\citet{halstead1977elements} divides program code into tokens of~\textit{operators} and~\textit{operands} that can be used to assess several characteristics of the software regardless of, for example, the implementation language. Operators can be considered as ``actions'' in the source code (e.g. in imperative languages, the assignment operator =). Operands represent data (e.g. variables)~\parencite{ryder2004software}. Moreover, the variables of the Halstead-metric are:
+One of the earliest static analysis methods for source code is the Halstead-metric~\parencite{halstead1977elements}. With an effort to unify empirical research on software,~\citet{halstead1977elements} divides program code into tokens of~\textit{operators} and~\textit{operands} that can be used to assess several characteristics of the software regardless of, for example, the implementation language. Operators can be considered as ``actions'' in
+the source code, like the the assignment operator {\tt =} in imperative languages. Operands represent data, such as variables~\parencite{ryder2004software}. Moreover, the variables of the Halstead-metric are:
 %{{{
 \begin{comment}
 Halstead classifies symbols in a program into two classes, those that are used to specify actions are classed as operators while symbols that represent data are classed as operands.~\parencite{ryder2004software}.
@@ -320,7 +321,16 @@ N_1 = \text{total occurrences of operators}\\
 N_2 = \text{total occurrences of operands}\\
 \end{flalign*}
 
-\noindent These variables are then used to quantify several properties such as the~\textit{length},~\textit{vocabulary},~\textit{volume},~\textit{program level} and~\textit{difficulty} of the source code. (TODO: Calculations and examples of the formulas)
+\noindent These variables are then used to quantify several properties such as the~\textit{length},~\textit{vocabulary},~\textit{volume},~\textit{program level} and~\textit{difficulty} of the source code. The example listing~\ref{lst:halstead-example} of C code has thus 4 operands ({\tt a, b, sum, "sum of.."}) and 4 operators ({\tt int, =, +, printf}).
+
+\begin{lstlisting}[language=C,caption=Halstead volume quantity example,label=lst:halstead-example]
+int a = 1;
+int b = 2;
+int sum = a + b;
+printf("sum of %d and %d is %d\n", a, b, sum);
+\end{lstlisting}
+
+(TODO: Calculations and examples of the formulas)
 
 \section{Structural metrics}
 
