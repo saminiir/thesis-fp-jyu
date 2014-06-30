@@ -935,7 +935,7 @@ presented.~\parenciteseveral{beck2011congruence}.
 \end{comment}
 %}}}
 
-The principles of~\textit{Low coupling and high cohesion} were first proposed by~\citet{stevens1974structured}, who argue that better program code can be achieved by encapsulating similar functionality with similar dependencies to one entity (high cohesion), and in turn, separating functionality that have few dependencies between each other (low coupling) to separate entities~\parencite{beck2011congruence}. 
+The principles of~\textit{Low coupling} and~\textit{high cohesion} were first proposed by~\citet{stevens1974structured}, who argue that better program code can be achieved by encapsulating similar functionality with similar dependencies to one entity (high cohesion), and in turn, separating functionality that have few dependencies between each other (low coupling) to separate entities~\parencite{beck2011congruence}. 
 
 Furthermore,~\parencite{parnas1971information} introduced the notion of ``information hiding'', where restricting information about components and libraries to their interfaces are seen beneficial for the cycle of development. This encourages well-behaved use of other modules without compromising the control of the authors on the internal implementation of those modules~\parencite{parnas1971information}. 
 %{{{
@@ -955,7 +955,13 @@ Furthermore,~\parencite{parnas1971information} introduced the notion of ``inform
 
 An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
 
+~\parencite{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by the other class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
 
+~\textit{Fan-Out Similarity (FO)}~\parencite{beck2011congruence} addresses the fact that the coupling of two entities can be indirect. For example, two classes can be related by extending the same class or implementing similar interfaces. Furthermore, the two classes can aggregate similar classes and components, thus increasing their coupling. Also, simply utilizing the same entities increases the coupling of two classes.
+
+~\textit{Evolutionary coupling}~\parencite{beck2011congruence} occurs when two seemingly unrelated entities are often changed simultaneously during development. The metric~\textit{support} quantifies the amount of common changes between the two entities.~\textit{Confidence} normalizes the support-metric by the total number of changes of one of the artifacts.
+
+The~\textit{code clone} metric~\parencite{beck2011congruence} determines the duplication of code in the application by comparing two classes and extracting their similarity in relevance to code. This is derived from the observation that changing such a ``code clone'' also requires the modification of other similar application parts, thus resulting in an increased coupling. This is derived from the observation that changing such a ``code clone'' also requires the modification of other similar application parts, thus resulting in an increased coupling. However, one can argue that sometimes duplication is desirable, e.g. for performance reasons.
 
 ~\citet{sarkar2007api} measure the quality of modularization 
 ~\parencite{sarkar2007api}
