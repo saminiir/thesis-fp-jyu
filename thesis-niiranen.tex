@@ -927,7 +927,37 @@ classes.~\parenciteseveral{chidamber1994metrics}.
 
 \section{Modularity metrics}
 
-Structure is crucial for the ease of development and maintenance of the application.~\citet{sarkar2007api} measure the quality of modularization 
+The complexity of an application is managed by structuring and modularizing the source code into logical parts that lessen the effort of maintenance and further development. For instance, namespaces are used to group similar program code entities together, classes encapsulate shared functionality and components provide reusable features. Although modularization of complex entities is not unique to software engineering, several principles for it have been
+presented.~\parenciteseveral{beck2011congruence}.
+%{{{
+\begin{comment}
+
+\end{comment}
+%}}}
+
+The principles of~\textit{Low coupling and high cohesion} were first proposed by~\citet{stevens1974structured}, who argue that better program code can be achieved by encapsulating similar functionality with similar dependencies to one entity (high cohesion), and in turn, separating functionality that have few dependencies between each other (low coupling) to separate entities~\parencite{beck2011congruence}. 
+
+Furthermore,~\parencite{parnas1971information} introduced the notion of ``information hiding'', where restricting information about components and libraries to their interfaces are seen beneficial for the cycle of development. This encourages well-behaved use of other modules without compromising the control of the authors on the internal implementation of those modules~\parencite{parnas1971information}. 
+%{{{
+\begin{comment}
+    Our concerns about the inconsistent decision orderings were based 
+    on the assumption that information would be used shortly after the cor-
+    responding decision. The restrictions placed by the three considerations 
+    are considerably relaxed if we have the possibility of hiding some decisions 
+    from each group. For example, we have noted a conflict between the desire 
+    to produce an external specification early and the desire to produce a 
+    system for which the external interface is easily changed. We can avoid 
+    that conflict by designing the external interface, using it as a check 
+    on the remaining work, but hiding the details that we think likely to 
+    change from those who should not use them.~\parencite{parnas1971information}.
+\end{comment}
+%}}}
+
+An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
+
+
+
+~\citet{sarkar2007api} measure the quality of modularization 
 ~\parencite{sarkar2007api}
 ~\parencite{beck2011congruence}
 
