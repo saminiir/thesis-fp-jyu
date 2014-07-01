@@ -967,9 +967,19 @@ The last metric provided by~\parencite{beck2011congruence} is~\textit{semantic s
 
 ~\citet{beck2011congruence} test the coupling metrics by applying them into 16 Java software projects and inspecting their effect on modularity. Structural dependencies (SD) received high correlation values and the authors estimate that the result stems from the fact that low coupling and high cohesion modularization principle~\parencite{stevens1974structured} is widely used in software design. Information hiding~\parencite{parnas1971information} also received correlation through the metrics fan-out similarity and evolutionary coupling. Code ownership resulted in low correlation, thus decreasing the plausibility of Conway's law~\parencite{conway1968committees} in software design. The rest of the modularization metrics showed medium-to-slight correlation values.
 
-~\citet{sarkar2007api} measure the quality of modularization 
-~\parencite{sarkar2007api}
-~\parencite{beck2011congruence}
+~\citet{sarkar2007api} provide several modularity and coupling metrics that specifically inspect the effect of Application Programming Interfaces (APIs) on the quality of the system as a whole. The authors argue that software generally considered as of high quality also exhibit above-average interfaces, which in turn, leads to high cohesion, low coupling and information hiding. The metrics were tested on several highly regarded open-source software projects, such as MySQL, GCC and the Linux Kernel. The metrics were controlled for results by generating module sets that contained randomly assigned functions and files.
+
+Several of the metrics presented by~\citet{sarkar2007api} show degraded values when the human-formed modular structure of the software is disassembled. However, as often is with software metrics, no single value should be used for drawing conclusions about the software. Additionally, the validation of the metrics is still insufficient and further research is warranted.
+%{{{
+\begin{comment}
+    These observations regarding the various metrics as we
+    go from human modularization to random modularization
+    speak to the fact that any single metric all by itself does not
+    tell us much about the quality of modularization. For a
+    composite picture of the quality of modularization, one has
+    no choice but to examine all the metrics.~\parencite{sarkar2007api}.
+\end{comment}
+%}}}
 
 \section{Change metrics}
 
