@@ -1737,7 +1737,7 @@ An example of spatial distance is to measure the actual source code lines from a
 Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees when compiling, it makes sense to count the amount of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
 representation details of the source code are dismissed. However,~\citet{ryder2004software} found no distinguishable difference between this approach and counting the source code lines. Further research is thus warranted.
 
-\subsection{Attributes of recursive Functions}
+\subsection{Attributes of recursive functions}
 
 Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
 
