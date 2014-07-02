@@ -433,12 +433,20 @@ The flowgraph is a good model for defining measures of control-flow structure, b
 
 \subsection{Cyclomatic complexity}
 
-~\textit{Cyclomatic complexity}~\parencite{mccabe1976complexity} utilizes flowgraphs to evaluate the complexity of a program's decision structure. A program is represented as a flowgraph $F$ with single entry and exit points of execution. The~\textit{cyclomatic number} is then calculated as:
-\begin{align}
+The~\textit{Cyclomatic complexity} metric~\parencite{mccabe1976complexity} utilizes flowgraphs to evaluate the complexity of a program's decision structure. A program is represented as a flowgraph $F$ with single entry and exit points of execution. The~\textit{cyclomatic number} is then calculated as:
+\begin{flalign*}
 v(F) = e - n + 2
-\end{align}
+\end{flalign*}
 
-\noindent where the flowgraph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}.~\citet{fenton1998software} agree that the measurement is objective, but argue concurrently that the cyclomatic number is a poor indicator of ``general complexity'' of a program's structure. Mainly because this ``complexity'' of a flowgraph $F$ does not necessary hold in conjuction with general measurement theory and its ``intuitive relations about complexity''.~\citet{fenton1998software} do suggest, however, that cyclomatic number is a well-suited indicator for how difficult the program is to test and maintain.
+\noindent where the flowgraph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit when refactoring of the module should be considered.
+%{{{
+\begin{comment}
+Programmers have been required to calculate complexity as they create software modules. When the complexity exceeded 10 they had to either recognize and modularize subfunctions or redo the software. The intention was to keep the "size" of the modules manageable and allow for testing all the independent paths~\parencite{mccabe1976complexity}.
+
+\end{comment}
+%}}}
+
+~\citet{fenton1998software} agree that the cyclomatic number is objective, but argue concurrently that it is a poor indicator of ``general complexity'' of a program's structure. Mainly because this ``complexity'' of a flowgraph $F$ does not necessary hold in conjuction with general measurement theory and its ``intuitive relations about complexity''.~\citet{fenton1998software} do suggest, however, that cyclomatic number is a well-suited indicator for how difficult the program is to test and maintain. Other proponents~\parencite{shepperd1988critique} argue that simple lines of code metrics can be more indicative than cyclomatic complexity.
 %{{{
 \begin{comment}
 The number of independent paths is a good indicator of the complexity of a program because generally a program becomes harder to understand as the number of paths increases.~\parencite{ryder2004software}.
@@ -447,13 +455,7 @@ From a measurement theory perspective, it is extremely doubtful that any of thes
 \end{comment}
 %}}}
 
-~\citet{mccabe1976complexity} suggests that a module with a complexity number of over 10 should be identified as problematic and refactoring should be considered. TODO: More text about CC
-%{{{
-\begin{comment}
-Programmers have been required to calculate complexity as they create software modules. When the complexity exceeded 10 they had to either recognize and modularize subfunctions or redo the software. The intention was to keep the "size" of the modules manageable and allow for testing all the independent paths~\parencite{mccabe1976complexity}.
-
-\end{comment}
-%}}}
+Cyclomatic complexity continues to be one of the widely used static code measures~\parencite{zimmermann2005mining}. It is relatively easy to extract out of static code and thus serves at least as an entry-point to more advanced measuring. Much debate over its efficacy has emerged over the decades, but no solid evidence one way or the another has been produced.
 
 \subsection{Test coverage measures}
 
