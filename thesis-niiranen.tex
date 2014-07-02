@@ -333,7 +333,7 @@ The meaning of Halstead's mathematical models on real-world usage are unclear. H
 
 \section{Structural metrics}
 
-Another interesting property of software is their structure, which indicates additional information of the development and maintenance effort of the source code. One approach to inspecting structural metrics is the perspective of~\textit{control-flow}, or the logical paths in the execution of the program. On the other hand,~\textit{Data-flow} deals with information flow between modules in the software.~\parenciteseveral{fenton1998software}. In this section, the more evident metrics of structural metrics are presented and their challenges are analyzed.
+Another interesting property of software is their structure, which indicates additional information of the development and maintenance effort of the source code. One approach to inspecting structural metrics is the perspective of~\textit{control-flow}, or the logical paths in the execution of the program. On the other hand,~\textit{data-flow} deals with information flow between modules in the software.~\parenciteseveral{fenton1998software}. In this section, the more evident metrics of structural metrics are presented and their challenges are analyzed.
 %{{{
 \begin{comment}
 The structure of the product plays a part, not only in requiring development effort but also in how the product is maintained.~\parencite{fenton1998software}.
@@ -351,7 +351,7 @@ A great deal of software metrics work has been devoted to measuring the control-
 \end{comment}
 %}}}
 
-For example, the following pseudo-code {\tt if A then X} can be expressed as a flowgraph (TODO: finish diagram):
+For example, the following pseudo-code {\tt if A then X else Y} can be expressed as a flowgraph:
 
 \begin{figure}[h]\centering
     \begin{tikzpicture}[>=latex']
@@ -371,10 +371,8 @@ For example, the following pseudo-code {\tt if A then X} can be expressed as a f
         \node [rblock, below right =2cm of start] (acquire) {X};
         \node [rblock, below right =2cm and -5.5cm of start] (gchannel) {Y};
 
-    %% paths
-        \path[draw,->] (start) edge (acquire)
-                    (start) edge (gchannel)
-                    ;
+        \draw[->,black] (start) to node[right = 0.5cm] {true} (acquire);
+        \draw[->,black] (start) to node[left = 0.5cm] {false} (gchannel);
     \end{tikzpicture}
   \caption[Example of flowgraph~\parencite{allen1970control}
   ]{Example of flowgraph~\parencite{allen1970control}}
@@ -417,12 +415,19 @@ For example, the following pseudo-code {\tt if A then X} can be expressed as a f
 \end{comment}
 %}}}
 
-\noindent As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node is called the~\textit{in-degree} of the node, while a node's~\textit{outdegree} is the number of arcs ``leaving'' the node~\parencite{fenton1998software}.
+\noindent As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called ~\textit{in-degrees} of the node, while a node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Thus, directed graphs are depicted with a set of nodes, and each arc connects a pair of nodes. We write an arc as an ordered pair, <x,y>, where x and y are the nodes forming the endpoints of the arc, and the arrow indicates that the arc direction is from x to y. The arrowhead indicates that something flows from one node to another node.~\parencite{fenton1998software}.
 
 The in-degree of a node is the number of arcs arriving at the node, and the outdegree is the number of arcs that leave the node. We can move from one node to another along the arcs, as long as we move in the direction of the arrows. A path is a sequence of consecutive (directed) edges, some of which may be traversed more than once during the sequence. A simple path is one in which there are no repeated edges.~\parencite{fenton1998software}.
+\end{comment}
+%}}}
+
+The flowgraph is convenient for visualizing the structural properties of the program. Nodes are the program statements themselves, and the directed arcs make the flow of control explicit. Numerous measures can also be derived, such as the number of nodes, number of edges (arcs), the~\textit{largest prime} measure and so on. The callgraph itself is, however, usually used in conjuct with other measuring approaches such as the~\textit{cyclomatic complexity}.~\parenciteseveral{fenton1998software}.
+%{{{
+\begin{comment}
+The flowgraph is a good model for defining measures of control-flow structure, because it makes explicit many of the structural properties of the program. The nodes enumerate the program statements, and the arcs make visible the control patterns.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
