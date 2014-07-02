@@ -459,27 +459,27 @@ Cyclomatic complexity continues to be one of the widely used static code measure
 
 \subsection{Test coverage measures}
 
-One approach to software measurement is how difficult the modules of the program are to test. In specific, if the structure of a program is misconstructed, also the testability should be low and difficult to be carried out. Moreover, motivation for software measurement and testing is that complex structures should often be concentrated on over ``simpler'' functionality. 
+One approach to software measurement is to measure how difficult the modules of a program are to test. In specific, if the structure of a program is misconstructed, also testability of the modules should be low and difficult to be carried out. Moreover, motivation for software measurement and testing is that complex structures should often be concentrated on over ``simpler'' functionality. This has real-world implications where quality assurance budgets are limited and using measurement tools to pinpoint problematic program modules translate to direct cost savings~\parencite{menzies2010defect}.
 %{{{
 \begin{comment}
 In particular, the structure of a module is related to the difficulty we find in testing it.
 \end{comment}
 %}}}
 
-TODO:~\textit{Mininum number of test cases}
+The~\textit{minimum number of test cases} metric aims to quantify the lowest possible amount of test cases to satisfy a certain testing strategy. This approach also provides useful information about how time consuming the testing will be and further aid in planning the testing strategy. The flow graphs of program execution are used for deriving several properties of the program, such as the amount of simple paths, branches and statements, to be used in quantifying the possible minimum number of test cases.~\parenciteseveral{fenton1998software}.  
 
-~\textit{Test effectiveness ratio}, or test coverage, is a common metric to indicate to which extent the actual execution logic is covered by the testing strategy~\parencite{fenton1998software}. Test effectiveness ratio can be calculated as
+~\textit{Test effectiveness ratio}, or test coverage, is a common metric to indicate to which extent the actual execution logic is covered by the testing strategy used~\parencite{fenton1998software}. Test effectiveness ratio can be calculated as
 %{{{
 \begin{comment}
 For a given program and a set of cases to test it, we would like to know the extent to which the test cases satisfy a particular testing strategy.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
-\begin{align}
+\begin{flalign*}
 TER_T = \dfrac{\text{number of T objects exercised at least once}}{\text{total number of T objects}}
-\end{align}
+\end{flalign*}
 
-\noindent Where $T$ objects are paths in the execution logic, such as loops and branches. Few important observations of $TER$ are that it often requires run-time execution, as which paths a test case covers is difficult to deduce statically~\parencite{ryder2004software}. Second, the resulting ratio can be deceiving if the $T$ objects are constrained loosely. Namely, a $TER$ of 100\% is easy to achieve by only ``simple paths'' as $T$ object values, but this hardly indicates whether some particular functionality is actually tested~\parencite{fenton1998software}.
+\noindent where $T$ objects are paths in the execution logic, such as loops and branches. Few important observations of $TER$ are that it often requires run-time execution, as which paths a test case covers is difficult to deduce statically~\parencite{ryder2004software}. Second, the resulting ratio can be deceiving if the $T$ objects are constrained loosely. Namely, a $TER$ of 100\% is easy to achieve by only ``simple paths'' as $T$ object values, but this hardly indicates whether some particular functionality is actually tested~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 This may be difficult to achieve statically, so it is often necessary to perform some form of runtime execu- tion tracing to be able to perform this measurement.~\parencite{ryder2004software}.
