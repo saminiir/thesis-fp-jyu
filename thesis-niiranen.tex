@@ -981,7 +981,21 @@ Several of the metrics presented by~\citet{sarkar2007api} show degraded values w
 \end{comment}
 %}}}
 
-\section{Change metrics}
+\section{Fault prediction models}
+
+Fault prediction has been a central research topic in software metrics for detecting problematic software components~\parencite{catal2009systematic,hall2012systematic,radjenovic2013software}. Fault prediction is seen important because non-trivial systems are larger than the finite quality assurance resources allocated for the project. Thus the ability of reliably pinpointing targets for inspection is crucial and can prevent often occurring ``blind spots'' in quality assurance~\parencite{menzies2010defect}. Fault prediction utilizes, in addition to metrics, modeling techniques that are specifically tuned for locating possible faults or problematic modules in the software.~\citet{radjenovic2013software} show that statistical analysis is the most prevalent modeling technique, followed by machine learning techniques and correlation analysis. However, concentrating on the models themselves may degrade the quality of research since they still need to be bundled with high-quality defect predictors (metrics)~\parencite{menzies2010defect}.
+%{{{
+\begin{comment}
+    Recent results show that better data mining technology is not leading to better
+    defect predictors. We hypothesize that we have reached the limits of the standard
+    learning goal of maximizing area under the curve (AUC) of the probability of false
+    alarms and probability of detection ¿AUC(pd, pf)¿; i.e. the area under the curve of a
+    probability of false alarm versus probability of detection.
+    Accordingly, we explore changing the standard goal. Learners that maximize~\parencite{menzies2010defect}.
+\end{comment}
+%}}}
+
+A persistent problem in defect predicting is the ``ceiling effect'' of the efficacy of the models. For example,~\citet{menzies2007data} utilize~\textit{naive Bayes classifiers} for modelling the results of the research's static code metrics. The simple model is still more effective than complex approaches~\parencite{menzies2010defect}.
 
 One of the currently more active approaches to measuring and predicting the quality of software is the inclusion of version change history as a measurement dimension~\parencite{zimmermann2005mining,hassan2009predicting}. These so-called ``change metrics'' presume that problematic components can be identified by the focus they receive during development.~\citet{zimmermann2005mining} apply~\textit{evolutionary coupling} as an indicator of components that would benefit from maintenance. Evolutionary coupling is simply deduced by the amount of changes to any two modules in the same revision of the version history. For example, when two source code files change, their evolutionary coupling number is increased. After inspecting the whole revision history, the evolutionary coupling count between modules is argued to be a good indicator for maintenance effort~\parencite{zimmermann2005mining}. The metric can also be tuned more precise, by e.g. inspecting the evolutionary coupling of methods and functions.
 %{{{
