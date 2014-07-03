@@ -491,9 +491,9 @@ However, the actual TER is typically no better than 40%. The typical TER for bra
 \section{Data-flow attributes}
 \label{section:data-flow-attributes}
 
-The metrics so far have dealt with~\textit{intra-modular measures}, but another interesting application of software measurement is how different program modules relate to each other in terms of structure and modularity~\parencite{fenton1998software}.~\citet{fenton1998software} propose that a module is any program construct that can be ``at least theoretically separately compilable''. 
+The metrics so far have dealt with~\textit{intra-modular measures}, i.e. the measurement of the properties of single modules. Another interesting application of software measurement is how different program modules relate to each other in terms of structure and modularity~\parencite{fenton1998software}.~\citet{fenton1998software} propose that a module is any program construct that can be ``at least theoretically separately compilable''. 
 
-Data-flow is often depicted with~\textit{call graphs}, which are directed graphs, but do not contain the start and end nodes found in flow graphs~\parencite{fenton1998software}. Furthermore, a call graph does not contain individual attributes of modules, but rather just describes which modules a specific module ``calls''.
+Data-flow is often depicted with~\textit{call graphs}, which are directed graphs, but do not contain the start and end nodes found in flow graphs~\parencite{fenton1998software}. Furthermore, a call graph does not contain individual attributes of modules, but rather describes which modules a specific module calls.
 %{{{
 \begin{comment}
 We use a more abstract model of the design, a directed graph known as the module call-graph. A call-graph is not a flow graph, as it has no circled start or stop node.~\parencite{fenton1998software}
@@ -502,11 +502,41 @@ For example, instead of examining variables, we may need to know only whether or
 \end{comment}
 %}}}
 
-\begin{align}
-\text{TODO: Example of call graph}
-\end{align}
+\begin{figure}[h]\centering
+    \begin{tikzpicture}[>=latex']
+        \tikzset{block/.style= {draw, rectangle, align=center,minimum width=2cm,minimum height=1cm},
+        input/.style={ % requires library shapes.geometric
+        draw,
+        trapezium,
+        trapezium left angle=60,
+        trapezium right angle=120,
+        minimum width=2cm,
+        align=center,
+        minimum height=1cm
+    },
+    arrow/.style={->,ultra thick},
+        }
+        \node [block]  (start) {Main};
+        \node [block, below right =2cm of start] (average) {Average};
+        \node [block, below left =2cm of start] (read_scores) {Read\_Scores};
+        \node [block, below left =2cm of average] (calc_av) {Calc\_Av};
+        \node [block, below right =2cm of average] (print_av) {Print\_Av};
 
-\noindent Several properties for assessing software design quality from call graphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the call graph. A large call graph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node.~\textit{Width} measures the maximum number of nodes at any one level.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the ratio increases simultaneously~\parencite{ryder2004software}. More specific attributes of call graphs can be derived, and they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
+        \draw[arrow] (start)   to (average);
+        \draw[arrow] (-28:1.8) -- (-30:2.7) node[above right]{scores};
+        \draw[arrow] (208:2.7)  -- (206:1.8) node[left]{scores};
+        \draw[arrow] (start)   to (read_scores);
+        \draw[arrow] (average) to (calc_av);
+        \draw[arrow] (average) to (print_av);
+    \end{tikzpicture}
+  \caption[Example of call graph~\parencite{fenton1998software}
+  ]{TODO: Example of call graph~\parencite{fenton1998software}}
+    \label{fig:call-graph-example}
+\end{figure}
+
+\noindent Several properties for assessing software design quality from call graphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the call graph. A large call graph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node. In figure~\ref{fig:call-graph-example}, depth would be measured as the distance from {\tt Main} to either {\tt Calc\_Av} or {\tt Print\_Av}.
+
+~\textit{Width} measures the maximum number of nodes at any one level. In figure~\ref{fig:call-graph-example}, the horizontal layer containing the most nodes are considered as the call graph's width, e.g. {\tt Read\_Scores + Average = 2}.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the more the arc-to-node ratio increases~\parencite{ryder2004software}. Several other more specific attributes of call graphs have been derived. The advantage of such graph measures are that they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Yourdon and Constantine have analyzed what contributes to good design, and they suggest several ways to view design components and structure. They use the notion of morphology to refer to the ``shape'' of the overall system structure when expressed pictorially.~\parencite{fenton1998software}.
@@ -521,7 +551,7 @@ These measures are not restricted to dependency graphs. They are generally appli
 
 \subsection{Graph impurity}
 
-One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the call graph of a program. The measure contains a simple hypothesis which holds that the more the program's call graph deviates from being a tree-structure, the more complex the structure is~\parencite{ince1988approach}. 
+One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the call graph of a program. The measure holds a simple hypothesis that the more the program's call graph deviates from being a tree-structure, the more complex the structure is~\parencite{ince1988approach}. 
 %{{{
 \begin{comment}
 One measure of system complexity that has been sug- gested is graph impurity: the more a system deviates from being a pure tree structure towards being a graph structure, the worse the design is~\parencite{ince1988approach}.
@@ -562,7 +592,7 @@ One measure of system complexity that has been sug- gested is graph impurity: th
     \label{fig:graph-impurity-example}
 \end{figure}
 
-\noindent~\citet{ince1988approach} argue, that graph impurity should not be achieved at the cost of generally accepted design patterns. For example, a module that is referenced often would be considered as contributing to graph impurity, but the structure of the program can actually be well-designed because of module reuse. As is, graph impurity should probably not be interpreted fully objectively, but rather ``where choice exists a design should be produced which minimises graph impurity''~\parencite{ince1988approach}.
+~\citet{ince1988approach} argue, that graph impurity should not be achieved at the cost of generally accepted design patterns. For example, a module that is often referenced by other modules would be considered as contributing to graph impurity, but the structure of the program can actually be well-designed because of module reuse. As is, graph impurity should not be interpreted fully objectively, but rather ``where choice exists a design should be produced which minimises graph impurity''~\parencite{ince1988approach}.
 %{{{
 \begin{comment}
 This does not mean that a designer should aim at producing a pure tree-structured design. The very nature of the subroutine, an object called from many places in a program which saves space, means that the designer will make use of common calls. What it does mean is that where choice exists a design should be produced which minimises graph impurity.~\parencite{ince1988approach}.
@@ -570,11 +600,11 @@ This does not mean that a designer should aim at producing a pure tree-structure
 %}}}
 
 Furthermore,~\citet{fenton1998software} provide a formula for calculating the impurity:
-\begin{align}
+\begin{flalign*}
 m(G) = \dfrac{2(e - n + 1)}{(n - 1)(n - 2)}
-\end{align}
+\end{flalign*}
 
-\noindent where $e$ is the edge (or arc) count and $n$ is the node count.~\citet{fenton1998software} conclude that ``system designs should strive for a value of $m$ near zero, but not at the expense of unnecessary duplication of modules''. This is in conjuction with the earlier presented observation that while graph impurity can indicate problematic software design, it might contradict with beneficial design choices.
+\noindent where $e$ is the edge (or arc) count and $n$ is the node count in the call graph.~\citet{fenton1998software} conclude that ``system designs should strive for a value of $m$ near zero, but not at the expense of unnecessary duplication of modules''. This is in conjuction with the earlier presented observation that while graph impurity can indicate problematic software design, it might contradict beneficial design choices.
 %{{{
 \begin{comment}
 Results suggest a relationship between tree impurity and poor design. Thus m may be useful for quality assurance of designs. System designs should strive for a value of m near zero, but not at the expense of unnecessary duplication of modules.~\parencite{fenton1998software}.
@@ -583,16 +613,16 @@ Results suggest a relationship between tree impurity and poor design. Thus m may
 
 \subsection{Internal reuse}
 
-Internal reuse is the measure to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse (~\textit{system design measure}~\parencite{yin1978establishment}) which can be calculated from the call graph of a program:
+{\itshape Internal reuse} is the measure of to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse ({\itshape system design measure}~\parencite{yin1978establishment}) which can be calculated from the call graph of a program:
 %{{{
 \begin{comment}
 We call internal reuse the extent to which modules are reused within the same product.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
-\begin{align}
+\begin{flalign*}
 r(G) = e - n + 1
-\end{align}
+\end{flalign*}
 
 \noindent where graph $G$ has $e$ edges and $n$ nodes.~\citet{fenton1998software} criticize the measure by stating that (1) it does not consider different calls from the same module and (2) it does not consider the size of the reused components. As such, the measure is perhaps best used as a general measure of a program's internal reuse and used in conjuction with other measures such as tree impurity.
 %{{{
@@ -601,11 +631,9 @@ This measure is crude as a reuse measure; not only does it take no account of po
 \end{comment}
 %}}}
 
-TODO: How is the measure interpreted?
-
 \subsection{Coupling}
 
-~\textit{Coupling} addresses the degree of interdependence between modules~\parencite{allen2001measuring}. Namely, coupling is most often inspected between two modules ($x$, $y$).~\textit{Global coupling} can be derived from the combination of coupling between modules~\parencite{fenton1998software}.
+{\itshape Coupling} addresses the degree of interdependence between modules~\parencite{allen2001measuring}. Namely, coupling is most often inspected between two modules ($x$, $y$).~\textit{Global coupling} can be derived from the combination of coupling between modules~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Coupling of a subsystem characterizes its interde- pendence with other subsystems.~\parencite{allen2001measuring}
@@ -621,7 +649,7 @@ Usually, coupling is an attribute of pairs of modules, rather than of the design
     \item~\textit{Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
     \item~\textit{Control coupling relation} $R_3$ when $x$ passes parameters to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
     \item~\textit{Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
-    \item~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values) of $y$.
+    \item~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values, state) of $y$.
 \end{itemize}
 %{{{
 \begin{comment}
@@ -629,7 +657,7 @@ n example might be passing parameters to a mathematical function, the func- tion
 \end{comment}
 %}}}
 
-\noindent In essence, the higher the $R_i$ value for two given modules, the more~\textit{tightly coupled} they are. In contrast, a $R_i$ value of 1-2 between two module would be characterized as~\textit{loosely-coupled}. However, the coupling classification can be challenging to determine, at least programmatically. A manual inspection of the program's structure is thus often warranted~\parencite{ryder2004software}.
+In essence, the higher the $R_i$ value for two given modules, the more~\textit{tightly coupled} they are. In contrast, a $R_i$ value of 1-2 between two module would be characterized as~\textit{loosely-coupled}. However, the coupling classification can be challenging to determine, at least programmatically. A manual inspection of the program's structure is thus often warranted~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
 We say that x and y are loosely coupled if i is 1 or 2, and they are tightly coupled if i is 4 or 5.~\parencite{fenton1998software}.
@@ -671,7 +699,7 @@ It is also worth noting that in practice it may be difficult to exactly classify
     \label{fig:coupling-model-graph-example}
 \end{figure}
 
-\noindent For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.  \noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
+For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.  \noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
 %{{{
 \begin{comment}
 To model module coupling, we use a directed graph with more detail than a call graph but less than the full module structure chart. The nodes correspond to the modules, and there may be more than one arc between two nodes. Each arc from a node x to node y represents coupling between modules x and y.~\parencite{fenton1998software}
