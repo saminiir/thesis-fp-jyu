@@ -644,12 +644,12 @@ Usually, coupling is an attribute of pairs of modules, rather than of the design
 
 ~\citet{fenton1998software} define several relations for inspecting the coupling between two modules:
 \begin{itemize}
-    \item~\textit{No coupling relation} $R_0$ when $x$ and $y$ have no interdependency.
-    \item~\textit{Data coupling relation} $R_1$ when $x$ and $y$ communicate by data parameters but no control element is incorporated. An example would be a mathematical function which performs the same computation regardless of the parameter values~\parencite{ryder2004software}.
-    \item~\textit{Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
-    \item~\textit{Control coupling relation} $R_3$ when $x$ passes parameters to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
-    \item~\textit{Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
-    \item~\textit{Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values, state) of $y$.
+    \item{\itshape No coupling relation} $R_0$ when $x$ and $y$ have no interdependency.
+    \item{\itshape Data coupling relation} $R_1$ when $x$ and $y$ communicate by data parameters but no control element is incorporated. An example would be a mathematical function which performs the same computation regardless of the parameter values~\parencite{ryder2004software}.
+    \item{\itshape Stamp coupling relation} $R_2$ when $x$ and $y$ accept the same types as parameters. The modules can be otherwise unrelated but interdependency can emerge from shared data types.
+    \item{\itshape Control coupling relation} $R_3$ when $x$ passes parameters to $y$ which changes its behavior. For example, a rendering function $y$ might receive coordinate points from module $x$.
+    \item{\itshape Common coupling relation} $R_4$ when $x$ and $y$ refer to the same global data. The modules are then coupled, because of the common interdependency on the same data. 
+    \item{\itshape Content coupling relation} $R_5$ when $x$ refers and changes the contents (e.g. values, state) of $y$.
 \end{itemize}
 %{{{
 \begin{comment}
@@ -718,19 +718,31 @@ The concept of cohesion has been used with reference to modules or modular syste
 \end{comment}
 %}}}
 
-TODO: More detailed presentation of cohesion
+The classical definition of~\parencite{stevens1974structured} consists of seven degrees of cohesion, listed from the most desirable to least desirable:
 
-Curiously, the cohesion metric has no formal measure by which it can be quantified. Instead,~\citet{fenton1998software} state that the level of a module's cohesion can be deduced by simply asking questions about the module's purpose. For example, if the purpose of a module cannot be described in a single sentence, it might have too many responsibilities, and consequently its cohesion is low. Paradoxically, a good designer probably has asked the question already and developed a module with high cohesion.~\parenciteseveral{fenton1998software}.
+\begin{itemize}
+    \item {\itshape Functional}: the module performs a single well-defined function
+    \item {\itshape Sequential}: the module performs several functions, but according to specification
+    \item {\itshape Communicational}: the module performs several functions, but on the same data
+    \item {\itshape Procedural}: the module performs several functions that relate only by the same control flow
+    \item {\itshape Temporal}: the module performs several functions that relate only by their shared timespan
+    \item {\itshape Logical}: the module performs several functions that relate only logically
+    \item {\itshape Coincidental}: the module performs several unrelated functions
+\end{itemize}
+
+A module can contain several of the cohesion degrees~\parencite{fenton1998software}. Curiously, the cohesion metric has no formal measure by which it can be quantified. Instead,~\citet{fenton1998software} state that the level of a module's cohesion can be deduced by simply asking questions about the module's purpose. For example, if the purpose of a module cannot be described in a single sentence, it might have too many responsibilities, and consequently its cohesion is low. Paradoxically, a good designer probably has asked the question already and developed a module with high cohesion.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
 There is no obvious measurement procedure for determining the level of cohesion in a given module. However, we can get a rough idea by writing down a sentence to describe the module's purpose. A good designer should have already done so, but a module with low cohesion is unlikely to have been produced by a good designer! If it is impossible to describe its purpose in a single sentence, then the module is likely to have coincidental cohesion.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
+Several other interpretations of cohesion have been presented, such as the ones from~\citet{chidamber1994metrics},~\citet{hitz1996chidamber} and~\citet{briand1998unified}. However, most of the interpretations are specially tailored for the object-oriented programming paradigm and as such are not generally applicable.
+
 \subsection{Information flow}
 
-As the flow of data between modules is an important part of measuring the attributes of software, also the overall level of information flow in a system is of interest.~\citet{henry1981software} describe three different types of~\textit{information flow}. (1)~\textit{Local indirect flow} occurs when a module passes information to another module or conversely, returns a result to a module invoking it. (2)~\textit{Local indirect flow} exists if ``the invoked module returns information
-that is subsequently passed to a second invoked module''. Third,~\textit{global flow} exists if data is passed between modules through a global data structure.~\parenciteseveral{fenton1998software}.
+As the flow of data between modules is an important part of measuring the attributes of software, also the overall level of~\textit{information flow} in a system is of interest.~\citet{henry1981software} describe three different types of information flow. First,~\textit{Local indirect flow} occurs when a module passes information to another module or conversely, returns a result to a module invoking it. Second,~\textit{Local indirect flow} exists if ``the invoked module returns information
+that is subsequently passed to a second invoked module''. Third,~\textit{global flow} occurs when data is passed between modules through a global data structure.~\parenciteseveral{fenton1998software}.
 \begin{comment}
 Generally a modular program will consist of modules with data flowing through them in a manner that is termed information flow. Measuring properties of in- formation flow may be of interest to programmers because it can help to indicate where particularly complex interaction is occurring between functions, and thus where there may be complex algorithmic behaviour that is likely to make modifi- cations to the program difficult to perform.~\parencite{ryder2004software}.
 
@@ -738,7 +750,7 @@ We say a local direct flow exists if either 1. a module invokes a second module 
 \end{comment}
 %}}}
 
-The information flow is relatively easy to be determined, as it can be done by simply analyzing the procedures and calls of the system's module~\parencite{henry1981software}. The~\textit{Henry-Kafura}~\parencite{henry1981software} measure formulates additional variables that help measuring the complexity of a module: The~\textit{fan-in} is the number of~\textit{local flows} into the module plus the number of data structures the module utilizes for information retrieval. On the other
+The information flow is relatively easy to be determined, as it can be done by simply analyzing the procedures and calls of the system's module~\parencite{henry1981software}. The~\textit{Henry-Kafura} measure~\parencite{henry1981software} formulates additional variables that aid in assessing the complexity of a module: The~\textit{fan-in} is the number of~\textit{local flows} into the module plus the number of data structures the module utilizes for information retrieval. On the other
 hand,~\textit{fan-out} is the amount of local flows out from a module plus the number of data structures the module updates. ~\parenciteseveral{henry1981software}.
 %{{{
 \begin{comment}
@@ -750,18 +762,20 @@ tureswhichprocedureAupdates.~\parencite{henry1981software}.
 %}}}}
 
 The~\textit{Henry-Kafura} measure is formulated as follows:
-\begin{align}
+\begin{flalign*}
     \text{Complexity of module $=$ length $*$ (fan-in $*$ fan-out)$^2$}
-\end{align}
+\end{flalign*}
 
-\noindent where~\textit{fan-in $*$ fan-out} indicates the number of possible combinations of an input source to an output destination. Furthermore, the number is squared because the complexity is believed to be more than linear. Length is used for a simple measure of the complexity of the module's code. The result defines the complexity of a module based on its external dependencies and internal code quality~\parenciteseveral{henry1981software}
+\noindent where~\textit{fan-in $*$ fan-out} indicates the number of possible combinations of an input source to an output destination. Furthermore, the number is squared because the complexity is believed to be more than linear. Length is used for a simple measure of the complexity of the module's code. The result defines the complexity of a module based on its external dependencies and internal code quality.~\parenciteseveral{henry1981software}.
 %{{{
 \begin{comment}
 Thetermfan-in*fan-outrepresentsthetotalpossiblenumber ofcombinationsofaninputsourcetoanoutputdestination.~\parencite{henry1981software}
 
 ofcombinationsofaninputsourcetoanoutputdestination.  Theweightingofthefan-inandfan-outcomponentisbasedon thebeliefthatthecomplexityismorethanlinearintermsof theconnectionswhichaprocedurehastoitsenvironment.  ThepoweroftwousedinthisweightingisthesameasBrook's ~\parencite{henry1981software}.
 \end{comment}
-%}}}}
+%}}}
+
+The Henry-Kafura measure is improved upon by the research of~\citet{ince1989empirical}. Namely,~\citet{ince1988approach} address ``several theoretical problems with the measure''~\parencite{fenton1998software}, such as the informal notion of indirect flow and its applicability as a measurement model. In conclusion,~\citet{ince1988approach} propose an improved measure where the length of the module is not taken into consideration.
 
 %{{{
 \section{Metrics for object-oriented languages}
@@ -1958,6 +1972,10 @@ Therefore, it is much easier to determine which of them can be concurrently exec
 
 \section{Validation methodology}
 
+%{{{Discussion
+\chapter{Discussion}
+
+%}}}
 
 
 Preliminary guidelines for empirical research in software engineering~\parencite{kitchenham2002preliminary}
@@ -1994,10 +2012,6 @@ Preliminary guidelines for empirical research in software engineering~\parencite
     attribute measurements were constrained.~\parencite{sarkar2007api}.
 \end{comment}
 %}}}
-
-%}}}
-%{{{Discussion
-\chapter{Discussion}
 
 %}}}
 %{{{Summary and conclusion
