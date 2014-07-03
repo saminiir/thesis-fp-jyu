@@ -342,16 +342,16 @@ It is the inter-module dependencies that interest us, and measures of these attr
 \end{comment}
 %}}}
 
-\subsection{Flowgraphs}
+\subsection{Flow graphs}
 
-As the research on software metrics traditionally centers on imperative languages,~\textit{flowgraphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flowgraphs are directed graphs that indicate program statements as nodes, and flow of control as arcs (or edges) in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
+As the research on software metrics traditionally centers on imperative languages,~\textit{flowa graphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flow graphs are directed graphs that indicate program statements as nodes, and flow of control as arcs (or edges) in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 A great deal of software metrics work has been devoted to measuring the control-flow structure of imperative language programs or algorithms. The control flow measures are usually modeled with directed graphs, where each node (or point) corresponds to a program statement, and each arc (or directed edge) indicates the flow of control from one statement to another.
 \end{comment}
 %}}}
 
-For example, the following pseudo-code {\tt if A then X else Y} can be expressed as a flowgraph:
+For example, the following pseudo-code {\tt if A then X else Y} can be expressed as a flow graph:
 
 \begin{figure}[h]\centering
     \begin{tikzpicture}[>=latex']
@@ -374,9 +374,9 @@ For example, the following pseudo-code {\tt if A then X else Y} can be expressed
         \draw[->,black] (start) to node[right = 0.5cm] {true} (acquire);
         \draw[->,black] (start) to node[left = 0.5cm] {false} (gchannel);
     \end{tikzpicture}
-  \caption[Example of flowgraph~\parencite{allen1970control}
-  ]{Example of flowgraph~\parencite{allen1970control}}
-    \label{fig:flowgraph-example}
+  \caption[Example of flow graph~\parencite{allen1970control}
+  ]{Example of flow graph~\parencite{allen1970control}}
+    \label{fig:flow graph-example}
 \end{figure}
 %{{{
 \begin{comment}
@@ -408,14 +408,14 @@ For example, the following pseudo-code {\tt if A then X else Y} can be expressed
           (4) edge                   node {} (5)
           (5) edge [bend right=20pt] node {} (2);
   \end{tikzpicture}
-  \caption[Example of flowgraph~\parencite{allen1970control}
-  ]{Example of flowgraph~\parencite{allen1970control}}
-    \label{fig:flowgraph-example}
+  \caption[Example of flow graph~\parencite{allen1970control}
+  ]{Example of flow graph~\parencite{allen1970control}}
+    \label{fig:flow graph-example}
 \end{figure}
 \end{comment}
 %}}}
 
-\noindent As can be seen from figure~\ref{fig:flowgraph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called ~\textit{in-degrees} of the node, while a node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
+\noindent As can be seen from figure~\ref{fig:flow graph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called ~\textit{in-degrees} of the node, while a node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Thus, directed graphs are depicted with a set of nodes, and each arc connects a pair of nodes. We write an arc as an ordered pair, <x,y>, where x and y are the nodes forming the endpoints of the arc, and the arrow indicates that the arc direction is from x to y. The arrowhead indicates that something flows from one node to another node.~\parencite{fenton1998software}.
@@ -424,21 +424,21 @@ The in-degree of a node is the number of arcs arriving at the node, and the outd
 \end{comment}
 %}}}
 
-The flowgraph is convenient for visualizing the structural properties of the program. Nodes are the program statements themselves, and the directed arcs make the flow of control explicit. Numerous measures can also be derived, such as the number of nodes, number of edges (arcs), the~\textit{largest prime} measure and so on. The callgraph itself is, however, usually used in conjuct with other measuring approaches such as the~\textit{cyclomatic complexity}.~\parenciteseveral{fenton1998software}.
+The flow graph is convenient for visualizing the structural properties of the program. Nodes are the program statements themselves, and the directed arcs make the flow of control explicit. Numerous measures can also be derived, such as the number of nodes, number of edges (arcs), the~\textit{largest prime} measure and so on. The call graph itself is, however, usually used in conjuct with other measuring approaches such as the~\textit{cyclomatic complexity}.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
-The flowgraph is a good model for defining measures of control-flow structure, because it makes explicit many of the structural properties of the program. The nodes enumerate the program statements, and the arcs make visible the control patterns.~\parencite{fenton1998software}.
+The flow graph is a good model for defining measures of control-flow structure, because it makes explicit many of the structural properties of the program. The nodes enumerate the program statements, and the arcs make visible the control patterns.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
 
 \subsection{Cyclomatic complexity}
 
-The~\textit{Cyclomatic complexity} metric~\parencite{mccabe1976complexity} utilizes flowgraphs to evaluate the complexity of a program's decision structure. A program is represented as a flowgraph $F$ with single entry and exit points of execution. The~\textit{cyclomatic number} is then calculated as:
+The~\textit{Cyclomatic complexity} metric~\parencite{mccabe1976complexity} utilizes flow graphs to evaluate the complexity of a program's decision structure. A program is represented as a flow graph $F$ with single entry and exit points of execution. The~\textit{cyclomatic number} is then calculated as:
 \begin{flalign*}
 v(F) = e - n + 2
 \end{flalign*}
 
-\noindent where the flowgraph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit when refactoring of the module should be considered.
+\noindent where the flow graph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit when refactoring of the module should be considered.
 %{{{
 \begin{comment}
 Programmers have been required to calculate complexity as they create software modules. When the complexity exceeded 10 they had to either recognize and modularize subfunctions or redo the software. The intention was to keep the "size" of the modules manageable and allow for testing all the independent paths~\parencite{mccabe1976complexity}.
@@ -446,7 +446,7 @@ Programmers have been required to calculate complexity as they create software m
 \end{comment}
 %}}}
 
-~\citet{fenton1998software} agree that the cyclomatic number is objective, but argue concurrently that it is a poor indicator of ``general complexity'' of a program's structure. Mainly because this ``complexity'' of a flowgraph $F$ does not necessary hold in conjuction with general measurement theory and its ``intuitive relations about complexity''.~\citet{fenton1998software} do suggest, however, that cyclomatic number is a well-suited indicator for how difficult the program is to test and maintain. Other proponents~\parencite{shepperd1988critique} argue that simple lines of code metrics can be more indicative than cyclomatic complexity.
+~\citet{fenton1998software} agree that the cyclomatic number is objective, but argue concurrently that it is a poor indicator of ``general complexity'' of a program's structure. Mainly because this ``complexity'' of a flow graph $F$ does not necessary hold in conjuction with general measurement theory and its ``intuitive relations about complexity''.~\citet{fenton1998software} do suggest, however, that cyclomatic number is a well-suited indicator for how difficult the program is to test and maintain. Other proponents~\parencite{shepperd1988critique} argue that simple lines of code metrics can be more indicative than cyclomatic complexity.
 %{{{
 \begin{comment}
 The number of independent paths is a good indicator of the complexity of a program because generally a program becomes harder to understand as the number of paths increases.~\parencite{ryder2004software}.
@@ -493,25 +493,25 @@ However, the actual TER is typically no better than 40%. The typical TER for bra
 
 The metrics so far have dealt with~\textit{intra-modular measures}, but another interesting application of software measurement is how different program modules relate to each other in terms of structure and modularity~\parencite{fenton1998software}.~\citet{fenton1998software} propose that a module is any program construct that can be ``at least theoretically separately compilable''. 
 
-Data-flow is often depicted with~\textit{callgraphs}, which are directed graphs, but do not contain the start and end nodes found in flowgraphs~\parencite{fenton1998software}. Furthermore, a callgraph does not contain individual attributes of modules, but rather just describes which modules a specific module ``calls''.
+Data-flow is often depicted with~\textit{call graphs}, which are directed graphs, but do not contain the start and end nodes found in flow graphs~\parencite{fenton1998software}. Furthermore, a call graph does not contain individual attributes of modules, but rather just describes which modules a specific module ``calls''.
 %{{{
 \begin{comment}
-We use a more abstract model of the design, a directed graph known as the module call-graph. A call-graph is not a flowgraph, as it has no circled start or stop node.~\parencite{fenton1998software}
+We use a more abstract model of the design, a directed graph known as the module call-graph. A call-graph is not a flow graph, as it has no circled start or stop node.~\parencite{fenton1998software}
 
 For example, instead of examining variables, we may need to know only whether or not one module calls (or depends on) another module.~\parencite{fenton1998software}
 \end{comment}
 %}}}
 
 \begin{align}
-\text{TODO: Example of callgraph}
+\text{TODO: Example of call graph}
 \end{align}
 
-\noindent Several properties for assessing software design quality from callgraphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the callgraph. A large callgraph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node.~\textit{Width} measures the maximum number of nodes at any one level.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the ratio increases simultaneously~\parencite{ryder2004software}. More specific attributes of callgraphs can be derived, and they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
+\noindent Several properties for assessing software design quality from call graphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the call graph. A large call graph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node.~\textit{Width} measures the maximum number of nodes at any one level.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the ratio increases simultaneously~\parencite{ryder2004software}. More specific attributes of call graphs can be derived, and they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Yourdon and Constantine have analyzed what contributes to good design, and they suggest several ways to view design components and structure. They use the notion of morphology to refer to the ``shape'' of the overall system structure when expressed pictorially.~\parencite{fenton1998software}.
 
-The greater the size of the callgraph, the more dependencies between different parts of the program there is likely to be, and so the greater the complexity.~\parencite{ryder2004software}.
+The greater the size of the call graph, the more dependencies between different parts of the program there is likely to be, and so the greater the complexity.~\parencite{ryder2004software}.
 
 This is a connectivity density measure that increases as more connections, or function calls, are made and is similar to cyclomatic complexity. A high arc-to-node ratio indicates complex interactions between functions, and thus may highlight areas of program code that may benefit from re-engineering. Section 2.7 examines the use of metrics in the re- engineering process.~\parencite{ryder2004software}.
 
@@ -521,7 +521,7 @@ These measures are not restricted to dependency graphs. They are generally appli
 
 \subsection{Graph impurity}
 
-One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the callgraph of a program. The measure contains a simple hypothesis which holds that the more the program's callgraph deviates from being a tree-structure, the more complex the structure is~\parencite{ince1988approach}. 
+One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the call graph of a program. The measure contains a simple hypothesis which holds that the more the program's call graph deviates from being a tree-structure, the more complex the structure is~\parencite{ince1988approach}. 
 %{{{
 \begin{comment}
 One measure of system complexity that has been sug- gested is graph impurity: the more a system deviates from being a pure tree structure towards being a graph structure, the worse the design is~\parencite{ince1988approach}.
@@ -583,7 +583,7 @@ Results suggest a relationship between tree impurity and poor design. Thus m may
 
 \subsection{Internal reuse}
 
-Internal reuse is the measure to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse (~\textit{system design measure}~\parencite{yin1978establishment}) which can be calculated from the callgraph of a program:
+Internal reuse is the measure to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse (~\textit{system design measure}~\parencite{yin1978establishment}) which can be calculated from the call graph of a program:
 %{{{
 \begin{comment}
 We call internal reuse the extent to which modules are reused within the same product.~\parencite{fenton1998software}.
@@ -674,7 +674,7 @@ It is also worth noting that in practice it may be difficult to exactly classify
 \noindent For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.  \noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
 %{{{
 \begin{comment}
-To model module coupling, we use a directed graph with more detail than a callgraph but less than the full module structure chart. The nodes correspond to the modules, and there may be more than one arc between two nodes. Each arc from a node x to node y represents coupling between modules x and y.~\parencite{fenton1998software}
+To model module coupling, we use a directed graph with more detail than a call graph but less than the full module structure chart. The nodes correspond to the modules, and there may be more than one arc between two nodes. Each arc from a node x to node y represents coupling between modules x and y.~\parencite{fenton1998software}
 \end{comment}
 %}}}
 
@@ -1552,7 +1552,7 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
 Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose metrics are primarily discussed in this section.The initial work of~\citet{van1995software} was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
-lines of code and Halstead's program volume, are also applicable to functional programs with slight modifications~\parencite{van1995software}. Other such metrics are the measures of testing effort (pathcount, cyclomatic complexity), callgraph measures (size, depth, arc-to-node ratio) and coupling measures~\parencite{ryder2004software}.
+lines of code and Halstead's program volume, are also applicable to functional programs with slight modifications~\parencite{van1995software}. Other such metrics are the measures of testing effort (pathcount, cyclomatic complexity), call graph measures (size, depth, arc-to-node ratio) and coupling measures~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
     A problem encountered was that these metrics have been defined mainly for imperative languages: there-
@@ -1568,7 +1568,7 @@ lines of code and Halstead's program volume, are also applicable to functional p
     plementing such metrics requires care to correctly consider all execution
     paths. The pathcount measure is analysed for Haskell in Section 4.5.1 of
     this chapter.
-    ¿ Callgraph measures.Measurements taken from callgraphs, such as size,
+    ¿ Call graph measures.Measurements taken from call graphs, such as size,
     depth, width and arc-to-node ratio, can all be applied to functional pro-
     grams without modification.These measures are examined for use with
     Haskell in Section 4.4 of this chapter.
@@ -1583,7 +1583,7 @@ lines of code and Halstead's program volume, are also applicable to functional p
 \end{comment}
 %}}}
 
-~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of callgraphs. 
+~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of call graphs. 
 
 The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.(TODO: Enemman tasta?)
 
@@ -1742,7 +1742,7 @@ representation details of the source code are dismissed. However,~\citet{ryder20
 Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
 
 First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a return value of zero or one. This seemingly simple metric can correlate with the amount of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
-recursion produces a cyclic callgraph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) and non-trivial recursion at the same time. Thus the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
+recursion produces a cyclic call graph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) and non-trivial recursion at the same time. Thus the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
 
 Often recursion is invoked based on multiple paths in a function. The metric~\textit{number of recursive paths} determines the amount of paths leading to recursion in a function, which is argued to correlate with subjective complexity. 
 
@@ -1766,17 +1766,17 @@ Lastly, all of the recursion-specific metrics are likely to interact with each o
 
 -Critique: Don't use explicit recursion, use fold!
 
-\subsection{Attributes of callgraphs}
+\subsection{Attributes of call graphs}
 
-As presented earlier in chapter~\ref{chap:software_metrics}, callgraphs are a convenient way of rendering and analyzing the data flow of a program. As functions are the main tool of functional languages, it should be possible to utilize much of the same metrics of callgraphs to the functional paradigm.
+As presented earlier in chapter~\ref{chap:software_metrics}, call graphs are a convenient way of rendering and analyzing the data flow of a program. As functions are the main tool of functional languages, it should be possible to utilize much of the same metrics of call graphs to the functional paradigm.
 
-Callgraphs can indicate~\textit{strongly connected components} in the program. When nodes of the callgraph are coupled so that they call each other, they are strongly connected. This connection can also be indirect by having a more complex graph that produces cyclic paths. The hypothesis is that the size of the strongly connected components also correlate with increased maintenance effort. This is because every change in these kind of coupled functions have the potential to also force
+Call graphs can indicate~\textit{strongly connected components} in the program. When nodes of the call graph are coupled so that they call each other, they are strongly connected. This connection can also be indirect by having a more complex graph that produces cyclic paths. The hypothesis is that the size of the strongly connected components also correlate with increased maintenance effort. This is because every change in these kind of coupled functions have the potential to also force
 changes in the strongly connected components.~\parenciteseveral{ryder2004software}. The empirical results of~\citet{ryder2004software} do not point out a strong correlation with the hypothesis, however. Further validation for the metric is warranted.
 
 The~\textit{indegree of a function} indicates how many times a function is called. This can point out ``important'' functions and in the same time, problematic areas of the program code. However,~\citet{ryder2004software} found no correlation of the property with subjective complexity. In similar spirit, the~\textit{outdegree} of a function counts the number of outbound function calls from a given function. Since this indicates how coupled the function is to other functions, it can also
 indicate how likely the function is to change because of other changes. As is,~\citet{ryder2004software} found correlation with the hypothesis in both case-study applications. The results are encouraging, but they warrant further empirical application of the metric.
 
-A useful property of callgraphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of callgraphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the amount of function calls (arcs) with functions (nodes) (TODO: ?). Depth and width is calculated simply by how wide or deep the callgraph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
+A useful property of call graphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of call graphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the amount of function calls (arcs) with functions (nodes) (TODO: ?). Depth and width is calculated simply by how wide or deep the call graph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
 
 \begin{figure}[h]\centering
     \begin{tikzpicture}[>=latex']
@@ -1817,7 +1817,7 @@ A useful property of callgraphs is that~\textit{subgraphs} of specific function 
 
 The subgraph accurately depicts the dependencies of a given function (see figure~\ref{fig:subgraph-example}).~\citet{ryder2004software} argues that if the subgraph ``grows'' too deep or too wide, the more problematic the function is to maintain and comprehend.~\citet{ryder2004software} found correlation for the hypothesis in his larger case-study application, where the function call-graphs are more complex.
 
-The interaction of the callgraph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
+The interaction of the call graph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
 
 \subsection{Miscellaneous attributes of functions}
 
