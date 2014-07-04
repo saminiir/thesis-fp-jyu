@@ -565,10 +565,9 @@ One measure of system complexity that has been sug- gested is graph impurity: th
 
 \begin{figure}[h]\centering
   \begin{tikzpicture}[%
-    ->,
     shorten >=2pt,
     >=stealth,
-    node distance=0.5cm,
+    node distance=0.7cm,
     node/.style={%
       rectangle,
       minimum width=3em,
@@ -576,23 +575,22 @@ One measure of system complexity that has been sug- gested is graph impurity: th
       draw
     }
   ]
-    \node[node] (1)                                             {A};
-    \node[node] (2) [below left=of 1]                           {B};
-    \node[node] (3) [below right=of 1]                          {C};
-    \node[node] (4) [below left=of 2]                           {D};
-    \node[node] (5) [below right=of 2]                          {E};
-    \node[node] (6) [below left=of 3]              {F};
-    \node[node] (7) [below right=of 3]              {G};
+    \node[node] (1)                                 {A};
+    \node[node] (2) [below left=of 1]               {B};
+    \node[node] (3) [below right=of 1]              {C};
+    \node[node] (4) [below left=of 2]               {D};
+    \node[node] (5) [below right=of 2]              {E};
+    \node[node] (6) [below right=of 3]                   {F};
 
     \path (1) edge                   node {} (2)
           (1) edge                   node {} (3)
+          (1) edge                   node {} (5)
           (2) edge                   node {} (4)
           (2) edge                   node {} (5)
-          (3) edge                   node {} (6)
-          (3) edge                   node {} (7);
+          (3) edge                   node {} (6);
   \end{tikzpicture}
   \caption[Example of graph impurity~\parencite{ince1988approach}
-  ]{TODO: Example of graph impurity~\parencite{ince1988approach}}
+  ]{Example of graph impurity~\parencite{ince1988approach}}
     \label{fig:graph-impurity-example}
 \end{figure}
 
