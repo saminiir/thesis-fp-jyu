@@ -524,13 +524,17 @@ For example, instead of examining variables, we may need to know only whether or
 
         \draw[arrow] (start)   to (average);
         \draw[arrow] (-28:1.8) -- (-30:2.7) node[above right]{scores};
-        \draw[arrow] (208:2.7)  -- (206:1.8) node[left]{scores};
+        \draw[arrow] (208:2.7)  -- (206:1.8) node[above left]{scores};
+        \draw[arrow] (218:2.4)  -- (219:1.6) node[pos=0.5, below right]{EOF};
         \draw[arrow] (start)   to (read_scores);
         \draw[arrow] (average) to (calc_av);
+        \draw[arrow] (-60:3.7)  -- (-73:3.9) node[above left]{scores};
+        \draw[arrow] (-70:4.4)  -- (-55:4.2) node[pos=0.5, below right]{average};
         \draw[arrow] (average) to (print_av);
+        \draw[arrow] (-33:6.1)  -- (-33:7.2) node[above right]{average};
     \end{tikzpicture}
   \caption[Example of call graph~\parencite{fenton1998software}
-  ]{TODO: Example of call graph~\parencite{fenton1998software}}
+  ]{Example of call graph~\parencite{fenton1998software}}
     \label{fig:call-graph-example}
 \end{figure}
 
