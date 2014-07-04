@@ -787,13 +787,13 @@ The 00 approach centers around modeling the real world in terms of its objects, 
 \end{comment}
 %}}}
 
-An object possesses~\textit{methods} and~\textit{attributes} that characterize its functionality. For example, a {\tt Dog} class might have a method {\tt wagTail()}. Now, a {\tt Dog} object can be instantiated and its methods used:
+An object possesses~\textit{methods} and~\textit{attributes} that characterize its functionality. For example, a {\tt Dog} class might have a method {\tt wagTail()}. A {\tt Dog} object can then be instantiated and its methods used:
 \begin{lstlisting}
     var dog = new Dog();
     dog.wagTail();
 \end{lstlisting}
 
-The purpose of the OOP paradigm is to model real-world entities as closely as possible~\parencite{booch1986object}. This thesis chooses to present OOP metrics specific to the work of~\citet{chidamber1994metrics}, where several measures for OOP are defined based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics. Their measures have been validated as good predictors defects in real-world software by numerous empirical studies~\parencite{basili1996validation,subramanyam2003empirical,gyimothy2005empirical,zhou2006empirical,olague2007empirical} and is the most widely used OOP metric suite~\parencite{catal2009systematic}.
+The purpose of the OOP paradigm is to model real-world entities as closely as possible~\parencite{booch1986object}. This thesis chooses to present OOP metrics specific to the work of~\citet{chidamber1994metrics}, where several measures for OOP are defined based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics. Their measures have been validated as good predictors defects in real-world software by numerous empirical studies~\parencite{basili1996validation,subramanyam2003empirical,gyimothy2005empirical,zhou2006empirical,olague2007empirical} and is the most widely used OOP metric suite~\parencite{catal2009systematic}. On the other hand, some of the metrics of~\citet{chidamber1994metrics} have been invalidated by researchers~\parencite{hitz1996chidamber,kitchenham2010s}. Still, researchers continue to use the CK-metric suite as the reference measurement tool for OOP.
 %{{{
 \begin{comment}
 We conclude that the CK and QMOOD suites contain similar components and produce statistical models that are effective in detecting error-prone classes.~\parencite{olague2007empirical}
@@ -809,18 +809,18 @@ However, CK metrics suite is much more popular than other suites and they are mo
 
 \subsection{Weighted methods per class}
 
-~\citet{chidamber1994metrics} argue that the the number of methods and their complexity in a class is a predictor of the effort required to develop and maintain it. Furthermore, the more methods in a class, the greater the effect on subclasses. Thus the first metric proposed metric by~\citet{chidamber1994metrics} is the~\textit{weighted methods per class} (WMC) metric. WMC is defined as
+~\citet{chidamber1994metrics} argue that the the number of methods and their complexity in a class is a predictor of the effort required to develop and maintain it. Furthermore, the more methods in a class, the greater the effect on subclasses. Thus the first metric proposed by~\citet{chidamber1994metrics} is the~\textit{weighted methods per class} (WMC) metric. WMC is defined as
 
-\begin{align}
+\begin{flalign*}
 WMC = \sum_{i=1}^{n} c_i
-\end{align}
+\end{flalign*}
 
-\noindent where $n$ is the amount of methods in a given class and $c_i$ is the ``complexity'' of the method. The complexity metric is deliberately left undefined, as it can be interpreted in multiple ways and thus interchangeable in the metric(TODO: ???).
+\noindent where $n$ is the amount of methods in a given class and $c_i$ is the ``complexity'' of the method. The complexity metric is deliberately left undefined, as it can be interpreted in multiple ways and thus interchangeable in the metric. In other words,~\citet{chidamber1994metrics} leave the actual complexity measure as an implementation decision.
 
 \subsection{Depth of inheritance}
 
-As inheritance is often utilized in object-oriented design~\parencite{booch1986object}, also its quantity and quality should offer some information for software measurement.~\textit{Depth of inheritance} (DIT) simply inspects the ``position'' of a class in its inheritance hierarchy. For example, the deeper the class is in regards to inheritance, the more likely it is to obtain unneeded methods from parent classes and thus increase compleexity. On the other hand, inheritance's main
-advantage is the reusability of methods, since general functionality can simply be acquired higher from the inheritance hierarchy. As is, the DIT metric is easy to be calculated, but does not directly point problems in the design. The inheritance tree can be ``top-heavy'', where the tree can be depicted as flat and wide, or ``bottom-heavy'', where the tree is thin but long. These properties do not, however, necessarily point out design flaws directly, as every program's design choices are unique.~\parenciteseveral{chidamber1994metrics}.
+As inheritance is often utilized in object-oriented design~\parencite{booch1986object}, also its quantity and quality should offer some information for software measurement.~\textit{Depth of inheritance} (DIT) simply inspects the ``position'' of a class in its inheritance hierarchy. For example, the deeper the class is in regards to inheritance, the more likely it is to obtain unneeded methods from parent classes and thus resulting in increased complexity. On the other hand, inheritance's main
+advantage is the reusability of methods, since general functionality can simply be acquired higher from the inheritance hierarchy. As is, the DIT metric is easy to be calculated, but does not directly point problems in the design. The inheritance tree can be ``top-heavy'', where the tree is depicted as flat and wide, or ``bottom-heavy'', where the tree is thin but long. These properties do not, however, necessarily point out design flaws directly, as every program's design choices are unique.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
     Metric 2: Depth of Inheritance Tree (DIT) 
@@ -845,7 +845,7 @@ advantage is the reusability of methods, since general functionality can simply 
 
 \subsection{Number of children}
 
-The~\textit{number of children} metric is likewise easy to be measured. It is simply the amount of immediate subclasses (children) of a class. The number of children metric is based on the notions that the greater the amount of subclasses, also greater is the reusage of the parent class's methods. With increased subclass count, however, also the likelyhood of misuse of inheritance by improper abstractions is increased. Lastly, the number of subclasses predict the impact of the parent
+The~\textit{number of children} metric is likewise easy to be measured. It is simply the amount of immediate subclasses (children) of a class. The number of children metric is based on the notions that the greater the amount of subclasses, also the greater the reusage of the parent class's methods is. With increased subclass count, however, also the likelyhood of misuse of inheritance by improper abstractions is increased. Lastly, the number of subclasses predict the impact of the parent
 class on the design. For example, a high subclass count may mandate more testing of that class.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
@@ -885,7 +885,7 @@ The metric~\textit{coupling between object classes} (CBO) is measured by the amo
 \end{comment}
 %}}}
 
-CBO is argued to predict the quality of the program's design. Tight coupling between objects hinders modularity and reuse of the components and subsequently increases the CBO count. In other words, coupling and the CBO count is favourable to be kept at minimum. Additionally, the CBO measure can be a indicator of the effort needed to test the program's code. A high CBO count is probable to warrant more testing.~\parenciteseveral{chidamber1994metrics}.
+CBO is argued to predict the quality of the program's design. Tight coupling between objects hinders modularity and reuse of the components and subsequently increases the CBO count. In other words, coupling and the CBO count is encouraged to be kept at a minimum. Additionally, the CBO measure can be a indicator of the effort needed to test the program's code. A high CBO count is probable to warrant more testing.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
     Viewpoints: 
@@ -907,7 +907,7 @@ CBO is argued to predict the quality of the program's design. Tight coupling bet
 
 \subsection{Response for class}
 
-The~\textit{Response for class} (RFC) metric deals with the amount of methods that are called when the object receives a message. If a high amount of method calls can potentially be executed when the object receives a message, also the testing and debugging of the object's class becomes more difficult. Additionally, the larger the RFC number is, the complexity of that class increases. With the help of the RFC metric, developers can draw opinions on the effort needed to e.g. test the
+The~\textit{Response for class} (RFC) metric deals with the amount of methods that are called when the object receives a message. If a high amount of method calls can potentially be executed when the object receives a message, also the testing and debugging of the object's class becomes more difficult. Additionally, when the RFC number is high, also the complexity of that class increases. With the help of the RFC metric, developers can draw conclusions on, for example, the effort needed to test the
 class.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
@@ -933,6 +933,24 @@ class.~\parenciteseveral{chidamber1994metrics}.
 
 \subsection{Lack of cohesion in methods}
 
+Cohesiveness roughly translates to the level of uniformity of a class. The greater the cohesiveness of a class's methods is, the greater the encapsulation is and subsequently the quality of design is heightened. A lack of cohesion increases complexity, which in turn increases the effort required to maintain and test the class. Low cohesion implies that the class has too many responsibilities and would benefit from division to smaller
+classes.~\parenciteseveral{chidamber1994metrics}.
+%{{{
+\begin{comment}
+    therefore is a measure of the attributes of an object class. 
+    Viewpoints: 
+    1) Cohesiveness of methods within a class is desirable, 
+    since it promotes encapsulation. 
+    2) Lack of cohesion implies classes should probably be 
+    split into two or more subclasses. 
+    3) Any measure of disparateness of methods helps identify 
+    flaws in the design of classes. 
+    4) Low cohesion increases complexity, thereby increasing 
+    the likelihood of errors during the development process. 
+    ~\parencite{chidamber1994metrics}.
+\end{comment}
+%}}}
+
 The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of cohesion in an object class. Namely, it calculates the amount of method pairs in a class that have no relation to each other. For example, if two methods do not share the use of an instance attribute of the object, their LCOM measure is zero. In essence, the LCOM metric ``provides a measure of the relative disparate nature of methods in the class''~\parencite{chidamber1994metrics}.
 %{{{
 \begin{comment}
@@ -953,24 +971,6 @@ The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of coh
 \end{comment}
 %}}}
 
-Cohesiveness is roughly translated to the level of uniformity of a class. The greater the cohesiveness of a class's methods is, the greater the encapsulation is and subsequently the quality of design is heightened. A lack of cohesion increases complexity, which in turn increases the effort required to maintain and test the class. Low cohesion implies that the class has too many responsibilities and would benefit from division to smaller
-classes.~\parenciteseveral{chidamber1994metrics}.
-%{{{
-\begin{comment}
-    therefore is a measure of the attributes of an object class. 
-    Viewpoints: 
-    1) Cohesiveness of methods within a class is desirable, 
-    since it promotes encapsulation. 
-    2) Lack of cohesion implies classes should probably be 
-    split into two or more subclasses. 
-    3) Any measure of disparateness of methods helps identify 
-    flaws in the design of classes. 
-    4) Low cohesion increases complexity, thereby increasing 
-    the likelihood of errors during the development process. 
-    ~\parencite{chidamber1994metrics}.
-\end{comment}
-%}}}
-
 \section{Modularity metrics}
 
 The complexity of an application is managed by structuring and modularizing the source code into logical parts that lessen the effort of maintenance and further development. For instance, namespaces are used to group similar program code entities together, classes encapsulate shared functionality and components provide reusable features. Although modularization of complex entities is not unique to software engineering, several principles for it have been
@@ -981,7 +981,7 @@ presented.~\parenciteseveral{beck2011congruence}.
 \end{comment}
 %}}}
 
-The principles of~\textit{Low coupling} and~\textit{high cohesion} were first proposed by~\citet{stevens1974structured}, who argue that better program code can be achieved by encapsulating similar functionality with similar dependencies to one entity (high cohesion), and in turn, separating functionality that have few dependencies between each other (low coupling) to separate entities~\parencite{beck2011congruence}. 
+The principles of~\textit{low coupling} and~\textit{high cohesion} were first proposed by~\citet{stevens1974structured}, who argue that better program code can be achieved by encapsulating similar functionality with similar dependencies to one entity (high cohesion), and in turn, separating functionality that have few dependencies between each other (low coupling) to separate entities~\parencite{beck2011congruence}. 
 
 Furthermore,~\parencite{parnas1971information} introduced the notion of ``information hiding'', where restricting information about components and libraries to their interfaces are seen beneficial for the cycle of development. This encourages well-behaved use of other modules without compromising the control of the authors on the internal implementation of those modules~\parencite{parnas1971information}. 
 %{{{
@@ -1001,7 +1001,7 @@ Furthermore,~\parencite{parnas1971information} introduced the notion of ``inform
 
 An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
 
-~\parencite{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by the other class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
+~\parencite{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by another class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
 
 ~\textit{Fan-Out Similarity (FO)}~\parencite{beck2011congruence} addresses the fact that the coupling of two entities can be indirect. For example, two classes can be related by extending the same class or implementing similar interfaces. Furthermore, the two classes can aggregate similar classes and components, thus increasing their coupling. Also, simply utilizing the same entities increases the coupling of two classes.
 
@@ -1009,7 +1009,7 @@ An often cited principle of system design is~\textit{Conway's law}, which holds 
 
 The~\textit{code clone} metric~\parencite{beck2011congruence} determines the duplication of code in the application by comparing two classes and extracting their similarity in relevance to code. This is derived from the observation that changing such a ``code clone'' also requires the modification of other similar application parts, thus resulting in an increased coupling. This is derived from the observation that modifying such a ``code clone'' also requires the modification of other similar application parts, thus resulting in an increased coupling. However, one can argue that sometimes duplication is desirable, e.g. for performance reasons.
 
-The last metric provided by~\parencite{beck2011congruence} is~\textit{semantic similarity}, where the source code is interpreted as plain text documents and similar vocabulary and domain concepts between documents indicate a higher coupling. Parts that are reoccurring but otherwise irrelevant to the logic of the program are ignored. This includes license texts, namespace imports and other language-specific keywords that are highly prevalent. The problem of semantic similarity is that circumstances affecting the vocabulary are numerous: Author information, references on other code entities and design patterns introducing certain naming conventions are examples of ways that can reduce the accuracy of metrics such as semantic similarity.
+The last metric provided by~\parencite{beck2011congruence} is~\textit{semantic similarity}, where the source code is interpreted as plain text documents and similar vocabulary and domain concepts between documents indicate a higher coupling. Parts that are reoccurring but otherwise irrelevant to the logic of the program are ignored. This includes license texts, namespace imports and some language-specific keywords. The problem of semantic similarity is that circumstances affecting the vocabulary are numerous: Author information, references on other code entities and design patterns introducing certain naming conventions are examples of ways that can reduce the accuracy of metrics such as semantic similarity.
 
 ~\citet{beck2011congruence} test the coupling metrics by applying them into 16 Java software projects and inspecting their effect on modularity. Structural dependencies (SD) received high correlation values and the authors estimate that the result stems from the fact that low coupling and high cohesion modularization principle~\parencite{stevens1974structured} is widely used in software design. Information hiding~\parencite{parnas1971information} also received correlation through the metrics fan-out similarity and evolutionary coupling. Code ownership resulted in low correlation, thus decreasing the plausibility of Conway's law~\parencite{conway1968committees} in software design. The rest of the modularization metrics showed medium-to-slight correlation values.
 
@@ -1067,8 +1067,6 @@ One of the currently more active approaches to measuring and predicting the qual
 
 \section{Challenges of metrics}
 
-Predicting fault incidence using software change history~\parencite{graves2000predicting}
-
 None of the metric suites presented in research literature are without their criticism. For example,~\citet{hitz1996chidamber} show that some of the metrics of~\citet{chidamber1994metrics} can be easily misused by not establishing a solid measurement environment. In essence, measuring software's internal attributes is highly context-specific. Concentrating on irrelevant attributes is bound to cause skewed measurement results and thus active engagement in resolving the truly important aspects of the software is required~\parencite{hitz1996chidamber}. This seems to be the core problem of software metrics: Determining what to measure, what data is relevant and how to interpret the results. The problem is further escalated by the fact that many metrics serve only as ``proxies'' to relevant measures, making the recognition of what to measure even harder. 
 %{{{
 \begin{comment}
@@ -1114,27 +1112,13 @@ Even after decades, no uniform guidelines for measuring software exist~\parencit
 \end{comment}
 %}}}
 
+The sheer number of metrics formed also contribute to the difficulty of comparing and validating the results. For example, object-oriented metrics suite studies from~\citet{briand2000exploring} and~\citet{briand2001replicated} deal with 67 and 54 different metrics~\parencite{kitchenham2010s}. Needless to say, the field would most likely benefit from a higher level of cooperation, where researchers would share measurement frameworks and increase the chance of comparable results. In addition,~\citet{kitchenham2010s} criticizes the field of advancing too fast to empirical research to validate the presented metrics, when in actuality, the background theory is not sufficiently established. Indeed, producing research data out of case studies is pointless when the theory used cannot be reliably applied to other settings as well.~\citet{kitchenham2010s} concludes that more attention is to be put on the unique contexts in which research is conducted and to consider the overall use of the metrics and their validation theory. 
+
 \section{Summary}
 
-A somewhat promising trend in the field of software measurement is the use of defect predicting analysis tools~\parencite{nagappan2005use,zimmermann2005mining,menzies2007data}. These techniques utilize machine learning and data mining~\parencite{witten2005data} to effectively train the tools used to recognize patterns in the source code that cause defects. In more depth, this approach concerns itself more on the algorithms which by the machine learning is conducted, rather than on the specific software metrics used. Even simple static code attributes, such as lines of code and cyclomatic complexity, have been found to be indicative of software quality~\parencite{menzies2007data}. 
-%{{{
-\begin{comment}
-Our conclusion is that, contrary to prior pessimism [21],
-[22], data mining static code attributes to learn defect
-predictors is useful. Given our new results on naive Bayes
-and log-filtering, these predictors are much better than
-previously demonstrated. Also, prior contradictory results
-on the merits of defect predictors can be explained in terms
-of the brittleness of the space of ¿best¿ predictors. Further,
-our baseline experiment clearly shows that it is a misdir-
-ected discussion to debate, e.g., ¿lines of code versus
-McCabe¿ for predicting defects. As we shall see, the choice of
-learning method is far more important than which subset of the
-available data is used for learning.~\parencite{menzies2007data}.
+The field of software measurement has existed as a research discipline since the first computer systems have been developed. In this chapter, all of the classic static code quality metrics were presented and the current trends were analyzed. Metrics specific to the object-oriented programming paradigm dominate in popularity, but researchers are also turning to other aids such as mining data out of version control histories~\parencite{menzies2007data}. This proves that the field is still healthy and many research topics are undoubtedly yet to emerge. 
 
-\end{comment}
-%}}}
-
+With the increase of programming languages and complex systems, the need for researching software metrics is evident. For example, even in safety-critical systems, the requirements of the software are easily overlooked, since every corner case is hard to be taken into consideration upfront~\parencite{lutz2003operational}. This advocates the use of automated tools to aid in discovering defects in the software. Thus the quantitative nature of software metrics is an important asset when dealing with nontrivial systems, where finite quality assurance resources limit the extent to which modules can be manually tested.
 
 %{{{Additional sources
 \begin{comment}
