@@ -681,23 +681,20 @@ It is also worth noting that in practice it may be difficult to exactly classify
       draw
     }
   ]
-    \node[node] (1)                                             {A};
-    \node[node] (2) [below left=of 1]                           {B};
-    \node[node] (3) [below right=of 1]                          {C};
-    \node[node] (4) [below left=of 2]                           {D};
-    \node[node] (5) [below right=of 2]                          {E};
-    \node[node] (6) [below left=of 3]              {F};
-    \node[node] (7) [below right=of 3]              {G};
+    \node[node] (A) at (0,0)    {A};
+    \node[node] (B) at (4,0)    {B};
+    \node[node] (C) at (0,-3)   {C};
+    \node[node] (D) at (4,-3)   {D};
 
-    \path (1) edge                   node {} (2)
-          (1) edge                   node {} (3)
-          (2) edge                   node {} (4)
-          (2) edge                   node {} (5)
-          (3) edge                   node {} (6)
-          (3) edge                   node {} (7);
+    \draw[->] ([yshift=4pt] A.east) -- ([yshift=4pt] B.west) node[pos=0.5, above]{(2,2)};
+    \draw[<-] ([yshift=-4pt] A.east) -- ([yshift=-4pt] B.west) node[pos=0.5, below]{(2,2)};
+    \draw[<-] ([xshift=-4pt] B.south) -- ([xshift=-4pt] D.north) node[pos=0.5, left]{(5,1)};
+    \draw[->] ([xshift=4pt] B.south) -- ([xshift=4pt] D.north) node[pos=0.5, right]{(5,1)};
+    \draw[->] (A.south) -- (C.north) node[pos=0.5, left]{(3,1)};
+
   \end{tikzpicture}
   \caption[Example of coupling model graph~\parencite{fenton1998software}
-  ]{TODO: Example of coupling model graph~\parencite{fenton1998software}}
+  ]{Example of coupling model graph~\parencite{fenton1998software}}
     \label{fig:coupling-model-graph-example}
 \end{figure}
 
