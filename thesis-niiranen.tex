@@ -187,7 +187,7 @@ size.~\parencite{habra2008framework}.
 \label{chap:software_metrics}
 
 Software is known to be brittle in the sense that its runtime behavior might not correspond to what the programmer had intended. More specifically, human error often introduces faulty logic into the software's code. Once these unintended ``features'', or bugs, slip into production versions and the software is released, fixing a critical error afterwards might require approximately hundred times more effort~\parencite{shull2002we}. To help assessing and predicting the quality of the
-software at the time of development, software metrics are engineered.
+software at the time of development,~\textit{software metrics} are engineered.
 %{{{
 \begin{comment}
 General data were presented that supported an effort increase of approximately 100:1. Don O¿Neill described data from IBM Rochester [10] in the pre-meeting feedback that found an increase in effort of about 13:1 for defect slippage from code to test and a further 9:1 increase for slippage from test to field (so, a ratio of about 117:1
@@ -195,7 +195,7 @@ from code to field).~\parencite{shull2002we}
 \end{comment}
 %}}}
 
-~\textit{Software metrics} is a rather generic term traditionally meant to include the assessment of software by its internal and external attributes~\parencite{fenton1999software}. The characteristics of software are quantified through metrics in order to predict (1) effort/cost of development processes and (2) the quality of software~\parencite{fenton2000software}. The central idea of measuring software is that with access to the characteristics
+Software metrics is a rather generic term traditionally meant to include the assessment of software by its internal and external attributes~\parencite{fenton1999software}. The characteristics of software are quantified through metrics in order to predict (1) effort/cost of development processes and (2) the quality of software~\parencite{fenton2000software}. The central idea of measuring software is that with access to the characteristics
 (quality, complexity) of the software, developers and management can make educated guesses about development and resource planning~\parencite{fenton1999software}.
 %{{{
 \begin{comment}
@@ -209,18 +209,16 @@ key in both cases has been the assumption that product 'size' measures should dr
 \end{comment}
 %}}}
 
-First attempts at recording software metrics were witnessed in the 1960s when .
+First attempts at recording software metrics were witnessed in the 1960s when properties such as program size were measured. The results were then used to assess programmer productivity and the quality of their work. In the 1970s the limitations of simple measures like lines of code was observed, and research departed to produce more elegant measures. These new measures, such as the ones from~\citet{halstead1977elements} and~\citet{mccabe1976complexity} were aimed to provide complexity measures independent of the accompanying programming languages. Ever since, research has produced numerous new metrics and validation frameworks, each with their own advantages and disadvantages.~\parenciteseveral{fenton1999software}.
 
 The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
 ~\begin{quoting}
 A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
 ~\end{quoting}
 
-\noindent Examples of such attributes are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}.
+\noindent Examples of such attributes are the number of lines of code and cyclomatic complexity~\parencite{mccabe1976complexity}. This thesis adopts the general categorization of software measures as proposed by~\citet{fenton1998software}. In specific, measures are divided into size, structure and information flow measures. In essence, the software metrics presented in the thesis deal with the internal attributes of software, mainly the composition of the program code.
 
-Although the theoretical effectiveness of software metrics and defect prediction TÄHÄN JUTTUA kritiikistä
-
-This thesis adopts the general categorization of software measures as proposed by~\citet{fenton1998software}. In specific, measures are divided into size, structure and information flow measures.~\citet{briand1996property} argue that many of the metrics presented in research are misplaced in the sense that they do not obey mathematical axioms of a given category. As such, this thesis recognizes the interpretative nature of the metrics and does not attempt to prove the validity of each presented measure in mathematical terms.
+In addition, much disparity on the nature of metrics research is evident between researchers.~\citet{briand1996property} argue that many of the metrics presented are misplaced in the sense that they do not obey mathematical axioms of a given category, rendering their validation difficult. On the other hand, many researchers seem to emphasize real-world studies where results count more than their theoretical foundings~\parencite{kitchenham2010s}. As such, this thesis recognizes the interpretative nature of the metrics and does not attempt to prove the validity of each presented measure in mathematical terms. The metrics presented in this thesis were chosen by their apparent popularity and impact in research. 
 %{{{
 \begin{comment}
 Unfortunately, new software measures are very often defined to capture elusive concepts such as complexity, cohesion, coupling, connectivity, etc. (Only size can be thought to be reasonably well understood.) Thus, it is impossible to assess the theoretical soundness of newly proposed measures, and the acceptance of a new measure is mostly a matter of belief.~\parencite{briand1996property}
@@ -228,6 +226,8 @@ Unfortunately, new software measures are very often defined to capture elusive c
 Concepts such as complexity, coupling, cohesion or even size are very often subject to interpretation and appear to have inconsistent definitions in the literature. As a consequence, there is little guidance provided to the analyst attempting to define proper measures for specific problems.~\parencite{briand1996property}
 \end{comment}
 %}}}
+
+This chapter continues on presenting many, if not all, classic measures of software code. These foundings are important to understand the implications of the empirical research that has been conducted and nature of the trends in the field. After the initial presentation, the focus of the chapter shifts to newer measurement approaches such as the measurement of code version history, which albeit does not directly fall into the category of internal code attribute measurement, is a prevalent current trend in the field~\parencite{zimmermann2005mining}. Lastly, the challenges of metrics are discussed and the main obstacles of future research are provided.
 
 %{{{ TODO: sources
 \begin{comment}
