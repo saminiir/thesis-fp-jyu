@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+if [ -z $1 ]; then 
+    echo "Input revision plz"
+    exit 1
+fi
+
+COMMIT=$1
+
+echo "Diffing revision $COMMIT"
+
+latexdiff -c latexdiff.cfg -t CTRADITIONAL <(git show $COMMIT:thesis-niiranen.tex) thesis-niiranen.tex > diff.tex
+
+pdflatex -interaction=nonstopmode diff.tex
