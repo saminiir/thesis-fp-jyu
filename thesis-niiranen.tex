@@ -285,6 +285,7 @@ Furthermore, not all source code lines are equal. Often comments and blank lines
 \text{Total length (LOC) = Non-Comment LOC + Comment LOC}
 \end{flalign*}
 \noindent Then the following serves as the ratio of commented lines in the source code:
+
 \begin{flalign*}
 \dfrac{CLOC}{LOC}
 \end{flalign*}
@@ -313,15 +314,12 @@ the source code, like the the assignment operator {\tt =} in imperative language
 Halstead classifies symbols in a program into two classes, those that are used to specify actions are classed as operators while symbols that represent data are classed as operands.~\parencite{ryder2004software}.
 \end{comment}
 %}}}
-
 \begin{flalign*}
 \mu_1 = \text{number of unique operators}\\
 \mu_2 = \text{number of unique operands}\\
-\\
 N_1 = \text{total occurrences of operators}\\
-N_2 = \text{total occurrences of operands}\\
+N_2 = \text{total occurrences of operands}
 \end{flalign*}
-
 \noindent These variables are then used to quantify several properties such as the~\textit{length},~\textit{vocabulary},~\textit{volume},~\textit{program level} and~\textit{difficulty} of the source code. The example C code (listing~\ref{lst:halstead-example}) has thus 6 operands ({\tt a, b, 1, 2, sum, "sum of.."}) and 5 operators ({\tt int, =, +, printf, ()}).
 
 \begin{lstlisting}[language=C,caption=Halstead volume quantity example,label=lst:halstead-example]
@@ -625,7 +623,6 @@ Results suggest a relationship between tree impurity and poor design. Thus m may
 We call internal reuse the extent to which modules are reused within the same product.~\parencite{fenton1998software}.
 \end{comment}
 %}}}
-
 \begin{flalign*}
 r(G) = e - n + 1
 \end{flalign*}
@@ -792,8 +789,8 @@ The 00 approach centers around modeling the real world in terms of its objects, 
 
 An object possesses~\textit{methods} and~\textit{attributes} that characterize its functionality. For example, a {\tt Dog} class might have a method {\tt wagTail()}. A {\tt Dog} object can then be instantiated and its methods used:
 \begin{lstlisting}
-    var dog = new Dog();
-    dog.wagTail();
+var dog = new Dog();
+dog.wagTail();
 \end{lstlisting}
 
 The purpose of the OOP paradigm is to model real-world entities as closely as possible~\parencite{booch1986object}. This thesis chooses to present OOP metrics specific to the work of~\citet{chidamber1994metrics}, where several measures for OOP are defined based on previous research. Namely, a close inspection of an object's properties and its relation to other objects is mapped as the foundation for OOP software metrics. Their measures have been validated as good predictors defects in real-world software by numerous empirical studies~\parencite{basili1996validation,subramanyam2003empirical,gyimothy2005empirical,zhou2006empirical,olague2007empirical} and is the most widely used OOP metric suite~\parencite{catal2009systematic}. On the other hand, some of the metrics of~\citet{chidamber1994metrics} have been invalidated by researchers~\parencite{hitz1996chidamber,kitchenham2010s}. Still, researchers continue to use the CK-metric suite as the reference measurement tool for OOP.
