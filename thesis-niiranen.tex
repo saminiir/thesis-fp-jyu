@@ -1488,21 +1488,21 @@ fmap (*) (Branch (Leaf 2) (Leaf 3)))
 \end{lstlisting}
 
 Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value ({\tt Leaf} in this case). As a result this recurring pattern of ``picking'' the function value out of the functor was abstracted as applicative functors~\parencite{mcbride2008functional}. The {\tt Tree} data type can be made as an instance of {\tt Applicative}:
-\begin{lstlisting}
+\begin{lstlisting}[breakatwhitespace=false, breaklines=true]
 instance Applicative Tree where
-    pure = Leaf
-    (Leaf f) <*> (Leaf x) = Leaf (f x)
-    (Branch a b) <*> (Branch c d) = Branch (a <*> c) (a <*> d)
+  pure = Leaf
+  (Leaf f) <*> (Leaf x) = Leaf (f x)
+  (Branch a b) <*> (Branch c d) = Branch (a <*> c) (a <*> d)
 \end{lstlisting}
 
 \noindent Now {\tt <*>} can be used for applying functor values:
 
-\begin{lstlisting}
+\begin{lstlisting}[breakatwhitespace=false, breaklines=true]
 (Branch (Leaf (*2)) (Leaf (*3))) <*> (Branch (Leaf 2) (Leaf 3))
 -- Outputs Branch (Leaf 4) (Leaf 6) 
 \end{lstlisting}
 
-In essence, {\tt <*>} is just function application with a context~\parencite{typeclassopedia2014haskellwiki}. The {\tt pure} function ``embeds pure computations into the pure fragment of an effectful world''~\parencite{mcbride2008functional}. In other words, a pure value is lifted into the computational context of {\tt Applicative}. Applicative functors must also satisfy some laws: 
+In essence, {\tt <*>} is just function application with a context~\parencite{typeclassopedia2014haskellwiki}. The {\tt pure} function ``embeds pure computations into the pure fragment of an effectful world''~\parencite{mcbride2008functional}. In other words, a pure value is lifted into the computational context of the {\tt Applicative} instance. Applicative functors must also satisfy certain laws: 
 %{{{
 \begin{comment}
 The idea is that pure embeds pure computations into the pure fragment of an effectful world¿the resulting computations may thus be shunted around freely, as long as the order of the genuinely effectful computations is preserved.~\parencite{mcbride2008functional}.
@@ -1512,23 +1512,19 @@ The idea is that pure embeds pure computations into the pure fragment of an effe
 \begin{itemize}
     \item The identity law:
           {\tt pure id <*> v = v}
-    \item Homomorphism
+    \item Homomorphism:
           {\tt pure f <*> pure x = pure (f x)}
     \item Interchange
+          {\tt v <*> pure x = pure (\textbackslash f -> f x) <*> v}
     \item Composition
+          {\tt pure (.) <*> u <*> v <*> w = u <*> (v <*> w)}
 \end{itemize}
 
+The identity law has the same principle as the one with functors. Homomorphism declares that applying a non-effectful function to a non-effectful value is the same as applying the function to a value and ``lifting'' the result in to the applicative context. Moreover, interchange shows that the order of applying an effectful function to a pure value is interchangeable. Composition deals with the associativity of the applicative property~\parencite{typeclassopedia2014haskellwiki}.
 
-The applicative type class contains the operator {\tt<*>} used for applying functors over functors:
+One real-world use case for applicative functors have been found in parsing applications. Parsers are a traditional software engineering problem that functional languages solve well by using combinatory parsing~\parencite{swierstra2009combinator}. In contrast to using monadic parsers~\parencite{hutton1996monadic}, an approach where the principles of applicative functors are used have proven to be likewise efficient, mainly because ``the structure of these parsers is independent of the results of parsing'', leading to lazy computation and thus to efficiency~\parencite{baars2004functional}. 
 
-%{{{
-\begin{comment}
-So now we know: there are strictly more Applicative functors than Monads. Should we just throw the Monad class away and use Applicative instead? Of course not! The reason there are fewer monads is just that the Monad structure is more powerful.~\parencite{mcbride2008functional}
-
-\end{comment}
-%}}}
-
-\subsection{Monoids}
+In conclusion, applicative functors are functors with effects. This has convenient implications for implementations where the full power of monads is not needed~\parencite{baars2004functional}.
 
 \subsection{Monads}
 
