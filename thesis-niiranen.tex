@@ -1439,8 +1439,8 @@ Another intuition is that a Functor represents some sort of ¿computational conte
 %}}}
 \begin{lstlisting}
 instance Functor Tree where
-    fmap f (Leaf x) = Leaf (f x)
-    fmap f (Branch a b) = Branch (fmap f a) (fmap f b)
+  fmap f (Leaf x) = Leaf (f x)
+  fmap f (Branch a b) = Branch (fmap f a) (fmap f b)
 \end{lstlisting}
 
 \noindent Now a given function can be applied (~\textit{mapped}) over the values in a {\tt Tree}:
@@ -1450,7 +1450,7 @@ fmap (*2) (Branch (Leaf 2) (Leaf 3))
 -- Outputs: Branch (Leaf 4) (Leaf 6)
 \end{lstlisting}
 
-Thus the values inside the {\tt Tree} ``context'' are changed, without affecting the computational context itself. Perhaps a more general example of a functor instance is the list data type, since it provides a map function like our tree structure~\parencite{typeclassopedia2014haskellwiki}. Derived from category theory, functors provide certain ``homomorphism'' or abstractions over functional data structures. As is the case with mathematics, certain laws must be satisfied for functors, expressed in Haskell code as: 
+Thus the values inside the {\tt Tree} ``context'' are changed, without affecting the computational context itself. Perhaps a more general example of a functor instance is the list data type, since it provides a map function similarly to the example {\tt Tree} structure~\parencite{typeclassopedia2014haskellwiki}. Derived from category theory, functors provide certain ``homomorphism'' or abstractions over functional data structures. As is the case with mathematics, certain laws must be satisfied for functors, expressed in Haskell code as: 
 %{{{
 \begin{comment}
 From the context point of view, the intention is that fmap applies a function to a value without altering its context~\parencite{typeclassopedia2014haskellwiki}
