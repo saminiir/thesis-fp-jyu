@@ -1522,7 +1522,20 @@ The idea is that pure embeds pure computations into the pure fragment of an effe
 
 The identity law has the same principle as the one with functors. Homomorphism declares that applying a non-effectful function to a non-effectful value is the same as applying the function to a value and ``lifting'' the result in to the applicative context. Moreover, interchange shows that the order of applying an effectful function to a pure value is interchangeable. Composition deals with the associativity of the applicative property~\parencite{typeclassopedia2014haskellwiki}.
 
-One real-world use case for applicative functors have been found in parsing applications. Parsers are a traditional software engineering problem that functional languages solve well by using combinatory parsing~\parencite{swierstra2009combinator}. In contrast to using monadic parsers~\parencite{hutton1996monadic}, an approach where the principles of applicative functors are used have proven to be likewise efficient, mainly because ``the structure of these parsers is independent of the results of parsing'', leading to lazy computation and thus to efficiency~\parencite{baars2004functional}. 
+One real-world use case for applicative functors have been found in parsing applications. Parsers are a traditional software engineering problem that functional languages solve well by using combinatory parsing~\parencite{swierstra2009combinator}. In contrast to using monadic parsers~\parencite{hutton1996monadic}, applicative functors are effective at parsing context-free grammars, mainly because ``the structure of these parsers is independent of the results of parsing'', leading to lazy computation and thus to efficiency~\parencite{baars2004functional}. 
+
+An often used notation technique for context-free grammars is the Backus-Naur Form (BNF). An example BNF would be 
+\begin{flalign*}
+float ::= sign^? digit^+ ('!digit^+)^?
+\end{flalign*}
+
+\noindent and an example parser for it would be~\parencite{hudak2007history}:
+
+\begin{lstlisting}
+float :: Parser
+float = optional sign <*> oneOrMore digit <*> 
+        optional (lit '.' <*> oneOrMore digit)
+\end{lstlisting}
 
 In conclusion, applicative functors are functors with effects. This has convenient implications for implementations where the full power of monads is not needed~\parencite{baars2004functional}.
 
