@@ -1339,7 +1339,55 @@ fold (*) [1,2,3,4,5] -- Returns 120
 
 As can be seen, the actual data handling logic is separated from the data structure traversal. This leads into modular programs where components are likely to be reusable, thus resulting in fewer bugs and increasing development time.
 
-\subsection{TODO: Non-strict semantics and lazy evaluation}
+\subsection{Type systems}
+
+Functional languages have traditionally taken extreme care of developing their~\textit{type systems}.~\citet[1.]{pierce2002types} provides a definition for type systems as 
+\begin{quoting}
+A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.
+\end{quoting}
+
+\noindent Type systems and type theory is a vast field of study involving mathematics, logics and philosophy. Programming languages involve type systems by utilizing them in the inference, or calculations, of a program's run-time behavior. This reasoning can be done statically by a compiler or an interpreter, or dynamically at run-time. In essence, the type system is responsible for detecting and preventing errors in the execution flow of a running program through a type checker~\parencite{cardelli1996type}.
+
+Two categories exist in the typing of programming languages. Most mainstream languages fall in to the category of~\textit{typed} languages, where program values are bound with information about their types~\parencite{cardelli1996type}.~\textit{Untyped} languages, such as assembly languages, omit such information and contain at most one general type (e.g. bit patterns in assembly). This means that operations can be done on any values and their combinations, decreasing the safety of the language. 
+
+Additionally, programming languages implement either~\textit{static checking} or~\textit{dynamic checking}, often called static and dynamic typing in practical settings~\parencite{pierce2002types}. Static checking in languages such as Haskell and C is implemented at compile-time, where type information is derived by a combination of explicit annotations and type inference. Dynamically checked languages, such as Lisp, add run-time information about the program's values to validate behavior when it is executed.~\parenciteseveral{cardelli1996type}. Often both static and dynamic checking are utilized to provide language mechanisms such as Java's downcasting to subtypes.
+
+A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where~\textit{type inference} plays an important role. Type inference enables automatic deducing of the types in expressions, without explicit declaration. This frees developers from having to repeat type declarations, but still offers polymorphic functions and data structures with accurate type information. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
+
+Haskell is considered as a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consent exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
+
+\subsection{Strict and non-strict semantics}
+
+Functional languages utilize either~\textit{strict} or~\textit{non-strict} semantics. These are derived from evaluation strategies of lambda calculus expressions, where the order of reducing the expression variables are dictated. In the~\textit{normal order} strategy, a lambda calculation is reduced as follows:
+
+\begin{enumerate}
+    \item $id(id(\lambda z . id z))$
+    \item $id(\lambda z . id z)$
+    \item $\lambda z . id z$
+    \item $\lambda z . z$
+\end{enumerate}
+
+Thus the leftmost, outermost expression is always reduced first~\parencite{pierce2002types}. The~\textit{call-by-name} strategy, on the other hand, only partially reduce expressions, not resulting to actual values: 
+
+\begin{enumerate}
+    \item $id(id(\lambda z . id z))$
+    \item $id(\lambda z . id z)$
+    \item $\lambda z . id z$
+\end{enumerate}
+
+This has the advantage that computations are only done when they are needed. For example, Haskell utilizes an optimized version of this strategy, where expressions once evaluated are saved and the values can reused without repeating the computations. Such semantics are called non-strict, where~\textit{lazy evaluation} is one implementation technique and utilized by e.g. Haskell.~\parenciteseveral{hudak2007history}.
+
+The strict semantics are implemented most of the time through~\textit{call-by-value} strategy, where only the outermost expression is evaluated and ``only when its right-hand side has been reduced to a value''~\parencite{pierce2002types}[57.]:
+
+\begin{enumerate}
+    \item $id(id(\lambda z . id z))$
+    \item $id(\lambda z . id z)$
+    \item $\lambda z . id z$
+\end{enumerate}
+
+This approach creates the strict semantics, because function parameters are always evaluated even when they are not used~\parencite{pierce2002types}.
+
+~\parencite{pierce2002types}[57.] juttua evaluation strategyista
 
 Derived from lambda calculus, a~\textit{non-strict} programming language such as Haskell uses avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages like Java and C++ utilize mechanisms such as~\textit{call-by-value} where function parameters are eagerly computed. Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand,~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
 %{{{
@@ -1377,6 +1425,22 @@ zy evaluation means that an actual parameter is evaluated only when its value is
 %{{{
 \begin{comment}
 Since this method of evaluation runs f as little as possible, it is called 'lazy evaluation'. It makes it practical to modularise a program as a generator which constructs a large number of possible answers, and a sleector which chooses the appropriate one.~\parencite{hughes1989functional}.
+\end{comment}
+%}}}
+
+%{{{ Additional sources
+\begin{comment}
+    By abstracting away from evaluation order, lazy evaluation also
+    abstracts away from object lifetimes, and that is why lazy evalua-
+    tion contributes to space leaks. Programmers who cannot predict¿
+    and indeed do not think about¿evaluation order also cannot pre-
+    dict which data-structures will live for a long time. Since Haskell
+    programs allocate objects very fast, if large numbers of them end
+    up with long lifetimes, then the peak space requirements can be
+    very high indeed. The next step was thus to extend the heap profiler
+    to provide direct information about object lifetimes.~\parencite{hudak2007history}
+
+
 \end{comment}
 %}}}
 
