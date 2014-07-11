@@ -1358,38 +1358,45 @@ Haskell is considered as a statically typed language with strong type inference.
 
 \subsection{Strict and non-strict semantics}
 
-Functional languages utilize either~\textit{strict} or~\textit{non-strict} semantics. These are derived from evaluation strategies of lambda calculus expressions, where the order of reducing the expression variables are dictated. In the~\textit{normal order} strategy, a lambda calculation is reduced as follows:
+Programming languages utilize either~\textit{strict} or~\textit{non-strict} semantics for evaluating expressions. These semantics are derived from reduction strategies of lambda calculus, which dictate the order of how expressions are evaluated. Most programming languages utilize strict semantics, where function arguments are eagerly evaluated. The paradigm of a language does not necessarily determine the evaluation strategy to be used. For example, both C (imperative) and Scheme (functional) languages utilize variants of the~\textit{call-by-value} strategy, where the outermost expression is evaluated and ``only when its right-hand side has been reduced to a value''~\parencite[57.]{pierce2002types}.
 
-\begin{enumerate}
-    \item $id(id(\lambda z . id z))$
-    \item $id(\lambda z . id z)$
-    \item $\lambda z . id z$
-    \item $\lambda z . z$
-\end{enumerate}
+\begingroup
+    \fontsize{13pt}{10pt}\selectfont
+    \begin{align*}
+        &id\; \underline{( id\; ( \lambda z .\; id\; z ))} \\
+        \rightarrow \: &\underline{id\;(\lambda z .\; id\; z)} \\
+        \rightarrow \: &\lambda z .\; id\; z \\
+    \end{align*}
+\endgroup
 
-Thus the leftmost, outermost expression is always reduced first~\parencite{pierce2002types}. The~\textit{call-by-name} strategy, on the other hand, only partially reduce expressions, not resulting to actual values: 
+\noindent This approach enforces the strict semantics of evaluation, because function parameters are always eagerly evaluated even when they are not used~\parencite{pierce2002types}. Most programming languages utilize this evaluation strategy.
 
-\begin{enumerate}
-    \item $id(id(\lambda z . id z))$
-    \item $id(\lambda z . id z)$
-    \item $\lambda z . id z$
-\end{enumerate}
+Non-strict evaluation strategies, however, have the benefit of not evaluating computations until needed. For example, in the~\textit{normal order} strategy, a lambda expression is reduced as follows:
 
-This has the advantage that computations are only done when they are needed. For example, Haskell utilizes an optimized version of this strategy, where expressions once evaluated are saved and the values can reused without repeating the computations. Such semantics are called non-strict, where~\textit{lazy evaluation} is one implementation technique and utilized by e.g. Haskell.~\parenciteseveral{hudak2007history}.
+\begingroup
+    \fontsize{13pt}{10pt}\selectfont
+    \begin{align*}
+        &\underline{id\; ( id\; ( \lambda z .\; id\; z ))} \\
+        \rightarrow \: &\underline{id\;(\lambda z .\; id\; z)} \\
+        \rightarrow \: &\lambda z .\; \underline{id\; z} \\
+        \rightarrow \: &\lambda z . z
+    \end{align*}
+\endgroup
 
-The strict semantics are implemented most of the time through~\textit{call-by-value} strategy, where only the outermost expression is evaluated and ``only when its right-hand side has been reduced to a value''~\parencite{pierce2002types}[57.]:
+\noindent Thus the leftmost, outermost expression is always reduced first~\parencite{pierce2002types}, causing functions to be applied before evaluating their arguments. However, the normal-order reduction is potentially inefficient when dealing with nontrivial computations, leading to unnecessary repetitive calculations in naive implementations~\parencite{hudak1989conception}. The~\textit{call-by-name} strategy, on the other hand, only partially reduces expressions, not resulting to actual values: 
 
-\begin{enumerate}
-    \item $id(id(\lambda z . id z))$
-    \item $id(\lambda z . id z)$
-    \item $\lambda z . id z$
-\end{enumerate}
+\begingroup
+    \fontsize{13pt}{10pt}\selectfont
+    \begin{align*}
+        &\underline{id\; ( id\; ( \lambda z .\; id\; z ))} \\
+        \rightarrow \: &\underline{id\;(\lambda z .\; id\; z)} \\
+        \rightarrow \: &\lambda z .\; id\; z \\
+    \end{align*}
+\endgroup
 
-This approach creates the strict semantics, because function parameters are always evaluated even when they are not used~\parencite{pierce2002types}.
+\noindent This has the advantage that computations are only evaluated when they are needed. Furthermore, Haskell utilizes an optimized, albeit a more complex version of this strategy called \textit{call-by-need}. In call-by-need, expressions once evaluated are saved and the values are reused without repeating the computations. This~\textit{lazy evaluation} is achieved by through graph reduction, where arguments and their evaluated results are shared between computations~\parencite{hudak2007history}. 
 
-~\parencite{pierce2002types}[57.] juttua evaluation strategyista
-
-Derived from lambda calculus, a~\textit{non-strict} programming language such as Haskell uses avoids evaluating values until they are actually needed. In contrast,~\textit{strict} languages like Java and C++ utilize mechanisms such as~\textit{call-by-value} where function parameters are eagerly computed. Deferring evaluation of parameter values offers the obvious advantage of saving computation time resulting in more efficient programs. On the other hand,~\textit{lazy evaluation} also grants the possibility of defining unbounded data structures such as infinite lists.~\parenciteseveral{hudak1989conception}. 
+A well-known property of lazy evaluation is the ability to declare unbounded data structures, such as infinite lists~\parencite{hudak1989conception}:
 %{{{
 \begin{comment}
 A programming language is strict if it requires all actual parameters to be fully evaluated, which ensures that the value of a function does not depend on the order in which the parameters are evaluated. A language is nonstrict if it does not have the strict requirement.~\parencite{hudak1989conception}.
@@ -1408,7 +1415,7 @@ squares = [x * x | x <- [0..]]
 
 \end{lstlisting}
 
-\noindent The values of the lists are not computed until they are needed. For example, {\tt take 5 squares} returns {\tt [0, 1, 2, 4, 9, 16, 25, 36, 49, 64, 81]}. Effectively, lazy evaluation provides three important mechanisms for evaluating function parameters~\parencite{TODO: Better source than sebesta}:
+\noindent The values of these lists are not computed until they are needed. For example, {\tt take 5 squares} would return {\tt [0, 1, 2, 4, 9]}. Effectively, lazy evaluation provides three important mechanisms for evaluating function parameters~\parencite{hudak2007history}:
 
 \begin{itemize}
     \item Only the needed parameters are evaluated
