@@ -1407,7 +1407,7 @@ Non-strict evaluation strategies, however, have the benefit of not evaluating co
     \end{align*}
 \endgroup
 
-\noindent This has the advantage that computations are only evaluated when they are needed. Furthermore, Haskell utilizes an optimized, albeit a more complex version of this strategy called \textit{call-by-need}. In call-by-need, expressions once evaluated are saved and the values are reused without repeating the computations. This~\textit{lazy evaluation} is achieved by through graph reduction, where arguments and their evaluated results are shared between computations~\parencite{hudak2007history}. 
+\noindent This has the advantage that computations are only evaluated when they are needed. Furthermore, Haskell utilizes an optimized, albeit a more complex version of this strategy, termed \textit{call-by-need}. In call-by-need, expressions once evaluated are saved and the values are reused without repeating the computations. This~\textit{lazy evaluation} is achieved through graph reduction, where arguments and their evaluated results are shared between computations~\parencite{hudak2007history}. 
 
 A well-known property of lazy evaluation is the ability to declare unbounded data structures, such as infinite lists~\parencite{hudak1989conception}:
 %{{{
@@ -1493,7 +1493,7 @@ size (Branch l r) = size l + size r + 1
 
 Effectively, {\tt size} receives a data type of {\tt Tree} as the only parameter. In fact, the function signature is {\tt size :: Tree a -> Int}. The pattern matching mechanism is then utilized for evaluating either expression, depending on the actual data constructor. 
 
-Due to the nature of lazy evaluation, the actual implementation of pattern matching has proved to be challenging in functional languages. In particular, the order of parameters rise subtle problems depending on their evaluation mechanism~\parencite{hudak1989conception}. In the end, matching patterns from top to bottom and evaluating parameters from left to right serves as a sufficient compromise and is used in most modern functional languages~\parencite{hudak2007history}.
+Due to the nature of lazy evaluation, the actual implementation of pattern matching has proved to be challenging in functional languages. In particular, the ordering of parameters rise subtle problems depending on their evaluation mechanism~\parencite{hudak1989conception}. In the end, matching patterns from top to bottom and evaluating parameters from left to right serves as a sufficient compromise and is used in most modern functional languages~\parencite{hudak2007history}.
 %{{{
 \begin{comment}
 In SASL, KRC, Hope, SML, and Miranda, matching against equa- tions is in order from top to bottom, with the first matching equation being used. Moreover in SASL, KRC, and Miranda, matching is from left to right within each left-hand-side¿which is important in a lazy language, since as soon as a non-matching pattern is found, matching proceeds to the next equation, potentially avoiding non- termination or an error in a match further to the right. Eventually, these choices were made for
