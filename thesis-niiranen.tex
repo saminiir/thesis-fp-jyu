@@ -1441,7 +1441,8 @@ zy evaluation means that an actual parameter is evaluated only when its value is
 \end{comment}
 %}}}
 
-\noindent As previously presented, functions have the convenient property of being freely composable from other functions. In conjuction with lazy evaluation, this function composition becomes especially useful when ``glueing'' several functions together. A popular usage in functional programs is to include ``generators'' (functions) that produce arbitrarily large data sets. However, combining these generators with functions that include predicates for selecting the correct values provides a modular and concise way to structure applications.~\parencite{hughes1989functional}. This separation of data structures and control is also one of the central notions of functional programming~\parencite{hudak1989conception}.
+\noindent As previously presented, functions in functional programming have the convenient property of being freely composable from other functions. In conjuction with lazy evaluation, this function composition becomes especially useful when ``glueing'' several functions together. A popular usage in functional programs is to include ``generators'' (functions) that produce arbitrarily large data sets. However, combining these generators with functions that include predicates for
+selecting the correct values provides a modular and concise way to structure applications. This separation of data structures and control is also one of the central notions of functional programming.~\parenciteseveral{hudak1989conception}.
 %{{{
 \begin{comment}
 Since this method of evaluation runs f as little as possible, it is called 'lazy evaluation'. It makes it practical to modularise a program as a generator which constructs a large number of possible answers, and a sleector which chooses the appropriate one.~\parencite{hughes1989functional}.
