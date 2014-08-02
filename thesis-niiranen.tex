@@ -1466,6 +1466,12 @@ Since this method of evaluation runs f as little as possible, it is called 'lazy
 
 \subsection{Polymorphic types}
 
+Traditionally, programming languages are defined as being either~\textit{monomorphic}, where only one type exists for functions and operands, or~\textit{polymorphic}, where values can have numerous types. For example, a polymorphic function might have arguments that, in turn, can be represented as more than one type. Additionally, these polymorphic types may have operations that are applicable to multiple types.~\parenciteseveral{cardelli1985understanding}.
+
+Polymorphism is further divided into more detailed concepts.~\textit{Parametric} polymorphism enables functions to operate on a uniform set of unconstrained types that share a common structure~\parencite{cardelli1985understanding}. For example, the idiomatic function {\tt id :: a -> a} generally accepts any kind of type as its argument and as a result, returns a value of the same unknown type.~\textit{Ad-hoc} polymorphism, on the other hand, enables functions to operate
+on seemingly unrelated types with an implementation that is specific to the type~\parencite{cardelli1985understanding}. The addition operator {\tt +} is ad-hoc in many languages, since it operates differently based on its input types. Adding two strings together might result in a concatenated string, where as adding two decimal numbers might utilize a floating point operation to effectively calculate the result. In fact, the types have~\textit{overloaded} the implementation of the addition
+operator. 
+
 Although a somewhat technical concept,~\textit{data types} are an essential part of modern functional languages~\parencite{hudak2007history}. In this section, algebraic and abstract data types are discussed and one of the main mechanism for their use, pattern matching, is presented.
 %{{{
 \begin{comment}
