@@ -1365,7 +1365,7 @@ A statically checked language has the benefit of being able to prove the correct
 
 Most typed programming languages implement type checking by requiring explicit type annotations for functions and local variables. Subexpressions in the function do not require explicit type information, since the compiler can deduce it from the environment of the function.~\parenciteseveral{cardelli1985understanding}. Functional languages, however, have taken this type deduction even further.~\textit{Type inference} is utilized to provide accurate type information of expressions without requiring explicit annotations. This frees developers from having to repeat type declarations, but still enables the type system to support abstract language mechanisms such as polymorphism~\parencite{hudak1989conception}.
 
-A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM includes algorithm~\textit{W}~\parencite{damas1982principal}, which can effectively  deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
+A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM includes algorithm~\textit{W}~\parencite{damas1982principal} to effectively deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
 
 Haskell is considered as a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consent exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
 
@@ -1382,7 +1382,7 @@ Programming languages utilize either~\textit{strict} or~\textit{non-strict} sema
     \end{align*}
 \endgroup
 
-\noindent This approach enforces the strict semantics of evaluation, because function parameters are always eagerly evaluated even when they are not used~\parencite{pierce2002types}. Most programming languages utilize this evaluation strategy.
+\noindent This approach enforces the strict semantics of evaluation, because function parameters are always eagerly evaluated even when they are not used~\parencite{pierce2002types}. 
 
 Non-strict evaluation strategies, however, have the benefit of not evaluating computations until needed. For example, in the~\textit{normal order} strategy, a lambda expression is reduced as follows:
 
