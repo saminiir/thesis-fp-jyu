@@ -1261,11 +1261,7 @@ The committee's primary goal was to deisgn a language that satisfied these const
 \end{comment}
 %}}}
 
-\section{Concepts}
-
-The different concepts of functional programming are numerous, but shared between languages. This section aims to provide an overview into the features of functional languages, as well as their strengths and weaknesses. 
-
-\subsection{Functions}
+\section{Functions}
 
 The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{hughes1989functional}. A function that returns an integer doubled by itself (effectively calculating the square of a number) would be defined in Haskell as:
 
@@ -1310,14 +1306,14 @@ The functional programming paradigm, which is based on mathematical functions, i
 \end{comment}
 %}}}
 
-\subsection{Higher-order functions}
+\section{Higher-order functions}
 
-Higher-order functions are the landmark feature of functional languages. Derived from the previous observation of generally applicable functions in lamdba calculus, higher-order functions can take functions as parameters and also return a function~\parencite{hudak1989conception}. Thus functions are treated like any other value. This has convenient practical implications, where functions can be composed of other functions. For example, composing a function that executes a given function twice is possible:
+Higher-order functions are one of the central features of functional languages. As ordinary functions are abstractions over values with certain behavior, a higher-order function can receive functions as parameters and also produce a function~\parencite{hudak1989conception}. Thus functions are treated like any other value. This has convenient practical implications, where functions can be composed of other functions. For example, composing a function that executes a given function twice is possible:
 \begin{lstlisting}
 twice f = f . f
 \end{lstlisting}
 
-\noindent Now {\tt twice sum 4}, where {\tt sum} is {\tt sum x = x * x}, would return 256. The function twice is now~\textit{curried} (i.e.\ composes multiple functions) and returns a new function. As {\tt twice} is a function it can be used again for function composition, et cetera. This kind of ``glueing'' together functions increases modularity of software written in a functional manner. Treating functions as first-class values also provides a way to abstract over functional behavior.~\parenciteseveral{hudak1989conception}.
+\noindent Now {\tt twice sum 4}, where {\tt sum} is {\tt sum x = x * x}, would return 256. The function twice is now~\textit{curried}, where applying an argument to the function returns a function, that also takes an argument. As {\tt twice} is a function it can be used again for function composition, et cetera. This kind of ``glueing'' together functions increases modularity of software written in a functional manner. Treating functions as first-class values also provides a way to abstract over functional behavior.~\parenciteseveral{hudak1989conception}.
 %{{{
 \begin{comment}
 A higher-order function, or functional form, is one that either takes one or more functions as parameters or yields a function as its result, or both.~\parencite{sebesta2002concepts}.
@@ -1328,13 +1324,13 @@ That glueing property comes not just from the ability to compose functions but a
 \end{comment}
 %}}}
 
-One of the major benefits of functions as first-class values is their property of abstracting the manipulation of data into succinct higher-order functions. For example, a function that ``folds'' over a data structure and returns a result value can be expressed as: 
+A convenient property of higher-order functions is their ability to generalize common behavior. For example, a function that ``folds'' over a data structure and returns a result value can be expressed as: 
 \begin{lstlisting}
 fold f z [] = z
 fold f z (x:xs) = f x (fold f z xs)
 \end{lstlisting}
 
-The {\tt fold} function can then be used to accumulate values from a data structure, and the actual logic of the accumulator is passed on to {\tt fold}:
+The {\tt fold} function can then be used to accumulate values from a data structure, and the actual logic is passed on to {\tt fold} as a function:
 \begin{lstlisting}
 fold (+) [1,2,3,4,5] -- Returns 15
 fold (-) [1,2,3,4,5] -- Returns -15
@@ -1343,7 +1339,7 @@ fold (*) [1,2,3,4,5] -- Returns 120
 
 As can be seen, the actual data handling logic is separated from the data structure traversal. This leads into modular programs where components are likely to be reusable, thus resulting in fewer bugs and increasing development time.
 
-\subsection{Type systems}
+\section{Type systems}
 
 Functional languages have traditionally taken extreme care of developing their~\textit{type systems}.~\citet[1.]{pierce2002types} provides a definition for type systems as 
 \begin{quoting}
@@ -1365,15 +1361,15 @@ Two categories exist for the typing of programming languages. Most mainstream la
 
 Additionally, programming languages implement either~\textit{static checking} or~\textit{dynamic checking} (often called static and dynamic typing in practical settings)~\parencite{pierce2002types}. Static checking in languages such as Haskell and C is implemented at compile-time, where type information is derived by a combination of explicit annotations and type inference. Dynamically checked languages, such as Lisp, add run-time information about the program's values to validate behavior when it is executed.~\parenciteseveral{cardelli1996type}. Often both static and dynamic checking are utilized to provide more abstract language mechanisms such as Java's polymorphism.
 
-A statically checked language has the benefit of being able to prove the correctness of the program at compile-time, delivering errors sooner rather than later at run-time. Moreover, when the expressions of the program code have been determined as type-correct, no run-time checking needs to be done, leading to execution efficiency. However, static checking can also restrict expressiveness, since the types have to be known in advance.~\parenciteseveral{cardelli1985understanding}.
+A statically checked language has the benefit of being able to detect errors in the types of the program at compile-time, delivering errors sooner rather than later at run-time. Moreover, when the expressions of the program code have been determined as type-correct, no run-time checking needs to be done, leading to execution efficiency. However, static checking can also restrict expressiveness, since the types have to be known in advance.~\parenciteseveral{cardelli1985understanding}.
 
 Most typed programming languages implement type checking by requiring explicit type annotations for functions and local variables. Subexpressions in the function do not require explicit type information, since the compiler can deduce it from the environment of the function.~\parenciteseveral{cardelli1985understanding}. Functional languages, however, have taken this type deduction even further.~\textit{Type inference} is utilized to provide accurate type information of expressions without requiring explicit annotations. This frees developers from having to repeat type declarations, but still enables the type system to support abstract language mechanisms such as polymorphism~\parencite{hudak1989conception}.
 
-A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM includes algorithm~\textit{W}~\parencite{damas1982principal} to effectively deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
+A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM can be implemented using Algorithm W~\textit{W}~\parencite{damas1982principal} to effectively deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
 
 Haskell is considered as a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consent exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
 
-\subsection{Strict and non-strict semantics}
+\section{Strict and non-strict semantics}
 
 Programming languages utilize either~\textit{strict} or~\textit{non-strict} semantics for evaluating expressions. These semantics are derived from reduction strategies of lambda calculus, which dictate the order of how expressions are evaluated. Most programming languages utilize strict semantics, where function arguments are eagerly evaluated. The paradigm of a language does not necessarily determine the evaluation strategy to be used. For example, both C (imperative) and Scheme (functional) languages utilize variants of the~\textit{call-by-value} strategy, where the outermost expression is evaluated and ``only when its right-hand side has been reduced to a value''~\parencite[57.]{pierce2002types}.
 
@@ -1469,12 +1465,11 @@ Since this method of evaluation runs f as little as possible, it is called 'lazy
 \end{comment}
 %}}}
 
-\subsection{Polymorphic types}
+\section{Polymorphic types}
 
-Traditionally, programming languages are defined as being either~\textit{monomorphic}, where only one type exists for functions and operands, or~\textit{polymorphic}, where values can have numerous types. For example, a polymorphic function might have arguments that, in turn, can be represented as more than one type. Additionally, these polymorphic types may have operations that are applicable to multiple types.~\parenciteseveral{cardelli1985understanding}.
+Programming languages can be defined as having either~\textit{monomorphic} types, where only one type exists for functions and operands, or~\textit{polymorphic} types, where values can have numerous types. For example, a polymorphic function might have arguments that, in turn, can be represented as more than one type. Additionally, these polymorphic types may have operations that are applicable to multiple types.~\parenciteseveral{cardelli1985understanding}.
 
-Polymorphism is further divided into more detailed concepts.~\textit{Parametric} polymorphism enables functions to operate on a uniform set of unconstrained types that share a common structure~\parencite{cardelli1985understanding}. For example, the idiomatic function {\tt id :: a -> a} generally accepts any kind of type as its argument and as a result, returns a value of the same unknown type.~\textit{Ad-hoc} polymorphism, on the other hand, enables functions to operate
-on seemingly unrelated types with an implementation that is specific to the type~\parencite{cardelli1985understanding}. The addition operator {\tt +} is ad-hoc in many languages, since it operates differently based on its input types. Adding two strings together might result in a concatenated string, where as adding two decimal numbers might utilize a floating point operation to effectively calculate the result. In fact, the types have~\textit{overloaded} the implementation of the addition
+Polymorphism is further divided into more detailed concepts.~\textit{Parametric} polymorphism enables functions to operate on a uniform set of unconstrained types that share a common structure~\parencite{cardelli1985understanding}. For example, the idiomatic function {\tt id :: a -> a} generally accepts any kind of type as its argument and as a result, returns a value of the same unknown type.~\textit{Ad-hoc} polymorphism, on the other hand, enables functions to operate on seemingly unrelated types with an implementation that is specific to the type~\parencite{cardelli1985understanding}. The addition operator {\tt +} is ad-hoc in many languages, since it operates differently based on its input types. For example, adding two strings together might result in a concatenated string, where as adding two decimal numbers might utilize a floating point operation to effectively calculate the result. In fact, the types have~\textit{overloaded} the implementation of the addition
 operator. 
 
 Although a somewhat technical concept,~\textit{data types} are an essential part of modern functional languages~\parencite{hudak2007history}. In this section, algebraic and abstract data types are discussed and one of the main mechanism for their use, pattern matching, is presented.
@@ -1521,7 +1516,7 @@ The advantage of this, of course, is that one is free to change the representati
 \end{comment}
 %}}}
 
-\subsection{Functors}
+\section{Functors}
 
 Functors add flexibility when encountering different data types, such as the previously presented {\tt Tree} construct or an ordinary list data structure. As looping over the values of a construct would be convenient, functors aim at providing an abstraction for this kind of behavior. Namely, functors enable ``mapping'' functions over data types and is one of the central routines of functional programming.~\parenciteseveral{lipovavca2011learn}. Functors can be thought as
 containers for values, or more precisely, as computational contexts~\parencite{typeclassopedia2014haskellwiki}. For example, {\tt Tree} can be made an instance of {\tt Functor}:
@@ -1575,7 +1570,7 @@ The second law says that composing two functions and then mapping the resulting 
 \end{comment}
 %}}}
 
-\subsection{Applicative functors}
+\section{Applicative functors}
 
 Applicative functors as an explicit abstraction are relatively new in functional programming~\parencite{mcbride2008functional}. As their name implies, applicative functors are an extension for functors. As functions essentially take only one parameter (and are thus~\textit{curried} functions for subsequent parameters), a data type can naturally contain functions. For example, the leaves of a {\tt Tree} data type could contain functions as values: 
 \begin{lstlisting}
@@ -1634,10 +1629,9 @@ float = optional sign <*> oneOrMore digit <*>
 
 In conclusion, applicative functors are functors with effects. This has convenient implications for implementations where the full power of monads is not needed~\parencite{baars2004functional}.
 
-\subsection{Monads}
+\section{Monads}
 
-Functional programming languages can roughly be divided into two categories; pure and impure approaches.~\textit{Pure} functional languages, such as Haskell, utilize lambda calculus in its simplest form, while~\textit{impure} languages, such as Scheme, introduce additional features, such as assignments, into computations. The main motivation behind ``pure'' languages is that they make data flow explicit and expressions only depend on their free variables. This enables a powerful aid in reasoning about the code's logic, since substitution is always valid(TODO: ??). On the other hand,
-impure features in a language can offer more conveniency for the developer as the concept of purity is not strictly enforced.~\parenciteseveral{wadler1995monads}.
+Functional programming languages can roughly be divided into two categories;~\textit{pure} and~\textit{impure} approaches. Pure functional languages, such as Haskell, utilize lambda calculus in its simplest form, while impure languages, such as Scheme, introduce additional features, such as assignments, into computations. The main motivation behind ``pure'' languages is that they make data flow explicit and expressions only depend on their free variables. This enables a powerful aid in reasoning about the code's logic, since substitution can always be done in-place. On the other hand, impure features in a language can offer more conveniency for the developer as the concept of purity is not strictly enforced.~\parenciteseveral{wadler1995monads}.
 %{{{
 \begin{comment}
 The functional programming community divides into two camps. Pure languages,
@@ -1657,17 +1651,13 @@ The concept of a monad, which arises from category theory, has been applied by M
 \end{comment}
 %}}}
 
-Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. For example, the standard Haskell data type {\tt Maybe} is an instance of the monad type class. 
-
-
+Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In Haskell, monads are often used for handling state, exceptions, output and for nondeterministic behavior. Often basic functionalities are, in catuality, monads. For example, implementing a counter that increases As an example, a state monad~\parencite{wadler1995monads}.
 
 Monads have three laws that they must obey.~\textit{Left identity}
 
 ~\textit{Right identity}
 
 ~\textit{Associativity}
-
-~\textit{Monads} address the issue of ``purity'' in functional languages. For example, a user interacting with the application results in input and output, or in other words, communication between the application and external domains. However, as functions are pure, they can not As the meaning of purity was presented earlier in the chapter,  A
 
 %{{{Additional sources
 \begin{comment}
@@ -1677,8 +1667,10 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 
 \end{comment}
 %}}}
+\section{Nondeterminism}
+\section{Concurrent programming}
 
-\section{Metrics for functional programming}
+\chapter{Metrics for functional programming}
 
 As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
@@ -1718,7 +1710,7 @@ lines of code and Halstead's program volume, are also applicable to functional p
 
 The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.(TODO: Enemman tasta?)
 
-\subsection{Complexity of patterns}
+\section{Complexity of patterns}
 
 One of the most used features in functional programming is pattern matching. In Haskell, pattern matching is used in various ways. In addition to normal function arguments, data types are often used as arguments to pattern matching. The {\tt \_} wildcard can be used to match (or ignore) arguments, and patterns can also be used in function bodies. Constructing metrics to deduce the complexity of patterns is then an obvious first interesting step towards measuring FP programs.(TODO:
 Lahde? Esimerkki PatMatchista?)
@@ -1844,7 +1836,7 @@ subjective complexity of the code. However, the rest of the metrics are found to
 
 As it seems, the size of a pattern is perhaps the only indicator of its complexity. However, further validation of the metrics is warranted and their application to larger projects should be conducted. 
 
-\subsection{Distance between declarations and usage}
+\section{Distance between declarations and usage}
 
 The distance between two interacting functions is an interesting property to measure. It is likely that if the distance is large, also the source code is harder for the developer to comprehend and the probability of errors in code increase. However, distance can be interpreted in multiple ways. The actual distance of source code lines can be referred as ``spatial'' distance measures, as where more semantic distance measures can be termed as ``conceptual'' distance measures.~\parenciteseveral{ryder2004software}. First, the~\textit{number of scopes} that are introduced for an executed function call can be quantified.
 
@@ -1868,7 +1860,7 @@ An example of spatial distance is to measure the actual source code lines from a
 Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees when compiling, it makes sense to count the amount of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
 representation details of the source code are dismissed. However,~\citet{ryder2004software} found no distinguishable difference between this approach and counting the source code lines. Further research is thus warranted.
 
-\subsection{Attributes of recursive functions}
+\section{Attributes of recursive functions}
 
 Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
 
@@ -1897,7 +1889,7 @@ Lastly, all of the recursion-specific metrics are likely to interact with each o
 
 -Critique: Don't use explicit recursion, use fold!
 
-\subsection{Attributes of call graphs}
+\section{Attributes of call graphs}
 
 As presented earlier in chapter~\ref{chap:software_metrics}, call graphs are a convenient way of rendering and analyzing the data flow of a program. As functions are the main tool of functional languages, it should be possible to utilize much of the same metrics of call graphs to the functional paradigm.
 
@@ -1950,7 +1942,7 @@ The subgraph accurately depicts the dependencies of a given function (see figure
 
 The interaction of the call graph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
 
-\subsection{Miscellaneous attributes of functions}
+\section{Miscellaneous attributes of functions}
 
 As many of the imperative metrics presented in chapter~\ref{chap:software_metrics} are also applicable to programs written in functional languages, it is interesting to explore the correlation of these metrics on complexity. For example, the~\textit{pathcount} and~\textit{operators and operands} are straightforward metrics often used in imperative languages, but may also provide additional insight into software measurement in functional programming.
 
@@ -1968,7 +1960,7 @@ An additional branch is introduced by the clause {\tt x > 0}. If the conditional
 
 The~\textit{size} of a function is a simple, yet heavily utilized measurement of complexity.~\citet{ryder2004software} modified the initial size metric specific to functional programming provided by~\citet{van1995software}. The size is calculated much in the same fashion as in the metrics of~\citet{halstead1977elements} (see subsection~\ref{subsection:halstead-metric}), where the program code is divided into~\textit{operands} and~\textit{operators}. Namely, operators include the standard operators and language keywords, such as {\tt :}, {\tt ++} and {\tt where} in Haskell. After applying the metric to his two case-study applications,~\citet{ryder2004software} found some correlation for increased size of functions and subjective complexity. This might especially apply to functional languages, where functions are intended to be kept as small as possible and numerous.
 
-\subsection{Referential transparency as a measure}
+\section{Referential transparency as a measure}
 
 ~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables as dependencies that could affect the computation. Referential transparency also makes the program easier to reason about and allows the compiler to provide heavy optimizations of such ``pure'' functions.~\parenciteseveral{hughes1989functional}.
 
@@ -1983,7 +1975,7 @@ In the Intermodule Referential Transparency Index (IRTI) we measure the proporti
 yielded lowest scores of the metrics. The inter-module metric, IRTI, however showed increases between versions, suggesting that updates to software brought about refactorings that included switching the use of impure functions to pure functions, and specifically those that are used between modules~\parencite{muddu2013metrics}. As it stands, function pureness is something of a desirable quality in functional programming and the RTI and IRTI metrics are useful if one wants to
 quantify that property.
 
-\subsection{Metrics for higher-order functions}
+\section{Metrics for higher-order functions}
 
 The use of higher-order functions is prevalent in functional programming. Higher-order functions are functions that receive functions as parameters and can output a function as their return value. The primary benefit of higher-order functions is in modularization, since e.g. data structures can be traversed by these functions without explicitly declaring how the data is utilized~\parencite{hughes1989functional}.
 %{{{
@@ -2021,10 +2013,10 @@ strengthen the validity of the metrics.~\parencite{muddu2013metrics}.
 \end{comment}
 %}}}
 
-\subsection{Degree of polymorphism}
+\section{Degree of polymorphism}
 
 
-\subsection{Summary}
+\section{Summary}
 
 Critique:
 ~\begin{itemize}
