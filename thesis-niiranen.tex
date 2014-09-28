@@ -1282,13 +1282,17 @@ Without variables, the execution of a purely functional program has no state in 
 \end{comment}
 %}}}
 
-A particular inspiration for functional languages is the~\textit{lamdba calculus}~\parencite{church1932set}. Its main purpose is to define the behavior of functions in an intuitive manner, where computations are the central aspect. In particular, the functions in lamdba calculus have one key abstraction: They can be applied to themselves. In addition to functions being anonymous in lamdba calculus, recursion does not have to be explicitly stated because of the general applicability of the functions.~\parenciteseveral{hudak1989conception}. For an example of lamdba calculus, the following expression results in 8 as the value of the computation:
+A particular inspiration for functional languages is the~\textit{lamdba calculus}~\parencite{church1932set} where computation consists solely of function definition and application. The structure of the lambda calculus consists of three~\textit{lambda-terms}: variable {\tt x}, abstraction {\tt $\lambda x.t$} and application {\tt t t}. Thus the basis of the calculus is simple and may be the reason for its ongoing popularity since the 1960s.~\parenciteseveral{pierce2002types}.
+
+The application of lambda calculus is done by applying functions to arguments that are also functions. In specific, a~\textit{redex} (reducible expression) might be of the form {\tt ($\lambda x. x$) y}, which would after reduction be evaluated into {\tt y}. In essence, each computation consists of rewriting the left-hand side lambda-abstraction (e.g. {\tt ($\lambda x. x$))} with the right-hand side variable ({\tt y}) to the abstraction's bound variable of {\tt x}.~\parenciteseveral{pierce2002types}. 
+
+The functions in lamdba calculus have one key abstraction: They can be applied to themselves. Because of this self-applicability and anonymity of functions, also the facilities for recursion are enhanced. In specific, recursion can be executed in a more direct manner ``without explicitly writing a recursive definition''~\parencite{hudak1989conception}. For an example of lamdba calculus, the following expression results in 8 as the value of the computation:
 
 \begin{lstlisting}[mathescape]
 $(\lambda (x)x * x * x)(2)$
 \end{lstlisting}
 
-\noindent Although the semantics of lamdba calculus are essentially small and simple~\parencite{hudak1989conception}, its application is more involved and thus is not described in this thesis. In conclusion, lambda calculus serves as the basis for functions in functional programming languages.
+\noindent Even though numerous calculi exist, Church's lambda calculus is the grand source for the computational aspects of functional languages~\parencite{hudak1989conception}. Indeed, many variants of lambda calculus exist with a corresponding amount of theories related to it.
 %{{{
 \begin{comment}
 Church's work was motivated by the desire to create a calculus (informally, a syntax for terms and set of rewrite rules for transforming terms) that captured one's intuition about the behavior of cuntions. This approach is counter to the consideration of functions, as for example, sets (more precisely, sets of argument/value pairs), since the intent was to capture the computational aspects of functions.~\parencite{hudak1989conception}.
