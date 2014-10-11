@@ -1371,7 +1371,20 @@ Haskell is considered as a statically typed language with strong type inference.
 
 \section{Strict and non-strict semantics}
 
-Programming languages utilize either~\textit{strict} or~\textit{non-strict} semantics for evaluating expressions. These semantics are derived from reduction strategies of lambda calculus, which dictate the order of how expressions are evaluated. Most programming languages utilize strict semantics, where function arguments are eagerly evaluated. The paradigm of a language does not necessarily determine the evaluation strategy to be used. For example, both C (imperative) and Scheme (functional) languages utilize variants of the~\textit{call-by-value} strategy, where the outermost expression is evaluated and ``only when its right-hand side has been reduced to a value''~\parencite[57.]{pierce2002types}.
+Programming languages possess~\textit{strict} and~\textit{non-strict} semantics, which are determined by the evaluation strategy of functions used in the language. Similarly, lambda calculus utilizes~\textit{reduction strategies} that act as rules for evaluating lambda expressions. Most programming languages utilize strict semantics, where function arguments are eagerly evaluated. The paradigm of a language does not necessarily determine the evaluation strategy to be used. For example, both C (imperative) and Scheme (functional) languages utilize variants of the~\textit{call-by-value} strategy where the outermost expression is evaluated and ``only when its right-hand side has been reduced to a value''~\parencite[57.]{pierce2002types}.
+%{{{
+\begin{comment}
+    In its pure form, the lambda-calculus has no built-in constants or primitive
+    operators¿no numbers, arithmetic operations, conditionals, records, loops,
+    sequencing, I/O, etc. The sole means by which terms ¿compute¿ is the ap-
+    plication of functions to arguments (which themselves are functions). Each
+    step in the computation consists of rewriting an application whose left-hand
+    component is an abstraction, by substituting the right-hand component for
+    the bound variable in the abstraction¿s body. Graphically, we write~\parencite{pierce2002types}
+\end{comment}
+%}}}
+
+As lambda expressions are prevalent in the functional programming paradigm~\parencite{hudak1989conception}, the evaluation strategies are demonstrated with lambda reductions in this thesis. Perhaps the most utilized evaluation strategy, call-by-value, executes as follows:
 
 \begingroup
     \fontsize{13pt}{10pt}\selectfont
@@ -1382,9 +1395,9 @@ Programming languages utilize either~\textit{strict} or~\textit{non-strict} sema
     \end{align*}
 \endgroup
 
-\noindent This approach enforces the strict semantics of evaluation, because function parameters are always eagerly evaluated even when they are not used~\parencite{pierce2002types}. 
+\noindent The call-by-value strategy reduces redexes from the outermost first and only when its right-hand side has been evaluated. In practice the function arguments are always evaluated, regardless if they are needed or not. As a result, a programming language utilizing call-by-value is defined as strict.~\parencite{pierce2002types}. 
 
-Non-strict evaluation strategies, however, have the benefit of not evaluating computations until needed. For example, in the~\textit{normal order} strategy, a lambda expression is reduced as follows:
+Non-strict evaluation strategies, however, have the benefit of not evaluating computations until needed. For example, in the~\textit{normal order} strategy, a lambda expression is reduced with the leftmost, outermost redex first~\parencite{pierce2002types}:
 
 \begingroup
     \fontsize{13pt}{10pt}\selectfont
@@ -1396,7 +1409,8 @@ Non-strict evaluation strategies, however, have the benefit of not evaluating co
     \end{align*}
 \endgroup
 
-\noindent Thus the leftmost, outermost expression is always reduced first~\parencite{pierce2002types}, causing functions to be applied before evaluating their arguments. However, the normal-order reduction is potentially inefficient when dealing with nontrivial computations, leading to unnecessary repetitive calculations in naive implementations~\parencite{hudak1989conception}. The~\textit{call-by-name} strategy, on the other hand, only partially reduces expressions, not resulting to actual values: 
+\noindent A language utilizing such an evaluation strategy is non-strict, because functions are applied before evaluating their arguments. However, the normal-order reduction is potentially inefficient when dealing with nontrivial computations, leading to unnecessary repetitive calculations in naive implementations~\parencite{hudak1989conception}. The~\textit{call-by-name} strategy, on the other hand, does not allow reductions inside abstractions, so the reduction
+process stops one step earlier than in the normal-order example:
 
 \begingroup
     \fontsize{13pt}{10pt}\selectfont
