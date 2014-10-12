@@ -1486,14 +1486,14 @@ Programming languages can be defined as having either~\textit{monomorphic} types
 Polymorphism is further divided into more detailed concepts.~\textit{Parametric} polymorphism enables functions to operate on a uniform set of unconstrained types that share a common structure~\parencite{cardelli1985understanding}. For example, the idiomatic function {\tt id :: a -> a} generally accepts any kind of type as its argument and as a result, returns a value of the same unknown type.~\textit{Ad-hoc} polymorphism, on the other hand, enables functions to operate on seemingly unrelated types with an implementation that is specific to the type~\parencite{cardelli1985understanding}. The addition operator {\tt +} is ad-hoc in many languages, since it operates differently based on its input types. For example, adding two strings together might result in a concatenated string, where as adding two decimal numbers might utilize a floating point operation to effectively calculate the result. In fact, the types have~\textit{overloaded} the implementation of the addition
 operator. 
 
-Although a somewhat technical concept,~\textit{data types} are an essential part of modern functional languages~\parencite{hudak2007history}. In this section, algebraic and abstract data types are discussed and one of the main mechanism for their use, pattern matching, is presented.
+An essential part of modern functional languages are~\textit{data types}. Furthermore,~\textit{pattern matching} is often utilized to enable succinct logic branches in functional programming. The implementation of these subjects is not a trivial matter, however, and has required some compromises in the Haskell language.~\parenciteseveral{hudak2007history}. 
 %{{{
 \begin{comment}
 Data types and pattern matching are fundamental to most modern functional languages (with the notable exception of Scheme).~\parencite{hudak2007history}.
 \end{comment}
 %}}}
 
-~\textit{Algebraic data types} increase the flexibility in which a computation can depend on type alternatives. In other words, the data types of functional languages are often~\textit{polymorphic}, i.e.\ they can represent multiple types.~\parenciteseveral{hudak2007history}. A popular example regarding algebraic data types is to represent the types of a binary search tree:
+In specific, the flexibility of functional programs is increased by~\textit{algebraic data types}, which enable a computation to depend on type alternatives. This means that the data types of functional languages are often~\textit{polymorphic}, i.e.\ they can represent multiple types. An algebraic type can be generalized as ``a sum of one or more alternatives, where each alternative is a product of zero or more fields.''~\parenciteseveral{hudak2007history}. An example of algebraic types is to represent the types of a binary search tree:
 %{{{
 \begin{comment}
 In general, an algebraic type specifies a sum of one or more alter- natives, where each alternative is a product of zero or more fields. It might have been useful to permit a sum of zero alternatives, which would be a completely empty type, but at the time the value of such a type was not appreciated.~\parencite{hudak2007history}
@@ -1504,7 +1504,7 @@ In general, an algebraic type specifies a sum of one or more alter- natives, whe
 data Tree a = Leaf a | Branch (Tree a) (Tree a)
 \end{lstlisting}
 
-Here {\tt Tree} is a~\textit{data type}. {\tt Leaf} and {\tt Branch} are~\textit{data constructors}. What follows is that~\textit{pattern matching} can be used to conveniently address either of these data constructors in a function~\parencite{hudak2007history}. For example, a function that returns the size (the number of elements) of the tree recursively can be expressed as follows:
+The {\tt Tree} is a data type, where as {\tt Leaf} and {\tt Branch} are~\textit{data constructors}. Pattern matching can be used to conveniently address either of these data constructors in a function~\parencite{hudak2007history}. For example, a function that returns the size (the number of elements) of the tree recursively can be expressed as follows:
 
 \begin{lstlisting}
 size (Leaf x)     = 1
@@ -1683,6 +1683,8 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 %}}}
 \section{Nondeterminism}
 \section{Concurrent programming}
+
+\section{Summary}
 
 \chapter{Metrics for functional programming}
 
