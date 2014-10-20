@@ -1528,7 +1528,7 @@ Together with a strong type system and data types a functional language such as 
 
 \section{Functors}
 
-Functors add flexibility when encountering different data types, such as the previously presented {\tt Tree} construct or an ordinary list data structure. As looping over the values of a construct would be convenient, functors aim at providing an abstraction for this kind of behavior. Namely, functors enable ``mapping'' functions over data types and is one of the central routines of functional programming.~\parenciteseveral{lipovavca2011learn}. Functors can be thought as
+Functors add flexibility when utilizing different data types, such as the previously presented {\tt Tree} construct or an ordinary list data structure. As looping over the values of a construct would be convenient, functors aim at providing an abstraction for this kind of behavior. Namely, functors enable ``mapping'' functions over data types and is one of the central routines of functional programming.~\parenciteseveral{lipovavca2011learn}. Functors can be thought as
 containers for values, or more precisely, as computational contexts~\parencite{typeclassopedia2014haskellwiki}. For example, {\tt Tree} can be made an instance of {\tt Functor}:
 %{{{
 \begin{comment}
@@ -1587,12 +1587,13 @@ Applicative functors as an explicit abstraction are relatively new in functional
 fmap (*) (Branch (Leaf 2) (Leaf 3)))
 \end{lstlisting}
 
-Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value ({\tt Leaf} in this case). As a result this recurring pattern of ``picking'' the function value out of the functor was abstracted as applicative functors~\parencite{mcbride2008functional}. The {\tt Tree} data type can be made as an instance of {\tt Applicative}:
+Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value ({\tt Leaf} in this case). As a result this recurring pattern of ``picking'' the function value out of the functor was abstracted as applicative functors~\parencite{mcbride2008functional}. The {\tt Tree} data type can be translated to a instance of {\tt Applicative}:
 \begin{lstlisting}[breakatwhitespace=false, breaklines=true]
 instance Applicative Tree where
   pure = Leaf
   (Leaf f) <*> (Leaf x) = Leaf (f x)
-  (Branch a b) <*> (Branch c d) = Branch (a <*> c) (a <*> d)
+  (Branch a b) <*> (Branch c d) = 
+                    Branch (a <*> c) (a <*> d)
 \end{lstlisting}
 
 \noindent Now {\tt <*>} can be used for applying functor values:
