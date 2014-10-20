@@ -1652,7 +1652,7 @@ A program in a pure functional language is written as a set of equations. Ex- pl
 \end{comment}
 %}}}
 
-As an example, adding error handling to program logic can turn out to be tedious, since every recursive function call would need to be checked for errors and subsequently handled. In contrast, exceptions in an impure language would not introduce such structuring of code. More to the point, counting the number of operations performed on a function would need similar structuring of the code where the count is explicitly passed on for further operations. Again, in an impure language a global variable for the count would suffice.~\parenciteseveral{wadler1995monads}. Largely for this division of pure and impure functional languages,~\textit{monads} were introduced as an utility to combine the benefits of both approaches. Namely, monads are used ``to integrate impure effects into pure functional languages''~\parencite[25.]{wadler1995monads}. As is customary for the functional programming paradigm, also the concept of monads is derived from mathematics, and in this case, category theory.~\parenciteseveral{wadler1995monads}.
+As an example, adding error handling to program logic is often tedious, since every recursive function call is to be checked for errors and subsequently handled. In contrast, exceptions in an impure language would not introduce such structuring of code. More to the point, counting the number of operations performed on a function require similar structuring of the code where the count is explicitly passed on for further operations. Again, in an impure language a global variable for the count would suffice.~\parenciteseveral{wadler1995monads}. Largely for this division of pure and impure functional languages,~\textit{monads} were introduced as an utility to combine the benefits of both approaches. Namely, monads are used ``to integrate impure effects into pure functional languages''~\parencite[25.]{wadler1995monads}. As is customary for the functional programming paradigm, also the concept of monads is derived from mathematics, and in this case, category theory.~\parenciteseveral{wadler1995monads}.
 %{{{
 \begin{comment}
 
@@ -1662,9 +1662,11 @@ The concept of a monad, which arises from category theory, has been applied by M
 \end{comment}
 %}}}
 
-Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In Haskell, monads are often used for handling state, exceptions, output and for nondeterministic behavior. Often basic functionalities are, in catuality, monads. For example, implementing a counter that increases As an example, a state monad~\parencite{wadler1995monads}.
+Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In Haskell, monads are often used for handling state, exceptions, output and for nondeterministic behavior.  Indeed, I/O operations are specifically structured as monads in Haskell and special syntax is reserved for its expression~\parencite{typeclassopedia2014haskellwiki}.
 
-Monads have three laws that they must obey.~\textit{Left identity}
+Even if monads are perhaps the more popular topic of functional programming, they are not any more complex from other constructs of computational contexts. For example, a developer wishes to operate on a data structure, but also keep a reference on how many operations were applied. In a pure approach, the obvious solution to increment the counter would be to pass it as a parameter to all subsequent iterations. Monads, however, can be utilized in this scenario to represent the counter variable.
+
+Since monads are derived from category theory~\parencite{moggi1991notions}, specific laws exist for validating whether a construct represents a monad.  
 
 ~\textit{Right identity}
 
@@ -1678,8 +1680,6 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 
 \end{comment}
 %}}}
-\section{Nondeterminism}
-\section{Concurrent programming}
 
 \section{Summary}
 
