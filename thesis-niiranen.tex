@@ -1479,6 +1479,7 @@ Since this method of evaluation runs f as little as possible, it is called 'lazy
 %}}}
 
 \section{Polymorphic types}
+\label{sec:polymorphic-types}
 
 Programming languages can be defined as having either~\textit{monomorphic} types, where only one type exists for functions and operands, or~\textit{polymorphic} types, where values can have numerous types. For example, a polymorphic function might have arguments that, in turn, can be represented as more than one type. Additionally, these polymorphic types may have operations that are applicable to multiple types.~\parenciteseveral{cardelli1985understanding}.
 
@@ -1699,7 +1700,7 @@ This chapter served a basis for functional programming and further established m
 
 As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
-Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are primarily laid by~\citet{van1995software} and~\citet{ryder2004software}, whose metrics are primarily discussed in this section.The initial work of~\citet{van1995software} was spun by the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
+Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are mostly laid by~\citet{van1995software} and~\citet{ryder2004software}, whose metrics are primarily discussed in this section. The initial work of~\citet{van1995software} was born because of the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
 lines of code and Halstead's program volume, are also applicable to functional programs with slight modifications~\parencite{van1995software}. Other such metrics are the measures of testing effort (pathcount, cyclomatic complexity), call graph measures (size, depth, arc-to-node ratio) and coupling measures~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
@@ -1737,12 +1738,11 @@ The validation methodology used by~\citet{ryder2004software} is based on~\textit
 
 \section{Complexity of patterns}
 
-One of the most used features in functional programming is pattern matching. In Haskell, pattern matching is used in various ways. In addition to normal function arguments, data types are often used as arguments to pattern matching. The {\tt \_} wildcard can be used to match (or ignore) arguments, and patterns can also be used in function bodies. Constructing metrics to deduce the complexity of patterns is then an obvious first interesting step towards measuring FP programs.(TODO:
-Lahde? Esimerkki PatMatchista?)
+One of the most used features in functional programming is pattern matching. In Haskell, pattern matching is used in various ways (see section~\ref{sec:polymorphic-types} for an example). Furthermore, the {\tt \_} wildcard can be used to match (or ignore) arguments, and patterns can also be used in function bodies. Constructing metrics to deduce the complexity of patterns is then an obvious first interesting step towards measuring FP programs.
 
 ~\citet{ryder2004software} found a relatively weak correlation between the~\textit{number of pattern variables} and subjective complexity in two case-study programs. He argues that an increased number of variables in pattern matching also increases the effort required to comprehend that specific code. The case-study programs utilize pattern matching heavily, with 70-85\% of the functions containing patterns.
 
-The measure~\textit{number of overridden or overriding pattern variables} deals with the fact that pattern and expression variables can be easily overridden in functional programming. For example, {\tt where} or {\tt let} bindings are often used for denoting intermediary variables(TODO: Esimerkki?). The hypothesis is that an increased amount of overridden variables in patterns increase program complexity.~\citet{ryder2004software} finds a statistical correlation between the hypothesis
+The measure~\textit{number of overridden or overriding pattern variables} deals with the fact that pattern and expression variables can be easily overridden in functional programming. For example, {\tt where} or {\tt let} bindings are often used for denoting intermediary variables. The hypothesis is that an increased amount of overridden variables in patterns increase program complexity.~\citet{ryder2004software} finds a statistical correlation between the hypothesis
 and the metric, but it can be argued that such a programming style is detrimental in its own. Thus the measure should be used as a sign of the need to refactor any patterns containing redundant naming~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
@@ -1769,7 +1769,7 @@ and the metric, but it can be argued that such a programming style is detrimenta
 \end{comment}
 %}}}
 
-The~\textit{number of constructors} in a pattern can be an indicator of program complexity. Two hypotheses are provided by~\citet{ryder2004software}, where the first deals with the notion that an increased number of constructors also increases complexity. The second hypothesis argues, counteractively, that if the constructors are named properly, it can reduce subjective complexity of a function. Once again,~\citet{ryder2004software} found a slight statistical correlation
+The~\textit{number of constructors} in a pattern can be an indicator of program complexity. Two hypotheses are provided by~\citet{ryder2004software}, where the first deals with the notion that an increased number of constructors also increase complexity. The second hypothesis argues, counteractively, that if the constructors are named properly, it can reduce subjective complexity of a function. Once again,~\citet{ryder2004software} found a slight statistical correlation
 between an elevated usage of constructors in patterns and subjective complexity.
 %{{{
 \begin{comment}
@@ -1795,7 +1795,7 @@ redValue :: Shape -> Int
 redValue (Triangle _ _ _ r _ _) = r
 \end{lstlisting}
 
-Using the two case-study programs,~\citet{ryder2004software} found correlation between complexity and increased number of wildcards in pattern matching. However, he further argues that the complexity is not necessary due to wildcards themselves, but because of the more complex data structures involved.
+\noindent Using the two case-study programs,~\citet{ryder2004software} found correlation between complexity and increased number of wildcards in pattern matching. However, he further argues that the complexity is not necessary due to wildcards themselves, but because of the more complex data structures involved. Again, exhibiting many function arguments that are not encapsulated to data types is a sign of the need to refactor the program.
 %{{{
 \begin{comment}
     Table 9 in Appendix B shows that once again the results for the Peg Soli-
@@ -1842,7 +1842,7 @@ For both patterns in listing~\ref{lst:depth-of-nesting}, {\tt pattern1} and {\tt
 \end{comment}
 %}}}
 
-The last pattern metric presented by~\citet{ryder2004software} is~\textit{pattern size}, which can be measured in two ways. The number of components in a pattern can be calculated or the depth of the resulting~\textit{abstract syntax tree}(TODO: reference?) can be measured.~\citet{ryder2004software} utilizes the amount of nodes in the syntax tree as a measure, and found a correlation for increased size in patterns and subjective complexity.
+The last pattern metric presented by~\citet{ryder2004software} is~\textit{pattern size}, which can be measured in two ways. The number of components in a pattern can be calculated or the depth of the resulting abstract syntax tree can be measured.~\citet{ryder2004software} utilizes the amount of nodes in the syntax tree as a measure, and found a correlation for increased size in patterns and subjective complexity.
 %{{{
 \begin{comment}
 The size of a pattern could be measured in a number of ways. For instance, one
@@ -1876,7 +1876,7 @@ bar a b = map fn c
         fn = \(x,y) -> foo (x+y)
 \end{lstlisting}
 
-\noindent Listing~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt (a,b)}, {\tt (fn c)}, and {\tt (x,y)} are considered as scopes for the function {\tt foo} when it is called. Thus measuring the number of scopes signals ``how complex the name-space of the program is at a particular point in the code'', but also indicates how nested the usage of functions is~\parencite{ryder2004software}.(TODO: Tahan lisaselvitysta)
+\noindent Listing~\ref{lst:number-of-scopes} contains the scopes {\tt foo} and {\tt bar}. In addition, {\tt (a,b)}, {\tt (fn c)}, and {\tt (x,y)} are considered as scopes for the function {\tt foo} when it is called. Thus measuring the number of scopes signals ``how complex the name-space of the program is at a particular point in the code'', but also indicates how nested the usage of functions is~\parencite{ryder2004software}.
 
 A second approach provided by~\citet{ryder2004software} is to count the~\textit{number of declarations} in the scope of a function call. This is performed by counting the declarations introduced between the function call and its declaration. The scope that contains the declaration is ignored. For example in figure~\ref{lst:number-of-scopes}, {\tt foo} is called at line 8. The scopes needed for this operation are then {\tt (x,y)}, {\tt (c,fn)}, {\tt (a, b)}. The {\tt foo} scope itself is ignored. The purpose of this measurement is to indicate the ``traffic'' of the nested scopes. Finally,~\citet{ryder2004software} concludes that~\textit{nesting} of the local definitions is more important than the number of those definitions for indicating complexity.
 
@@ -1889,7 +1889,7 @@ representation details of the source code are dismissed. However,~\citet{ryder20
 
 Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
 
-First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a return value of zero or one. This seemingly simple metric can correlate with the amount of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
+First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a value of zero or one. This seemingly simple metric can correlate with the amount of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
 recursion produces a cyclic call graph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) and non-trivial recursion at the same time. Thus the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
 
 Often recursion is invoked based on multiple paths in a function. The metric~\textit{number of recursive paths} determines the amount of paths leading to recursion in a function, which is argued to correlate with subjective complexity. 
@@ -1910,13 +1910,11 @@ most likely since the studied applications did not utilize non-trivial recursion
 One property of recursion is the actual~\textit{length of the recursive path}. Since the path leading to recursion can be somewhat long, also the comprehensibility of the function is likely to lower. The path can be measured in multiple ways. For instance, the number of calls or the number of functions in the path can be quantified. Additionally, if the function contains multiple recursive paths, the paths are summed and their product can be calculated. The results from the research
 of~\citet{ryder2004software} do not show any statistically significant correlation for either the sum or product of recursive paths as a metric.
 
-Lastly, all of the recursion-specific metrics are likely to interact with each other, and as such, observation of their interaction from a measurement perspective is worthwhile to conduct.
-
--Critique: Don't use explicit recursion, use fold!
+Lastly, all of the recursion-specific metrics are likely to interact with each other, and as such, observation of their interaction from a measurement perspective is worthwhile to conduct. It can be argued, however, that the abundant use of explicit recursion in functional programs is against good practice and should signal immediate refactoring efforts. 
 
 \section{Attributes of call graphs}
 
-As presented earlier in chapter~\ref{chap:software_metrics}, call graphs are a convenient way of rendering and analyzing the data flow of a program. As functions are the main tool of functional languages, it should be possible to utilize much of the same metrics of call graphs to the functional paradigm.
+As presented earlier in section~\ref{section:data-flow-attributes}, call graphs are a convenient way of rendering and analyzing the data flow of a program. As functions are the main tool of functional languages, it should be possible to utilize much of the same metrics of call graphs to the functional paradigm.
 
 Call graphs can indicate~\textit{strongly connected components} in the program. When nodes of the call graph are coupled so that they call each other, they are strongly connected. This connection can also be indirect by having a more complex graph that produces cyclic paths. The hypothesis is that the size of the strongly connected components also correlate with increased maintenance effort. This is because every change in these kind of coupled functions have the potential to also force
 changes in the strongly connected components.~\parenciteseveral{ryder2004software}. The empirical results of~\citet{ryder2004software} do not point out a strong correlation with the hypothesis, however. Further validation for the metric is warranted.
@@ -1924,7 +1922,7 @@ changes in the strongly connected components.~\parenciteseveral{ryder2004softwar
 The~\textit{indegree of a function} indicates how many times a function is called. This can point out ``important'' functions and in the same time, problematic areas of the program code. However,~\citet{ryder2004software} found no correlation of the property with subjective complexity. In similar spirit, the~\textit{outdegree} of a function counts the number of outbound function calls from a given function. Since this indicates how coupled the function is to other functions, it can also
 indicate how likely the function is to change because of other changes. As is,~\citet{ryder2004software} found correlation with the hypothesis in both case-study applications. The results are encouraging, but they warrant further empirical application of the metric.
 
-A useful property of call graphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of call graphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the amount of function calls (arcs) with functions (nodes) (TODO: ?). Depth and width is calculated simply by how wide or deep the call graph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
+A useful property of call graphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of call graphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the amount of function calls (arcs) with functions (nodes). Depth and width is calculated simply by how wide or deep the call graph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
 
 \begin{figure}[h]\centering
     \begin{tikzpicture}[>=latex']
@@ -1963,7 +1961,7 @@ A useful property of call graphs is that~\textit{subgraphs} of specific function
     \label{fig:subgraph-example}
 \end{figure}
 
-The subgraph accurately depicts the dependencies of a given function (see figure~\ref{fig:subgraph-example}).~\citet{ryder2004software} argues that if the subgraph ``grows'' too deep or too wide, the more problematic the function is to maintain and comprehend.~\citet{ryder2004software} found correlation for the hypothesis in his larger case-study application, where the function call-graphs are more complex.
+The subgraph accurately depicts the dependencies of a given function (figure~\ref{fig:subgraph-example}).~\citet{ryder2004software} argues that if the subgraph ``grows'' too deep or too wide, the more problematic the function is to maintain and comprehend.~\citet{ryder2004software} found correlation for the hypothesis in his larger case-study application, where the function call-graphs are more complex.
 
 The interaction of the call graph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
 
@@ -1987,7 +1985,8 @@ The~\textit{size} of a function is a simple, yet heavily utilized measurement of
 
 \section{Referential transparency as a measure}
 
-~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables as dependencies that could affect the computation. Referential transparency also makes the program easier to reason about and allows the compiler to provide heavy optimizations of such ``pure'' functions.~\parenciteseveral{hughes1989functional}.
+~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables as dependencies that could affect the computation. Referential transparency also makes the program easier to reason about and allows the compiler to provide heavy
+optimizations for such ``pure'' functions.~\parenciteseveral{hughes1989functional}.
 
 ~\textit{Referential Transparency Index} (RTI)~\parencite{muddu2013metrics} quantifies ``the proportion of all the defined methods which can be considered pure functions''. The metric is calculated by the ratio of pure (referentially transparent) functions that are in-use and the amount of overall used functions in the system. The~\textit{Intermodule Referential Transparency Index} (IRTI) calculates the proportion of referentially transparent function calls from a certain module to the rest of the system by the ratio of a module's pure function calls and the overall amount of functions in the system. Furthermore, by taking the average of IRTI, the metric can be calculated for the entire system.~\parenciteseveral{muddu2013metrics}.
 %{{{
@@ -2038,17 +2037,12 @@ strengthen the validity of the metrics.~\parencite{muddu2013metrics}.
 \end{comment}
 %}}}
 
-\section{Degree of polymorphism}
-
-
 \section{Summary}
 
 Critique:
 ~\begin{itemize}
     \item Ryder's work uses only two small case-study programs
 ~\end{itemize}
-
-\section{Summary}
 
 %{{{ Additional sources
 \begin{comment}
