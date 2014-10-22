@@ -1734,7 +1734,7 @@ lines of code and Halstead's program volume, are also applicable to functional p
 
 ~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of call graphs. 
 
-The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.(TODO: Enemman tasta?)
+The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.
 
 \section{Complexity of patterns}
 
@@ -2038,6 +2038,13 @@ strengthen the validity of the metrics.~\parencite{muddu2013metrics}.
 %}}}
 
 \section{Summary}
+
+Software metrics studies specific to the functional programming paradigm are scarce.~\citet{van1995software} is the first to research the topic in-depth~\parencite{berg1992syntactic,van1995static}, and extensive work by~\citet{ryder2004software,ryder2005software} furthermore increased the body of research. New programming languages such as Scala brought about new interest in functional programming and metrics work is likewise revitalized~\parencite{kiraly2010implementing,muddu2013metrics,kiraly2013complexity}.
+
+As is with the more ``traditional'' metrics study visited in chapter~\ref{chap:software_metrics}, also the functional metrics studies exhibit strong dependancy on subjective observations, rather than systematic and evidence-based outcomes. In essence, many of the metrics are, in fact, subjective by nature, since e.g. readability is hard to measure objectively. However, the problem of lacking evidence is magnified in the functional paradigm metrics studies due to sheer low amount of research conducted.
+
+The positive side is that the functional paradigm seems to be well-suited for software measurement. Metrics such as~\textit{number of constructors} and~\textit{number of overridden pattern variables}~\parencite{ryder2004software} are easy to be quantified and show promising preliminary results. Call graphs are convenient for visual comprehension of the program logic flow, but arguably even more so for functional programs where
+functions are numerous. In addition, call graphs can quickly visualize the overall ``health'' of the system. Indeed, the findings of~\citet{ryder2004software} suggest that visual measures are suitable for capturing software complexity.
 
 Critique:
 ~\begin{itemize}
