@@ -2039,17 +2039,17 @@ strengthen the validity of the metrics.~\parencite{muddu2013metrics}.
 
 \section{Summary}
 
-Software metrics studies specific to the functional programming paradigm are scarce.~\citet{van1995software} is the first to research the topic in-depth~\parencite{berg1992syntactic,van1995static}, and extensive work by~\citet{ryder2004software,ryder2005software} furthermore increased the body of research. New programming languages such as Scala brought about new interest in functional programming and metrics work is likewise revitalized~\parencite{kiraly2010implementing,muddu2013metrics,kiraly2013complexity}.
+Software metrics studies specific to the functional programming paradigm are scarce.~\citet{van1995software} is the first to research the topic in-depth~\parencite{berg1992syntactic,van1995static}, and extensive work by~\citet{ryder2004software,ryder2005software} furthermore increase the body of research. New programming languages such as Scala brought about new interest in functional programming and metrics study is likewise revitalized~\parencite{kiraly2010implementing,muddu2013metrics,kiraly2013complexity}.
 
-As is with the more ``traditional'' metrics study visited in chapter~\ref{chap:software_metrics}, also the functional metrics studies exhibit strong dependancy on subjective observations, rather than systematic and evidence-based outcomes. In essence, many of the metrics are, in fact, subjective by nature, since e.g. readability is hard to measure objectively. However, the problem of lacking evidence is magnified in the functional paradigm metrics studies due to sheer low amount of research conducted.
+As is with the more ``traditional'' metrics visited in chapter~\ref{chap:software_metrics}, also the functional metrics exhibit strong dependancy on subjective observations, rather than systematic and evidence-based outcomes. In essence, many of the metrics are, in fact, subjective by nature, since e.g. readability is hard to measure objectively. However, the problem of lacking evidence is magnified in the functional paradigm metrics studies due to sheer low amount of research conducted.
 
 The positive side is that the functional paradigm seems to be well-suited for software measurement. Metrics such as~\textit{number of constructors} and~\textit{number of overridden pattern variables}~\parencite{ryder2004software} are easy to be quantified and show promising preliminary results. Call graphs are convenient for visual comprehension of the program logic flow, but arguably even more so for functional programs where
 functions are numerous. In addition, call graphs can quickly visualize the overall ``health'' of the system. Indeed, the findings of~\citet{ryder2004software} suggest that visual measures are suitable for capturing software complexity.
 
-Critique:
-~\begin{itemize}
-    \item Ryder's work uses only two small case-study programs
-~\end{itemize}
+Complexity between modules can be measured with metrics such as~\textit{intermodule referential transparency index} or~\textit{intermodule first order functions index}. Such metrics are interesting for analyzing the overall quality of the system, rather than individual functions. Indeed,~\citet{muddu2013metrics} present promising results of the degree of modularization between large open-source projects' versions.
+
+Even though the foundations for metrics research in the functional paradigm are laid out well, the quantity of studies leaves much to hope for. In part this may be because of the functional paradigm's apparent overshadowing by the imperative and object-oriented paradigms used in the industry. On the other hand, languages such as Scala~\parencite{odersky2004overview} have brought about new interest in the functional paradigm for commercialized use, increasing metrics research
+activity in the last couple of years~\parencite{muddu2013metrics}. As the shift towards higher-level languages (and abstractions) in large-scale architectures increase, also the metrics are bound to adapt. Software metrics research seems to require a certain demand from the industry in order to thrive, however.  
 
 %{{{ Additional sources
 \begin{comment}
