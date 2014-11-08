@@ -91,78 +91,67 @@
 %}}}
 %{{{Introduction
 \chapter{Introduction}
-Software quality metrics is a branch of software engineering where the quality of code is analyzed and quantified. The purpose of this observation is to identify problematic modules in the code and predict future maintenance effort~\parencite{fenton1999software}. This need is evident in any nontrivial software system, since their complexity is increased in conjuction with their size. NASA, for example, uses software metrics as an aid to validate their spaceflight systems~\parencite{judas2011historical}.
+Software quality metrics is a branch of software engineering where the quality of code is analyzed and quantified. The purpose of this observation is to identify problematic modules in the code and predict future maintenance effort~\parencite{fenton1999software}. This need is evident in any nontrivial software system, where further developing the program modules often result in increased code complexity. NASA, for example, uses software metrics as an aid to validate their spaceflight systems~\parencite{judas2011historical}.
 
-The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
+Several terms and interpretations exist for measuring the quality of software. The definition for software quality metrics is given in the IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
 ~\begin{quoting}
 A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality. 
 ~\end{quoting}
 
-\noindent ~\citet{fenton1998software} regard this approach as ``structural and complexity metrics'' when dealing with the ``internal attributes'' of software. Classic examples of software metrics are lines of code (LOC) and cyclomatic complexity~\parencite{mccabe1976complexity}. This thesis uses the shortened terms,~\textit{software metrics} and~\textit{software
-measurement}, to describe software quality metrics.
+This thesis concentrates on examining the code-specific attributes of software, rather than external attributes affecting software quality such as management decisions. A classical example of a software metric is the lines of code (LOC) metric, where the input (according to IEEE standard 1061 for software quality metrics) is the source code of the program, and the output is the number of source code lines. Then interpretations on the software's quality can be proposed. For example, a program
+module with a high LOC count can be argued to be more complex than a module with fewer lines.~\citet{fenton1998software} regard such measures as ``structural and complexity metrics''. Other classic examples of software metrics are cyclomatic complexity~\parencite{mccabe1976complexity} and Halstead's metric suite~\parencite{halstead1977elements}. This thesis uses the shortened terms,~\textit{software metrics} and~\textit{software measurement}, to describe software quality metrics as defined by the IEEE standard 1061.
 %{{{
 \begin{comment}
 Structural and complexity metrics~\parencite{fenton1998software} p 18.
 \end{comment}
 %}}}
 
-Functional programming aims for program code that is succinct and modular. In specific, source code written in a functional language often consists of several small utility functions that can be combined together in an extensible manner~\parencite{hughes1989functional}. This is achieved through mechanisms such as higher-order functions and algebraic data types.
+Functional programming aims for program code that is succinct and modular. In specific, source code written in a functional language often consists of several small utility functions that can be combined together in an extensible manner~\parencite{hughes1989functional}. This is achieved through mechanisms such as higher-order functions and algebraic data types. The development of functional programs is aided by features from mathematics.~\textit{Referential
+transparency} guarantees that expressions return the same output with the same input, resulting in easier reasoning of the program logic. Computational contexts such as~\textit{functors} provide clean abstractions, for example, to error values. State, manifesting itself often as global variables in imperative languages such as C, is avoided and instead, immutable data structures are favoured.~\parenciteseveral{wadler1992essence}.  
 
-The development of functional programs is aided by features from mathematics.~\textit{Referential transparency} guarantees that expressions return the same output with the same input, leading to easier reasoning of the program logic. Computational contexts such as~\textit{functors} provide clean abstractions, for example, to error values. State, manifesting itself often as global variables in imperative languages such as C, is avoided and instead, immutable data structures are favoured.~\parenciteseveral{wadler1992essence}.  
+As the popularity of functional programming is increasing with languages such as Scala~\parencite{odersky2004overview} and Haskell~\parencite{marlow2010haskell}, also researching the applicability of software metrics to the functional paradigm is intriguing. Since both fields of research advocate maintainable systems, combining software metrics and functional programming can be argued to result in improved software quality.  
 
-As the popularity of functional programming is increasing with languages such as Scala~\parencite{odersky2004overview} and Haskell~\parencite{marlow2010haskell}, also researching the applicability of software metrics to the functional paradigm is intriguing. Since both approaches advocate maintainable systems, combining them should thus result in new approaches that have the possibility to redefine how software is constructed.
+Previous research in software metrics is numerous, starting from the classic works of~\citet{mccabe1976complexity,halstead1977elements}. In the 90s, metrics research achieved its height due to the popularity of the object-oriented paradigm~\parencite{lorenz1994object,briand1996property,hitz1996chidamber,fenton1998software}, but has continued to be researched in a steady fashion ever since~\parencite{olague2007empirical,gui2008new,ordonez2008state}. Several
+reviews and mapping studies have also been conducted~\parencite{kitchenham2010s,tahir2012systematic} that accurately compose the positive and the negative sides of past software metrics research.
 
-Previous research in software metrics is vast, starting from the classic works of~\citet{mccabe1976complexity,halstead1977elements}, the vigorous research of the 90s~\parencite{lorenz1994object,briand1996property,hitz1996chidamber,fenton1998software} to more recent studies such as~\citet{olague2007empirical,gui2008new,ordonez2008state}. Several reviews and mapping studies have also been conducted~\parencite{kitchenham2010s,tahir2012systematic} that accurately
-encapsulate the positive and the negative of the past software metrics research.
+Functional programming, albeit sufficiently researched, is mostly an interest in academia. Nevertheless, the research of the paradigm is active, starting from LISP~\parencite{backus1978can} to the current research of Haskell being the most vigorously researched functional programming language~\parencite{wadler1995monads,hudak2007history}. In the industry side, Erlang~\parencite{armstrong1993concurrent} is an example of a heavily-used functional programming language. It is
+especially favoured in telecommunication systems due to its facilities for concurrency and messaging.
 
-Functional programming, albeit sufficiently researched, is still mostly an interest only in academia. Nevertheless, the research of the paradigm is active, starting from LISP~\parencite{backus1978can} to the current research of Haskell being the most vigorously researched functional programming language~\parencite{wadler1995monads,hudak2007history}.
+Previous research combining software metrics and functional programming is much lower in quantity when comparing to the imperative and object-oriented paradigms. The basis for the research is done by~\citet{van1995software}, who assessed the complexity of code produced by students participating in functional programming courses.~\citet{ryder2004software} presented more metrics by conducting in-depth research and also proposed a software tool for calculating the
+result of several metrics in functional programs. In more recent years, research is concentrating on programming languages such as Scala and the module complexity measurement in open-source software~\parencite{muddu2013metrics}.
 
-\section{Previous work}
+As code complexity is an inherent problem of software development, it is only natural that possible solutions have been researched since the first computer systems(TODO: Lahde?). Functional programming is touted as addressing the complexity issue, but large-scale validation in industry-scale systems has not been viable due to lack of adoption of the functional paradigm. In specific, commercial use heavily favours the object-oriented and imperative paradigms. Although software metrics
+have been extensively researched, the amount of studies specific to the functional paradigm is still low in quantity. Thus the need for further study is warranted, if only to motivate the research field and scope new directions. 
 
-Code analysis and comparison of quality in functional programming (FP) paradigms is relatively scarce~\parencite{hudak1994haskell,harrison1996comparing,harrison1995estimating,harrison1996evaluation}.
+The aim of this thesis is to provide an up-to-date overview of software metrics and discuss possible future research directions. Moreover, metrics are specifically pruned in the context of functional programming languages, where Haskell is used as reference. As an example,~\citet{ryder2004software} encourages future research to measure polymorphism and higher-order functions in functional programming.
 
-Explicit formulation of metrics for functional programming has been presented in the works of~\citet{ryder2004software,van1995software}. Furthermore,~\citet{ryder2004software} leaves the measurement of type systems, polymorphism and higher-order functions for future research, which this thesis aims to address.
+The research can be decomposed into four questions:
+
+\begin{itemize}
+    \item What are software metrics?
+    \item What is functional programming?
+    \item How do existing software metrics apply to the functional paradigm? 
+    \item What is the status of software metrics research for the functional paradigm?
+\end{itemize}
+
+\noindent The research problem can be expressed as follows:~\textit{What kind of software metrics exists for the functional programming paradigm, and how do the metrics apply to them?}
+
+The thesis utilizes literature review as its research method. The review starts with an overview into software metrics. In particular, the earliest software metrics are presented to provide a basis for more recent studies. The newer research is presented and possible challenges are discussed. In the end of every chapter is a summary composing the content.
+
+The studies and metrics presented are chosen by their apparent influence in the field, dictated by their citation count in Google Scholar~\parencite{kousha2007google}. 
+
+The results aim at explaining the various semantics of FP and how they relate to software quality metrics. The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating software metrics and functional programming into practical settings. Future research will be fueled by providing more support to the functional paradigm and by encouraing real-world usage of the functional paradigm.
 
 \section{Limitations}
 
-Commercial use of programming paradigms are still in favour of the object-oriented (Java) and imperative (C) approaches. Despite FP being largely utilized in academia, the research on it is somewhat diverse and not uniform. In addition, real-world applications of FP are not abundant and finding a suitable program for research might be challenging. 
+Software metrics, regardless of their quantitative nature, are up for interpretation and thus the results of the metrics are subjectively assessed.  Algorithmic efficiency is left out.
 
-Software metrics, regardless of their quantitative nature, are up for interpretation and thus the results of the metrics are subjectively assessed.
-
-Algorithmic efficiency is left out.
-
-\section{Research problem}
-
-The aim of this thesis is to provide an up-to-date overview of software metrics and discuss future research. Moreover, metrics are specifically pruned in the context of functional programming languages, where Haskell is used as reference.  As an example,~\citet{ryder2004software} encourages future research for measuring polymorphism and higher-order functions in functional programming.
 %{{{
 \begin{comment}
 Functional languages often provide powerful abstraction mechanisms such as polymorphic and higher-order functions, or abstract data types. These languages features suggest that useful metrics could be defined to measure attributes of abstraction in programs.
 For example, one might measure how polymorphic a function is by counting the number of different type variables present in the function¿s type signature, or by counting how many different types the function is used as. Likewise one might measure how abstract a given algebraic data type is by counting the number of constructors which are exported for that data type. Similar metrics could also be created to measure attributes of higher-order functions and other abstraction mechanisms.~\parencite{ryder2004software}
 \end{comment}
 %}}}
-
-The research can be decomposed into four questions:
-
-\begin{itemize}
-    \item What are software quality metrics?
-    \item What is functional programming?
-    \item How do existing software quality metrics apply to the functional programming paradigm? 
-    \item What kind of new metrics can be formulated and how do they apply to FP programs?
-\end{itemize}
-
-\noindent The research problem can be expressed as follows: \textit{What kind of software metrics exists for the functional programming paradigm, and how do the metrics apply to applications with functional implementation?}
-
-\section{Research methods}
-The thesis utilizes literature review as its main research method. The review consists of an overview into the metrics of software quality and functional programming. In preparation of the empirical part, FP metrics~\parencite{ryder2004software} are scrutinized and the possibility for new metrics is investigated.
-
-New metrics formulated will be presented. For example, polymorphism and other type system -specific metrics are currently nonexistant~\parencite{ryder2004software} and could serve as a basis for new metrics research.
-
-In the second part, the research themes are investigated through empirical research. One or more case study applications are chosen and their source code is used for applying the metrics. As an example, the abstract syntax trees (AST) with type information could be built from the case study source codes and the metrics quantified with the help of the AST.
-
-\section{Expected results and their significance}
-The results aim at explaining the various semantics of FP and how they relate to software quality metrics. The discovery of new metrics for FP-specific metrics is likely, since research on the subject has not been extensive~\parencite{ryder2004software}.
-
-The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating software metrics and FP into practical settings. Future research will be fueled by providing more support to the functional paradigm as opposed to imperative approaches, and encourage real-world usage of the functional paradigm.
 %{{{Additional questions
 \begin{comment}
 There are two general types of criticisms that can be applied to current software metrics. The first category are those theoretical criticisms that are leveled at conventional software metrics as they are applied to traditional, non-00 software design and development. Kearney, et al. criticized software complexity metrics as being without solid theoretical bases and lacking appropriate properties [21]. Vessey and Weber also commented on the general lack of theoretical rigor in the
