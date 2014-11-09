@@ -12,4 +12,6 @@ echo "Diffing revision $COMMIT"
 
 latexdiff -c latexdiff.cfg -t CTRADITIONAL <(git show $COMMIT:thesis-niiranen.tex) thesis-niiranen.tex > diff.tex
 
+biber diff
+
 pdflatex -interaction=nonstopmode diff.tex
