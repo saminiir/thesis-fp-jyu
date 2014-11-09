@@ -1670,15 +1670,9 @@ The concept of a monad, which arises from category theory, has been applied by M
 \end{comment}
 %}}}
 
-Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In Haskell, monads are often used for handling state, exceptions, output and for nondeterministic behavior.  Indeed, I/O operations are specifically structured as monads in Haskell and special syntax is reserved for its expression~\parencite{typeclassopedia2014haskellwiki}.
+Monads can be seen as ``wrappers'' or contexts for values, similar to functors and applicative functors. In Haskell, monads are often used for handling state, exceptions, output and for nondeterministic behavior.  Indeed, I/O operations are specifically structured as monads in Haskell and special syntax is reserved for expressing them~\parencite{typeclassopedia2014haskellwiki}.
 
 Even if monads are perhaps the more popular topic of functional programming, they are not any more complex from other constructs of computational contexts. For example, a developer wishes to operate on a data structure, but also keep a reference on how many operations were applied. In a pure approach, the obvious solution to increment the counter would be to pass it as a parameter to all subsequent iterations. Monads, however, can be utilized in this scenario to represent the counter variable.
-
-Since monads are derived from category theory~\parencite{moggi1991notions}, specific laws exist for validating whether a construct represents a monad.  
-
-~\textit{Right identity}
-
-~\textit{Associativity}
 
 %{{{Additional sources
 \begin{comment}
@@ -1691,18 +1685,16 @@ Although Wadler¿s development of Moggi¿s ideas was not directed towards the ques
 
 \section{Summary}
 
-Functional programming is a distinct paradigm from the arguably more wide-spread imperative approaches like C~\parencite{kernighan1988c}. However, functional languages attempt to give a more mathematical structure to programming, which in turn, is argued to lead to better reasoning of the program logic. Referential transparency, where expressions can be evaluated and their variables replaced by values at any time, is perhaps the most convincing aspect of functional programming~\parencite{hughes1989functional}.   
+Functional programming is a distinct paradigm compared to the arguably more widespread imperative and object-oriented approaches. However, functional languages attempt to provide a more mathematical structure to programming, which in turn, is argued to lead to better reasoning of the program logic. Referential transparency, where expressions can be evaluated and their variables replaced by values at any time, is perhaps the most convincing aspect of functional programming~\parencite{hughes1989functional}.   
 
 Lambda calculus is a prevalent system for expressing computations in functional programs, and in its simplest form only contains few constructs (redexes, abstractions) and is relatively simple to be applied through variable binding and substitution. Haskell utilizes the more complex call-by-need strategy to achieve the well-known attribute of lazy evaluation~\parencite{maraist1998call}.
 
 The expressiveness of functional programs are increased by their use of higher-order functions and strong type systems. Program logic often consists of short and succinct functions that can be combined together through currying. Furthermore, the parameters of functions are often (custom) type variables, which are extensively supported by e.g. Haskell's type system.~\parenciteseveral{hudak1989conception}.
 
-The fascinating aspect of functional programming is its basis on mathematical notions. Through this connection, e.g. Haskell, widely popular in academia, continues to be researched and as a result new approaches (see e.g.~\citet{baars2004functional,mcbride2008functional}) are found at regular intervals. For example, the popular construct of monad was not initially included in the design of Haskell~\parencite{hudak2007history}. In fact, the usefulness of monads in programming language design
+The fascinating aspect of functional programming is its basis on mathematical notions. Through this connection Haskell, widely popular in academia, continues to be researched and as a result new approaches (see e.g.~\citet{baars2004functional,mcbride2008functional}) are found at regular intervals. For example, the popular construct of monad was not initially included in the design of Haskell~\parencite{hudak2007history}. In fact, the usefulness of monads in programming language design
 was not realized until the early 90s~\parencite{moggi1991notions}.
 
-This chapter served a basis for functional programming and further established motivation for the significance of approaches where reasoning logic and expressiveness are held as a central programming construct. Moreover, this thesis can not contain but a limited introduction to functional programming (and Haskell), but readers are nevertheless encouraged to learn a new programming paradigm
-(see~\citet{lipovavca2011learn,o2008real} for learning Haskell).
-
+This chapter served a basis for functional programming and further established motivation for the significance of approaches where reasoning logic and expressiveness are held central to the programming effort. Moreover, this thesis can not contain but a limited introduction to functional programming (and Haskell), but readers are nevertheless encouraged to learn a new programming paradigm (see~\citet{lipovavca2011learn,o2008real} for learning Haskell).
 
 \chapter{Metrics for functional programming}
 \label{chap:metrics_for_functional_programming}
