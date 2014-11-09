@@ -119,14 +119,14 @@ As the popularity of functional programming is increasing with languages such as
 Previous research in software metrics is numerous, starting from the classic works of~\citet{mccabe1976complexity,halstead1977elements}. In the 90s, metrics research achieved its height due to the popularity of the object-oriented paradigm~\parencite{lorenz1994object,briand1996property,hitz1996chidamber,fenton1998software}, but has continued to be researched in a steady fashion ever since~\parencite{olague2007empirical,gui2008new,ordonez2008state}. Several
 reviews and mapping studies have also been conducted~\parencite{kitchenham2010s,tahir2012systematic} that accurately compose the positive and the negative sides of past software metrics research.
 
-Functional programming, albeit sufficiently researched, is mostly an interest in academia. Nevertheless, the research of the paradigm is active, starting from LISP~\parencite{backus1978can} to the current research of Haskell being the most vigorously researched functional programming language~\parencite{wadler1995monads,hudak2007history}. In the industry side, Erlang~\parencite{armstrong1993concurrent} is an example of a heavily-used functional programming language. It is
+Functional programming, albeit sufficiently researched, is mostly an interest in academia. Nevertheless, the research of the paradigm is active, starting from LISP~\parencite{backus1978can} to the current research of Haskell being the most vigorously researched functional programming language~\parencite{wadler1995monads,hudak2007history}. At the industry side, Erlang~\parencite{armstrong1993concurrent} is an example of a heavily-used functional programming language. It is
 especially favoured in telecommunication systems due to its facilities for concurrency and messaging.
 
-Previous research combining software metrics and functional programming is much lower in quantity when comparing to the imperative and object-oriented paradigms. The basis for the research is done by~\citet{van1995software}, who assessed the complexity of code produced by students participating in functional programming courses.~\citet{ryder2004software} presented more metrics by conducting in-depth research and also proposed a software tool for calculating the
-result of several metrics in functional programs. In more recent years, research is concentrating on programming languages such as Scala and the module complexity measurement in open-source software~\parencite{muddu2013metrics}.
+Previous research combining software metrics and functional programming is much lower in quantity when comparing to the imperative and object-oriented paradigms. The basis for the research is done by~\citet{van1995software}, who assessed the complexity of code produced by students participating in functional programming courses.~\citet{ryder2004software} presents more metrics by conducting in-depth research and also proposes a software tool for calculating the
+result of several metrics in functional programs. In the recent years, research is concentrating on programming languages such as Scala and the measurement of module complexity in open-source software~\parencite{muddu2013metrics}.
 
-As code complexity is an inherent problem of software development, it is only natural that possible solutions have been researched since the first computer systems(TODO: Lahde?). Functional programming is touted as addressing the complexity issue, but large-scale validation in industry-scale systems has not been viable due to lack of adoption of the functional paradigm. In specific, commercial use heavily favours the object-oriented and imperative paradigms. Although software metrics
-have been extensively researched, the amount of studies specific to the functional paradigm is still low in quantity. Thus the need for further study is warranted, if only to motivate the research field and scope new directions. 
+As code complexity is an inherent problem of software development, it is only natural that possible solutions have been researched since the first computer systems(TODO: Lahde?). Functional programming is touted as addressing the complexity issue, but large-scale validation in industry-scale systems has not been viable due to lack of adoption of the paradigm. In other words, commercial use heavily favours the object-oriented and imperative paradigms(TODO: Lahde). Although software metrics
+have been extensively researched, the amount of studies specific to the functional paradigm is still low in quantity. Thus the need for further study is warranted, if only to motivate the research field and to scope new directions. 
 
 The aim of this thesis is to provide an up-to-date overview of software metrics and discuss possible future research directions. Moreover, metrics are specifically pruned in the context of functional programming languages, where Haskell is used as reference. As an example,~\citet{ryder2004software} encourages future research to measure polymorphism and higher-order functions in functional programming.
 
@@ -141,11 +141,14 @@ The research can be decomposed into four questions:
 
 \noindent The research problem can be expressed as follows:~\textit{What kind of software metrics exists for the functional programming paradigm, and how do the metrics apply to them?}
 
-The thesis utilizes literature review as its research method. The review starts with an overview into software metrics. In particular, the earliest software metrics are presented to provide a basis for more recent studies. The newer research is presented and possible challenges are discussed. In the end of every chapter is a summary composing the content.
+The thesis utilizes literature review as its research method. The studies and metrics presented are chosen by their apparent influence in the field, mainly measured by their citation count in Google Scholar~\parencite{kousha2007google}. Moreover, iterating sources, or~\textit{snowballing} as it is called in research, is used to build an intact and chronologically sound research body for the thesis. The research methodology is explained in-depth in the last chapter (Summary).
 
-The studies and metrics presented are chosen by their apparent influence in the field, dictated by their citation count in Google Scholar~\parencite{kousha2007google}. 
+The scientific contribution of the thesis is to explain various semantics of functional programming and review the current status of software metrics and especially research that utilizes functional programming. The research is expected to be of significance to researchers and practitioners alike, mainly by helping in formulating software metrics and functional programming into a comprehensive overview. Future research will be fueled by providing more support to the functional paradigm and by encouraging improving the maintainability of systems through measurement.
 
-The results aim at explaining the various semantics of FP and how they relate to software quality metrics. The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating software metrics and functional programming into practical settings. Future research will be fueled by providing more support to the functional paradigm and by encouraing real-world usage of the functional paradigm.
+As previously stated, this thesis treats software measurement as defined in the IEEE standard 1061 for software quality metrics. Moreover, algorithmic efficiency can be thought of as a ``internal attribute'' of code, but such performance-related measurement is out of the scope of the thesis. Code complexity is the measurement attribute this thesis is mainly covering. The thesis also recognizes the inherent subjectivity of a qualitative attribute such as code complexity. This is,
+of course, the ultimate reason quantitative approaches, such as software metrics, are devised.
+
+The thesis consists of the following content: Chapter~\ref{chap:software_metrics} presents an overview on software metrics and chapter~\ref{chap:functional_programming} introduces functional programming. Chapter~\ref{chap:metrics_for_functional_programming} combines the two subjects, presenting software metrics research specific to the functional paradigm. Finally, chapter~\ref{chap:summary} concludes the literature review, presenting the findings and discussing future research possibilities.
 
 %{{{
 \begin{comment}
@@ -1171,6 +1174,8 @@ With the increase of programming languages and complex systems, the need for res
 
 %{{{Functional programming
 \chapter{Functional programming}
+\label{chap:functional_programming}
+
 %{{{Chapter questions
 \begin{comment}
 \end{comment}
@@ -1701,6 +1706,7 @@ This chapter served a basis for functional programming and further established m
 
 
 \chapter{Metrics for functional programming}
+\label{chap:metrics_for_functional_programming}
 
 As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
@@ -2127,11 +2133,12 @@ Preliminary guidelines for empirical research in software engineering~\parencite
 %}}}
 %{{{Summary and conclusion
 \chapter{Summary and conclusion}
+\label{chap:summary}
 
 The aim of this study was to explore the current status of software metrics research together with functional programming. In specific, the objective is to present previous research on software metrics, introduce functional programming as a programming language paradigm and to assess the depth and breadth of software metrics research specific to the functional paradigm. The topics chosen are relevant in many ways - measuring software is as old as computer science itself and
-proactively pinpointing problematic program components ultimately reduce production costs. Functional programming is likewise an old topic, but has eluded wide mainstream use despite no apparent weaknesses. Combining the two is thus relevant for exploring future ways of conducting software engineering and paving way for new research.
+proactively pinpointing problematic program components ultimately reduce production costs. Functional programming is likewise an old topic, but has eluded wide mainstream use despite no apparent weaknesses. Combining the two topics is thus relevant for exploring future ways of conducting software engineering and paving way for new research.
 
-The research method chosen for the thesis - literature review - is fitting, since the subject is variably researched~\parencite{kitchenham2010s,ryder2005software} and conducting reviews is an excellent way of mapping the current situation and generating interest in to the subject. The literature for this thesis was searched mainly with Google Scholar (see~\citet{kousha2007google}) and was chosen based on (1) the influence on other research (citation count) and by
+The research method chosen for the thesis - literature review - is fitting, since the subject is variably researched~\parencite{kitchenham2010s,ryder2005software} and conducting reviews is an excellent way of mapping the current situation and generating interest in to the subject. The literature for this thesis was searched with Google Scholar (see~\citet{kousha2007google}) and was chosen based on (1) the influence on other research (citation count) and by
 (2) pruning (``snowballing'') these citation lists for studies relevant to the topic. Sources were searched with the keywords ``software metrics'', ``functional programming'' and the previous joined together. The process of gathering the references had no fixed timespan, but rather was active for almost the life time of the thesis writing process from early 2014 to late 2014.
 
 The selection of the references was also influenced by the age of the research. New research, such as~\citet{beck2011congruence,muddu2013metrics}, was deemed to be interesting from the standpoint of literature review. On the other hand, plenty popular, albeit old, research exists~\parencite{mccabe1976complexity,backus1978can,halstead1977elements} and were included in the thesis for wholeness and their field-defining content. Nevertheless, the thesis aims to provide an extensive investigation of the field of software metrics spanning many decades.
