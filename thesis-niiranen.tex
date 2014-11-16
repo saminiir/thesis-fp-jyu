@@ -147,10 +147,6 @@ The studies and metrics presented are chosen by their apparent influence in the 
 
 The results aim at explaining the various semantics of FP and how they relate to software quality metrics. The research is expected to be of significance to researchers and practitioners alike. The results will help in formulating software metrics and functional programming into practical settings. Future research will be fueled by providing more support to the functional paradigm and by encouraing real-world usage of the functional paradigm.
 
-\section{Limitations}
-
-Software metrics, regardless of their quantitative nature, are up for interpretation and thus the results of the metrics are subjectively assessed.  Algorithmic efficiency is left out.
-
 %{{{
 \begin{comment}
 Functional languages often provide powerful abstraction mechanisms such as polymorphic and higher-order functions, or abstract data types. These languages features suggest that useful metrics could be defined to measure attributes of abstraction in programs.
@@ -219,7 +215,7 @@ key in both cases has been the assumption that product 'size' measures should dr
 \end{comment}
 %}}}
 
-First attempts at recording software metrics were witnessed in the 1960s when properties such as program size were measured. The results were then used to assess programmer productivity and the quality of their work. In the 1970s the limitations of simple measures like lines of code was observed, and research departed to produce more elegant measures. These new measures, such as the ones from~\citet{halstead1977elements} and~\citet{mccabe1976complexity} were aimed to provide complexity measures independent of the accompanying programming languages. Ever since, research has produced numerous new metrics and validation frameworks, each with their own advantages and disadvantages.~\parenciteseveral{fenton1999software}.
+First attempts at recording software metrics were conducted in the 1960s when properties such as program size were measured. The results were then used to assess programmer productivity and the quality of their work. In the 1970s the limitations of simple measures like lines of code were noted and research departed to produce more elegant measures. These new measures, such as the ones from~\citet{halstead1977elements} and~\citet{mccabe1976complexity} were aimed to provide complexity measures independent of the accompanying programming languages. Ever since, research has produced numerous new metrics and validation frameworks, each with their own advantages and disadvantages.~\parenciteseveral{fenton1999software}.
 
 The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
 ~\begin{quoting}
@@ -237,7 +233,7 @@ Concepts such as complexity, coupling, cohesion or even size are very often subj
 \end{comment}
 %}}}
 
-This chapter continues on presenting many, if not all, classic measures of software code. These foundings are important to understand the implications of the empirical research that has been conducted and nature of the trends in the field. After the initial presentation, the focus of the chapter shifts to newer measurement approaches such as the measurement of code version history, which albeit does not directly fall into the category of internal code attribute measurement, is a prevalent current trend in the field~\parencite{zimmermann2005mining}. Lastly, the challenges of metrics are discussed and the main obstacles of future research are provided.
+This chapter continues on presenting many, if not all, classic measures of software code. The foundations are important for understanding the implications of the empirical research that has been conducted and nature of the trends in the field. After the initial presentation, the focus of the chapter shifts to newer measurement approaches such as the measurement of code version history, which, while not directly falling into the category of internal code attribute measurement, is a prevalent current trend in the field~\parencite{zimmermann2005mining}. Lastly, the challenges of metrics are discussed and the main obstacles of future research are provided.
 
 %{{{ TODO: sources
 \begin{comment}
@@ -279,7 +275,7 @@ Several measures introduced in the literature can be classified as size measures
 
 \subsection{Lines of code}
 
-Counting the~\textit{lines of code} (LOC) is perhaps the most commonly used metric, but on the same time it poses challenges regarding the interpretation of the results~\parencite{fenton1998software}. Programmers and projects have distinct styles and guidelines which can affect the results. For example, a function can be separated into multiple lines in order to make it more readable, where in other cases the same results are achieved by a shorter declaration. In turn, the LOC metric varies even though the intent of the function is the same.
+Counting the~\textit{lines of code} (LOC) is perhaps the most commonly used metric, but on the same time it poses challenges regarding the interpretation of the results~\parencite{fenton1998software}. Programmers and projects have distinct styles and guidelines which affect the results. For example, a function can be separated into multiple lines in order to make it more readable, where in other cases the same results are achieved by a shorter declaration. In turn, the LOC metric varies even though the intent of the function is the same.
 %{{{
 \begin{comment}
 Some lines of code are different from others~\parencite{fenton1998software}.
@@ -337,7 +333,7 @@ printf("sum of %d and %d is %d\n", a, b, sum);
 
 The Halstead program volume measures are calculated for listing~\ref{lst:halstead-example} as follows. The length $N$ is 20 ($N_1 + N_2$). The vocabulary $\mu$ is calculated with $\mu_1 + \mu_2$, which amounts to 10. The volume is calculated by $V = N * log_2 \mu$, resulting to 66.44. Moreover, the program level is calculated with $L = V_1/V$ where $V_1$ is the volume of the minimal potential size of the implementation. The inverse of level is difficulty, calculated by $D = 1/L$.~\textit{Effort} is calculated by $E = D * V$.
 
-The meaning of Halstead's mathematical models on real-world usage are unclear. Halstead is critized for not indicating whether the metrics are measures or predictive variables of systems.~\parenciteseveral{fenton1998software}. This might add to observations made by other researchers, such as~\citet{jones1994software}, about the convoluted nature of the Halstead metric and its inherent flawness in attempting to deliver accurate estimations of development and maintenance effort.
+The meaning of Halstead's mathematical models on real-world usage are unclear. Halstead is critized for not indicating whether the metrics are measures or predictive variables of systems.~\parenciteseveral{fenton1998software}. This might add to observations made by~\citet{jones1994software} about the convoluted nature of the Halstead metric and its inherent flawness in attempting to deliver accurate estimations of development and maintenance effort.
 
 \section{Structural metrics}
 
@@ -352,7 +348,7 @@ It is the inter-module dependencies that interest us, and measures of these attr
 
 \subsection{Flow graphs}
 
-As the research on software metrics traditionally centers on imperative languages,~\textit{flowa graphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flow graphs are directed graphs that indicate program statements as nodes, and flow of control as arcs (or edges) in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
+As the research on software metrics traditionally centers on imperative languages,~\textit{flow graphs}~\parencite{allen1970control} are an intuitive way of mapping the ``flow'' of program statements. Flow graphs are directed graphs that indicate program statements as nodes, and flow of control as arcs (or edges) in the graph. Together these elements visualize all of the paths the program's execution can take~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 A great deal of software metrics work has been devoted to measuring the control-flow structure of imperative language programs or algorithms. The control flow measures are usually modeled with directed graphs, where each node (or point) corresponds to a program statement, and each arc (or directed edge) indicates the flow of control from one statement to another.
@@ -382,8 +378,8 @@ For example, the following pseudo-code {\tt if A then X else Y} can be expressed
         \draw[->,black] (start) to node[right = 0.5cm] {true} (acquire);
         \draw[->,black] (start) to node[left = 0.5cm] {false} (gchannel);
     \end{tikzpicture}
-  \caption[Example of flow graph~\parencite{allen1970control}
-  ]{Example of flow graph~\parencite{allen1970control}}
+  \caption[Example of a flow graph~\parencite{allen1970control}
+  ]{Example of a flow graph~\parencite{allen1970control}}
     \label{fig:flow graph-example}
 \end{figure}
 %{{{
@@ -423,7 +419,7 @@ For example, the following pseudo-code {\tt if A then X else Y} can be expressed
 \end{comment}
 %}}}
 
-\noindent As can be seen from figure~\ref{fig:flow graph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called ~\textit{in-degrees} of the node, while a node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
+\noindent As can be seen from figure~\ref{fig:flow graph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called ~\textit{in-degrees} of the node, while the node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Thus, directed graphs are depicted with a set of nodes, and each arc connects a pair of nodes. We write an arc as an ordered pair, <x,y>, where x and y are the nodes forming the endpoints of the arc, and the arrow indicates that the arc direction is from x to y. The arrowhead indicates that something flows from one node to another node.~\parencite{fenton1998software}.
@@ -432,7 +428,7 @@ The in-degree of a node is the number of arcs arriving at the node, and the outd
 \end{comment}
 %}}}
 
-The flow graph is convenient for visualizing the structural properties of the program. Nodes are the program statements themselves, and the directed arcs make the flow of control explicit. Numerous measures can also be derived, such as the number of nodes, number of edges (arcs), the~\textit{largest prime} measure and so on. The call graph itself is, however, usually used in conjuct with other measuring approaches such as the~\textit{cyclomatic complexity}.~\parenciteseveral{fenton1998software}.
+The flow graph is convenient for visualizing the structural properties of a program. Nodes are the program statements themselves, and the directed arcs make the flow of control explicit. Numerous measures can also be derived, such as the number of nodes, number of edges (arcs), the~\textit{largest prime} measure and so on. The call graph itself is, however, usually used in conjuct with other measuring approaches such as the~\textit{cyclomatic complexity}.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
 The flow graph is a good model for defining measures of control-flow structure, because it makes explicit many of the structural properties of the program. The nodes enumerate the program statements, and the arcs make visible the control patterns.~\parencite{fenton1998software}.
@@ -446,7 +442,8 @@ The~\textit{Cyclomatic complexity} metric~\parencite{mccabe1976complexity} utili
 v(F) = e - n + 2
 \end{flalign*}
 
-\noindent where the flow graph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit when refactoring of the module should be considered.
+\noindent where the flow graph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit to
+initiate refactoring of the module.
 %{{{
 \begin{comment}
 Programmers have been required to calculate complexity as they create software modules. When the complexity exceeded 10 they had to either recognize and modularize subfunctions or redo the software. The intention was to keep the "size" of the modules manageable and allow for testing all the independent paths~\parencite{mccabe1976complexity}.
@@ -546,7 +543,7 @@ For example, instead of examining variables, we may need to know only whether or
     \label{fig:call-graph-example}
 \end{figure}
 
-\noindent Several properties for assessing software design quality from call graphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the call graph. A large call graph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node. In figure~\ref{fig:call-graph-example}, depth would be measured as the distance from {\tt Main} to either {\tt Calc\_Av} or {\tt Print\_Av}.
+Several properties for assessing software design quality from call graphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the call graph. A large call graph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node. In figure~\ref{fig:call-graph-example}, depth would be measured as the distance from {\tt Main} to either {\tt Calc\_Av} or {\tt Print\_Av}.
 
 ~\textit{Width} measures the maximum number of nodes at any one level. In figure~\ref{fig:call-graph-example}, the horizontal layer containing the most nodes are considered as the call graph's width, e.g. {\tt Read\_Scores + Average = 2}.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the more the arc-to-node ratio increases~\parencite{ryder2004software}. Several other more specific attributes of call graphs have been derived. The advantage of such graph measures are that they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
 %{{{
@@ -563,7 +560,7 @@ These measures are not restricted to dependency graphs. They are generally appli
 
 \subsection{Graph impurity}
 
-One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the call graph of a program. The measure holds a simple hypothesis that the more the program's call graph deviates from being a tree-structure, the more complex the structure is~\parencite{ince1988approach}. 
+One measure for system complexity is~\textit{graph impurity}~\parencite{ince1988approach}, which can be derived from the call graph of a program. The measure holds a simple hypothesis that the more the program's call graph deviates from being a tree-like structure, the more complex the structure is~\parencite{ince1988approach}. 
 %{{{
 \begin{comment}
 One measure of system complexity that has been sug- gested is graph impurity: the more a system deviates from being a pure tree structure towards being a graph structure, the worse the design is~\parencite{ince1988approach}.
@@ -623,7 +620,7 @@ Results suggest a relationship between tree impurity and poor design. Thus m may
 
 \subsection{Internal reuse}
 
-{\itshape Internal reuse} is the measure of to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} have defined a measure for internal reuse ({\itshape system design measure}~\parencite{yin1978establishment}) which can be calculated from the call graph of a program:
+{\itshape Internal reuse} is the measure of to which extent a program reuses its own modules~\parencite{fenton1998software}.~\citet{yin1978establishment} define a measure for internal reuse ({\itshape system design measure}~\parencite{yin1978establishment}), which can be calculated from the call graph of a program:
 %{{{
 \begin{comment}
 We call internal reuse the extent to which modules are reused within the same product.~\parencite{fenton1998software}.
@@ -724,7 +721,7 @@ The concept of cohesion has been used with reference to modules or modular syste
 \end{comment}
 %}}}
 
-The classical definition of~\parencite{stevens1974structured} consists of seven degrees of cohesion, listed from the most desirable to least desirable:
+The definition by~\citet{stevens1974structured} consists of seven degrees of cohesion, listed from the most desirable to least desirable:
 
 \begin{itemize}
     \item {\itshape Functional}: the module performs a single well-defined function
@@ -747,7 +744,7 @@ Several other interpretations of cohesion have been presented, such as the ones 
 
 \subsection{Information flow}
 
-As the flow of data between modules is an important part of measuring the attributes of software, also the overall level of~\textit{information flow} in a system is of interest.~\citet{henry1981software} describe three different types of information flow. First,~\textit{Local indirect flow} occurs when a module passes information to another module or conversely, returns a result to a module invoking it. Second,~\textit{Local indirect flow} exists if ``the invoked module returns information
+As the flow of data between modules is an important part of measuring the attributes of software, also the overall level of~\textit{information flow} in a system is of interest.~\citet{henry1981software} describe three different types of information flow. First,~\textit{local indirect flow} occurs when a module passes information to another module or conversely, returns a result to a module invoking it. Second,~\textit{local indirect flow} exists if ``the invoked module returns information
 that is subsequently passed to a second invoked module''. Third,~\textit{global flow} occurs when data is passed between modules through a global data structure.~\parenciteseveral{fenton1998software}.
 \begin{comment}
 Generally a modular program will consist of modules with data flowing through them in a manner that is termed information flow. Measuring properties of in- formation flow may be of interest to programmers because it can help to indicate where particularly complex interaction is occurring between functions, and thus where there may be complex algorithmic behaviour that is likely to make modifi- cations to the program difficult to perform.~\parencite{ryder2004software}.
@@ -825,8 +822,8 @@ WMC = \sum_{i=1}^{n} c_i
 
 \subsection{Depth of inheritance}
 
-As inheritance is often utilized in object-oriented design~\parencite{booch1986object}, also its quantity and quality should offer some information for software measurement.~\textit{Depth of inheritance} (DIT) simply inspects the ``position'' of a class in its inheritance hierarchy. For example, the deeper the class is in regards to inheritance, the more likely it is to obtain unneeded methods from parent classes and thus resulting in increased complexity. On the other hand, inheritance's main
-advantage is the reusability of methods, since general functionality can simply be acquired higher from the inheritance hierarchy. As is, the DIT metric is easy to be calculated, but does not directly point problems in the design. The inheritance tree can be ``top-heavy'', where the tree is depicted as flat and wide, or ``bottom-heavy'', where the tree is thin but long. These properties do not, however, necessarily point out design flaws directly, as every program's design choices are unique.~\parenciteseveral{chidamber1994metrics}.
+As inheritance is often utilized in object-oriented design~\parencite{booch1986object}, also its quantity and quality should offer some information for software measurement.~\textit{Depth of inheritance} (DIT) simply inspects the ``position'' of a class in its inheritance hierarchy. For example, the deeper the class is in regards to inheritance, the more likely it is to obtain unneeded methods from parent classes, therefore resulting in increased complexity. On the other hand, inheritance's main
+advantage is the reusability of methods, since general functionality can simply be acquired higher from the inheritance hierarchy. As is, the DIT metric is easy to calculate, but does not directly point problems in the design. The inheritance tree can be ``top-heavy'', where the tree is depicted as flat and wide, or ``bottom-heavy'', where the tree is thin but long. These properties do not, however, necessarily point out design flaws directly, as every program's design choices are unique.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
     Metric 2: Depth of Inheritance Tree (DIT) 
@@ -1007,7 +1004,7 @@ Furthermore,~\parencite{parnas1971information} introduced the notion of ``inform
 
 An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
 
-~\parencite{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by another class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
+~\citet{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by another class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
 
 ~\textit{Fan-Out Similarity (FO)}~\parencite{beck2011congruence} addresses the fact that the coupling of two entities can be indirect. For example, two classes can be related by extending the same class or implementing similar interfaces. Furthermore, the two classes can aggregate similar classes and components, thus increasing their coupling. Also, simply utilizing the same entities increases the coupling of two classes.
 
@@ -1019,7 +1016,7 @@ The last metric provided by~\parencite{beck2011congruence} is~\textit{semantic s
 
 ~\citet{beck2011congruence} test the coupling metrics by applying them into 16 Java software projects and inspecting their effect on modularity. Structural dependencies (SD) received high correlation values and the authors estimate that the result stems from the fact that low coupling and high cohesion modularization principle~\parencite{stevens1974structured} is widely used in software design. Information hiding~\parencite{parnas1971information} also received correlation through the metrics fan-out similarity and evolutionary coupling. Code ownership resulted in low correlation, thus decreasing the plausibility of Conway's law~\parencite{conway1968committees} in software design. The rest of the modularization metrics showed medium-to-slight correlation values.
 
-~\citet{sarkar2007api} provide several modularity and coupling metrics that specifically inspect the effect of Application Programming Interfaces (APIs) on the quality of the system as a whole. The authors argue that software generally considered as of high quality also exhibit above-average interfaces, which in turn, leads to high cohesion, low coupling and information hiding. The metrics were tested on several highly regarded open-source software projects, such as MySQL, GCC and the Linux Kernel. The metrics were controlled for results by generating module sets that contained randomly assigned functions and files.
+~\citet{sarkar2007api} provide several modularity and coupling metrics that specifically inspect the effect of Application Programming Interfaces (APIs) on the quality of the system as a whole. The authors argue that software generally considered as of high quality also exhibit above-average interfaces, which in turn, leads to high cohesion, low coupling and information hiding. The metrics were tested on several highly regarded open-source software projects, such as MySQL, GCC and the Linux kernel. The metrics were controlled for results by generating module sets that contained randomly assigned functions and files.
 
 Several of the metrics presented by~\citet{sarkar2007api} show degraded values when the human-formed modular structure of the software is disassembled. However, as often is with software metrics, no single value should be used for drawing conclusions about the software. Additionally, the validation of the metrics is still insufficient and further research is warranted.
 %{{{
@@ -1035,7 +1032,7 @@ Several of the metrics presented by~\citet{sarkar2007api} show degraded values w
 
 \section{Fault prediction models}
 
-Fault prediction has been a central research topic in software metrics for detecting problematic software components~\parencite{catal2009systematic,hall2012systematic,radjenovic2013software}. Fault prediction is seen important because non-trivial systems are larger than the finite quality assurance resources allocated for the project. Thus the ability of reliably pinpointing targets for inspection is crucial and can prevent often occurring ``blind spots'' in quality assurance~\parencite{menzies2010defect}. Fault prediction utilizes, in addition to metrics, modeling techniques that are specifically tuned for locating possible faults or problematic modules in the software.~\citet{radjenovic2013software} show that statistical analysis is the most prevalent modeling technique, followed by machine learning techniques and correlation analysis. However, concentrating on the models themselves may degrade the quality of research since they still need to be bundled with high-quality defect predictors (metrics)~\parencite{menzies2010defect}.
+Fault prediction has been a central research topic in software metrics for detecting problematic software components~\parencite{catal2009systematic,hall2012systematic,radjenovic2013software}. Fault prediction is seen important because non-trivial systems are larger in proportion to the finite quality assurance resources allocated for the project. Therefore the ability of reliably pinpointing targets for inspection is crucial and can prevent often occurring ``blind spots'' in quality assurance~\parencite{menzies2010defect}. Fault prediction utilizes, in addition to metrics, modeling techniques that are specifically tuned for locating possible faults or problematic modules in the software.~\citet{radjenovic2013software} show that statistical analysis is the most prevalent modeling technique, followed by machine learning techniques and correlation analysis. However, concentrating on the models themselves may degrade the quality of research since they still need to be bundled with high-quality defect predictors (metrics)~\parencite{menzies2010defect}.
 %{{{
 \begin{comment}
     Recent results show that better data mining technology is not leading to better
@@ -1090,7 +1087,7 @@ None of the metric suites presented in research literature are without their cri
 \end{comment}
 %}}}
 
-Even after decades, no uniform guidelines for measuring software exist~\parencite{kitchenham2010s}. Since metrics are scrutinized closely by the research community, also their theoretical foundation can be often invalidated. For example,~\citet{kitchenham2010s} notes that the metric suite of~\citet{chidamber1994metrics} is long been theoretically invalidated, and as a consequence empirical results of those metrics are also invalid. This results in a large body of studies and results that are potentially invalid in the scientific sense. On the other hand, many researchers acknowledge the situational nature of metrics and seem to concentrate more on real-world scenarios~\parencite{kitchenham2010s}. As is, the best of both worlds (solid ontologies for creating metrics and guidelines for empirical studies) is still yet to emerge.
+Even after decades, no uniform guidelines for measuring software exist~\parencite{kitchenham2010s}. Since metrics are scrutinized closely by the research community, also their theoretical foundation can be often invalidated. For example,~\citet{kitchenham2010s} notes that the metric suite of~\citet{chidamber1994metrics} has long been theoretically invalidated, and as a consequence empirical results of those metrics are also invalid. This results in a large body of studies and results that are potentially invalid in the scientific sense. On the other hand, many researchers acknowledge the situational nature of metrics and seem to concentrate more on real-world scenarios~\parencite{kitchenham2010s}. As is, the best of both worlds (solid ontologies for creating metrics and guidelines for empirical studies) is still yet to emerge.
 %{{{
 \begin{comment}
     It seems that empirical validation papers are of major impor-
@@ -1122,7 +1119,8 @@ The sheer number of metrics formed also contribute to the difficulty of comparin
 
 \section{Summary}
 
-The field of software measurement has existed as a research discipline since the first computer systems have been developed. In this chapter, all of the classic static code quality metrics were presented and the current trends were analyzed. Metrics specific to the object-oriented programming paradigm dominate in popularity, but researchers are also turning to other aids such as mining data out of version control histories~\parencite{menzies2007data}. This proves that the field is still healthy and many research topics are undoubtedly yet to emerge. 
+The field of software measurement has existed as a research discipline since the first computer systems have been developed. In this chapter, many classic static code quality metrics were presented and the current trends were analyzed. Metrics specific to the object-oriented programming paradigm dominate in popularity, but researchers are also turning to other aids such as mining data out of version control histories~\parencite{menzies2007data}. This proves that the field is still healthy and
+new research topics are undoubtedly to be discovered. 
 
 With the increase of programming languages and complex systems, the need for researching software metrics is evident. For example, even in safety-critical systems, the requirements of the software are easily overlooked, since every corner case is hard to be taken into consideration upfront~\parencite{lutz2003operational}. This advocates the use of automated tools to aid in discovering defects in the software. Thus the quantitative nature of software metrics is an important asset when dealing with nontrivial systems, where finite quality assurance resources limit the extent to which modules can be manually tested.
 
