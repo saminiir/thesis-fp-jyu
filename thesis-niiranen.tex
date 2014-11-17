@@ -81,7 +81,7 @@ Software metrics have long been utilized for quantifying the quality of code and
 by choosing popular studies based on their citation count in Google Scholar. The findings of the thesis were that software metrics research is alive, but has gone through many transformations over the decades. Furthermore, software metrics research for the functional paradigm is somewhat scarce, but robust and replicable. The field's research needs further validation with larger systems. Future research is proposed to consist of combining the positives of software metrics, functional programming and the current agile way of software engineering.
 }
 \tiivistelma{
-Ohjelmistometriikoita on pitkään käytetty mittaamaan ohjelmistojen koodin laatua ja ylläpidon ohjaamiseen ongelmallisiin komponentteihin. Funktionaalinen ohjelmointiparadigma tarjoaa lähestymistavan, missä ohjelmakoodi strukturoidaan matemaattisten käsitteiden mukaisesti. Tämä tutkielma kartoitti ohjelmistometrikoiden nykytilan ja tutki kuinka niitä on käytetty funktionaalisessa ohjelmointiparadigmassa. Tutkimusmenetelmänä oli kirjallisuuskatsaus. Lähteet haettiin Google Scholarista avainsanojen perusteella ja valitsemalla tutkimukset niiden suosion (sitaattien määrän) ja julkaisun ajankohdan perusteella. Tutkielman tutkimustulokset osoittivat, että ohjelmistometriikan tutkimus on eloisaa monesta suunnanvaihdoksesta huolimatta. Funktionaalisen ohjelmoinnin metriikkatutkimus on niukkaa, mutta laadultaan hyvää ja toistettavissa olevaa. Alan tutkimus tarvitsee kuitenkin lisävalidaatiota isompien järjestelmien kanssa. Jatkotutkimusaiheena ehdotetaan ohjelmistometriikoiden ja funktionaalisen ohjelmoinnin positiivisten puolten hyödyntämistä ketterässä ohjelmistokehityksessä.  
+Ohjelmistometriikoita on pitkään käytetty mittaamaan ohjelmistojen koodin laatua ja ylläpidon ohjaamiseen ongelmallisiin komponentteihin. Funktionaalinen ohjelmointiparadigma tarjoaa lähestymistavan, missä ohjelmakoodi strukturoidaan matemaattisten käsitteiden mukaisesti. Tässä tutkielmassa kartoitettiin ohjelmistometrikoiden nykytilaa ja tutkittiin kuinka niitä on käytetty funktionaalisessa ohjelmointiparadigmassa. Tutkimusmenetelmänä oli kirjallisuuskatsaus. Lähteet haettiin Google Scholarista avainsanojen perusteella ja valitsemalla tutkimukset niiden suosion (sitaattien määrän) ja julkaisun ajankohdan perusteella. Tutkielman tutkimustulokset osoittivat, että ohjelmistometriikan tutkimus on eloisaa monesta suunnanvaihdoksesta huolimatta. Funktionaalisen ohjelmoinnin metriikkatutkimus on niukkaa, mutta laadultaan hyvää ja toistettavissa olevaa. Alan tutkimus tarvitsee kuitenkin lisävalidaatiota isompien järjestelmien kanssa. Jatkotutkimusaiheena ehdotetaan ohjelmistometriikoiden ja funktionaalisen ohjelmoinnin positiivisten puolten hyödyntämistä ketterässä ohjelmistokehityksessä.  
 }
 
 \avainsanat{ohjelmistosuunnittelu, ohjelmistometriikat, funktionaalinen ohjelmointi, Haskell} 
@@ -104,7 +104,7 @@ A function whose inputs are software data and whose output is a single numerical
 ~\end{quoting}
 
 This thesis concentrates on examining the code-specific attributes of software, rather than external attributes affecting software quality such as management decisions. A classical example of a software metric is the lines of code (LOC) metric, where the input (according to IEEE standard 1061 for software quality metrics) is the source code of the program, and the output is the number of source code lines. Then interpretations on the software's quality can be proposed. For example, a program
-module with a high LOC count can be argued to be more complex than a module with fewer lines.~\citet{fenton1998software} regard such measures as ``structural and complexity metrics''. Other classic examples of software metrics are cyclomatic complexity~\parencite{mccabe1976complexity} and Halstead's metric suite~\parencite{halstead1977elements}. This thesis uses the shortened terms,~\textit{software metrics} and~\textit{software measurement}, to describe software quality metrics as defined by the IEEE standard 1061.
+module with a high LOC count can be argued to be more complex than a module with fewer lines.~\citet{fenton1998software} regard such measures as structural and complexity metrics. Other classic examples of software metrics are cyclomatic complexity~\parencite{mccabe1976complexity} and Halstead's metric suite~\parencite{halstead1977elements}. This thesis uses the shortened terms,~\textit{software metrics} and~\textit{software measurement}, to describe software quality metrics as defined by the IEEE standard 1061.
 %{{{
 \begin{comment}
 Structural and complexity metrics~\parencite{fenton1998software} p 18.
@@ -601,7 +601,8 @@ One measure of system complexity that has been sug- gested is graph impurity: th
     \label{fig:graph-impurity-example}
 \end{figure}
 
-~\citet{ince1988approach} argue, that graph impurity should not be achieved at the cost of generally accepted design patterns. For example, a module that is often referenced by other modules would be considered as contributing to graph impurity, but the structure of the program can actually be well-designed because of module reuse. As is, graph impurity should not be interpreted fully objectively, but rather ``where choice exists a design should be produced which minimises graph impurity''~\parencite{ince1988approach}.
+~\citet{ince1988approach} argue, that graph impurity should not be achieved at the cost of generally accepted design patterns. For example, a module that is often referenced by other modules would be considered as contributing to graph impurity, but the structure of the program can actually be well-designed because of module reuse. As is, graph impurity should not be interpreted fully objectively, but rather ``where choice exists a design should be produced which minimises graph
+impurity''~\parencite[54.]{ince1988approach}.
 %{{{
 \begin{comment}
 This does not mean that a designer should aim at producing a pure tree-structured design. The very nature of the subroutine, an object called from many places in a program which saves space, means that the designer will make use of common calls. What it does mean is that where choice exists a design should be produced which minimises graph impurity.~\parencite{ince1988approach}.
@@ -704,7 +705,8 @@ It is also worth noting that in practice it may be difficult to exactly classify
     \label{fig:coupling-model-graph-example}
 \end{figure}
 
-For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.  \noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''.
+For visualizing the coupling of a system, a~\textit{coupling model graph} can be utilized~\parencite{fenton1998software}.  \noindent In the coupling model graph, nodes correspond to modules and the directed edges (arcs) are dependencies between the modules. A value $(i,j)$ defines the level of coupling ($i = R_i$) and the count of how many times a given coupling occurs ($j$) between two modules.~\parenciteseveral{fenton1998software}. Additionally, ~\citet{ryder2004software} argues that ``the
+visualisation of the module coupling may be of as much, or even more, use than any measures on coupling because it can allow developers to gain a high level overview of the interactions in the software system very quickly''~\parencite[26.]{ryder2004software}.
 %{{{
 \begin{comment}
 To model module coupling, we use a directed graph with more detail than a call graph but less than the full module structure chart. The nodes correspond to the modules, and there may be more than one arc between two nodes. Each arc from a node x to node y represents coupling between modules x and y.~\parencite{fenton1998software}
@@ -956,7 +958,7 @@ classes.~\parenciteseveral{chidamber1994metrics}.
 \end{comment}
 %}}}
 
-The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of cohesion in an object class. Namely, it calculates the amount of method pairs in a class that have no relation to each other. For example, if two methods do not share the use of an instance attribute of the object, their LCOM measure is zero. In essence, the LCOM metric ``provides a measure of the relative disparate nature of methods in the class''~\parencite{chidamber1994metrics}.
+The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of cohesion in an object class. Namely, it calculates the amount of method pairs in a class that have no relation to each other. For example, if two methods do not share the use of an instance attribute of the object, their LCOM measure is zero. In essence, the LCOM metric ``provides a measure of the relative disparate nature of methods in the class''~\parencite[489.]{chidamber1994metrics}.
 %{{{
 \begin{comment}
     The LCOM is a count of the number of method pairs whose 
@@ -1004,7 +1006,7 @@ Furthermore,~\parencite{parnas1971information} introduced the notion of ``inform
 \end{comment}
 %}}}
 
-An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
+An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite[31.]{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
 
 ~\citet{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by another class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
 
@@ -1285,11 +1287,11 @@ Without variables, the execution of a purely functional program has no state in 
 \end{comment}
 %}}}
 
-A particular inspiration for functional languages is the~\textit{lamdba calculus}~\parencite{church1932set} where computation consists solely of function definition and application. The structure of the lambda calculus consists of three~\textit{lambda-terms}: variable {\tt x}, abstraction {\tt $\lambda x.t$} and application {\tt t t}. The basis of the calculus is simple and may be the reason for its ongoing popularity since the 1960s.~\parenciteseveral{pierce2002types}.
+A particular inspiration for functional languages is the~\textit{lamdba calculus}~\parencite{church1932set}, where computation consists solely of function definition and application. The structure of the lambda calculus consists of three~\textit{lambda-terms}: variable {\tt x}, abstraction {\tt $\lambda x.t$} and application {\tt t t}. The basis of the calculus is simple and may be the reason for its popularity since the 1960s.~\parenciteseveral{pierce2002types}.
 
 The application of lambda calculus is done by applying functions to arguments that are also functions. In specific, a~\textit{redex} (reducible expression) might be of the form {\tt ($\lambda x. x$) y}, which would after reduction be evaluated into {\tt y}. In essence, each computation consists of rewriting the left-hand side lambda-abstraction (e.g. {\tt ($\lambda x. x$))} with the right-hand side variable ({\tt y}) to the abstraction's bound variable of {\tt x}.~\parenciteseveral{pierce2002types}. 
 
-The functions in lamdba calculus have one key abstraction: They can be applied to themselves. Because of this self-applicability and anonymity of functions, also the facilities for recursion are enhanced. In specific, recursion can be executed in a more direct manner ``without explicitly writing a recursive definition''~\parencite{hudak1989conception}. For an example of lamdba calculus, the following expression results in 8 as the value of the computation:
+The functions in lamdba calculus have one key abstraction: They can be applied to themselves. Because of this self-applicability and anonymity of functions, also the facilities for recursion are enhanced. In specific, recursion can be executed in a more direct manner ``without explicitly writing a recursive definition''~\parencite[363.]{hudak1989conception}. For an example of lamdba calculus, the following expression results in 8 as the value of the computation:
 
 \begin{lstlisting}[mathescape]
 $(\lambda (x)x * x * x)(2)$
@@ -1372,9 +1374,9 @@ A statically checked language has the benefit of being able to detect errors in 
 
 Most typed programming languages implement type checking by requiring explicit type annotations for functions and local variables. Subexpressions in the function do not require explicit type information, since the compiler can deduce it from the environment of the function.~\parenciteseveral{cardelli1985understanding}. Functional languages, however, have taken this type deduction even further.~\textit{Type inference} is utilized to provide accurate type information of expressions without requiring explicit annotations. This frees developers from having to repeat type declarations, but still enables the type system to support abstract language mechanisms such as polymorphism~\parencite{hudak1989conception}.
 
-A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM can be implemented using Algorithm W~\textit{W}~\parencite{damas1982principal} to effectively deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
+A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM can be implemented using Algorithm~\textit{W}~\parencite{damas1982principal} to effectively deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
 
-Haskell is considered as a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consent exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
+Haskell is considered to be a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consent exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
 
 \section{Strict and non-strict semantics}
 
@@ -1494,7 +1496,8 @@ Programming languages can be defined as having either~\textit{monomorphic} types
 Polymorphism is further divided into more detailed concepts.~\textit{Parametric} polymorphism enables functions to operate on a uniform set of unconstrained types that share a common structure~\parencite{cardelli1985understanding}. For example, the idiomatic function {\tt id :: a -> a} generally accepts any kind of type as its argument and as a result, returns a value of the same unknown type.~\textit{Ad-hoc} polymorphism, on the other hand, enables
 functions to operate on seemingly unrelated types with an implementation that is specific to the type~\parencite{cardelli1985understanding}. The addition operator {\tt +} implements ad-hoc polymorphism in many languages, since it operates differently based on its input types. For example, adding two strings together might result in a concatenated string, where as adding two decimal numbers might utilize a floating point operation to calculate the result. In fact, the types have~\textit{overloaded} the implementation of the addition operator. 
 
-The data abstraction mechanisms of modern functional languages are elaborate. The flexibility of functional programs is increased by~\textit{algebraic data types}, which enable a computation to depend on type alternatives. This means that the data types of functional languages are often~\textit{polymorphic}, i.e.\ they can represent multiple types. An algebraic type can be generalized as ``a sum of one or more alternatives, where each alternative is a product of zero or more fields.''~\parenciteseveral{hudak2007history}. An example of algebraic types is to represent the types of a binary search tree:
+The data abstraction mechanisms of modern functional languages are elaborate. The flexibility of functional programs is increased by~\textit{algebraic data types}, which enable a computation to depend on type alternatives. This means that the data types of functional languages are often~\textit{polymorphic}, i.e.\ they can represent multiple types. An algebraic type can be generalized as ``a sum of one or more alternatives, where each alternative is a product of zero or more
+fields''~\parencite[15.]{hudak2007history}. An example of algebraic types is to represent the types of a binary search tree:
 %{{{
 \begin{comment}
 In general, an algebraic type specifies a sum of one or more alter- natives, where each alternative is a product of zero or more fields. It might have been useful to permit a sum of zero alternatives, which would be a completely empty type, but at the time the value of such a type was not appreciated.~\parencite{hudak2007history}
@@ -1595,7 +1598,7 @@ Applicative functors as an explicit abstraction are relatively new in functional
 fmap (*) (Branch (Leaf 2) (Leaf 3)))
 \end{lstlisting}
 
-Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value ({\tt Leaf} in this case). As a result this recurring pattern of ``picking'' the function value out of the functor was abstracted as applicative functors~\parencite{mcbride2008functional}. The {\tt Tree} data type can be translated to a instance of {\tt Applicative}:
+Now the leaves contain multiplicating functions of 2 and 3 respectively. However, a plain functor can not extract a function out of a functor value ({\tt Leaf} in this case). As a result this recurring pattern of ``picking'' the function value out of the functor was abstracted as applicative functors~\parencite{mcbride2008functional}. The {\tt Tree} data type can be translated to an instance of {\tt Applicative}:
 \begin{lstlisting}[breakatwhitespace=false, breaklines=true]
 instance Applicative Tree where
   pure = Leaf
@@ -1611,7 +1614,7 @@ instance Applicative Tree where
 -- Outputs Branch (Leaf 4) (Leaf 6) 
 \end{lstlisting}
 
-In essence, {\tt <*>} is just function application with a context~\parencite{typeclassopedia2014haskellwiki}. The {\tt pure} function ``embeds pure computations into the pure fragment of an effectful world''~\parencite{mcbride2008functional}. In other words, a pure value is lifted into the computational context of the {\tt Applicative} instance. Applicative functors must also satisfy certain laws: 
+In essence, {\tt <*>} is just function application with a context~\parencite{typeclassopedia2014haskellwiki}. The {\tt pure} function ``embeds pure computations into the pure fragment of an effectful world''~\parencite[4.]{mcbride2008functional}. In other words, a pure value is lifted into the computational context of the {\tt Applicative} instance. Applicative functors must also satisfy certain laws: 
 %{{{
 \begin{comment}
 The idea is that pure embeds pure computations into the pure fragment of an effectful world¿the resulting computations may thus be shunted around freely, as long as the order of the genuinely effectful computations is preserved.~\parencite{mcbride2008functional}.
@@ -1631,7 +1634,7 @@ The idea is that pure embeds pure computations into the pure fragment of an effe
 
 The identity law has the same principle as the one with functors. Homomorphism declares that applying a non-effectful function to a non-effectful value is the same as applying the function to a value and ``lifting'' the result in to the applicative context. Moreover, interchange shows that the order of applying an effectful function to a pure value is interchangeable. Composition deals with the associativity of the applicative property~\parencite{typeclassopedia2014haskellwiki}.
 
-One real-world use case for applicative functors have been found in parsing applications. Parsers are a traditional software engineering problem that functional languages solve well by using combinatory parsing~\parencite{swierstra2009combinator}. In contrast to using monadic parsers~\parencite{hutton1996monadic}, applicative functors are effective at parsing context-free grammars, mainly because ``the structure of these parsers is independent of the results of parsing'', leading to lazy computation and thus to efficiency~\parencite{baars2004functional}. 
+One real-world use case for applicative functors have been found in parsing applications. Parsers are a traditional software engineering problem that functional languages solve well by using combinatory parsing~\parencite{swierstra2009combinator}. In contrast to using monadic parsers~\parencite{hutton1996monadic}, applicative functors are effective at parsing context-free grammars, mainly because the structure of these parsers is independent of the results of parsing, leading to lazy computation and thus to efficiency~\parencite{baars2004functional}. 
 
 An often used notation technique for context-free grammars is the Backus-Naur Form (BNF). An example BNF would be 
 \begin{flalign*}
@@ -1699,9 +1702,9 @@ This chapter served a basis for functional programming and further established m
 \chapter{Metrics for functional programming}
 \label{chap:metrics_for_functional_programming}
 
-As previously presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
+As presented in chapter~\ref{chap:software_metrics}, software metrics are an essential approach to quantifying attributes about the quality of software. Even though it is a profoundly different paradigm compared to object-oriented and imperative approaches, also functional programming can benefit from software metrics.
 
-Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are mostly laid by~\citet{van1995software} and~\citet{ryder2004software}, whose metrics are primarily discussed in this section. The initial work of~\citet{van1995software} was born because of the need to effectively measure the readability of code programmed by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
+Prior research on metrics exclusively applicable to functional programming is scarce. Foundings of such research are mostly laid by~\citet{van1995software} and~\citet{ryder2004software}, whose metrics are primarily discussed in this section. The initial work of~\citet{van1995software} was born because of the need to effectively measure the readability of code produced by students taking part in functional programming courses. Somewhat fortunately, many of the existing metrics, such as
 lines of code and Halstead's program volume, are also applicable to functional programs with slight modifications~\parencite{van1995software}. Other such metrics are the measures of testing effort (pathcount, cyclomatic complexity), call graph measures (size, depth, arc-to-node ratio) and coupling measures~\parencite{ryder2004software}.
 %{{{
 \begin{comment}
@@ -1735,7 +1738,7 @@ lines of code and Halstead's program volume, are also applicable to functional p
 
 ~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of call graphs. 
 
-The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.
+The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''~\parencite[103.]{ryder2004software}. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.
 
 \section{Complexity of patterns}
 
@@ -1964,7 +1967,7 @@ A useful property of call graphs is that~\textit{subgraphs} of specific function
 
 The subgraph accurately depicts the dependencies of a given function (figure~\ref{fig:subgraph-example}).~\citet{ryder2004software} argues that if the subgraph ``grows'' too deep or too wide, the more problematic the function is to maintain and comprehend.~\citet{ryder2004software} found correlation for the hypothesis in his larger case-study application, where the function call-graphs are more complex.
 
-The interaction of the call graph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity~\parenciteseveral{ryder2004software}.
+The interaction of the call graph measures are limited to the width and depth metrics. These two metrics are likely to grow uniformly as the complexity of a function increases. Likewise, the outdegree metric was found to have high correlation values towards complexity. If a program utilizes non-trivial recursion to an extent, the strongly connected component size metric is indicative of the actual complexity.~\parenciteseveral{ryder2004software}.
 
 \section{Miscellaneous attributes of functions}
 
@@ -2148,8 +2151,6 @@ constructs in a reasonable way (such as the number of
 pattern variables). Reproducibility also seems to be taken into account, since the research methods are clearly explained and should pose no restrictions for replicating these studies.
 
 The results are that even if functional programming is touted as being superior in readability and expressiveness than imperative programs, the functional paradigm can be enhanced by utilizing software metrics. The fact is that the functional programming paradigm lacks widespread use, at least compared to the imperative and object-oriented approaches. This alone limits the comparability of the functional paradigm and its metrics against other approaches.
-
-The research method chosen for the purposes of the thesis is arguably well-suited for scanning and aggregating results from a large body of research. The literature review approach lends itself sufficiently to the field of software measurement, where periodic reviews of past work are frequent and new areas of interest are generated. 
 
 The significance of the results are moderate. The functional paradigm is gaining traction also in practical settings, and the crossing of software metrics into that area is intriguing. At the very least, this thesis adds mass to the body of studies, which in its current state leaves much to hope for. The impact of the thesis' results on future research is harder to predict. As software metrics research seems to be revitalizing, also the need for review and mapping
 studies is increased.
