@@ -119,8 +119,7 @@ As the popularity of functional programming is increasing with languages such as
 Previous research in software metrics is numerous, starting from the classic works of~\citet{mccabe1976complexity,halstead1977elements}. In the 90s, metrics research achieved its height due to the popularity of the object-oriented paradigm~\parencite{lorenz1994object,briand1996property,hitz1996chidamber,fenton1998software}, but has continued to be researched in a steady fashion ever since~\parencite{olague2007empirical,gui2008new,ordonez2008state}. Several
 reviews and mapping studies have also been conducted~\parencite{kitchenham2010s,tahir2012systematic} that accurately compose the positive and the negative sides of past software metrics research.
 
-Functional programming, albeit sufficiently researched, is mostly an interest in academia. Nevertheless, the research of the paradigm is active, starting from LISP~\parencite{backus1978can} to the current research of Haskell being the most vigorously researched functional programming language~\parencite{wadler1995monads,hudak2007history}. At the industry side, Erlang~\parencite{armstrong1993concurrent} is an example of a heavily-used functional programming language. It is
-especially favoured in telecommunication systems due to its facilities for concurrency and messaging.
+Functional programming, albeit sufficiently researched, is mostly an interest in academia. Nevertheless, the research of the paradigm is active, starting from LISP~\parencite{backus1978can} to the current research of Haskell being the most vigorously researched functional programming language~\parencite{wadler1995monads,hudak2007history}. At the industry side, Erlang~\parencite{armstrong1993concurrent} is an example of a heavily-used functional programming language. It is especially favoured in telecommunication systems due to its facilities for concurrency and messaging.
 
 Previous research combining software metrics and functional programming is much lower in quantity when comparing to the imperative and object-oriented paradigms. The basis for the research is done by~\citet{van1995software}, who assessed the complexity of code produced by students participating in functional programming courses.~\citet{ryder2004software} presents more metrics by conducting in-depth research and also proposes a software tool for calculating the result of several metrics in functional programs. In the recent years, research is concentrating on programming languages with facilities for functional programming and the measurement of module complexity in open-source software~\parencite{muddu2013metrics}.
 
@@ -139,12 +138,14 @@ The research can be decomposed into four questions:
 
 \noindent The research problem can be expressed as follows:~\textit{What kind of software metrics exists for the functional programming paradigm, and how do the metrics apply to them?}
 
-The thesis utilizes literature review as its research method. The studies and metrics presented are chosen by their apparent influence in the field, mainly measured by their citation count in Google Scholar~\parencite{kousha2007google}. Moreover, iterating sources, or~\textit{snowballing} as it is called in research, is used to build an intact and chronologically sound research body for the thesis. The research methodology is explained in-depth in the last chapter (Summary).
+The thesis utilizes literature review as its research method. The literature for this thesis was searched with Google Scholar (see~\citet{kousha2007google}) and was chosen based on (1) the influence on other research (citation count) and by (2) pruning (``snowballing'') these citation lists for studies relevant to the topic. Sources were searched with the keywords ``software metrics'', ``functional programming'' and the previous joined together. The process of gathering the references had no fixed timespan, but rather was active for almost the life time of the thesis writing process from early 2014 to late 2014.
+
+The selection of the references was also influenced by the age of the research. New research, such as~\citet{beck2011congruence,muddu2013metrics}, was deemed to be interesting from the standpoint of literature review. On the other hand, plenty popular, albeit old, research exists~\parencite{mccabe1976complexity,backus1978can,halstead1977elements} and were included in the thesis for wholeness and their field-defining content. Nevertheless, the thesis aims to provide an extensive investigation of the field of software metrics spanning many decades.
 
 The scientific contribution of the thesis is to explain various semantics of functional programming and review the current status of software metrics and especially research that utilizes functional programming. The research is expected to be of significance to researchers and practitioners alike, mainly by formulating software metrics and functional programming research into a comprehensive overview. Future research will be fueled by providing more support to the functional
 paradigm and by encouraging improving the maintainability of systems through measurement.
 
-As previously stated, this thesis treats software measurement as defined in the IEEE standard 1061 for software quality metrics. Moreover, algorithmic efficiency can be thought of as a ``internal attribute'' of code, but such performance-related measurement is out of the scope of the thesis. Code complexity is the measurement attribute this thesis is mainly covering. The thesis also recognizes the inherent subjectivity of a qualitative attribute such as code complexity. This is,
+As previously stated, this thesis adopts software measurement as defined in the IEEE standard 1061 for software quality metrics. Moreover, algorithmic efficiency can be thought of as a ``internal attribute'' of code, but such performance-related measurement is out of the scope of the thesis. Code complexity is the measurement attribute this thesis is mainly covering. The thesis also recognizes the inherent subjectivity of a qualitative attribute such as code complexity. This is,
 of course, the ultimate reason quantitative approaches, such as software metrics, are devised.
 
 The thesis consists of the following content: Chapter~\ref{chap:software_metrics} presents an overview on software metrics and chapter~\ref{chap:functional_programming} introduces functional programming. Chapter~\ref{chap:metrics_for_functional_programming} combines the two subjects, presenting software metrics research specific to the functional paradigm. Finally, chapter~\ref{chap:summary} concludes the literature review, presenting the findings and discussing future research possibilities.
@@ -219,7 +220,7 @@ key in both cases has been the assumption that product 'size' measures should dr
 
 First attempts at recording software metrics were conducted in the 1960s when properties such as program size were measured. The results were then used to assess programmer productivity and the quality of their work. In the 1970s the limitations of simple measures like lines of code were noted and research departed to produce more elegant measures. These new measures, such as the ones from~\citet{halstead1977elements} and~\citet{mccabe1976complexity} were aimed to provide complexity measures independent of the accompanying programming languages. Ever since, research has produced numerous new metrics and validation frameworks, each with their own advantages and disadvantages.~\parenciteseveral{fenton1999software}.
 
-The definition for software quality metrics is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
+The definition for a software quality metric is given in IEEE standard 1061~\parencite{ieeesoftwaremetrics1998} as: 
 ~\begin{quoting}
 A function whose inputs are software data and whose output is a single numerical value that can be interpreted as the degree to which software possesses a given attribute that affects its quality.
 ~\end{quoting}
@@ -253,7 +254,7 @@ the measurement theory literature.~\parencite{chidamber1994metrics}.
 
 \section{Size metrics}
 
-Perhaps the first approach to measuring the internal attributes of software is the ~\textit{size} metric. It is relatively easy to be quantified, since only source code is required for the analysis and the measurement is often made statically, meaning that the program code is not executed.~\citet{fenton1998software} divide the size metric into the following subcategories: 
+Perhaps the first approach to measuring the internal attributes of software is the ~\textit{size} metric. It is relatively easy to quantify, since only source code is required for the analysis and the measurement is often made statically, meaning that the program code is not executed.~\citet{fenton1998software} divide the size metric into the following subcategories: 
 
 \begin{itemize}
     \item~\textit{Length} (actual size of the source code)
@@ -262,7 +263,7 @@ Perhaps the first approach to measuring the internal attributes of software is t
     \item~\textit{Reuse} (how much of the code is original and what is reused)
 \end{itemize}
 
-\noindent Essentially the simplest size metrics are relatively easy to be formed, but also provide only a one-dimensional view into the quality of the software. Thus some of the metrics are most often utilized as an aid for interpreting internal attributes, but not too much information should be expected of their results.~\parenciteseveral{fenton1998software}.
+\noindent Essentially the simplest size metrics are relatively easy to form, but also provide only a one-dimensional view into the quality of the software. Thus some of the metrics are most often utilized as an aid for interpreting internal attributes, but not too much information should be expected of their results.~\parenciteseveral{fenton1998software}.
 %{{{
 \begin{comment}
 Rejecting simple size measures on these grounds reflects a misunderstanding of the basic measurement principles.~\parencite{fenton1998software}
@@ -421,7 +422,7 @@ For example, the following pseudo-code {\tt if A then X else Y} can be expressed
 \end{comment}
 %}}}
 
-\noindent As can be seen from figure~\ref{fig:flow graph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called ~\textit{in-degrees} of the node, while the node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
+\noindent As can be seen from figure~\ref{fig:flow graph-example}, directed graphs consist of a set of nodes that are connected with arcs. Furthermore, the arrowhead indicates the direction of the execution, flowing from one node to another.~\parenciteseveral{allen1970control}. Logical paths arriving at a node are called~\textit{in-degrees} of the node, while the node's~\textit{outdegrees} indicate the arcs ``leaving'' the node~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Thus, directed graphs are depicted with a set of nodes, and each arc connects a pair of nodes. We write an arc as an ordered pair, <x,y>, where x and y are the nodes forming the endpoints of the arc, and the arrow indicates that the arc direction is from x to y. The arrowhead indicates that something flows from one node to another node.~\parencite{fenton1998software}.
@@ -444,7 +445,7 @@ The~\textit{Cyclomatic complexity} metric~\parencite{mccabe1976complexity} utili
 v(F) = e - n + 2
 \end{flalign*}
 
-\noindent where the flow graph $F$ has $e$ amount of arcs and $n$ amount of nodes. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit to
+\noindent where $e$ is the number of arcs and $n$ amount of nodes in the flow graph $F$. The cyclomatic number points out the number of independent execution paths through $F$ and is seen to indicate the complexity of the program's structure. More specifically, comprehending the source code in general increases in difficulty when the cyclomatic number is higher~\parencite{ryder2004software}. Indeed,~\citet{mccabe1976complexity} originally advocated the number 10 as the cyclomatic complexity limit to
 initiate refactoring of the module.
 %{{{
 \begin{comment}
@@ -473,7 +474,7 @@ In particular, the structure of a module is related to the difficulty we find in
 \end{comment}
 %}}}
 
-The~\textit{minimum number of test cases} metric aims to quantify the lowest possible amount of test cases to satisfy a certain testing strategy. This approach also provides useful information about how time consuming the testing will be and further aid in planning the testing strategy. The flow graphs of program execution are used for deriving several properties of the program, such as the amount of simple paths, branches and statements, to be used in quantifying the possible minimum number of test cases.~\parenciteseveral{fenton1998software}.  
+The~\textit{minimum number of test cases} metric aims to quantify the lowest possible amount of test cases to satisfy a certain testing strategy. This approach also provides useful information about how time consuming the testing will be and further aid in planning the testing strategy. The flow graphs of program execution are used for deriving several properties of the program, such as the number of simple paths, branches and statements, to be used in quantifying the possible minimum number of test cases.~\parenciteseveral{fenton1998software}.  
 
 ~\textit{Test effectiveness ratio}, or test coverage, is a common metric to indicate to which extent the actual execution logic is covered by the testing strategy used~\parencite{fenton1998software}. Test effectiveness ratio can be calculated as
 %{{{
@@ -547,7 +548,7 @@ For example, instead of examining variables, we may need to know only whether or
 
 Several properties for assessing software design quality from call graphs have been formed~\parencite{yourdon1979structured}. The most obvious one is~\textit{size}, where the number of nodes and edges are counted from the call graph. A large call graph should then indicate increased complexity in the structure of the program~\parencite{ryder2004software}.~\textit{Depth}, on the other hand, is the longest path from the root node to a leaf node. In figure~\ref{fig:call-graph-example}, depth would be measured as the distance from {\tt Main} to either {\tt Calc\_Av} or {\tt Print\_Av}.
 
-~\textit{Width} measures the maximum number of nodes at any one level. In figure~\ref{fig:call-graph-example}, the horizontal layer containing the most nodes are considered as the call graph's width, e.g. {\tt Read\_Scores + Average = 2}.~\textit{Arc-to-node ratio} indicates the amount of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the more the arc-to-node ratio increases~\parencite{ryder2004software}. Several other more specific attributes of call graphs have been derived. The advantage of such graph measures are that they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
+~\textit{Width} measures the maximum number of nodes at any one level. In figure~\ref{fig:call-graph-example}, the horizontal layer containing the most nodes are considered as the call graph's width, e.g. {\tt Read\_Scores + Average = 2}.~\textit{Arc-to-node ratio} indicates the number of ``connections'' between nodes. In other words, the more function calls are in- or outbound to a node, the more the arc-to-node ratio increases~\parencite{ryder2004software}. Several other more specific attributes of call graphs have been derived. The advantage of such graph measures are that they are, in fact, often applicable to most graph-type models~\parencite{fenton1998software}.
 %{{{
 \begin{comment}
 Yourdon and Constantine have analyzed what contributes to good design, and they suggest several ways to view design components and structure. They use the notion of morphology to refer to the ``shape'' of the overall system structure when expressed pictorially.~\parencite{fenton1998software}.
@@ -757,8 +758,8 @@ We say a local direct flow exists if either 1. a module invokes a second module 
 \end{comment}
 %}}}
 
-The information flow is relatively easy to be determined, as it can be done by simply analyzing the procedures and calls of the system's module~\parencite{henry1981software}. The~\textit{Henry-Kafura} measure~\parencite{henry1981software} formulates additional variables that aid in assessing the complexity of a module: The~\textit{fan-in} is the number of~\textit{local flows} into the module plus the number of data structures the module utilizes for information retrieval. On the other
-hand,~\textit{fan-out} is the amount of local flows out from a module plus the number of data structures the module updates. ~\parenciteseveral{henry1981software}.
+The information flow is relatively easy to determine, as it can be done by simply analyzing the procedures and calls of the system's modules~\parencite{henry1981software}. The~\textit{Henry-Kafura} measure~\parencite{henry1981software} formulates additional variables that aid in assessing the complexity of a module: The~\textit{fan-in} is the number of~\textit{local flows} into the module plus the number of data structures the module utilizes for information retrieval. On the other
+hand,~\textit{fan-out} is the number of local flows out from a module plus the number of data structures the module updates. ~\parenciteseveral{henry1981software}.
 %{{{
 \begin{comment}
 An important property of the information flows defined above is that the knowledge necessary toconstructthecom- pleteflowsstructurecanbeobtainedfromasimpleprocedure- by-procedureanalysis.~\parencite{henry1981software}.
@@ -816,13 +817,13 @@ However, CK metrics suite is much more popular than other suites and they are mo
 
 \subsection{Weighted methods per class}
 
-~\citet{chidamber1994metrics} argue that the the number of methods and their complexity in a class is a predictor of the effort required to develop and maintain it. Furthermore, the more methods in a class, the greater the effect on subclasses. Thus the first metric proposed by~\citet{chidamber1994metrics} is the~\textit{weighted methods per class} (WMC) metric. WMC is defined as
+~\citet{chidamber1994metrics} argue that the number of methods and their complexity in a class is a predictor of the effort required to develop and maintain it. Furthermore, the more methods in a class, the greater the effect on subclasses. Thus the first metric proposed by~\citet{chidamber1994metrics} is the~\textit{weighted methods per class} (WMC) metric. WMC is defined as
 
 \begin{flalign*}
 WMC = \sum_{i=1}^{n} c_i
 \end{flalign*}
 
-\noindent where $n$ is the amount of methods in a given class and $c_i$ is the ``complexity'' of the method. The complexity metric is deliberately left undefined, as it can be interpreted in multiple ways and thus interchangeable in the metric. In other words,~\citet{chidamber1994metrics} leave the actual complexity measure as an implementation decision.
+\noindent where $n$ is the number of methods in a given class and $c_i$ is the ``complexity'' of the method. The complexity metric is deliberately left undefined, as it can be interpreted in multiple ways and thus interchangeable in the metric. In other words,~\citet{chidamber1994metrics} leave the actual complexity measure as an implementation decision.
 
 \subsection{Depth of inheritance}
 
@@ -852,7 +853,7 @@ advantage is the reusability of methods, since general functionality can simply 
 
 \subsection{Number of children}
 
-The~\textit{number of children} metric is likewise easy to be measured. It is simply the amount of immediate subclasses (children) of a class. The number of children metric is based on the notions that the greater the amount of subclasses, also the greater the reusage of the parent class's methods is. With increased subclass count, however, also the likelyhood of misuse of inheritance by improper abstractions is increased. Lastly, the number of subclasses predict the impact of the parent
+The~\textit{number of children} metric is likewise easy to measure. It is simply the number of immediate subclasses (children) of a class. The number of children metric is based on the notions that the greater the number of subclasses, also the greater the reusage of the parent class's methods is. With increased subclass count, however, also the likelyhood of misuse of inheritance by improper abstractions is increased. Lastly, the number of subclasses predict the impact of the parent
 class on the design. For example, a high subclass count may mandate more testing of that class.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
@@ -877,7 +878,7 @@ methods in that class. ~\parencite{chidamber1994metrics}
 
 \subsection{Coupling between object classes}
 
-The metric~\textit{coupling between object classes} (CBO) is measured by the amount of objects an object is coupled to.~\citet{chidamber1994metrics} define coupling as ``an object is coupled to another object if one of them acts on the other, i.e., methods of one use methods or instance variables of another''.  
+The metric~\textit{coupling between object classes} (CBO) is measured by the number of objects an object is coupled to.~\citet{chidamber1994metrics} define coupling as ``an object is coupled to another object if one of them acts on the other, i.e., methods of one use methods or instance variables of another''.  
 %{{{
 \begin{comment}
     Definition: CBO for a class is a count of the number of other 
@@ -892,7 +893,7 @@ The metric~\textit{coupling between object classes} (CBO) is measured by the amo
 \end{comment}
 %}}}
 
-CBO is argued to predict the quality of the program's design. Tight coupling between objects hinders modularity and reuse of the components and subsequently increases the CBO count. In other words, coupling and the CBO count is encouraged to be kept at a minimum. Additionally, the CBO measure can be a indicator of the effort needed to test the program's code. A high CBO count is probable to warrant more testing.~\parenciteseveral{chidamber1994metrics}.
+CBO is argued to predict the quality of the program's design. Tight coupling between objects hinders modularity and reuse of the components and subsequently increases the CBO count. In other words, coupling and the CBO count is encouraged to be kept at a minimum. Additionally, the CBO measure can be an indicator of the effort needed to test the program's code. A high CBO count is probable to warrant more testing.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
     Viewpoints: 
@@ -914,7 +915,7 @@ CBO is argued to predict the quality of the program's design. Tight coupling bet
 
 \subsection{Response for class}
 
-The~\textit{Response for class} (RFC) metric deals with the amount of methods that are called when the object receives a message. If a high amount of method calls can potentially be executed when the object receives a message, also the testing and debugging of the object's class becomes more difficult. Additionally, when the RFC number is high, also the complexity of that class increases. With the help of the RFC metric, developers can draw conclusions on, for example, the effort needed to test the
+The~\textit{Response for class} (RFC) metric deals with the number of methods that are called when the object receives a message. If a high amount of method calls can potentially be executed when the object receives a message, also the testing and debugging of the object's class becomes more difficult. Additionally, when the RFC number is high, also the complexity of that class increases. With the help of the RFC metric, developers can draw conclusions on, for example, the effort needed to test the
 class.~\parenciteseveral{chidamber1994metrics}.
 %{{{
 \begin{comment}
@@ -958,7 +959,7 @@ classes.~\parenciteseveral{chidamber1994metrics}.
 \end{comment}
 %}}}
 
-The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of cohesion in an object class. Namely, it calculates the amount of method pairs in a class that have no relation to each other. For example, if two methods do not share the use of an instance attribute of the object, their LCOM measure is zero. In essence, the LCOM metric ``provides a measure of the relative disparate nature of methods in the class''~\parencite[489.]{chidamber1994metrics}.
+The~\textit{lack of cohesion in methods} (LCOM) metric measures the level of cohesion in an object class. Namely, it calculates the number of method pairs in a class that have no relation to each other. For example, if two methods do not share the use of an instance attribute of the object, their LCOM measure is zero. In essence, the LCOM metric ``provides a measure of the relative disparate nature of methods in the class''~\parencite[489.]{chidamber1994metrics}.
 %{{{
 \begin{comment}
     The LCOM is a count of the number of method pairs whose 
@@ -1006,13 +1007,13 @@ Furthermore,~\parencite{parnas1971information} introduced the notion of ``inform
 \end{comment}
 %}}}
 
-An often cited principle of system design is~\textit{Conway's law}, which holds that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite[31.]{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
+An often cited principle of system design is~\textit{Conway's law}, which includes the observation that ``organizations which design systems (used in the broad sense here) are constrained to produce designs which are copies of the communication structures of these organizations''~\parencite[31.]{conway1968committees}. Although not a direct principle of software engineering, the notion of Conway's law has implications for the modularization degree and quality in software.
 
 ~\citet{beck2011congruence} provide several metrics for assessing the level of coupling and quality of a software's modularity. The metric~\textit{structural dependencies} is formed in three ways: two classes are coupled if they are (1) related by inheritance, (2) related by aggregate class variables used by another class, (3) related by direct usage, e.g. as a local variable or as a function parameter.
 
 ~\textit{Fan-Out Similarity (FO)}~\parencite{beck2011congruence} addresses the fact that the coupling of two entities can be indirect. For example, two classes can be related by extending the same class or implementing similar interfaces. Furthermore, the two classes can aggregate similar classes and components, thus increasing their coupling. Also, simply utilizing the same entities increases the coupling of two classes.
 
-~\textit{Evolutionary coupling}~\parencite{beck2011congruence} occurs when two seemingly unrelated entities are often changed simultaneously during development. The metric~\textit{support} quantifies the amount of common changes between the two entities.~\textit{Confidence} normalizes the support-metric by the total number of changes of one of the artifacts.
+~\textit{Evolutionary coupling}~\parencite{beck2011congruence} occurs when two seemingly unrelated entities are often changed simultaneously during development. The metric~\textit{support} quantifies the number of common changes between the two entities.~\textit{Confidence} normalizes the support-metric by the total number of changes of one of the artifacts.
 
 The~\textit{code clone} metric~\parencite{beck2011congruence} determines the duplication of code in the application by comparing two classes and extracting their similarity in relevance to code. This is derived from the observation that changing such a ``code clone'' also requires the modification of other similar application parts, thus resulting in an increased coupling. This is derived from the observation that modifying such a ``code clone'' also requires the modification of other similar application parts, thus resulting in an increased coupling. However, one can argue that sometimes duplication is desirable, e.g. for performance reasons.
 
@@ -1050,7 +1051,8 @@ Fault prediction has been a central research topic in software metrics for detec
 
 A persistent problem in defect predicting is the ``ceiling effect'' of the efficacy of the models. For example,~\citet{menzies2007data} utilize~\textit{naive Bayes classifiers} for modelling the results of the research's static code metrics. The simple model is still more effective than complex approaches~\parencite{menzies2010defect}.
 
-One of the currently more active approaches to measuring and predicting the quality of software is the inclusion of version change history as a measurement dimension~\parencite{zimmermann2005mining,hassan2009predicting}. These so-called ``change metrics'' presume that problematic components can be identified by the focus they receive during development.~\citet{zimmermann2005mining} apply~\textit{evolutionary coupling} as an indicator of components that would benefit from maintenance. Evolutionary coupling is simply deduced by the amount of changes to any two modules in the same revision of the version history. For example, when two source code files change, their evolutionary coupling number is increased. After inspecting the whole revision history, the evolutionary coupling count between modules is argued to be a good indicator for maintenance effort~\parencite{zimmermann2005mining}. The metric can also be tuned more precise, by e.g. inspecting the evolutionary coupling of methods and functions.
+One of the currently more active approaches to measuring and predicting the quality of software is the inclusion of version change history as a measurement dimension~\parencite{zimmermann2005mining,hassan2009predicting}. These so-called ``change metrics'' presume that problematic components can be identified by the focus they receive during development.~\citet{zimmermann2005mining} apply~\textit{evolutionary coupling} as an indicator of components that would benefit from maintenance.
+Evolutionary coupling is simply deduced by the number of changes to any two modules in the same revision of the version history. For example, when two source code files change, their evolutionary coupling number is increased. After inspecting the whole revision history, the evolutionary coupling count between modules is argued to be a good indicator for maintenance effort~\parencite{zimmermann2005mining}. The metric can also be tuned more precise, by e.g. inspecting the evolutionary coupling of methods and functions.
 %{{{
 \begin{comment}
     Both files have been changed together 20 times, indicat-
@@ -1190,8 +1192,7 @@ As software becomes more and more complex, it is more and more important to stru
 \end{comment}
 %}}}
 
-Several programming paradigms exist for developing software. The most popular paradigm is the~\textit{imperative} approach, where programs are written in step-by-step instructions and commands~\parencite{sebesta2002concepts}. This approach is similar to the design of the von Neumann computer architecture and its basic implementation of sending messages back and forth between the central processing unit and the memory~\parencite{backus1978can}.
-In turn, many programming languages (~\textit{C},~\textit{Java}) have adapted the same approach as in the von Neumann architecture to their execution flow: variables, control statements and assignment statements~\parencite{backus1978can}.
+Several programming paradigms exist for developing software. The most popular paradigm is the~\textit{imperative} approach, where programs are written in step-by-step instructions and commands~\parencite{sebesta2002concepts}. This approach is similar to the design of the von Neumann computer architecture, where execution is implemented as sequential steps of instructions that manipulate the state of the  central processing unit and the memory~\parencite{backus1978can}. In turn, many programming languages (~\textit{C},~\textit{Java}) have adapted the same approach as in the von Neumann architecture to their execution flow: variables, control statements and assignment statements~\parencite{backus1978can}.
 %{{{
 \begin{comment}
 In its simplest form a von Neumann computer has three parts, a central processing unit (or CPU) a store, and a connecting tube that can transmit a single word between the CPU and the store (and send an address to the store).~\parencite{backus1978can}.
@@ -1208,8 +1209,7 @@ a program written in a pure functional language, for such programs have neither 
 \end{comment}
 %}}}
 
-Functional programming is a different approach to software engineering compared to imperative languages. It utilizes mathematical functions for program flow, such as recursion and conditional expressions, in contrast to the characteristic of sequential and iterative repetition found in imperative languages~\parencite{sebesta2002concepts}. Moreover, variables that model values in memory locations do not exist in mathematics, and as such, are also omitted from pure functional
-programming. 
+Functional programming is a different approach to software engineering compared to imperative languages. It utilizes mathematical functions for program flow, such as recursion and conditional expressions, in contrast to the characteristic sequential and iterative repetition found in imperative languages~\parencite{sebesta2002concepts}. Moreover, variables that model values in memory locations do not exist in mathematics, and as such, are also omitted from pure functional programming. 
 %{{{
 \begin{comment}
 One of the fundamental characteristics of mathematical functions is that the evaluation order of their mapping expressions is controlled by recursion and conditional expressions, rather than the sequencing and iterative repetition that are common to the imperative programming languages.~\parencite{sebesta2002concepts}
@@ -1272,9 +1272,10 @@ The committee's primary goal was to deisgn a language that satisfied these const
 
 \section{Functions}
 
-The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{hughes1989functional}. A function that returns an integer doubled by itself (effectively calculating the square of a number) would be defined in Haskell as:
+The main motivation behind the functional programming paradigm is the use of mathematical functions in expressing programs concisely. Unlike in imperative languages such as C++, functions in functional languages resemble the mathematical notion of functions. That is, rather than specifying values over sequential operations, function parameters are meant to be mapped over values.~\parenciteseveral{hughes1989functional}. A function that returns a number doubled by itself (effectively calculating the square of a number) would be defined in Haskell as:
 
 \begin{lstlisting}
+square :: Num a => a -> a
 square x = x * x 
 \end{lstlisting}
 
@@ -1322,7 +1323,7 @@ Higher-order functions are one of the central features of functional languages. 
 twice f = f . f
 \end{lstlisting}
 
-\noindent Now {\tt twice sum 4}, where {\tt sum} is {\tt sum x = x * x}, would return 256. The function twice is now~\textit{curried}, where applying an argument to the function returns a function, that also takes an argument. As {\tt twice} is a function it can be used again for function composition, et cetera. This kind of ``glueing'' together functions increases modularity of software written in a functional manner. Treating functions as first-class values also provides a way to abstract over functional behavior.~\parenciteseveral{hudak1989conception}.
+\noindent Now {\tt twice square 4}, where {\tt square} is {\tt square x = x * x}, would return 256. The function {\tt twice} is now~\textit{curried}, meaning that applying an argument to the function returns a function which also takes an argument. As {\tt twice} is a function it can be used again for function composition, et cetera. This kind of ``glueing'' together functions increases modularity of software written in a functional manner. Treating functions as first-class values also provides a way to abstract over functional behavior.~\parenciteseveral{hudak1989conception}.
 %{{{
 \begin{comment}
 A higher-order function, or functional form, is one that either takes one or more functions as parameters or yields a function as its result, or both.~\parencite{sebesta2002concepts}.
@@ -1346,7 +1347,7 @@ fold (-) [1,2,3,4,5] -- Returns -15
 fold (*) [1,2,3,4,5] -- Returns 120
 \end{lstlisting}
 
-As can be seen, the actual data handling logic is separated from the data structure traversal. This leads into modular programs where components are likely to be reusable, thus resulting in fewer bugs and increasing development time.
+As can be seen, the actual data handling logic is separated from the data structure traversal. This leads into modular programs where components are likely to be reusable, thus resulting in fewer bugs and decreasing development time.
 
 \section{Type systems}
 
@@ -1376,7 +1377,7 @@ Most typed programming languages implement type checking by requiring explicit t
 
 A dominant type system in functional programming is the Hindley-Milner (HM) type system~\parencite{milner1978theory}, where type inference plays an important role. HM can be implemented using Algorithm~\textit{W}~\parencite{damas1982principal} to effectively deduce the most general types in an expression without explicit type annotations. Indeed, the ML language, a major inspiration of Haskell, was the first statically typed language to integrate type inference into its implementation~\parencite{hudak1989conception}.
 
-Haskell is considered to be a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consent exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
+Haskell is considered to be a statically typed language with strong type inference. However, programming language type systems and type theory involve varying perspectives and terms, to which no unanimous consensus exists. To exaggerate the overlapping of different type concepts, a pure functional language such as Haskell also exhibits characteristics of dynamic checking and both implicit and explicit typing~\parencite{hudak2007history}.
 
 \section{Strict and non-strict semantics}
 
@@ -1464,7 +1465,7 @@ zy evaluation means that an actual parameter is evaluated only when its value is
 \end{comment}
 %}}}
 
-\noindent As previously presented, functions in functional programming have the convenient property of being freely composable from other functions. In conjuction with lazy evaluation, this function composition becomes especially useful when ``glueing'' several functions together. A popular usage in functional programs is to include ``generators'' (functions) that produce arbitrarily large data sets. However, combining these generators with functions that include predicates for
+\noindent As previously presented, functions in functional programming have the convenient property of being composable from other functions (warranted that their function signatures match). In conjuction with lazy evaluation, this function composition becomes especially useful when ``glueing'' several functions together. A popular usage in functional programs is to include ``generators'' (functions) that produce arbitrarily large data sets. However, combining these generators with functions that include predicates for
 selecting the correct values provides a modular and concise way to structure applications. This separation of data structures and control is also one of the central notions of functional programming.~\parenciteseveral{hudak1989conception}.
 %{{{
 \begin{comment}
@@ -1515,7 +1516,7 @@ size (Leaf x)     = 1
 size (Branch l r) = size l + size r + 1
 \end{lstlisting}
 
-Effectively, {\tt size} receives a data type of {\tt Tree} as the only parameter. In fact, the function signature is {\tt size :: Tree a -> Int}. The pattern matching mechanism is then utilized for evaluating either expression, depending on the actual data constructor. 
+Effectively, {\tt size} receives a data type of {\tt Tree} as the only parameter. In fact, the function signature is {\tt size :: Tree a -> Int}. The pattern matching mechanism is then utilized for evaluating either expression of {\tt size}, depending on the actual data constructor. 
 
 Due to the nature of lazy evaluation, the actual implementation of pattern matching has proved to be challenging in functional languages. In particular, the ordering of parameters rise subtle problems depending on their evaluation mechanism~\parencite{hudak1989conception}. In the end, matching patterns from top to bottom and evaluating parameters from left to right serves as a sufficient compromise and is used in most modern functional languages~\parencite{hudak2007history}.
 %{{{
@@ -1738,7 +1739,8 @@ lines of code and Halstead's program volume, are also applicable to functional p
 
 ~\citet{ryder2004software} presents many code-specific metrics that are specific to the functional paradigm. For example, measures for the size and complexity of patterns are provided, as well as some intermodule metrics, such as the distance of declarations and their use, are created. In addition,~\citet{ryder2004software} integrates existing measures such as attributes of call graphs. 
 
-The validation methodology used by~\citet{ryder2004software} is based on~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''~\parencite[103.]{ryder2004software}. The metrics are applied to source code version histories of two relatively small programs and statistical analysis is utilized for determining the correlation of the measurements.
+The validation methodology used by~\citet{ryder2004software} is based on comparing version change histories of Haskell programs to the values output from the metrics presented. A high metric value from a program module is further assessed by~\textit{subjective complexity}, which is referred as ``a notion of the complexity that might be perceived by a programmer attempting to understand or modify the given function''~\parencite[103.]{ryder2004software}. Subjective complexity is, of course,
+affected by many variables such as the experience of the programmer and cannot be ``concretely specified''~\parencite[103.]{ryder2004software}. As a result,~\citet{ryder2004software} uses subjective complexity as an aid for determining the correctness of the metric values.
 
 \section{Complexity of patterns}
 
@@ -1830,7 +1832,7 @@ pattern2 :: TupleList -> Int
 pattern2 [(a,b), (c,d),(e,f)] = a + b + c + d + e + f
 \end{lstlisting}
 
-For both patterns in listing~\ref{lst:depth-of-nesting}, {\tt pattern1} and {\tt pattern2}, the maximum depth is 2. However, sums of the depths are not the same between the patterns. Finally,~\citet{ryder2004software} found a somewhat strong correlation for increased depth of nesting and complexity.
+For both patterns in listing~\ref{lst:depth-of-nesting}, {\tt pattern1} and {\tt pattern2}, the maximum depth is 2. However, sums of the depths are not the same between the patterns. Finally,~\citet{ryder2004software} found a somewhat strong correlation for the value of increased depth of nesting and subjective complexity.
 %{{{
 \begin{comment}
     When measuring the depth of nesting one must consider how to measure the
@@ -1846,7 +1848,7 @@ For both patterns in listing~\ref{lst:depth-of-nesting}, {\tt pattern1} and {\tt
 \end{comment}
 %}}}
 
-The last pattern metric presented by~\citet{ryder2004software} is~\textit{pattern size}, which can be measured in two ways. The number of components in a pattern can be calculated or the depth of the resulting abstract syntax tree can be measured.~\citet{ryder2004software} utilizes the amount of nodes in the syntax tree as a measure, and found a correlation for increased size in patterns and subjective complexity.
+The last pattern metric presented by~\citet{ryder2004software} is~\textit{pattern size}, which can be measured in two ways. The number of components in a pattern can be calculated or the depth of the resulting abstract syntax tree can be measured.~\citet{ryder2004software} utilizes the number of nodes in the syntax tree as a measure, and found a correlation for increased size in patterns and subjective complexity.
 %{{{
 \begin{comment}
 The size of a pattern could be measured in a number of ways. For instance, one
@@ -1886,17 +1888,17 @@ A second approach provided by~\citet{ryder2004software} is to count the~\textit{
 
 An example of spatial distance is to measure the actual source code lines from a function call to its declaration. In essence, the call to function {\tt foo} at line 8 in figure~\ref{lst:number-of-scopes} is seven source code lines away from its declaration, if empty lines are counted. The empirical results of~\citet{ryder2004software} leaves room for further research, since mixed results from the measure were found. 
 
-Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees when compiling, it makes sense to count the amount of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
+Counting the distance based on source lines can be argued as being easily misinterpreted, since source lines can contain multiple statements. For this reason, the~\textit{number of parse tree nodes} can be a more accurate spatial distance measure. As program code is often internally represented in parse trees when compiling, it makes sense to count the number of nodes leading from a declaration to its usage. This approach has the advantage that the actual logic is only dealt with and the
 representation details of the source code are dismissed. However,~\citet{ryder2004software} found no distinguishable difference between this approach and counting the source code lines. Further research is thus warranted.
 
 \section{Attributes of recursive functions}
 
 Recursion is central to functional programming since often no constructs for explicit iteration of data structures, such as loops, are provided. This is the case in Haskell, where recursion is used extensively either by invoking the function itself or by using higher-order functions such as {\tt foldr}.~\citet{ryder2004software} concentrates on the former case and investigates how explicit recursion can add to subjective complexity.
 
-First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a value of zero or one. This seemingly simple metric can correlate with the amount of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
+First recursion measure provided by~\citet{ryder2004software} is the~\textit{binary indication of recursion}. The metric simply determines if a function is recursive in nature, indicated by a value of zero or one. This seemingly simple metric can correlate with the number of changes in the code base, and thus may indicate increased subjective complexity. Non-trivial recursion is when a function invokes a function, which in turn invokes the original function back. This kind of
 recursion produces a cyclic call graph and is harder to detect in the source code. In addition, a function can contain both trivial recursion (the function invokes itself) and non-trivial recursion at the same time. Thus the binary indication of recursion simply points out whether a function is recursive without pointing out the implementation.
 
-Often recursion is invoked based on multiple paths in a function. The metric~\textit{number of recursive paths} determines the amount of paths leading to recursion in a function, which is argued to correlate with subjective complexity. 
+Often recursion is invoked based on multiple paths in a function. The metric~\textit{number of recursive paths} determines the number of paths leading to recursion in a function, which is argued to correlate with subjective complexity. 
 
 \begin{lstlisting}[caption={Example of multiple recursive paths~\parencite{ryder2004software}},label={lst:number-of-recursive-paths}]
 toggleCase :: String -> String
@@ -1908,7 +1910,7 @@ toggleCase (x:xs)
 
 In listing~\ref{lst:number-of-recursive-paths} the number of recursive paths is two. The resulting hypothesis is that the greater the number of recursive paths, the more complex the function is to comprehend. However,~\citet{ryder2004software} found weak correlation with the number of recursive paths and complexity in the case study applications. This is most likely due to a minimal amount of recursive paths in actual functions, since introducing such complexity would be against good coding practices.
 
-Counting the~\textit{number of non-trivial and trivial recursion} can indicate complexity in the code base. As presented previously, trivial recursion occurs when a function invokes itself, as where non-trivial recursion deals with two functions that invoke each other. If the amount of non-trivial recursion exceeds trivial recursion, it can be hypothesised that the complexity of the code also increases. Again,~\citet{ryder2004software} found no support for the hypothesis,
+Counting the~\textit{number of non-trivial and trivial recursion} can indicate complexity in the code base. As presented previously, trivial recursion occurs when a function invokes itself, as where non-trivial recursion deals with two functions that invoke each other. If the number of non-trivial recursion exceeds trivial recursion, it can be hypothesised that the complexity of the code also increases. Again,~\citet{ryder2004software} found no support for the hypothesis,
 most likely since the studied applications did not utilize non-trivial recursion to an extent.
 
 One property of recursion is the actual~\textit{length of the recursive path}. Since the path leading to recursion can be somewhat long, also the comprehensibility of the function is likely to lower. The path can be measured in multiple ways. For instance, the number of calls or the number of functions in the path can be quantified. Additionally, if the function contains multiple recursive paths, the paths are summed and their product can be calculated. The results from the research
@@ -1926,7 +1928,7 @@ changes in the strongly connected components.~\parenciteseveral{ryder2004softwar
 The~\textit{indegree of a function} indicates how many times a function is called. This can point out ``important'' functions and in the same time, problematic areas of the program code. However,~\citet{ryder2004software} found no correlation of the property with subjective complexity. In similar spirit, the~\textit{outdegree} of a function counts the number of outbound function calls from a given function. Since this indicates how coupled the function is to other functions, it can also
 indicate how likely the function is to change because of other changes. As is,~\citet{ryder2004software} found correlation with the hypothesis in both case-study applications. The results are encouraging, but they warrant further empirical application of the metric.
 
-A useful property of call graphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of call graphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the amount of function calls (arcs) with functions (nodes). Depth and width is calculated simply by how wide or deep the call graph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
+A useful property of call graphs is that~\textit{subgraphs} of specific function calls can be generated. Common attributes of call graphs, such as depth, width and arc-to-node ratio, can then be measured to indicate the complexity of given functions. The arc-to-node ratio is calculated by dividing the number of function calls (arcs) with functions (nodes). Depth and width is calculated simply by how wide or deep the call graph's tree is (see section~\ref{section:data-flow-attributes}).~\parenciteseveral{ryder2004software}.
 
 \begin{figure}[h]\centering
     \begin{tikzpicture}[>=latex']
@@ -1992,7 +1994,7 @@ The~\textit{size} of a function is a simple, yet heavily utilized measurement of
 ~\citet{muddu2013metrics} provide metrics for the functional programming property of referential transparency. As discussed earlier in the chapter, a function is referentially transparent when the same input always returns the same output. The function thus does not have side-effects such as global variables as dependencies that could affect the computation. Referential transparency also makes the program easier to reason about and allows the compiler to provide heavy
 optimizations for such ``pure'' functions.~\parenciteseveral{hughes1989functional}.
 
-~\textit{Referential Transparency Index} (RTI)~\parencite{muddu2013metrics} quantifies ``the proportion of all the defined methods which can be considered pure functions''. The metric is calculated by the ratio of pure (referentially transparent) functions that are in-use and the amount of overall used functions in the system. The~\textit{Intermodule Referential Transparency Index} (IRTI) calculates the proportion of referentially transparent function calls from a certain module to the rest of the system by the ratio of a module's pure function calls and the overall amount of functions in the system. Furthermore, by taking the average of IRTI, the metric can be calculated for the entire system.~\parenciteseveral{muddu2013metrics}.
+~\textit{Referential Transparency Index} (RTI)~\parencite{muddu2013metrics} quantifies ``the proportion of all the defined methods which can be considered pure functions''. The metric is calculated by the ratio of pure (referentially transparent) functions that are in-use and the number of overall used functions in the system. The~\textit{Intermodule Referential Transparency Index} (IRTI) calculates the proportion of referentially transparent function calls from a certain module to the rest of the system by the ratio of a module's pure function calls and the overall amount of functions in the system. Furthermore, by taking the average of IRTI, the metric can be calculated for the entire system.~\parenciteseveral{muddu2013metrics}.
 %{{{
 \begin{comment}
 In the Intermodule Referential Transparency Index (IRTI) we measure the proportion of the calls in a certain module to methods in other modules which are pure over all the intermodule calls: ~\parencite{muddu2013metrics}
@@ -2020,12 +2022,13 @@ is clearly an advantage w.r.t modularization..~\parencite{muddu2013metrics}.
 Slightly confusingly,~\citet{muddu2013metrics} define several metrics for ``first order'' functions, even though the more prevalent term seems to be higher-orderism~\parencite{hughes1989functional}. This thesis treats the terms higher-order and first-order as interchangeable.~\citet{muddu2013metrics} argue that if related first-order functions are separated in different modules, additional dependencies are created and thus the level of program modularization might suffer. This~\textit{Intermodule First Order Functions Index} (IFOI) can be resolved by taking the minimum of three calculations: 
 
 \begin{itemize}
-        \item Ratio of the amount of functions in a module that have at least one external function as their parameter and the amount of functions in the module with a function as a parameter.  
-        \item Ratio of the amount of external functions that are called in a first-order way from the current module and the amount of functions outside the module
+        \item Ratio of the number of functions in a module that have at least one external function as their parameter and the number of functions in the module with a function as a parameter.  
+        \item Ratio of the number of external functions that are called in a first-order way from the current module and the number of functions outside the module
         \item ``The proportion of other modules whose methods are called upon in a first order way by current module's methods''~\parencite{muddu2013metrics}
 \end{itemize}
 
-The~\textit{Pure First Order Function Index} (PFOI) metric addresses the fact that a function being passed in a higher-order manner benefits of the property of pureness, since it increases program modularity. PFOI is defined at a system level by measuring ``the proportion of all the first order calls which are pure methods''~\parencite{muddu2013metrics}. Furthermore, the~\textit{Intermodule Pure First Order Function Index} (IPFOI) metric is similar, but calculates the ratio of first order calls to pure functions in external modules and the amount of first order function calls executed~\parencite{muddu2013metrics}.
+The~\textit{Pure First Order Function Index} (PFOI) metric addresses the fact that a function being passed in a higher-order manner benefits of the property of pureness, since it increases program modularity. PFOI is defined at a system level by measuring ``the proportion of all the first order calls which are pure methods''~\parencite{muddu2013metrics}. Furthermore, the~\textit{Intermodule Pure First Order Function Index} (IPFOI) metric is similar, but calculates the ratio of first order calls
+to pure functions in external modules and the number of first order function calls executed~\parencite{muddu2013metrics}.
 
 The metrics proposed by~\citet{muddu2013metrics} have only been tested with few open-source projects, and thus should be further validated to assess their feasibility. Furthermore, the results of the metrics are somewhat ambiguous and most benefit would be drawn if the developers and architects of the modules themselves would address this issue~\parencite{muddu2013metrics}. 
 %{{{
@@ -2047,7 +2050,7 @@ Software metrics studies specific to the functional programming paradigm are sca
 
 As is with the more ``traditional'' metrics visited in chapter~\ref{chap:software_metrics}, also the functional metrics exhibit strong dependancy on subjective observations, rather than systematic and evidence-based outcomes. In essence, many of the metrics are, in fact, subjective by nature, since e.g. readability is hard to measure objectively. However, the problem of lacking evidence is magnified in the functional paradigm metrics studies due to sheer low amount of research conducted.
 
-The positive side is that the functional paradigm seems to be well-suited for software measurement. Metrics such as~\textit{number of constructors} and~\textit{number of overridden pattern variables}~\parencite{ryder2004software} are easy to be quantified and show promising preliminary results. Call graphs are convenient for visual comprehension of the program logic flow, but arguably even more so for functional programs where
+The positive side is that the functional paradigm seems to be well-suited for software measurement. Metrics such as~\textit{number of constructors} and~\textit{number of overridden pattern variables}~\parencite{ryder2004software} are easy to quantify and show promising preliminary results. Call graphs are convenient for visual comprehension of the program logic flow, but arguably even more so for functional programs where
 functions are numerous. In addition, call graphs can quickly visualize the overall ``health'' of the system. Indeed, the findings of~\citet{ryder2004software} suggest that visual measures are suitable for capturing software complexity.
 
 Complexity between modules can be measured with metrics such as~\textit{intermodule referential transparency index} or~\textit{intermodule first order functions index}. Such metrics are interesting for analyzing the overall quality of the system, rather than individual functions. Indeed,~\citet{muddu2013metrics} present promising results of the degree of modularization between large open-source projects' versions.
@@ -2132,12 +2135,7 @@ Preliminary guidelines for empirical research in software engineering~\parencite
 The aim of this study was to explore the current status of software metrics research together with functional programming. In specific, the objective is to present previous research on software metrics, introduce functional programming as a programming language paradigm and to assess the depth and breadth of software metrics research specific to the functional paradigm. The topics chosen are relevant in many ways - measuring software is as old as computer science itself and
 proactively pinpointing problematic program components ultimately reduce production costs. Functional programming is likewise an old topic, but has eluded wide mainstream use despite no apparent weaknesses. Combining the two topics is thus relevant for exploring future ways of conducting software engineering and paving way for new research.
 
-The research method chosen for the thesis - literature review - is fitting, since the subject is variably researched~\parencite{kitchenham2010s,ryder2005software} and conducting reviews is an excellent way of mapping the current situation and generating interest in to the subject. The literature for this thesis was searched with Google Scholar (see~\citet{kousha2007google}) and was chosen based on (1) the influence on other research (citation count) and by
-(2) pruning (``snowballing'') these citation lists for studies relevant to the topic. Sources were searched with the keywords ``software metrics'', ``functional programming'' and the previous joined together. The process of gathering the references had no fixed timespan, but rather was active for almost the life time of the thesis writing process from early 2014 to late 2014.
-
-The selection of the references was also influenced by the age of the research. New research, such as~\citet{beck2011congruence,muddu2013metrics}, was deemed to be interesting from the standpoint of literature review. On the other hand, plenty popular, albeit old, research exists~\parencite{mccabe1976complexity,backus1978can,halstead1977elements} and were included in the thesis for wholeness and their field-defining content. Nevertheless, the thesis aims to provide an extensive investigation of the field of software metrics spanning many decades.
-
-The results of the literature review are promising. Withstanding the lack of studies in the early 80s and low activity in the 00s, software metrics research has shown credible activity during the recent years. Moreover, interest in functional programming is rising, which is evident from new studies measuring complexity of functional programs (see~\citet{kiraly2010implementing,muddu2013metrics,kiraly2013complexity}). On the other hand, much of the
+The research method chosen for the thesis - literature review - is fitting, since the subject is variably researched~\parencite{kitchenham2010s,ryder2005software} and conducting reviews is an excellent way of mapping the current situation and generating interest in to the subject. The results of the literature review are promising. Withstanding the lack of studies in the early 80s and low activity in the 00s, software metrics research has shown credible activity during the recent years. Moreover, interest in functional programming is rising, which is evident from new studies measuring complexity of functional programs (see~\citet{kiraly2010implementing,muddu2013metrics,kiraly2013complexity}). On the other hand, much of the
 measuring techniques have shifted towards prediction models~\parencite{radjenovic2013software}, where targets of component maintenance are calculated probabilistically, e.g.\ based on software change history~\parencite{graves2000predicting}.
 
 As predicted, the agile software engineering~\parencite{beck2001agile} approach has dramatically decreased the interest in software measurement, because it can be seen as unnecessary work not suitable for the agile workflow. Moreover, quantifiable approaches (which measurement can be considered as) are not advocated in the agile manifesto, which specifically values ``individuals and interactions over processes and tools''. As it is, software measurement and the agile
